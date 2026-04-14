@@ -1,0 +1,73 @@
+
+Network Living Compendium – Multi-License Notice
+===============================================
+
+Copyright (c) 2026 geekazoid80
+
+This repository uses a MULTI-LICENSE model to reflect the different types of content it contains.
+Please read carefully.
+
+────────────────────────────────────────────
+1. KNOWLEDGE & DOCUMENTATION CONTENT
+────────────────────────────────────────────
+
+All human-readable knowledge content in this repository — including but not limited to:
+- Markdown files
+- Conceptual definitions, principles, patterns, and playbooks
+- Architectural descriptions, diagrams (in source form), and essays
+- Non-code AI-generated or AI-maintained textual content
+
+is licensed under:
+
+Creative Commons Attribution–ShareAlike 4.0 International (CC BY-SA 4.0)
+License text: https://creativecommons.org/licenses/by-sa/4.0/
+
+You are free to:
+- Share: copy and redistribute the material in any medium or format
+- Adapt: remix, transform, and build upon the material
+- Use commercially
+
+Under the following terms:
+- Attribution: You must give appropriate credit
+- ShareAlike: Derivative works must be licensed under the same terms
+
+This ensures the compendium remains a permanently open, networked, and evolving body of knowledge.
+
+────────────────────────────────────────────
+2. CODE, AUTOMATION & TOOLING
+────────────────────────────────────────────
+
+All source code, scripts, automation, agents, pipelines, and configuration files — including but not limited to:
+- `/tools`, `/scripts`, `/agents`, `/automation`
+- CLI utilities, background services, and integrations
+- Tests, build scripts, and infrastructure-as-code
+
+are licensed under:
+
+Apache License, Version 2.0
+You may obtain a copy of the license at: https://www.apache.org/licenses/LICENSE-2.0
+
+The Apache 2.0 license includes an explicit patent grant and is intended to support enterprise, cloud, and AI tooling use.
+
+────────────────────────────────────────────
+3. LICENSE PRECEDENCE
+────────────────────────────────────────────
+
+If a file or directory includes a LICENSE header or notice, that notice takes precedence for that file or directory.
+Otherwise, licensing is determined by content type as described above.
+
+────────────────────────────────────────────
+4. NO WARRANTY
+────────────────────────────────────────────
+
+This project is provided "AS IS", WITHOUT WARRANTY OF ANY KIND, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and noninfringement.
+
+The authors and contributors shall not be liable for any claim, damages, or other liability arising from use of this project.
+
+────────────────────────────────────────────
+5. QUESTIONS
+────────────────────────────────────────────
+
+If you have questions about licensing or reuse, please open an issue or contact the maintainers.
+
+End of Terms
