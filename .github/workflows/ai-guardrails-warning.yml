@@ -1,0 +1,32 @@
+name: AI Guardrails Warning (Non-Blocking)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ai-guardrails-warning:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check AI Guardrails presence
+        shell: bash
+        run: |
+          echo "🔍 Checking AI guardrails..."
+
+          if [ ! -f AI_GUARDRAILS.md ]; then
+            echo "::warning title=AI Guardrails Missing::AI_GUARDRAILS.md not found. AI-assisted contributions must follow documented guardrails."
+            echo "::warning::See CONTRIBUTING.md and AI_GUARDRAILS.md before merging."
+            exit 0
+          fi
+
+          if ! grep -q "Machine‑Readable Prompt Blocks" AI_GUARDRAILS.md; then
+            echo "::warning title=AI Guardrails Incomplete::AI_GUARDRAILS.md found but machine-readable prompt blocks are missing."
+            echo "::warning::If using Claude, Cursor, or other agents, ensure prompts are loaded manually."
+            exit 0
+          fi
+
+          echo "✅ AI guardrails detected and appear complete."
