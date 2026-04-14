@@ -8,12 +8,12 @@ Claude, before generating, editing, synthesizing, or reviewing any content in th
 
 You MUST read and follow these documents in full:
 
-- AI_GUARDRAIL.md  
+- AI_GUARDRAILS.md  
 - CONTRIBUTION_SPEC.md  
 - CONTRIBUTING.md  
 
 If any instructions conflict:
-- AI_GUARDRAIL.md takes precedence
+- AI_GUARDRAILS.md takes precedence
 - CONTRIBUTION_SPEC.md is the authoritative source for structure, licensing, and validation
 
 ## 2. Acknowledgement Requirement
