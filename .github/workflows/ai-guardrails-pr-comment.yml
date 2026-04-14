@@ -1,0 +1,88 @@
+name: AI Guardrails PR Comment (Non-Blocking)
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  ai-guardrails-pr-comment:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Evaluate AI guardrails
+        id: check
+        shell: bash
+        run: |
+          echo "status=ok" >> "$GITHUB_OUTPUT"
+
+          if [ ! -f AI_GUARDRAILS.md ]; then
+            echo "status=missing" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if ! grep -q "Machine‑Readable Prompt Blocks" AI_GUARDRAILS.md; then
+            echo "status=incomplete" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+      - name: Post PR comment if warning needed
+        if: steps.check.outputs.status != 'ok'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = "${{ steps.check.outputs.status }}";
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+
+            // Check existing comments to avoid duplicates
+            const comments = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number,
+            });
+
+            const alreadyPosted = comments.data.some(c =>
+              c.body.includes("AI Guardrails Notice")
+            );
+
+            if (alreadyPosted) {
+              core.info("Guardrails notice already posted. Skipping.");
+              return;
+            }
+
+            let message = "### ⚠️ AI Guardrails Notice\n\n";
+
+            if (status === "missing") {
+              message +=
+                "- `AI_GUARDRAILS.md` was not found in this repository.\n" +
+                "- If AI tools were used for this PR, contributors are expected to follow documented guardrails.\n\n";
+            }
+
+            if (status === "incomplete") {
+              message +=
+                "- `AI_GUARDRAILS.md` is present, but machine‑readable prompt blocks were not detected.\n" +
+                "- If using Claude, Cursor, or other agents, ensure prompts are loaded manually.\n\n";
+            }
+
+            message +=
+              "**This is a non‑blocking notice.**\n" +
+              "Human review and PR workflows remain the source of enforcement.\n\n" +
+              "References:\n" +
+              "- `AI_GUARDRAILS.md`\n" +
+              "- `CONTRIBUTING.md`";
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
+              body: message,
+            });
+``
