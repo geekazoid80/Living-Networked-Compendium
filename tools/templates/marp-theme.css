@@ -1,0 +1,194 @@
+/* Living Networked Compendium — Marp Slide Theme
+   Applied via: marp --theme tools/templates/marp-theme.css
+   Based on the default Marp theme with project-specific colours and typography.
+*/
+
+@import 'default';
+
+:root {
+  --color-primary: #1a5276;      /* Deep navy — headings, borders */
+  --color-accent: #2980b9;       /* Mid blue — links, highlights */
+  --color-light: #d6eaf8;        /* Light blue — backgrounds */
+  --color-text: #2c3e50;         /* Dark slate — body text */
+  --color-muted: #7f8c8d;        /* Grey — secondary text, footers */
+  --color-code-bg: #f4f6f7;      /* Off-white — code blocks */
+  --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-code: 'Consolas', 'Courier New', monospace;
+}
+
+section {
+  font-family: var(--font-body);
+  font-size: 1.35rem;
+  color: var(--color-text);
+  background: #ffffff;
+  padding: 2rem 3rem;
+}
+
+/* Title slide */
+section.title {
+  background: var(--color-primary);
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.title h1 {
+  font-size: 2.4rem;
+  color: #ffffff;
+  border: none;
+  margin-bottom: 0.5rem;
+}
+
+section.title h2 {
+  font-size: 1.4rem;
+  color: var(--color-light);
+  border: none;
+  font-weight: normal;
+}
+
+section.title p {
+  color: var(--color-light);
+  font-size: 1rem;
+}
+
+/* Section headings */
+h1 {
+  font-size: 2rem;
+  color: var(--color-primary);
+  border-bottom: 3px solid var(--color-primary);
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  border-bottom: 1.5px solid var(--color-accent);
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.8rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+/* Paragraphs and lists */
+p {
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+}
+
+ul, ol {
+  margin-left: 1.5rem;
+  line-height: 1.8;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+/* Code blocks */
+code {
+  font-family: var(--font-code);
+  background: var(--color-code-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  font-size: 0.95em;
+  color: #c0392b;
+}
+
+pre {
+  background: var(--color-code-bg);
+  border-left: 4px solid var(--color-accent);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+pre code {
+  background: transparent;
+  color: var(--color-text);
+  padding: 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.05rem;
+  margin: 0.8rem 0;
+}
+
+th {
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid #dde;
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background: var(--color-light);
+}
+
+/* Header and footer */
+header {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  border-bottom: 1px solid #dde;
+  padding-bottom: 0.2rem;
+}
+
+footer {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  border-top: 1px solid #dde;
+  padding-top: 0.2rem;
+}
+
+/* Blockquotes — used for important notes */
+blockquote {
+  background: var(--color-light);
+  border-left: 4px solid var(--color-accent);
+  padding: 0.6rem 1rem;
+  margin: 0.8rem 0;
+  border-radius: 0 4px 4px 0;
+  font-style: normal;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/* Strong text */
+strong {
+  color: var(--color-primary);
+}
+
+/* Links */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Page number */
+section::after {
+  font-size: 0.7rem;
+  color: var(--color-muted);
+}

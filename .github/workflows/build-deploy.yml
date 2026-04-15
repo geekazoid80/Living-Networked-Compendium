@@ -1,0 +1,207 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:   # Allow manual trigger from GitHub UI
+
+permissions:
+  contents: write      # Needed to create releases and push to gh-pages
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "deploy"
+  cancel-in-progress: false
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Job 1: Validate module frontmatter
+  # ─────────────────────────────────────────────────────────────────────────────
+  validate:
+    name: Validate Modules
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required frontmatter fields
+        run: |
+          ERRORS=0
+          REQUIRED_FIELDS=("title" "module_id" "domain" "difficulty" "prerequisites" "estimated_time" "version" "last_updated" "maintainer" "human_reviewed" "ai_assisted")
+
+          find modules/ -name "*.md" ! -name ".gitkeep" | while read -r FILE; do
+            # Extract frontmatter block (between first pair of ---)
+            FRONTMATTER=$(awk '/^---/{if(p==1){exit}; p=1; next} p' "$FILE")
+
+            for FIELD in "${REQUIRED_FIELDS[@]}"; do
+              if ! echo "$FRONTMATTER" | grep -q "^${FIELD}:"; then
+                echo "::error file=${FILE}::Missing required frontmatter field: ${FIELD}"
+                ERRORS=$((ERRORS + 1))
+              fi
+            done
+
+            # Check for prerequisite module IDs that don't exist
+            PREREQS=$(echo "$FRONTMATTER" | grep "^prerequisites:" | \
+                      grep -oP '"[A-Z]+-[0-9]+"' | tr -d '"' || true)
+            for PREREQ in $PREREQS; do
+              if ! find modules/ -name "*.md" | xargs grep -l "^module_id: \"${PREREQ}\"" &>/dev/null; then
+                echo "::warning file=${FILE}::Prerequisite '${PREREQ}' not found as a module"
+              fi
+            done
+          done
+
+          if [[ $ERRORS -gt 0 ]]; then
+            echo "::error::${ERRORS} frontmatter validation error(s) found"
+            exit 1
+          fi
+          echo "All module frontmatter validated successfully."
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Job 2: Build MkDocs site and deploy to GitHub Pages
+  # ─────────────────────────────────────────────────────────────────────────────
+  build-web:
+    name: Build & Deploy Web
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # Full history for git-revision-date plugin
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install MkDocs dependencies
+        run: |
+          pip install --upgrade pip
+          pip install \
+            mkdocs \
+            mkdocs-material \
+            mkdocs-git-revision-date-localized-plugin
+
+      - name: Build MkDocs site
+        run: mkdocs build --strict
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          cname: ""   # Set to your custom domain (e.g. compendium.example.com) or leave empty
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Job 3: Generate versioned PDF and PPTX handouts
+  # ─────────────────────────────────────────────────────────────────────────────
+  build-handouts:
+    name: Build Handouts (PDF + PPTX)
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      version_dir: ${{ steps.version.outputs.version_dir }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pandoc and LaTeX
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended \
+            texlive-plain-generic fonts-liberation
+
+      - name: Install Marp CLI
+        run: npm install -g @marp-team/marp-cli
+
+      - name: Determine version number
+        id: version
+        run: |
+          # Version = number of commits on main (simple, monotonic)
+          COUNT=$(git rev-list --count HEAD)
+          VERSION=$(printf "v%03d" "$COUNT")
+          DATE=$(date +%Y-%m-%d)
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "version_dir=${VERSION}-${DATE}" >> "$GITHUB_OUTPUT"
+          echo "Building handout ${VERSION} (${DATE})"
+
+      - name: Create handout directory
+        run: mkdir -p "handouts/versions/${{ steps.version.outputs.version_dir }}"
+
+      - name: Build PDF
+        run: |
+          chmod +x tools/scripts/build-pdf.sh
+          # Extract version number from the v0NN string
+          VER_NUM=$(echo "${{ steps.version.outputs.version }}" | grep -oP '[0-9]+')
+          ./tools/scripts/build-pdf.sh "$VER_NUM"
+        continue-on-error: true   # Don't fail the whole job if PDF build fails
+
+      - name: Build PPTX slides
+        run: |
+          chmod +x tools/scripts/build-pptx.sh
+          VER_NUM=$(echo "${{ steps.version.outputs.version }}" | grep -oP '[0-9]+')
+          ./tools/scripts/build-pptx.sh "$VER_NUM"
+        continue-on-error: true
+
+      - name: Upload handout artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: handouts-${{ steps.version.outputs.version }}
+          path: handouts/versions/${{ steps.version.outputs.version_dir }}/
+          retention-days: 90
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Job 4: Create GitHub Release with handout artifacts
+  # ─────────────────────────────────────────────────────────────────────────────
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: build-handouts
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download handout artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: handouts-${{ needs.build-handouts.outputs.version }}
+          path: release-artifacts/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.build-handouts.outputs.version }}
+          name: "Compendium ${{ needs.build-handouts.outputs.version }}"
+          body: |
+            ## Living Networked Compendium — ${{ needs.build-handouts.outputs.version }}
+
+            Auto-generated handout release from commit ${{ github.sha }}.
+
+            ### Included Files
+            - **PDF**: Combined handout (all modules)
+            - **PPTX**: Per-module slide decks
+            - **MANIFEST.md**: List of all included modules
+            - **CHANGES-*.md**: Change sheet vs previous version
+
+            ### How to Use
+            - **For self-study**: Download the PDF handout
+            - **For training delivery**: Download individual PPTX slide decks
+            - See the [change sheet](CHANGES-*.md) for what's new in this version
+
+            ---
+            Content: CC BY-SA 4.0 | Code: Apache 2.0
+          files: release-artifacts/**/*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

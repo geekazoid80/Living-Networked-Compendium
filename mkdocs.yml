@@ -1,0 +1,136 @@
+site_name: Living Networked Compendium
+site_description: A progressive, community-built guide for network engineers — enterprise, carrier, data centre, RF/satellite, and beyond.
+site_author: Community Contributors
+# site_url: https://your-custom-domain.com   # Update once GitHub Pages / custom domain is configured
+repo_url: https://github.com/geekazoid80/Living-Networked-Compendium
+repo_name: Living-Networked-Compendium
+edit_uri: edit/main/
+
+copyright: "Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors"
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.action.edit
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+
+plugins:
+  - search:
+      lang: en
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
+      fallback_to_build_date: true
+  - tags
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+      title: On this page
+  - def_list
+  - footnotes
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/geekazoid80/Living-Networked-Compendium
+  # analytics:
+  #   provider: google
+  #   property: G-XXXXXXXXXX
+
+nav:
+  - Home: README.md
+  - Learning Paths:
+    - Data Network Engineer: learning-paths/data-network-engineer.md
+    - Carrier / SP Engineer: learning-paths/carrier-engineer.md
+    - Data Centre Engineer: learning-paths/datacentre-engineer.md
+    - RF & Satellite Engineer: learning-paths/rf-satellite-engineer.md
+    - RF-Coax / Cable Engineer: learning-paths/rf-coax-engineer.md
+    - Voice / Telephony Engineer: learning-paths/voice-telephony-engineer.md
+    - RF Mobile / Cellular Engineer: learning-paths/rf-mobile-engineer.md
+    - Storage Network Engineer: learning-paths/storage-network-engineer.md
+    - Broadcast Engineer: learning-paths/broadcast-engineer.md
+  - Fundamentals:
+    - Networking Basics:
+      - OSI Model: modules/fundamentals/networking/osi-model.md
+    - IP Addressing:
+      - IP Addressing Fundamentals: modules/fundamentals/ip/ip-addressing.md
+      - IP Subnetting & VLSM: modules/fundamentals/ip/subnetting.md
+    - Access Media: []
+    - Routing: []
+    - Switching: []
+    - Carrier & Transport: []
+    - Data Centre: []
+    - Protocols: []
+    - Network Functions: []
+    - Services: []
+    - Security: []
+    - QoS: []
+    - RF: []
+    - Automation: []
+    - Professional Standards: modules/fundamentals/professional-standards/overview.md
+  - Applied:
+    - Data Network Engineer: modules/applied/data-network-engineer/overview.md
+    - Carrier / SP Engineer: modules/applied/carrier-engineer/overview.md
+    - Data Centre Engineer: modules/applied/datacentre-engineer/overview.md
+    - RF & Satellite Engineer: modules/applied/rf-satellite-engineer/overview.md
+    - RF-Coax / Cable Engineer: modules/applied/rf-coax-engineer/overview.md
+    - Voice / Telephony Engineer: modules/applied/voice-telephony-engineer/overview.md
+    - RF Mobile / Cellular Engineer: modules/applied/rf-mobile-engineer/overview.md
+    - Storage Network Engineer: modules/applied/storage-network-engineer/overview.md
+    - Broadcast Engineer: modules/applied/broadcast-engineer/overview.md
+    - Start a New Path: modules/applied/_new-path-template/overview.md
+  - Contributing:
+    - How to Contribute: CONTRIBUTING.md
+    - Contribution Spec: CONTRIBUTION_SPEC.md
+    - AI Guardrails: AI_GUARDRAILS.md
+    - Module Template: docs/MODULE_TEMPLATE.md
+    - Session Instructions: docs/INSTRUCTION.md
