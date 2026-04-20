@@ -1,6 +1,6 @@
 ---
-id: RT-008
-title: "BGP Advanced — Communities, Policy & Filtering"
+module_id: RT-008
+title: "BGP Advanced - Communities, Policy & Filtering"
 description: "BGP community tagging, route-maps, prefix-lists, AS-path filters, and traffic engineering with local preference, MED, and prepending."
 version: "1.0.0"
 status: draft
@@ -25,21 +25,37 @@ created: 2026-04-19
 updated: 2026-04-19
 ---
 
-# RT-008 — BGP Advanced — Communities, Policy & Filtering
+# RT-008 - BGP Advanced - Communities, Policy & Filtering
+## Learning Objectives
 
+After completing this module you will be able to:
+
+1. Write route-maps that match BGP prefixes and set BGP attributes.
+2. Configure prefix-lists and AS-path filters for BGP route filtering.
+3. Explain BGP communities (standard, extended, large) and common well-known communities.
+4. Use communities to implement inbound and outbound traffic engineering.
+5. Configure AS-path prepending for inbound traffic engineering.
+6. Implement a simple multi-homed BGP policy (prefer one ISP for inbound, one for outbound).
+
+---
+## Prerequisites
+
+- RT-007 - BGP Fundamentals (eBGP/iBGP, path-vector, AS_PATH, 12-step best-path algorithm, attributes)
+
+---
 ## The Problem
 
 You're a network operator connected to two ISPs. You want routes learned from ISP-A to be preferred over ISP-B for customer traffic, but you want your own prefixes to be preferred via ISP-B for outbound traffic. You also want to tag routes from certain customers so that upstream peers can apply their own preferences without you hardcoding every case in your own router's policy.
 
-BGP's path selection algorithm (RT-007) determines best path — but its inputs are all attributes. **Policy** means systematically modifying those attributes as routes enter or leave your network. **Communities** allow you to attach arbitrary signals to routes so that distant peers can act on them without knowing your internal topology.
+BGP's path selection algorithm (RT-007) determines best path - but its inputs are all attributes. **Policy** means systematically modifying those attributes as routes enter or leave your network. **Communities** allow you to attach arbitrary signals to routes so that distant peers can act on them without knowing your internal topology.
 
-### Step 1: Route-maps — the policy engine
+### Step 1: Route-maps - the policy engine
 
-A route-map is an ordered list of match conditions and set actions. "If this route matches community X and prefix-list Y → set local-preference 200." BGP applies route-maps at the point where routes enter or leave the BGP table — at `neighbor <ip> route-map <name> in|out`.
+A route-map is an ordered list of match conditions and set actions. "If this route matches community X and prefix-list Y → set local-preference 200." BGP applies route-maps at the point where routes enter or leave the BGP table - at `neighbor <ip> route-map <name> in|out`.
 
-### Step 2: Communities — scalable signalling
+### Step 2: Communities - scalable signalling
 
-Without communities, you'd need to write separate policy for every prefix. With communities, you tag a group of routes with a well-known or custom value (e.g., `65000:100`) and write policy against the tag. When the set of routes changes, you only update the tagging — the policy at the consumer remains unchanged. Communities propagate with the route, surviving multiple AS hops (unless stripped).
+Without communities, you'd need to write separate policy for every prefix. With communities, you tag a group of routes with a well-known or custom value (e.g., `65000:100`) and write policy against the tag. When the set of routes changes, you only update the tagging - the policy at the consumer remains unchanged. Communities propagate with the route, surviving multiple AS hops (unless stripped).
 
 ### Step 3: Traffic engineering
 
@@ -59,26 +75,6 @@ Influencing outbound traffic: adjust **local preference** (higher = preferred). 
 | Extended community (larger value space) | RFC 4360 extended community |
 
 ---
-
-## Learning Objectives
-
-After completing this module you will be able to:
-
-1. Write route-maps that match BGP prefixes and set BGP attributes.
-2. Configure prefix-lists and AS-path filters for BGP route filtering.
-3. Explain BGP communities (standard, extended, large) and common well-known communities.
-4. Use communities to implement inbound and outbound traffic engineering.
-5. Configure AS-path prepending for inbound traffic engineering.
-6. Implement a simple multi-homed BGP policy (prefer one ISP for inbound, one for outbound).
-
----
-
-## Prerequisites
-
-- RT-007 — BGP Fundamentals (eBGP/iBGP, path-vector, AS_PATH, 12-step best-path algorithm, attributes)
-
----
-
 ## Core Content
 
 ### Route-Maps
@@ -88,7 +84,7 @@ A route-map consists of numbered **clauses** (sequences), each with:
 - **set** statements: attribute modifications to apply if all matches pass
 - **permit** or **deny** action for the clause
 
-Processing: top-to-bottom, first match wins. A `deny` clause drops the route from BGP (does not forward it). A `permit` clause applies the set actions and passes the route. A route not matching any clause is **implicitly denied** by the route-map — use a final `permit 65535` with no match to create a "permit all else" default.
+Processing: top-to-bottom, first match wins. A `deny` clause drops the route from BGP (does not forward it). A `permit` clause applies the set actions and passes the route. A route not matching any clause is **implicitly denied** by the route-map - use a final `permit 65535` with no match to create a "permit all else" default.
 
 ```
 route-map MY-POLICY permit 10
@@ -128,11 +124,11 @@ Common patterns:
 
 | Pattern | Matches |
 |---|---|
-| `^$` | Empty AS_PATH — routes originated locally or by direct eBGP peer |
+| `^$` | Empty AS_PATH - routes originated locally or by direct eBGP peer |
 | `^65001$` | Routes originated by AS 65001 only (not transited) |
 | `^65001_` | Routes where AS 65001 is the first AS (directly from AS 65001) |
 | `_65001$` | Routes originated in AS 65001 (regardless of transit) |
-| `.*` | Any AS_PATH — match all |
+| `.*` | Any AS_PATH - match all |
 | `^(65001\|65002)$` | Routes originated directly by AS 65001 or AS 65002 |
 
 ```
@@ -148,7 +144,7 @@ A **BGP community** is a 32-bit value attached to a route, formatted as `AS:valu
 
 | Community | Meaning |
 |---|---|
-| `no-export` (0xFFFFFF01) | Do not advertise outside this AS — stays within confederation |
+| `no-export` (0xFFFFFF01) | Do not advertise outside this AS - stays within confederation |
 | `no-advertise` (0xFFFFFF02) | Do not advertise to any peer (including iBGP) |
 | `local-as` (0xFFFFFF03) | Do not export outside the local AS (including confederation peers) |
 | `internet` (0x00000000) | Advertise to all (default; no restriction) |
@@ -200,7 +196,7 @@ route-map BACKUP-ISP-B permit 10
 
 Operators influence how traffic from other networks reaches them:
 
-**MED (Multi-Exit Discriminator):** A hint to eBGP peers about the preferred entry point among multiple paths into your AS. Lower MED = preferred. Only advisory — the peer may ignore it. Effective only between same AS peers (MED comparison is limited by `bgp always-compare-med` or `deterministic-med` policies).
+**MED (Multi-Exit Discriminator):** A hint to eBGP peers about the preferred entry point among multiple paths into your AS. Lower MED = preferred. Only advisory - the peer may ignore it. Effective only between same AS peers (MED comparison is limited by `bgp always-compare-med` or `deterministic-med` policies).
 
 ```
 route-map SET-MED permit 10
@@ -216,7 +212,7 @@ route-map PREPEND-FOR-ISP-B permit 10
 neighbor <isp-b-peer> route-map PREPEND-FOR-ISP-B out
 ```
 
-Use sparingly — excessive prepending can cause asymmetric routing and complicate troubleshooting.
+Use sparingly - excessive prepending can cause asymmetric routing and complicate troubleshooting.
 
 ### Common Multi-Homed Policy Pattern
 
@@ -240,7 +236,6 @@ route-map TO-ISP-B permit 10
 ```
 
 ---
-
 ## Vendor Implementations
 
 === "Cisco IOS-XE"
@@ -336,27 +331,25 @@ route-map TO-ISP-B permit 10
     Full configuration reference: [https://documentation.nokia.com/sr/23-3/titles/bgp.html](https://documentation.nokia.com/sr/23-3/titles/bgp.html)
 
 ---
-
 ## Common Pitfalls
 
 1. **Missing `permit all` at end of route-map.** A route-map without a final `permit <high-seq>` (no match conditions) implicitly denies all routes not matched by previous clauses. In a BGP inbound route-map, this drops all unmatched routes from the BGP table. Always include a catch-all permit unless intent is to deny everything else.
 
 2. **`send-community` not enabled (Cisco).** Communities are not sent to eBGP peers by default in Cisco IOS. A community set on a route is silently stripped before it leaves the AS unless `neighbor <ip> send-community` is configured. Communities between iBGP peers are sent by default.
 
-3. **Local preference scope.** Local preference is significant only within a single AS — it is stripped before routes are advertised to eBGP peers. Trying to influence another AS's routing with local preference doesn't work; use MED or prepending instead.
+3. **Local preference scope.** Local preference is significant only within a single AS - it is stripped before routes are advertised to eBGP peers. Trying to influence another AS's routing with local preference doesn't work; use MED or prepending instead.
 
-4. **MED comparison across different ASes.** By default, OSPF/IOS only compares MED values for routes learned from the same AS. Routes from different ASes are not compared by MED. Use `bgp always-compare-med` to compare MEDs from all ASes — but this can cause routing instability if ASes don't set MED consistently.
+4. **MED comparison across different ASes.** By default, OSPF/IOS only compares MED values for routes learned from the same AS. Routes from different ASes are not compared by MED. Use `bgp always-compare-med` to compare MEDs from all ASes - but this can cause routing instability if ASes don't set MED consistently.
 
-5. **AS-path prepending overuse.** Prepending your own AS many times makes your routes look very long. If an alternative path exists without prepending, traffic should naturally prefer it — excessive prepending is mostly useful when you need a dramatic preference shift. Two or three prepends are usually sufficient.
+5. **AS-path prepending overuse.** Prepending your own AS many times makes your routes look very long. If an alternative path exists without prepending, traffic should naturally prefer it - excessive prepending is mostly useful when you need a dramatic preference shift. Two or three prepends are usually sufficient.
 
 ---
-
 ## Practice Problems
 
-**Q1.** A route-map has three clauses: seq 10 (match prefix-list A, set local-pref 200), seq 20 (match community X, set local-pref 150), seq 30 (permit — no match). A route matches both prefix-list A and community X. What local-preference does it get?
+**Q1.** A route-map has three clauses: seq 10 (match prefix-list A, set local-pref 200), seq 20 (match community X, set local-pref 150), seq 30 (permit - no match). A route matches both prefix-list A and community X. What local-preference does it get?
 
 ??? answer
-    Local preference 200 — seq 10 matches first (first match wins). Seq 20 is never evaluated for this route.
+    Local preference 200 - seq 10 matches first (first match wins). Seq 20 is never evaluated for this route.
 
 **Q2.** You want to accept only your customer's prefixes (a specific /24) from an eBGP peer and reject everything else. Write the prefix-list and apply it to the neighbor.
 
@@ -373,31 +366,28 @@ route-map TO-ISP-B permit 10
 **Q3.** What is the difference between AS-path prepending and setting MED for inbound traffic engineering?
 
 ??? answer
-    **MED** is advisory — it signals your preferred entry point to a peer, but the peer may ignore it. It's effective when the peer honours MED and both routes are learned from the same AS. **AS-path prepending** makes your route appear longer in the AS_PATH attribute, which directly affects the best-path algorithm (step 6 — shorter AS_PATH preferred). Prepending is more universally effective but less surgical — it affects all ASes that receive the prepended route, not just the direct peer.
+    **MED** is advisory - it signals your preferred entry point to a peer, but the peer may ignore it. It's effective when the peer honours MED and both routes are learned from the same AS. **AS-path prepending** makes your route appear longer in the AS_PATH attribute, which directly affects the best-path algorithm (step 6 - shorter AS_PATH preferred). Prepending is more universally effective but less surgical - it affects all ASes that receive the prepended route, not just the direct peer.
 
 ---
-
 ## Summary & Key Takeaways
 
-- **Route-maps** are the BGP policy engine: ordered match+set clauses; first match wins; implicit deny at end — always add a final permit clause.
+- **Route-maps** are the BGP policy engine: ordered match+set clauses; first match wins; implicit deny at end - always add a final permit clause.
 - **Prefix-lists** filter BGP routes by prefix; use `ge`/`le` for range matching.
 - **AS-path filters** use regular expressions to match the AS_PATH string.
 - **BGP communities** (RFC 1997 standard, RFC 4360 extended, RFC 8092 large) tag routes with arbitrary signals for policy automation.
-- Communities are not sent to eBGP peers by default on Cisco — enable with `send-community`.
+- Communities are not sent to eBGP peers by default on Cisco - enable with `send-community`.
 - **Local preference** (higher = preferred) influences **outbound** traffic (exit selection); local to the AS.
 - **MED** (lower = preferred) influences **inbound** traffic; advisory to the peer.
 - **AS-path prepending** makes a path appear longer → less preferred; effective for inbound traffic engineering across multiple ASes.
 
 ---
-
 ## Where to Next
 
-- **RT-009 — Route Redistribution & Policy:** Mutual redistribution between BGP and IGPs.
-- **CT-002 — MPLS VPNs (L3VPN):** BGP extended communities (Route Target) underpin MPLS L3VPN.
-- **CT-006 — EVPN Fundamentals:** BGP extended communities drive EVPN MAC/IP advertisement.
+- **RT-009 - Route Redistribution & Policy:** Mutual redistribution between BGP and IGPs.
+- **CT-002 - MPLS VPNs (L3VPN):** BGP extended communities (Route Target) underpin MPLS L3VPN.
+- **CT-006 - EVPN Fundamentals:** BGP extended communities drive EVPN MAC/IP advertisement.
 
 ---
-
 ## Standards & Certifications
 
 | Standard / Cert | Relevance |
@@ -405,20 +395,18 @@ route-map TO-ISP-B permit 10
 | RFC 1997 | BGP Communities Attribute |
 | RFC 4360 | BGP Extended Communities Attribute |
 | RFC 8092 | BGP Large Communities Attribute |
-| RFC 4271 | BGP-4 (base specification — attribute definitions) |
+| RFC 4271 | BGP-4 (base specification - attribute definitions) |
 | Cisco CCNP Enterprise | BGP policy, communities, route-maps |
 | Juniper JNCIP-SP | BGP policy design and communities |
 
 ---
-
 ## References
 
-- RFC 1997 — BGP Communities Attribute. [https://www.rfc-editor.org/rfc/rfc1997](https://www.rfc-editor.org/rfc/rfc1997)
-- RFC 4360 — BGP Extended Communities Attribute. [https://www.rfc-editor.org/rfc/rfc4360](https://www.rfc-editor.org/rfc/rfc4360)
-- RFC 8092 — BGP Large Communities Attribute. [https://www.rfc-editor.org/rfc/rfc8092](https://www.rfc-editor.org/rfc/rfc8092)
+- RFC 1997 - BGP Communities Attribute. [https://www.rfc-editor.org/rfc/rfc1997](https://www.rfc-editor.org/rfc/rfc1997)
+- RFC 4360 - BGP Extended Communities Attribute. [https://www.rfc-editor.org/rfc/rfc4360](https://www.rfc-editor.org/rfc/rfc4360)
+- RFC 8092 - BGP Large Communities Attribute. [https://www.rfc-editor.org/rfc/rfc8092](https://www.rfc-editor.org/rfc/rfc8092)
 
 ---
-
 ## Attribution & Licensing
 
 - Module content: original draft, AI-assisted (Claude Sonnet 4.6), 2026-04-19.
@@ -440,5 +428,5 @@ route-map TO-ISP-B permit 10
 
 | Module ID | Title | Relationship |
 |---|---|---|
-| RT-007 | BGP Fundamentals | Prerequisite — BGP sessions, attributes, best-path algorithm |
+| RT-007 | BGP Fundamentals | Prerequisite - BGP sessions, attributes, best-path algorithm |
 <!-- XREF-END -->

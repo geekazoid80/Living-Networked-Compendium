@@ -1,5 +1,5 @@
 ---
-title: "Applied: RF & Satellite Network Engineer — Overview"
+title: "Applied: RF & Satellite Network Engineer - Overview"
 module_id: "RSE-000"
 domain: "applied/rf-satellite-engineer"
 difficulty: "intermediate"
@@ -15,7 +15,7 @@ tags: [applied, rf-satellite-engineer, learning-path, overview]
 
 ## What Is an RF & Satellite Network Engineer?
 
-An RF and satellite network engineer designs, operates, and maintains communication systems that use radio frequency (RF) links — particularly satellite links — to carry voice, data, and video traffic.
+An RF and satellite network engineer designs, operates, and maintains communication systems that use radio frequency (RF) links - particularly satellite links - to carry voice, data, and video traffic.
 
 The role spans:
 - Satellite hub and ground station operation
@@ -38,7 +38,7 @@ IP networking knowledge is necessary but not sufficient. You also need to unders
 - The physics of radio frequency propagation
 - Why satellite latency exists and how to work around it
 - What a link budget is and how to read one
-- The difference between GEO, MEO, and LEO orbits — and why it matters for your design
+- The difference between GEO, MEO, and LEO orbits - and why it matters for your design
 - Satellite-specific protocols and standards (DVB-S2, DVB-S2X, CCSDS)
 
 This path combines IP networking fundamentals with the RF and satellite-specific knowledge that turns a network engineer into a satellite network engineer.
@@ -56,4 +56,4 @@ See [learning-paths/rf-satellite-engineer.md](../../../learning-paths/rf-satelli
 → Skip to Stage 2 (RF-001) once you've confirmed your networking foundation is solid.
 
 **If you're coming in fresh:**
-→ Start at NW-001. Do it in order. The RF physics builds on the networking foundation — you need both.
+→ Start at NW-001. Do it in order. The RF physics builds on the networking foundation - you need both.

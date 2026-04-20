@@ -1,7 +1,7 @@
 ---
 id: NW-REF-001
 title: "Network Operating System Platform Reference"
-description: "Factual reference for major network operating systems — what hardware they run on, where they are deployed, and links to official documentation portals."
+description: "Factual reference for major network operating systems - what hardware they run on, where they are deployed, and links to official documentation portals."
 version: "1.0.0"
 status: draft
 human_reviewed: false
@@ -29,11 +29,11 @@ created: 2026-04-19
 updated: 2026-04-19
 ---
 
-# NW-REF-001 — Network Operating System Platform Reference
+# NW-REF-001 - Network Operating System Platform Reference
 
 This page provides factual information about the major network operating systems referenced throughout this compendium. Use it to understand what each OS is, what it runs on, and where to find official documentation.
 
-This is a reference page — not a tutorial. For configuration examples, see the relevant module's Vendor Implementations section.
+This is a reference page - not a tutorial. For configuration examples, see the relevant module's Vendor Implementations section.
 
 ---
 
@@ -41,7 +41,7 @@ This is a reference page — not a tutorial. For configuration examples, see the
 
 **What it is:** The current mainline Cisco IOS for enterprise and service provider platforms. A modular operating system with a separation between the IOS process (control plane) and the underlying Linux-based infrastructure.
 
-**Runs on:** Cisco Catalyst (enterprise switching), Cisco ISR and ASR 1000 series (enterprise/SP routing), Cisco CSR 1000v (virtual/cloud), Cisco ASR 9000 (partial — see IOS-XR).
+**Runs on:** Cisco Catalyst (enterprise switching), Cisco ISR and ASR 1000 series (enterprise/SP routing), Cisco CSR 1000v (virtual/cloud), Cisco ASR 9000 (partial - see IOS-XR).
 
 **Common in:** Enterprise campus networks, enterprise WAN, small and mid-scale service provider edge.
 
@@ -107,7 +107,7 @@ This is a reference page — not a tutorial. For configuration examples, see the
 
 ## Arista EOS (Extensible Operating System)
 
-**What it is:** Arista's Linux-based network operating system. Fully programmable — runs standard Linux tools and supports eAPI (JSON-RPC), NETCONF/RESTCONF, OpenConfig, and gNMI natively. All state stored in a central in-memory database (Sysdb); all daemons are restartable without traffic disruption.
+**What it is:** Arista's Linux-based network operating system. Fully programmable - runs standard Linux tools and supports eAPI (JSON-RPC), NETCONF/RESTCONF, OpenConfig, and gNMI natively. All state stored in a central in-memory database (Sysdb); all daemons are restartable without traffic disruption.
 
 **Runs on:** Arista 7000 series (data centre leaf/spine/core), 7300 series (core), CloudEOS (virtual/cloud), cEOS (containerised lab).
 
@@ -123,7 +123,7 @@ This is a reference page — not a tutorial. For configuration examples, see the
 
 **What it is:** Huawei's network operating system for routing and switching. Broadly deployed in Asia-Pacific and European carrier markets. VRP is a modular platform supporting routing, MPLS, carrier Ethernet, and data centre features. CLI style is similar to Cisco IOS with some differences (e.g., `display` instead of `show`, `undo` to negate commands).
 
-**Runs on:** Huawei NE series (carrier routing — NE40E, NE9000), CE series (data centre switching), AR series (enterprise routing), S series (enterprise switching).
+**Runs on:** Huawei NE series (carrier routing - NE40E, NE9000), CE series (data centre switching), AR series (enterprise routing), S series (enterprise switching).
 
 **Common in:** Tier-1 and Tier-2 carriers (especially in APAC, Middle East, Africa, Europe), enterprise networks in those regions.
 
@@ -137,7 +137,7 @@ This is a reference page — not a tutorial. For configuration examples, see the
 
 **What it is:** MikroTik's proprietary operating system for RouterBOARD hardware. A full-featured routing and switching OS supporting BGP, OSPF, MPLS, VPN, firewall, QoS, and more. Managed via Winbox (GUI), WebFig, SSH CLI (`/ip route print` style hierarchical commands), or API. RouterOS v7 introduced major improvements including EVPN, OpenFlow, and enhanced BGP.
 
-**Runs on:** MikroTik RouterBOARD (x86, ARM, MIPS hardware), CHR (Cloud Hosted Router — virtualised, runs on KVM/VMware/Hyper-V/cloud).
+**Runs on:** MikroTik RouterBOARD (x86, ARM, MIPS hardware), CHR (Cloud Hosted Router - virtualised, runs on KVM/VMware/Hyper-V/cloud).
 
 **Common in:** ISPs (particularly in developing markets), wireless ISPs (WISPs), enterprise networks (SMB and mid-market), homelab and network engineering labs worldwide.
 
@@ -155,7 +155,7 @@ When working with any platform, the most reliable documentation source is always
 2. Select the correct OS version (commands and features vary significantly across releases).
 3. Use the feature-specific configuration guide (e.g., "MPLS Configuration Guide", "BGP Configuration Guide").
 
-Each module in this compendium links directly to the relevant vendor documentation page for the specific feature being taught — use those links rather than searching from the portal root.
+Each module in this compendium links directly to the relevant vendor documentation page for the specific feature being taught - use those links rather than searching from the portal root.
 
 ---
 

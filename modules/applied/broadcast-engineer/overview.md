@@ -1,5 +1,5 @@
 ---
-title: "Applied: Broadcast Network Engineer — Overview"
+title: "Applied: Broadcast Network Engineer - Overview"
 module_id: "BRD-000"
 domain: "applied/broadcast-engineer"
 difficulty: "intermediate"
@@ -15,7 +15,7 @@ tags: [applied, broadcast-engineer, learning-path, overview, seeking-contributor
 
 ## What Is a Broadcast Network Engineer?
 
-A broadcast network engineer builds and operates the networks that carry live and recorded audio/video content — from production studios through to viewers' screens.
+A broadcast network engineer builds and operates the networks that carry live and recorded audio/video content - from production studios through to viewers' screens.
 
 The role sits at the intersection of traditional IP networking and broadcast-specific technology: video compression, streaming protocols, synchronisation standards, and production network design.
 
@@ -28,7 +28,7 @@ You'll find these engineers at:
 
 ## This Path Is Under Construction
 
-The broadcast network engineering path is a **framework awaiting contributors**. The curriculum structure is defined — the modules need to be written by engineers with hands-on experience in this domain.
+The broadcast network engineering path is a **framework awaiting contributors**. The curriculum structure is defined - the modules need to be written by engineers with hands-on experience in this domain.
 
 See [learning-paths/broadcast-engineer.md](../../../learning-paths/broadcast-engineer.md) for the proposed module list.
 

@@ -1,5 +1,5 @@
 ---
-id: AUTO-001
+module_id: AUTO-001
 title: "Python for Network Engineers"
 description: "How to use Python with Netmiko, NAPALM, and Paramiko to automate network device configuration, data retrieval, and change management."
 version: "1.0.0"
@@ -25,36 +25,7 @@ created: 2026-04-19
 updated: 2026-04-19
 ---
 
-# AUTO-001 — Python for Network Engineers
-
-## The Problem
-
-You have 200 switches. You need to add a new VLAN to all of them. Manual approach: SSH to each switch, enter configuration mode, add the VLAN, save. At 3 minutes per switch, that's 10 hours of repetitive work, with a high probability of a typo on switch 173 that causes an outage at 2am.
-
-### Step 1: SSH programmatically
-
-Python can open SSH connections and send commands just as you would manually, but at machine speed. You write the logic once; the script runs it on 200 devices simultaneously.
-
-### Step 2: A library that understands network devices
-
-Raw SSH (Paramiko) requires you to handle prompts, pagination, login banners, and `--More--` pauses manually — each vendor behaves differently. **Netmiko** wraps Paramiko with per-vendor knowledge: it knows how to log in to a Cisco IOS switch, disable pagination, handle config mode prompts, and enter/exit enable mode.
-
-### Step 3: Vendor-agnostic automation
-
-Even with Netmiko, the commands you send (`interface vlan 10` on Cisco vs `set vlans VLAN10 vlan-id 10` on Junos) differ per platform. **NAPALM** provides a standardised API: `device.get_interfaces()`, `device.load_merge_candidate()`, `device.compare_config()`, `device.commit_config()` — the same function calls work across Cisco IOS, Junos, EOS, and others.
-
-### What You Just Built
-
-| Scenario element | Technical term |
-|---|---|
-| SSH library for network devices | Netmiko / Paramiko |
-| Vendor-agnostic network API | NAPALM |
-| Safely staging and comparing config | Configuration candidate / diff |
-| Running the same task on many devices | Automation loop |
-| Defining tasks in reusable code | Script / function |
-
----
-
+# AUTO-001 - Python for Network Engineers
 ## Learning Objectives
 
 After completing this module you will be able to:
@@ -67,28 +38,53 @@ After completing this module you will be able to:
 6. Explain structured vs unstructured data output and when to use TextFSM/Genie parsers.
 
 ---
-
 ## Prerequisites
 
-- SV-005 — SNMP & Syslog (monitoring context — automation supplements monitoring)
-- RT-001 — Routing Fundamentals (context for what you're automating)
+- SV-005 - SNMP & Syslog (monitoring context - automation supplements monitoring)
+- RT-001 - Routing Fundamentals (context for what you're automating)
 - Basic Python familiarity (variables, loops, functions, exception handling) assumed
 
 ---
+## The Problem
 
+You have 200 switches. You need to add a new VLAN to all of them. Manual approach: SSH to each switch, enter configuration mode, add the VLAN, save. At 3 minutes per switch, that's 10 hours of repetitive work, with a high probability of a typo on switch 173 that causes an outage at 2am.
+
+### Step 1: SSH programmatically
+
+Python can open SSH connections and send commands just as you would manually, but at machine speed. You write the logic once; the script runs it on 200 devices simultaneously.
+
+### Step 2: A library that understands network devices
+
+Raw SSH (Paramiko) requires you to handle prompts, pagination, login banners, and `--More--` pauses manually - each vendor behaves differently. **Netmiko** wraps Paramiko with per-vendor knowledge: it knows how to log in to a Cisco IOS switch, disable pagination, handle config mode prompts, and enter/exit enable mode.
+
+### Step 3: Vendor-agnostic automation
+
+Even with Netmiko, the commands you send (`interface vlan 10` on Cisco vs `set vlans VLAN10 vlan-id 10` on Junos) differ per platform. **NAPALM** provides a standardised API: `device.get_interfaces()`, `device.load_merge_candidate()`, `device.compare_config()`, `device.commit_config()` - the same function calls work across Cisco IOS, Junos, EOS, and others.
+
+### What You Just Built
+
+| Scenario element | Technical term |
+|---|---|
+| SSH library for network devices | Netmiko / Paramiko |
+| Vendor-agnostic network API | NAPALM |
+| Safely staging and comparing config | Configuration candidate / diff |
+| Running the same task on many devices | Automation loop |
+| Defining tasks in reusable code | Script / function |
+
+---
 ## Core Content
 
 ### Why Not Just Use CLI?
 
-CLI is designed for humans. It produces unstructured text that humans can read but programs cannot easily parse. `show ip route` returns many lines of text — extracting the next-hop for a specific prefix requires string parsing that is fragile across software versions.
+CLI is designed for humans. It produces unstructured text that humans can read but programs cannot easily parse. `show ip route` returns many lines of text - extracting the next-hop for a specific prefix requires string parsing that is fragile across software versions.
 
 Automation requires:
 - **Reliable connection handling** (reconnect on failure, handle SSH host key changes, handle banners).
-- **Structured data** (lists, dicts) — not screen-scraping text.
+- **Structured data** (lists, dicts) - not screen-scraping text.
 - **Change safety** (preview, diff, rollback).
-- **Scale** — same code runs on 1 or 1000 devices.
+- **Scale** - same code runs on 1 or 1000 devices.
 
-### Paramiko — Low-Level SSH
+### Paramiko - Low-Level SSH
 
 Paramiko is the Python SSH library. It handles the SSH protocol but nothing network-device-specific. You must handle:
 - Login prompts and password entry.
@@ -98,7 +94,7 @@ Paramiko is the Python SSH library. It handles the SSH protocol but nothing netw
 
 Paramiko is used when you need full control or when Netmiko doesn't support your device. For most network automation, use Netmiko instead.
 
-### Netmiko — Network-Aware SSH
+### Netmiko - Network-Aware SSH
 
 Netmiko extends Paramiko with per-platform handlers. Supported platforms include: Cisco IOS, IOS-XE, IOS-XR, Junos, EOS, Nokia SR-OS, MikroTik, Huawei VRP, and dozens more.
 
@@ -136,7 +132,7 @@ Key Netmiko features:
 - `find_prompt()`: Returns the current prompt string.
 - `save_config()`: Platform-appropriate save (`write mem`, `commit`, etc.).
 
-### Parsing Unstructured Output — TextFSM / Genie
+### Parsing Unstructured Output - TextFSM / Genie
 
 `show` commands return text. To use the data programmatically, parse it into structured form.
 
@@ -153,11 +149,11 @@ with ConnectHandler(**device) as conn:
         print(f"Peer: {peer['bgp_neigh']} State: {peer['state_pfxrcd']}")
 ```
 
-**Genie / PyATS (Cisco):** A more sophisticated parser and testing framework from Cisco. Genie parsers understand the semantics of the output — not just the structure. Works with Cisco platforms.
+**Genie / PyATS (Cisco):** A more sophisticated parser and testing framework from Cisco. Genie parsers understand the semantics of the output - not just the structure. Works with Cisco platforms.
 
-### NAPALM — Vendor-Agnostic API
+### NAPALM - Vendor-Agnostic API
 
-NAPALM provides a unified API across network platforms. The same Python code works on Cisco IOS, IOS-XE, Junos, EOS, and others — NAPALM handles the platform differences internally.
+NAPALM provides a unified API across network platforms. The same Python code works on Cisco IOS, IOS-XE, Junos, EOS, and others - NAPALM handles the platform differences internally.
 
 ```python
 from napalm import get_network_driver
@@ -232,10 +228,9 @@ Network automation failures can cause outages. Defensive practices:
 5. **Inventory from files, not hardcoded:** Store device lists in YAML/CSV/NetBox; don't hardcode IPs in scripts.
 
 ---
-
 ## Vendor Implementations
 
-All implementations use the same Python libraries — the `device_type` parameter selects the vendor handler. Key Netmiko device types:
+All implementations use the same Python libraries - the `device_type` parameter selects the vendor handler. Key Netmiko device types:
 
 | Platform | device_type |
 |---|---|
@@ -254,7 +249,6 @@ Full Netmiko documentation: [https://ktbyers.github.io/netmiko/](https://ktbyers
 Full NAPALM documentation: [https://napalm.readthedocs.io/](https://napalm.readthedocs.io/)
 
 ---
-
 ## Common Pitfalls
 
 1. **Hardcoded credentials in scripts.** Never put passwords in scripts or commit them to version control. Use environment variables (`os.environ['NET_PASSWORD']`), a secrets vault (HashiCorp Vault, Ansible Vault), or a secrets manager (AWS Secrets Manager).
@@ -265,16 +259,15 @@ Full NAPALM documentation: [https://napalm.readthedocs.io/](https://napalm.readt
 
 4. **Running automation during production hours.** A script that pushes configuration to 200 switches simultaneously during business hours will cause packet loss during the config push. Always use maintenance windows.
 
-5. **Screen-scraping instead of structured data.** Parsing `show` command text with regex is fragile — a minor OS upgrade or regional locale change can break the parser. Use TextFSM/ntc-templates or NAPALM getters for any production automation that consumes output data.
+5. **Screen-scraping instead of structured data.** Parsing `show` command text with regex is fragile - a minor OS upgrade or regional locale change can break the parser. Use TextFSM/ntc-templates or NAPALM getters for any production automation that consumes output data.
 
 ---
-
 ## Practice Problems
 
 **Q1.** You need to retrieve the BGP neighbour state from 50 routers. What is the most reliable approach?
 
 ??? answer
-    Use NAPALM's `get_bgp_neighbors()` which returns a structured dictionary per platform. Alternatively, use Netmiko's `send_command('show bgp summary', use_textfsm=True)` with ntc-templates for structured parsing. Avoid raw regex parsing of `show bgp summary` text — it's fragile across OS versions and locale settings.
+    Use NAPALM's `get_bgp_neighbors()` which returns a structured dictionary per platform. Alternatively, use Netmiko's `send_command('show bgp summary', use_textfsm=True)` with ntc-templates for structured parsing. Avoid raw regex parsing of `show bgp summary` text - it's fragile across OS versions and locale settings.
 
 **Q2.** A script connecting to 100 devices fails on device 30 and crashes, never reaching devices 31–100. How do you fix this?
 
@@ -284,31 +277,28 @@ Full NAPALM documentation: [https://napalm.readthedocs.io/](https://napalm.readt
 **Q3.** What is the advantage of NAPALM's `compare_config()` before `commit_config()`?
 
 ??? answer
-    `compare_config()` shows a diff of what will change — similar to `git diff` before a commit, or `show | compare` on Junos. This lets the operator review the exact configuration changes before applying them. It prevents unintended side effects (accidentally removing an existing config line, introducing a syntax error). Always review the diff before committing, especially in production.
+    `compare_config()` shows a diff of what will change - similar to `git diff` before a commit, or `show | compare` on Junos. This lets the operator review the exact configuration changes before applying them. It prevents unintended side effects (accidentally removing an existing config line, introducing a syntax error). Always review the diff before committing, especially in production.
 
 ---
-
 ## Summary & Key Takeaways
 
 - Python automation eliminates repetitive manual CLI work and reduces human error.
-- **Paramiko:** Low-level SSH library — use for unsupported devices or fine-grained control.
-- **Netmiko:** Network-aware SSH with per-vendor handlers — the standard for CLI automation.
-- **NAPALM:** Vendor-agnostic API — same code for Cisco IOS, Junos, EOS; use for multi-vendor automation.
+- **Paramiko:** Low-level SSH library - use for unsupported devices or fine-grained control.
+- **Netmiko:** Network-aware SSH with per-vendor handlers - the standard for CLI automation.
+- **NAPALM:** Vendor-agnostic API - same code for Cisco IOS, Junos, EOS; use for multi-vendor automation.
 - **TextFSM / ntc-templates:** Parse unstructured show output into structured Python data.
 - Always handle exceptions per device; never let one failure stop the entire run.
 - Never hardcode credentials; use environment variables or a secrets vault.
 - Always run a dry-run and review diffs before applying config changes in production.
 
 ---
-
 ## Where to Next
 
-- **AUTO-002 — REST APIs & Network Automation:** Automate via HTTP APIs (eAPI, NETCONF/RESTCONF).
-- **AUTO-004 — Ansible for Network Automation:** Declarative automation with playbooks and roles.
-- **PROTO-008 — NETCONF & YANG:** Structured configuration management protocol.
+- **AUTO-002 - REST APIs & Network Automation:** Automate via HTTP APIs (eAPI, NETCONF/RESTCONF).
+- **AUTO-004 - Ansible for Network Automation:** Declarative automation with playbooks and roles.
+- **PROTO-008 - NETCONF & YANG:** Structured configuration management protocol.
 
 ---
-
 ## Standards & Certifications
 
 | Standard / Cert | Relevance |
@@ -318,7 +308,6 @@ Full NAPALM documentation: [https://napalm.readthedocs.io/](https://napalm.readt
 | CompTIA Network+ | Automation concepts |
 
 ---
-
 ## References
 
 - Netmiko documentation: [https://ktbyers.github.io/netmiko/](https://ktbyers.github.io/netmiko/)
@@ -326,7 +315,6 @@ Full NAPALM documentation: [https://napalm.readthedocs.io/](https://napalm.readt
 - ntc-templates: [https://github.com/networktocode/ntc-templates](https://github.com/networktocode/ntc-templates)
 
 ---
-
 ## Attribution & Licensing
 
 - Module content: original draft, AI-assisted (Claude Sonnet 4.6), 2026-04-19.
@@ -347,6 +335,6 @@ Full NAPALM documentation: [https://napalm.readthedocs.io/](https://napalm.readt
 
 | Module ID | Title | Relationship |
 |---|---|---|
-| SV-005 | SNMP & Syslog | Monitoring context — automation supplements |
+| SV-005 | SNMP & Syslog | Monitoring context - automation supplements |
 | RT-001 | Routing Fundamentals | Understanding what is being automated |
 <!-- XREF-END -->

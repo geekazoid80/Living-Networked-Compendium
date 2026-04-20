@@ -1,7 +1,7 @@
 ---
-id: CT-008
+module_id: CT-008
 title: "MEF Standards & Carrier Ethernet Framework"
-description: "How MEF defines Carrier Ethernet service types, attributes, and performance metrics — E-Line, E-LAN, E-Tree, E-Access — standardising the commercial and technical vocabulary for Ethernet services."
+description: "How MEF defines Carrier Ethernet service types, attributes, and performance metrics - E-Line, E-LAN, E-Tree, E-Access - standardising the commercial and technical vocabulary for Ethernet services."
 version: "1.0.0"
 status: draft
 human_reviewed: false
@@ -27,8 +27,25 @@ created: 2026-04-19
 updated: 2026-04-19
 ---
 
-# CT-008 — MEF Standards & Carrier Ethernet Framework
+# CT-008 - MEF Standards & Carrier Ethernet Framework
+## Learning Objectives
 
+After completing this module you will be able to:
+
+1. Describe the four MEF EVC types and their connectivity models.
+2. Explain UNI and its key attributes.
+3. Describe MEF bandwidth profiles - CIR, EIR, CBS, EBS, and their token bucket model.
+4. Explain MEF service attributes - frame delivery, multiplexing, bundling.
+5. Describe MEF performance parameters - FD, FDV, FLR.
+6. Map MEF service types to underlying MPLS/Ethernet technologies.
+
+---
+## Prerequisites
+
+- CT-003 - MPLS L2VPN (VPLS & Pseudowire): underlying technology for MEF services
+- SW-002 - VLANs & 802.1Q Trunking: CE-VLAN and S-tag (802.1ad) framing
+
+---
 ## The Problem
 
 An enterprise customer wants a WAN Ethernet service between their sites. They contact three service providers. Each provider describes the service differently:
@@ -37,9 +54,9 @@ An enterprise customer wants a WAN Ethernet service between their sites. They co
 - Provider B: "Virtual private LAN service, full mesh"
 - Provider C: "Any-to-any Ethernet service with CIR/EIR bandwidth"
 
-The customer cannot compare these services technically or contractually — the vocabulary is inconsistent. What bandwidth guarantee means, what service attributes are included, how performance is measured, what failover behaviour looks like — all differ by provider and sometimes by salesperson.
+The customer cannot compare these services technically or contractually - the vocabulary is inconsistent. What bandwidth guarantee means, what service attributes are included, how performance is measured, what failover behaviour looks like - all differ by provider and sometimes by salesperson.
 
-**MEF** (MEF Forum, formerly Metro Ethernet Forum) solves this by defining standard service types, attributes, and performance parameters for Carrier Ethernet services — giving providers and customers a common vocabulary.
+**MEF** (MEF Forum, formerly Metro Ethernet Forum) solves this by defining standard service types, attributes, and performance parameters for Carrier Ethernet services - giving providers and customers a common vocabulary.
 
 ### Step 1: Define service connectivity types
 
@@ -73,27 +90,6 @@ MEF specifies standardised performance metrics (delay, jitter, frame loss) for e
 | Excess burst size | EBS |
 
 ---
-
-## Learning Objectives
-
-After completing this module you will be able to:
-
-1. Describe the four MEF EVC types and their connectivity models.
-2. Explain UNI and its key attributes.
-3. Describe MEF bandwidth profiles — CIR, EIR, CBS, EBS, and their token bucket model.
-4. Explain MEF service attributes — frame delivery, multiplexing, bundling.
-5. Describe MEF performance parameters — FD, FDV, FLR.
-6. Map MEF service types to underlying MPLS/Ethernet technologies.
-
----
-
-## Prerequisites
-
-- CT-003 — MPLS L2VPN (VPLS & Pseudowire): underlying technology for MEF services
-- SW-002 — VLANs & 802.1Q Trunking: CE-VLAN and S-tag (802.1ad) framing
-
----
-
 ## Core Content
 
 ### MEF EVC Types
@@ -106,11 +102,11 @@ Site A ─── UNI-A ─── [Provider Network] ─── UNI-Z ─── Si
 ```
 
 Variants:
-- **EPL (Ethernet Private Line):** Dedicated, non-multiplexed — one EVC per UNI port. Full transparency of Ethernet frames including VLAN tags.
-- **EVPL (Ethernet Virtual Private Line):** Multiplexed — multiple EVCs per UNI (multiple customers or services per port). Uses CE-VLAN ID to identify each EVC.
+- **EPL (Ethernet Private Line):** Dedicated, non-multiplexed - one EVC per UNI port. Full transparency of Ethernet frames including VLAN tags.
+- **EVPL (Ethernet Virtual Private Line):** Multiplexed - multiple EVCs per UNI (multiple customers or services per port). Uses CE-VLAN ID to identify each EVC.
 
 **E-LAN (MEF 6.x):**
-Multipoint-to-multipoint — all UNIs can communicate with all others. Equivalent to VPLS.
+Multipoint-to-multipoint - all UNIs can communicate with all others. Equivalent to VPLS.
 
 ```
 Site A ─── UNI-A ─┐
@@ -123,14 +119,14 @@ Variants:
 - **EVP-LAN (Ethernet Virtual Private LAN):** Multiplexed EVCs per port using CE-VLAN.
 
 **E-Tree (MEF 6.x):**
-Rooted multipoint — one root UNI, multiple leaf UNIs. Root can communicate with all leaves; leaves cannot communicate with each other. Used for point-to-multipoint services (IPTV, internet access from a hub).
+Rooted multipoint - one root UNI, multiple leaf UNIs. Root can communicate with all leaves; leaves cannot communicate with each other. Used for point-to-multipoint services (IPTV, internet access from a hub).
 
 **E-Access (MEF 51.x):**
 Wholesale access service. An access provider (separate from the service provider) delivers connectivity from a UNI at the customer site to an ENNI (External Network-to-Network Interface) at the service provider edge. E-Access is the Carrier Ethernet equivalent of a local loop.
 
-### UNI — User-Network Interface
+### UNI - User-Network Interface
 
-The UNI is the physical and logical interface between the customer equipment (CE) and the provider's network (CEN — Carrier Ethernet Network). Key UNI attributes:
+The UNI is the physical and logical interface between the customer equipment (CE) and the provider's network (CEN - Carrier Ethernet Network). Key UNI attributes:
 
 | Attribute | Description |
 |---|---|
@@ -147,10 +143,10 @@ MEF defines bandwidth profiles using a **dual token bucket model** (two rate, th
 
 | Parameter | Description |
 |---|---|
-| **CIR (Committed Information Rate)** | Guaranteed throughput — green traffic |
-| **CBS (Committed Burst Size)** | Maximum burst at CIR rate — green bucket depth |
-| **EIR (Excess Information Rate)** | Best-effort additional bandwidth — yellow traffic |
-| **EBS (Excess Burst Size)** | Maximum excess burst — yellow bucket depth |
+| **CIR (Committed Information Rate)** | Guaranteed throughput - green traffic |
+| **CBS (Committed Burst Size)** | Maximum burst at CIR rate - green bucket depth |
+| **EIR (Excess Information Rate)** | Best-effort additional bandwidth - yellow traffic |
+| **EBS (Excess Burst Size)** | Maximum excess burst - yellow bucket depth |
 
 Traffic colouring:
 - **Green (≤ CIR + CBS bucket):** Forwarded with lowest drop probability.
@@ -171,9 +167,9 @@ MEF specifies performance attributes per EVC with objective values the provider 
 | Availability | Availability | Percentage of time the service meets FD and FLR objectives |
 | Mean time to restore | MTTR | Average recovery time after a fault |
 
-These parameters map directly to ITU-T Y.1731 OAM measurements — providers use Y.1731 to measure and report these values.
+These parameters map directly to ITU-T Y.1731 OAM measurements - providers use Y.1731 to measure and report these values.
 
-### 802.1ad (QinQ) — Provider Bridging
+### 802.1ad (QinQ) - Provider Bridging
 
 For services that carry customer VLAN tags (CE-VLAN) transparently, the provider wraps an additional VLAN tag (S-VLAN, service VLAN) around the customer's frame using **802.1ad (QinQ)**:
 
@@ -184,9 +180,9 @@ For services that carry customer VLAN tags (CE-VLAN) transparently, the provider
 - **S-VLAN:** Provider-assigned, identifies the EVC.
 - **C-VLAN:** Customer-assigned, preserved transparently.
 
-This allows the provider to carry thousands of customer VLANs without VLAN ID conflicts (customer VLANs in different EVCs can have the same number — they're in different S-VLAN tunnels).
+This allows the provider to carry thousands of customer VLANs without VLAN ID conflicts (customer VLANs in different EVCs can have the same number - they're in different S-VLAN tunnels).
 
-### ENNI — External Network-to-Network Interface
+### ENNI - External Network-to-Network Interface
 
 The **ENNI** is the interface between two provider networks. Used in multi-carrier deployments where E-Line or E-LAN services span multiple providers (inter-carrier Ethernet). The ENNI defines how operators interconnect their networks to deliver end-to-end EVCs.
 
@@ -202,21 +198,19 @@ The **ENNI** is the interface between two provider networks. Used in multi-carri
 | E-Access | NNI hand-off from access provider to service provider |
 
 ---
-
 ## Common Pitfalls
 
-1. **Confusing CIR with link speed.** CIR is the guaranteed bandwidth for the EVC — it may be much less than the UNI physical speed. An enterprise may have a 1 GbE UNI but only a 100 Mbps CIR for their E-Line service. Traffic above CIR is yellow (best-effort) up to EIR, then red (dropped). Many customers assume their service is as fast as the physical port.
+1. **Confusing CIR with link speed.** CIR is the guaranteed bandwidth for the EVC - it may be much less than the UNI physical speed. An enterprise may have a 1 GbE UNI but only a 100 Mbps CIR for their E-Line service. Traffic above CIR is yellow (best-effort) up to EIR, then red (dropped). Many customers assume their service is as fast as the physical port.
 
-2. **CE-VLAN bundling vs multiplexing.** Bundling maps multiple CE-VLANs to one EVC (e.g., CE-VLANs 10–20 all in one EVC, losing VLAN distinction at the far end). Multiplexing creates separate EVCs per CE-VLAN (each VLAN gets its own bandwidth profile and QoS). These are different services — verify which the customer needs before ordering.
+2. **CE-VLAN bundling vs multiplexing.** Bundling maps multiple CE-VLANs to one EVC (e.g., CE-VLANs 10–20 all in one EVC, losing VLAN distinction at the far end). Multiplexing creates separate EVCs per CE-VLAN (each VLAN gets its own bandwidth profile and QoS). These are different services - verify which the customer needs before ordering.
 
-3. **EVPL without CE-VLAN preservation.** Some EVPL implementations do not preserve CE-VLAN tags — they strip and re-tag at the far end. This breaks customer protocols that rely on VLAN identity. Verify the provider's CE-VLAN ID preservation attribute in the service specification.
+3. **EVPL without CE-VLAN preservation.** Some EVPL implementations do not preserve CE-VLAN tags - they strip and re-tag at the far end. This breaks customer protocols that rely on VLAN identity. Verify the provider's CE-VLAN ID preservation attribute in the service specification.
 
-4. **Misunderstanding E-Tree leaf isolation.** In E-Tree, leaves cannot communicate with each other — traffic between two leaf sites must flow through the root. If an enterprise needs any-to-any connectivity between all sites, they need E-LAN, not E-Tree. E-Tree is for hub-and-spoke architectures (internet breakout from hub, content delivery from root to leaves).
+4. **Misunderstanding E-Tree leaf isolation.** In E-Tree, leaves cannot communicate with each other - traffic between two leaf sites must flow through the root. If an enterprise needs any-to-any connectivity between all sites, they need E-LAN, not E-Tree. E-Tree is for hub-and-spoke architectures (internet breakout from hub, content delivery from root to leaves).
 
-5. **Applying bandwidth profiles in the wrong direction.** MEF bandwidth profiles are typically applied on ingress at the UNI (policing traffic entering the provider network from the customer). Applying them on egress (toward the customer) means the provider is policing traffic it is delivering — this should instead be a scheduling/shaping commitment, not a policer.
+5. **Applying bandwidth profiles in the wrong direction.** MEF bandwidth profiles are typically applied on ingress at the UNI (policing traffic entering the provider network from the customer). Applying them on egress (toward the customer) means the provider is policing traffic it is delivering - this should instead be a scheduling/shaping commitment, not a policer.
 
 ---
-
 ## Practice Problems
 
 **Q1.** A customer has 20 branches and a single head office. All branch traffic must pass through the head office before reaching other branches. Which MEF EVC type is appropriate, and why?
@@ -227,36 +221,33 @@ The **ENNI** is the interface between two provider networks. Used in multi-carri
 **Q2.** An enterprise orders a 500 Mbps CIR E-Line with EIR 200 Mbps on a 1 GbE UNI. They burst to 800 Mbps for 10 seconds. What happens to their traffic?
 
 ??? answer
-    Traffic up to 500 Mbps is green — forwarded with guaranteed delivery and lowest drop priority. Traffic from 500 Mbps to 700 Mbps (CIR + EIR) is yellow — forwarded on a best-effort basis; dropped first if the provider network is congested. Traffic above 700 Mbps is red — dropped at the UNI ingress policer. During the 800 Mbps burst: 500 Mbps guaranteed delivery, up to 200 Mbps additional is best-effort (may or may not get through depending on provider network load), and the remainder (up to 100 Mbps) is dropped. The 1 GbE physical port allows up to 1 GbE of physical throughput but the bandwidth profile enforces the CIR/EIR limits regardless.
+    Traffic up to 500 Mbps is green - forwarded with guaranteed delivery and lowest drop priority. Traffic from 500 Mbps to 700 Mbps (CIR + EIR) is yellow - forwarded on a best-effort basis; dropped first if the provider network is congested. Traffic above 700 Mbps is red - dropped at the UNI ingress policer. During the 800 Mbps burst: 500 Mbps guaranteed delivery, up to 200 Mbps additional is best-effort (may or may not get through depending on provider network load), and the remainder (up to 100 Mbps) is dropped. The 1 GbE physical port allows up to 1 GbE of physical throughput but the bandwidth profile enforces the CIR/EIR limits regardless.
 
 **Q3.** What is the difference between EPL and EVPL?
 
 ??? answer
-    **EPL (Ethernet Private Line):** Dedicated UNI — one EVC per UNI port. All frames entering the UNI belong to the single EVC. The full UNI bandwidth is dedicated to this service. Provides complete Ethernet frame transparency including CE-VLAN tags (the customer's VLAN structure is preserved end-to-end). **EVPL (Ethernet Virtual Private Line):** Multiplexed UNI — multiple EVCs share one UNI port, distinguished by CE-VLAN ID. Each CE-VLAN maps to a different EVC (different bandwidth profile, different far-end UNI). Allows multiple services over one physical port. The trade-off: EVPL requires VLAN-based multiplexing at the UNI, and the number of EVCs is limited by CE-VLAN ID space.
+    **EPL (Ethernet Private Line):** Dedicated UNI - one EVC per UNI port. All frames entering the UNI belong to the single EVC. The full UNI bandwidth is dedicated to this service. Provides complete Ethernet frame transparency including CE-VLAN tags (the customer's VLAN structure is preserved end-to-end). **EVPL (Ethernet Virtual Private Line):** Multiplexed UNI - multiple EVCs share one UNI port, distinguished by CE-VLAN ID. Each CE-VLAN maps to a different EVC (different bandwidth profile, different far-end UNI). Allows multiple services over one physical port. The trade-off: EVPL requires VLAN-based multiplexing at the UNI, and the number of EVCs is limited by CE-VLAN ID space.
 
 ---
-
 ## Summary & Key Takeaways
 
-- **MEF** standardises Carrier Ethernet service types, attributes, and performance metrics — enabling comparable, contractual service definitions between providers and customers.
+- **MEF** standardises Carrier Ethernet service types, attributes, and performance metrics - enabling comparable, contractual service definitions between providers and customers.
 - **EVC types:** E-Line (point-to-point), E-LAN (any-to-any), E-Tree (hub-and-spoke), E-Access (wholesale).
 - **EPL vs EVPL:** Dedicated UNI vs multiplexed (multiple EVCs per UNI via CE-VLAN).
-- **Bandwidth profile:** CIR (guaranteed green), EIR (best-effort yellow), red (dropped) — dual token bucket.
-- **Performance attributes:** FD (frame delay), FDV (jitter), FLR (frame loss ratio) — independently measurable via Y.1731.
-- **802.1ad (QinQ):** Provider S-VLAN wraps customer C-VLAN — allows overlapping customer VLANs across the provider network.
+- **Bandwidth profile:** CIR (guaranteed green), EIR (best-effort yellow), red (dropped) - dual token bucket.
+- **Performance attributes:** FD (frame delay), FDV (jitter), FLR (frame loss ratio) - independently measurable via Y.1731.
+- **802.1ad (QinQ):** Provider S-VLAN wraps customer C-VLAN - allows overlapping customer VLANs across the provider network.
 - EVPL requires CE-VLAN preservation to be contractually specified; verify before ordering.
 - Technology map: E-Line → pseudowire; E-LAN → VPLS or EVPN; E-Tree → VPLS split-horizon or EVPN E-Tree.
 
 ---
-
 ## Where to Next
 
-- **CT-009 — Carrier Ethernet Services:** Operational design and deployment of MEF services on MPLS/EVPN infrastructure.
-- **CT-003 — MPLS L2VPN:** VPLS and pseudowire implementation of MEF E-Line and E-LAN.
-- **CT-006 — EVPN Fundamentals:** EVPN implementation of MEF E-LAN and E-Tree.
+- **CT-009 - Carrier Ethernet Services:** Operational design and deployment of MEF services on MPLS/EVPN infrastructure.
+- **CT-003 - MPLS L2VPN:** VPLS and pseudowire implementation of MEF E-Line and E-LAN.
+- **CT-006 - EVPN Fundamentals:** EVPN implementation of MEF E-LAN and E-Tree.
 
 ---
-
 ## Standards & Certifications
 
 | Standard / Cert | Relevance |
@@ -265,20 +256,18 @@ The **ENNI** is the interface between two provider networks. Used in multi-carri
 | MEF 51.x | E-Access Services |
 | MEF 10.4 | Ethernet Services Attributes |
 | MEF 23.x | Bandwidth Profile |
-| ITU-T Y.1731 | OAM for Ethernet — performance measurement |
+| ITU-T Y.1731 | OAM for Ethernet - performance measurement |
 | MEF CECP | Carrier Ethernet Certification Programme |
 | Cisco CCIE Service Provider | MEF services, E-Line, E-LAN |
 
 ---
-
 ## References
 
-- MEF 6.3 — Ethernet Virtual Connection Services. Available via MEF membership: [https://www.mef.net/resources/mef-6-3/](https://www.mef.net/resources/mef-6-3/)
-- MEF 10.4 — Ethernet Service Attributes. [https://www.mef.net/resources/mef-10-4/](https://www.mef.net/resources/mef-10-4/)
-- ITU-T Y.1731 — OAM Functions and Mechanisms for Ethernet-Based Networks. [https://www.itu.int/rec/T-REC-Y.1731](https://www.itu.int/rec/T-REC-Y.1731)
+- MEF 6.3 - Ethernet Virtual Connection Services. Available via MEF membership: [https://www.mef.net/resources/mef-6-3/](https://www.mef.net/resources/mef-6-3/)
+- MEF 10.4 - Ethernet Service Attributes. [https://www.mef.net/resources/mef-10-4/](https://www.mef.net/resources/mef-10-4/)
+- ITU-T Y.1731 - OAM Functions and Mechanisms for Ethernet-Based Networks. [https://www.itu.int/rec/T-REC-Y.1731](https://www.itu.int/rec/T-REC-Y.1731)
 
 ---
-
 ## Attribution & Licensing
 
 - Module content: original draft, AI-assisted (Claude Sonnet 4.6), 2026-04-19.

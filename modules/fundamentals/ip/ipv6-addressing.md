@@ -11,20 +11,38 @@ maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
 tags: ["ipv6", "addressing", "slaac", "ndp", "icmpv6", "dual-stack", "global-unicast", "link-local", "eui-64", "prefix"]
-cert_alignment: "CCNA 200-301 — 1.8 | JNCIA-Junos JN0-103 | Nokia NRS I"
+cert_alignment: "CCNA 200-301 - 1.8 | JNCIA-Junos JN0-103 | Nokia NRS I"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "Huawei VRP", "MikroTik RouterOS"]
 language: "en"
 ---
+## Learning Objectives
 
+By the end of this module, you will be able to:
+
+1. **Explain** why IPv6 was necessary and what IPv4 limitation it solves
+2. **Read and write** IPv6 addresses in both full and compressed notation, and expand a compressed address back to full form
+3. **Describe** the structure of an IPv6 address - prefix, subnet ID, and interface ID - and apply /64 subnetting
+4. **Identify** the major IPv6 address types (global unicast, link-local, loopback, ULA, multicast, anycast) by their prefix
+5. **Explain** how NDP replaces ARP and how SLAAC enables stateless autoconfiguration
+6. **Compare** dual-stack, tunnelling, and translation as IPv4/IPv6 coexistence strategies
+
+---
+## Prerequisites
+
+- [IP Addressing Fundamentals](ip-addressing.md) (`IP-001`) - binary and hex notation, network vs host portions, subnet masks
+- [IP Subnetting & VLSM](subnetting.md) (`IP-002`) - prefix length, CIDR notation, address carving
+- [The OSI Model](../networking/osi-model.md) (`NW-001`) - Layer 3 context; what "network layer addressing" means
+
+---
 ## The Problem
 
-Two network architects in 1993 are designing an addressing plan. Their company has 500 devices — servers, workstations, printers. IPv4 works perfectly. Each device gets a 32-bit address. Everything connects. Life is good.
+Two network architects in 1993 are designing an addressing plan. Their company has 500 devices - servers, workstations, printers. IPv4 works perfectly. Each device gets a 32-bit address. Everything connects. Life is good.
 
 ### Step 1: The address pool runs dry
 
-The internet grows. Every phone, laptop, camera, smart meter, and industrial sensor wants an address. At 32 bits, IPv4 can express 4,294,967,296 unique values — just over four billion. That sounds enormous until you account for 8 billion people, each owning multiple devices, and billions of infrastructure nodes. The Regional Internet Registries began handing out their last address blocks in the 2010s.
+The internet grows. Every phone, laptop, camera, smart meter, and industrial sensor wants an address. At 32 bits, IPv4 can express 4,294,967,296 unique values - just over four billion. That sounds enormous until you account for 8 billion people, each owning multiple devices, and billions of infrastructure nodes. The Regional Internet Registries began handing out their last address blocks in the 2010s.
 
-The fix is obvious: make the address longer. But how long? The engineers designing the next version ask: what if every grain of sand on earth could have its own address, with room to spare? They settle on **128 bits**. That yields 2¹²⁸ — approximately **340 undecillion** addresses (3.4 × 10³⁸). The address shortage problem is solved for the foreseeable future. This decision is the foundation of IPv6.
+The fix is obvious: make the address longer. But how long? The engineers designing the next version ask: what if every grain of sand on earth could have its own address, with room to spare? They settle on **128 bits**. That yields 2¹²⁸ - approximately **340 undecillion** addresses (3.4 × 10³⁸). The address shortage problem is solved for the foreseeable future. This decision is the foundation of IPv6.
 
 ### Step 2: 128 bits is unreadable
 
@@ -38,28 +56,28 @@ Eight groups. Four hex digits each. 32 hex characters plus 7 colons. This is the
 
 ### Step 3: Zeros everywhere
 
-Most IPv6 addresses have long runs of zeros — especially in early deployment, where addresses are carefully allocated from structured prefixes. Writing every zero is tedious and error-prone. Two compression rules clean this up:
+Most IPv6 addresses have long runs of zeros - especially in early deployment, where addresses are carefully allocated from structured prefixes. Writing every zero is tedious and error-prone. Two compression rules clean this up:
 
 1. **Drop leading zeros** within any group: `0db8` → `db8`, `0042` → `42`, `0000` → `0`
-2. **Collapse one consecutive run** of all-zero groups with `::` — used at most once per address
+2. **Collapse one consecutive run** of all-zero groups with `::` - used at most once per address
 
 So `2001:0db8:0000:0000:0000:0000:0000:0001` compresses to `2001:db8::1`. A loopback address that is 127 zero bits followed by a one becomes simply `::1`.
 
 ### Step 4: ARP shouts at everyone
 
-With IPv4, when a device needs a MAC address to match an IP, it broadcasts "**Who has 192.168.1.5?**" — a frame delivered to every device on the segment. Every device wakes up, reads the question, most discard it. We saw in NW-002 that broadcast storms are a real cost. Can IPv6 resolve addresses without shouting at everyone?
+With IPv4, when a device needs a MAC address to match an IP, it broadcasts "**Who has 192.168.1.5?**" - a frame delivered to every device on the segment. Every device wakes up, reads the question, most discard it. We saw in NW-002 that broadcast storms are a real cost. Can IPv6 resolve addresses without shouting at everyone?
 
-Yes. IPv6 uses **ICMPv6 Neighbor Discovery Protocol (NDP)**. Instead of a broadcast, a device sends a Neighbor Solicitation to a specific **solicited-node multicast address** — a special multicast group derived from the last 24 bits of the target's IPv6 address. Only the device (or devices) sharing that address suffix receive the message. Everyone else ignores it. ARP is gone; NDP replaces it with multicast precision.
+Yes. IPv6 uses **ICMPv6 Neighbor Discovery Protocol (NDP)**. Instead of a broadcast, a device sends a Neighbor Solicitation to a specific **solicited-node multicast address** - a special multicast group derived from the last 24 bits of the target's IPv6 address. Only the device (or devices) sharing that address suffix receive the message. Everyone else ignores it. ARP is gone; NDP replaces it with multicast precision.
 
 ### Step 5: Someone has to hand out addresses
 
-With IPv4, a DHCP server tracks which address goes to which device, assigns leases, and renews them. It works — but it requires infrastructure to deploy and maintain. As networks grow to millions of addresses, can devices configure themselves without a server?
+With IPv4, a DHCP server tracks which address goes to which device, assigns leases, and renews them. It works - but it requires infrastructure to deploy and maintain. As networks grow to millions of addresses, can devices configure themselves without a server?
 
-In IPv6, they can. A router periodically sends **Router Advertisement (RA)** messages announcing the local network prefix — for example, `2001:db8:1::/64`. A device that receives this takes the /64 prefix from the router and appends its own **64-bit interface identifier**, generated from its MAC address using a process called **EUI-64**. The result is a globally unique, self-configured IPv6 address — no server required. This is **SLAAC: Stateless Address Autoconfiguration**.
+In IPv6, they can. A router periodically sends **Router Advertisement (RA)** messages announcing the local network prefix - for example, `2001:db8:1::/64`. A device that receives this takes the /64 prefix from the router and appends its own **64-bit interface identifier**, generated from its MAC address using a process called **EUI-64**. The result is a globally unique, self-configured IPv6 address - no server required. This is **SLAAC: Stateless Address Autoconfiguration**.
 
 ### What You Just Built
 
-IPv6 — a 128-bit addressing scheme with hexadecimal colon notation, compression rules, multicast-based neighbour discovery, and stateless autoconfiguration.
+IPv6 - a 128-bit addressing scheme with hexadecimal colon notation, compression rules, multicast-based neighbour discovery, and stateless autoconfiguration.
 
 | Scenario element | Technical term |
 |---|---|
@@ -71,28 +89,6 @@ IPv6 — a 128-bit addressing scheme with hexadecimal colon notation, compressio
 | Derived interface identifier from MAC address | EUI-64 |
 
 ---
-
-## Learning Objectives
-
-By the end of this module, you will be able to:
-
-1. **Explain** why IPv6 was necessary and what IPv4 limitation it solves
-2. **Read and write** IPv6 addresses in both full and compressed notation, and expand a compressed address back to full form
-3. **Describe** the structure of an IPv6 address — prefix, subnet ID, and interface ID — and apply /64 subnetting
-4. **Identify** the major IPv6 address types (global unicast, link-local, loopback, ULA, multicast, anycast) by their prefix
-5. **Explain** how NDP replaces ARP and how SLAAC enables stateless autoconfiguration
-6. **Compare** dual-stack, tunnelling, and translation as IPv4/IPv6 coexistence strategies
-
----
-
-## Prerequisites
-
-- [IP Addressing Fundamentals](ip-addressing.md) (`IP-001`) — binary and hex notation, network vs host portions, subnet masks
-- [IP Subnetting & VLSM](subnetting.md) (`IP-002`) — prefix length, CIDR notation, address carving
-- [The OSI Model](../networking/osi-model.md) (`NW-001`) — Layer 3 context; what "network layer addressing" means
-
----
-
 ## Core Content
 
 ### Address Format and Notation
@@ -106,7 +102,7 @@ Full form:   2001:0db8:0000:0001:0000:0000:0000:0001
            (each group = 16 bits = 4 hex digits)
 ```
 
-**Compression rules** — both may be applied together:
+**Compression rules** - both may be applied together:
 
 | Rule | Before | After |
 |---|---|---|
@@ -121,7 +117,7 @@ Step 1:  2001:db8:0:1:0:0:0:1        (drop leading zeros)
 Step 2:  2001:db8:0:1::1             (collapse longest zero run — 3 groups)
 ```
 
-**Expanding a compressed address** — reverse the process:
+**Expanding a compressed address** - reverse the process:
 
 1. Find `::`. Count the groups present. The `::` represents (8 − groups present) × all-zero 16-bit groups.
 2. Insert the missing `0000` groups where `::` appears.
@@ -154,20 +150,20 @@ Example — /48 to org, /64 to subnet:
 
 | Allocation | Typical prefix | How many subnets downstream |
 |---|---|---|
-| RIR to ISP | /32 | — |
-| ISP to organisation | /32–/48 | — |
+| RIR to ISP | /32 | - |
+| ISP to organisation | /32–/48 | - |
 | Organisation to site | /48 | 2¹⁶ = 65,536 /64 subnets |
 | Site to end subnet | /64 | 2⁶⁴ host addresses per subnet |
 | Single host/loopback | /128 | One address |
 
-The **interface ID is always 64 bits** in standard SLAAC addressing. This is why /64 is the standard subnet prefix length — it splits the address space exactly in half: 64 bits for routing, 64 bits for the host.
+The **interface ID is always 64 bits** in standard SLAAC addressing. This is why /64 is the standard subnet prefix length - it splits the address space exactly in half: 64 bits for routing, 64 bits for the host.
 
 ??? supplementary "EUI-64: Deriving the Interface ID from a MAC Address"
     SLAAC needs a unique 64-bit interface ID. The standard method (RFC 4291) derives it from the device's 48-bit MAC address using EUI-64:
 
     1. Split the MAC at the midpoint: `AA:BB:CC` | `DD:EE:FF`
     2. Insert `FF:FE` in the middle: `AA:BB:CC:FF:FE:DD:EE:FF`
-    3. Flip bit 7 (the Universal/Local bit) of the first byte — this inverts the "globally unique" sense from MAC to EUI-64 convention
+    3. Flip bit 7 (the Universal/Local bit) of the first byte - this inverts the "globally unique" sense from MAC to EUI-64 convention
 
     Example:
     ```text
@@ -178,7 +174,7 @@ The **interface ID is always 64 bits** in standard SLAAC addressing. This is why
     Interface ID: 0250:56FF:FEC0:0001
     ```
 
-    This means a device's SLAAC address reveals its MAC address — a privacy concern. RFC 4941 (Privacy Extensions) generates a random, time-limited interface ID for outbound connections instead. Most modern operating systems (Windows, macOS, Linux) enable privacy extensions by default. You may see multiple addresses per interface: one stable (EUI-64) and one or more temporary (privacy extensions).
+    This means a device's SLAAC address reveals its MAC address - a privacy concern. RFC 4941 (Privacy Extensions) generates a random, time-limited interface ID for outbound connections instead. Most modern operating systems (Windows, macOS, Linux) enable privacy extensions by default. You may see multiple addresses per interface: one stable (EUI-64) and one or more temporary (privacy extensions).
 
 ### IPv6 Address Types
 
@@ -186,17 +182,17 @@ IPv6 has **no broadcast**. Specific address types serve specific roles, and mult
 
 | Type | Prefix | Scope | Purpose |
 |---|---|---|---|
-| **Global unicast** | `2000::/3` | Global internet | Routable addresses — equivalent of public IPv4 |
+| **Global unicast** | `2000::/3` | Global internet | Routable addresses - equivalent of public IPv4 |
 | **Link-local** | `fe80::/10` | Single link only | Auto-configured on every interface; used for NDP and routing protocols |
 | **Loopback** | `::1/128` | Host only | Equivalent to `127.0.0.1`; always present |
 | **Unique Local (ULA)** | `fc00::/7` (typically `fd00::/8`) | Organisation | Equivalent to RFC 1918 private space; not globally routable |
 | **Multicast** | `ff00::/8` | Scope-dependent | One-to-many; replaces broadcast |
 | **Anycast** | From unicast space | Routing | Same address on multiple nodes; packet goes to nearest |
-| **Unspecified** | `::/128` | — | Equivalent to `0.0.0.0`; source before assignment |
+| **Unspecified** | `::/128` | - | Equivalent to `0.0.0.0`; source before assignment |
 
 **Key rule:** Every IPv6-enabled interface has **at least two addresses**:
-1. A **link-local** address (`fe80::...`) — auto-configured, never forwarded beyond the link
-2. A **global unicast** or **ULA** address — used for inter-network communication
+1. A **link-local** address (`fe80::...`) - auto-configured, never forwarded beyond the link
+2. A **global unicast** or **ULA** address - used for inter-network communication
 
 ```text
 Link-local prefix:  FE80::/10
@@ -208,7 +204,7 @@ Multicast prefix:   FF00::/8
 ```
 
 ??? supplementary "Multicast Scopes in IPv6"
-    The third byte of a multicast address encodes the **scope** — how far the multicast travels:
+    The third byte of a multicast address encodes the **scope** - how far the multicast travels:
 
     | Scope value | Name | What it means |
     |---|---|---|
@@ -236,13 +232,13 @@ NDP (RFC 4861) replaces both ARP and several ICMP router-discovery functions fro
 
 | NDP Message | ICMPv6 Type | Replaces | Purpose |
 |---|---|---|---|
-| Router Solicitation (RS) | 133 | — | Host asks: "Is there a router here?" |
-| Router Advertisement (RA) | 134 | — | Router announces prefix, gateway, flags |
+| Router Solicitation (RS) | 133 | - | Host asks: "Is there a router here?" |
+| Router Advertisement (RA) | 134 | - | Router announces prefix, gateway, flags |
 | Neighbor Solicitation (NS) | 135 | ARP Request | "Who has this IPv6 address?" (sent to solicited-node multicast) |
 | Neighbor Advertisement (NA) | 136 | ARP Reply | "I have that address; here is my MAC" |
 | Redirect | 137 | ICMP Redirect | Router tells host of a better next-hop |
 
-**How address resolution works — replacing ARP:**
+**How address resolution works - replacing ARP:**
 
 ```text
 Host A wants to reach Host B (2001:db8::1:100):
@@ -256,7 +252,7 @@ Host A wants to reach Host B (2001:db8::1:100):
 4. Host A stores the mapping in its Neighbor Cache (equivalent of the ARP table)
 ```
 
-**How SLAAC works — step by step:**
+**How SLAAC works - step by step:**
 
 ```text
 1. Interface comes up
@@ -282,7 +278,7 @@ Host A wants to reach Host B (2001:db8::1:100):
 
 ??? supplementary "Duplicate Address Detection (DAD)"
     Before using any new IPv6 address (including link-local), a node confirms the address is not already in use. It sends a Neighbor Solicitation with:
-    - Source: `::/128` (unspecified — the node doesn't yet own the address)
+    - Source: `::/128` (unspecified - the node doesn't yet own the address)
     - Destination: the solicited-node multicast of the tentative address
 
     If no Neighbor Advertisement returns within a timeout (default: 1 second, up to RetransTimer), the address is considered unique and assigned.
@@ -302,7 +298,7 @@ The RA's **M bit** (Managed) and **O bit** (Other) control host behaviour:
 
 | M bit | O bit | Host behaviour |
 |---|---|---|
-| 0 | 0 | SLAAC only — no DHCPv6 |
+| 0 | 0 | SLAAC only - no DHCPv6 |
 | 0 | 1 | SLAAC for address; DHCPv6 for other options (DNS) |
 | 1 | 0 | DHCPv6 stateful for address; no other options |
 | 1 | 1 | DHCPv6 stateful for address and options |
@@ -311,38 +307,37 @@ The RA's **M bit** (Managed) and **O bit** (Other) control host behaviour:
 
 The internet does not switch overnight. Three transition strategies exist:
 
-**1. Dual-stack** — run both IPv4 and IPv6 simultaneously on every device and link
+**1. Dual-stack** - run both IPv4 and IPv6 simultaneously on every device and link
 
 - Each interface has both an IPv4 and IPv6 address
-- Applications prefer IPv6 where available (RFC 6724 address selection — "Happy Eyeballs")
+- Applications prefer IPv6 where available (RFC 6724 address selection - "Happy Eyeballs")
 - Both protocol stacks must be managed, secured, and monitored
 - The current standard approach for enterprise and ISP networks
 
-**2. Tunnelling** — carry IPv6 packets inside IPv4 (or vice versa)
+**2. Tunnelling** - carry IPv6 packets inside IPv4 (or vice versa)
 
 - Used to cross IPv4-only segments
 - Common mechanisms: 6in4 (static, explicit endpoints), 6rd (ISP-deployed), ISATAP (intranet)
 - Adds header overhead; complicates troubleshooting (packets within packets)
 - Used where upgrading the underlying network is not yet practical
 
-**3. Translation** — convert between IPv4 and IPv6 at the boundary
+**3. Translation** - convert between IPv4 and IPv6 at the boundary
 
 - **NAT64**: maps IPv6 client requests to an IPv4 address for IPv4-only servers
 - **DNS64**: synthesises AAAA records for A-only names so IPv6-only clients can reach IPv4-only servers
 - Breaks end-to-end transparency; problematic for applications that embed IP addresses in payloads
 
-??? supplementary "Address Selection — Why IPv6 is Preferred on Dual-Stack Hosts"
+??? supplementary "Address Selection - Why IPv6 is Preferred on Dual-Stack Hosts"
     When a dual-stack host has both an IPv4 and IPv6 address for a destination, RFC 6724 defines the default address selection algorithm. The general preference: IPv6 global unicast is ranked above IPv4-mapped addresses. In practice, when both A and AAAA DNS records exist, the OS typically connects over IPv6 first.
 
-    This is why working IPv6 connectivity is critical before advertising AAAA records. A broken IPv6 path causes connection failures even when IPv4 would work — the client tries IPv6 first and waits for a timeout. RFC 8305 (Happy Eyeballs v2) mitigates this by racing IPv4 and IPv6 connections with a 250 ms stagger, but not all clients implement it fully.
+    This is why working IPv6 connectivity is critical before advertising AAAA records. A broken IPv6 path causes connection failures even when IPv4 would work - the client tries IPv6 first and waits for a timeout. RFC 8305 (Happy Eyeballs v2) mitigates this by racing IPv4 and IPv6 connections with a 250 ms stagger, but not all clients implement it fully.
 
 ---
-
 ## Vendor Implementations
 
 The IPv6 address structure and NDP behaviour are standardised in RFC 8200 and RFC 4861. All compliant implementations share the same address notation, NDP message types, and SLAAC behaviour. Differences below are syntactic.
 
-!!! success "Standard — RFC 8200 (IPv6), RFC 4861 (NDP), RFC 4862 (SLAAC)"
+!!! success "Standard - RFC 8200 (IPv6), RFC 4861 (NDP), RFC 4862 (SLAAC)"
     Any RFC-compliant implementation produces interoperable neighbour discovery, SLAAC, and address resolution. Vendor configuration differences are syntactic only.
 
 === "Cisco IOS-XE"
@@ -442,7 +437,6 @@ The IPv6 address structure and NDP behaviour are standardised in RFC 8200 and RF
     Full configuration reference: [MikroTik IPv6 Address Management](https://help.mikrotik.com/docs/display/ROS/IPv6+Addresses)
 
 ---
-
 ## Common Pitfalls
 
 ### Pitfall 1: Forgetting `ipv6 unicast-routing` on Cisco
@@ -451,22 +445,21 @@ On Cisco IOS-XE, an interface can have an IPv6 address but the router will not f
 
 ### Pitfall 2: Blocking ICMPv6 in the firewall
 
-IPv6 relies on ICMPv6 for NDP and SLAAC. Firewalls that block all ICMP — carried over from IPv4 hardening habits — break IPv6 neighbour discovery entirely. Hosts cannot resolve MAC addresses, cannot perform DAD, and never receive Router Advertisements. At minimum, permit ICMPv6 types 133–137 (RS, RA, NS, NA, Redirect) inbound and outbound on all IPv6-enabled interfaces.
+IPv6 relies on ICMPv6 for NDP and SLAAC. Firewalls that block all ICMP - carried over from IPv4 hardening habits - break IPv6 neighbour discovery entirely. Hosts cannot resolve MAC addresses, cannot perform DAD, and never receive Router Advertisements. At minimum, permit ICMPv6 types 133–137 (RS, RA, NS, NA, Redirect) inbound and outbound on all IPv6-enabled interfaces.
 
 ### Pitfall 3: Using `::` more than once
 
-The `::` shorthand can appear only once per address. `2001:db8::1::2` is invalid — the parser cannot determine how many zero groups each `::` represents. Symptom: configuration is rejected or silently misinterpreted. When two separate zero runs exist, collapse only the longer one.
+The `::` shorthand can appear only once per address. `2001:db8::1::2` is invalid - the parser cannot determine how many zero groups each `::` represents. Symptom: configuration is rejected or silently misinterpreted. When two separate zero runs exist, collapse only the longer one.
 
 ### Pitfall 4: Treating link-local addresses as routable
 
-`fe80::` addresses are valid only on the link where they were configured. They cannot be forwarded by a router. Routing protocols (OSPFv3, BGP) use link-local addresses as the neighbour address — that is correct behaviour. But the **forwarding next-hop** for remote routes must be a global unicast address. Confusion here causes routes that form correctly but traffic that fails to forward.
+`fe80::` addresses are valid only on the link where they were configured. They cannot be forwarded by a router. Routing protocols (OSPFv3, BGP) use link-local addresses as the neighbour address - that is correct behaviour. But the **forwarding next-hop** for remote routes must be a global unicast address. Confusion here causes routes that form correctly but traffic that fails to forward.
 
 ### Pitfall 5: Treating ULA as globally routable
 
 Unique Local Addresses (`fc00::/7`, typically `fd00::/8`) are the IPv6 equivalent of RFC 1918 private space. ISPs do not advertise them. If you configure ULA addresses expecting external reachability, traffic will be dropped at the internet boundary with no error visible to the source.
 
 ---
-
 ## Practice Problems
 
 1. Write the full 128-bit form of the compressed address `2001:db8::cafe:1`. How many zero groups does `::` represent?
@@ -491,9 +484,9 @@ Unique Local Addresses (`fc00::/7`, typically `fd00::/8`) are the IPv6 equivalen
     - SLAAC address: `2001:db8:a1b2::21a:2bff:fe3c:4d5e`
 
     **3.** In order of most likely cause:
-    1. **No router is sending RAs** — verify `ipv6 unicast-routing` is enabled; confirm RAs are being sent with `show ipv6 interface` or `debug ipv6 nd`
-    2. **ICMPv6 blocked** — RA messages (type 134) are ICMPv6; a firewall or ACL may be dropping them before they reach the host
-    3. **DAD failure** — the host attempted SLAAC but detected a duplicate; check the interface for "tentative" or "duplicate" state
+    1. **No router is sending RAs** - verify `ipv6 unicast-routing` is enabled; confirm RAs are being sent with `show ipv6 interface` or `debug ipv6 nd`
+    2. **ICMPv6 blocked** - RA messages (type 134) are ICMPv6; a firewall or ACL may be dropping them before they reach the host
+    3. **DAD failure** - the host attempted SLAAC but detected a duplicate; check the interface for "tentative" or "duplicate" state
 
     **4.** Allocate /56 per site (8 bits beyond the /48 gives 2⁸ = 256 ≥ 12 sites). Each /56 contains 2⁸ = **256 /64 subnets**, which exceeds the 200-subnet requirement per site.
 
@@ -501,7 +494,6 @@ Unique Local Addresses (`fc00::/7`, typically `fd00::/8`) are the IPv6 equivalen
     First diagnostic step: ping the server's IPv6 address directly from a branch client. If this fails while IPv4 ping succeeds, trace the IPv6 path to find the break.
 
 ---
-
 ## Lab
 
 ### Lab: Configure and Verify IPv6 Addressing with SLAAC
@@ -578,78 +570,73 @@ Unique Local Addresses (`fc00::/7`, typically `fd00::/8`) are the IPv6 equivalen
     ```
 
 ??? supplementary "Lab extension: Capture NDP packets in Wireshark"
-    Enable a Wireshark capture on the PC-A — R1 link before bringing the interface up. Look for:
+    Enable a Wireshark capture on the PC-A - R1 link before bringing the interface up. Look for:
     - **Router Solicitation** (ICMPv6 type 133) from PC-A to `ff02::2`
     - **Router Advertisement** (ICMPv6 type 134) from R1 to `ff02::1`
     - **Neighbor Solicitation for DAD** (type 135, source = `::`)
-    - **Neighbor Advertisement** (type 136) — absent if no collision
+    - **Neighbor Advertisement** (type 136) - absent if no collision
 
     Seeing these four exchanges in sequence gives an intuitive picture of how SLAAC and NDP work that no diagram fully replaces.
 
 ---
-
 ## Summary & Key Takeaways
 
-- IPv6 uses **128-bit addresses** — 3.4 × 10³⁸ possible values — to solve IPv4 exhaustion
+- IPv6 uses **128-bit addresses** - 3.4 × 10³⁸ possible values - to solve IPv4 exhaustion
 - Addresses are written as **8 groups of 4 hex digits** separated by colons; leading zeros can be dropped; one consecutive run of all-zero groups collapses to `::`
 - To expand `::`: count groups shown, subtract from 8, and that many zero groups replace the `::`
-- The standard host subnet is **/64** — 64 bits for the routing prefix, 64 bits for the interface ID
-- IPv6 has **no broadcast** — multicast addresses serve every role that broadcast served in IPv4
+- The standard host subnet is **/64** - 64 bits for the routing prefix, 64 bits for the interface ID
+- IPv6 has **no broadcast** - multicast addresses serve every role that broadcast served in IPv4
 - Every IPv6-enabled interface auto-configures a **link-local address** (`fe80::/10`) at startup
 - **NDP** (RFC 4861) replaces ARP: Neighbor Solicitations go to a **solicited-node multicast** group, not to all hosts
-- **SLAAC** lets a device build its own global unicast address from the router's RA prefix + its own EUI-64 interface ID — no DHCP server required
+- **SLAAC** lets a device build its own global unicast address from the router's RA prefix + its own EUI-64 interface ID - no DHCP server required
 - **DAD** (Duplicate Address Detection) confirms uniqueness before any address is used
 - The RA's M and O flags control whether hosts use SLAAC, DHCPv6, or both
 - Transition strategies: **dual-stack** (both protocols simultaneously), **tunnelling** (IPv6 in IPv4), **translation** (NAT64/DNS64)
-- **Never block ICMPv6** — it carries NDP, DAD, and SLAAC; blocking it silently breaks IPv6
+- **Never block ICMPv6** - it carries NDP, DAD, and SLAAC; blocking it silently breaks IPv6
 
 ---
-
 ## Where to Next
 
-- **Continue:** [Routing Fundamentals](../routing/routing-fundamentals.md) (`RT-001`) — how packets cross network boundaries; IPv6 forwarding builds directly on this module
-- **Related:** [IP Subnetting & VLSM](subnetting.md) (`IP-002`) — the prefix-length and address-carving principles extend directly to IPv6 allocation
-- **Applied context:** [Learning Path: Data Network Engineer](../../../learning-paths/data-network-engineer.md) — this module is Stage 3, position 16 in the DNE path
+- **Continue:** [Routing Fundamentals](../routing/routing-fundamentals.md) (`RT-001`) - how packets cross network boundaries; IPv6 forwarding builds directly on this module
+- **Related:** [IP Subnetting & VLSM](subnetting.md) (`IP-002`) - the prefix-length and address-carving principles extend directly to IPv6 allocation
+- **Applied context:** [Learning Path: Data Network Engineer](../../../learning-paths/data-network-engineer.md) - this module is Stage 3, position 16 in the DNE path
 
 ---
-
 ## Standards & Certifications
 
 **Relevant standards:**
-- [RFC 8200 — Internet Protocol, Version 6 (IPv6) Specification](https://www.rfc-editor.org/rfc/rfc8200)
-- [RFC 4291 — IPv6 Addressing Architecture](https://www.rfc-editor.org/rfc/rfc4291)
-- [RFC 4861 — Neighbor Discovery for IP version 6 (NDP)](https://www.rfc-editor.org/rfc/rfc4861)
-- [RFC 4862 — IPv6 Stateless Address Autoconfiguration (SLAAC)](https://www.rfc-editor.org/rfc/rfc4862)
-- [RFC 4193 — Unique Local IPv6 Unicast Addresses (ULA)](https://www.rfc-editor.org/rfc/rfc4193)
-- [RFC 4941 — Privacy Extensions for Stateless Address Autoconfiguration](https://www.rfc-editor.org/rfc/rfc4941)
-- [RFC 6724 — Default Address Selection for IPv6](https://www.rfc-editor.org/rfc/rfc6724)
+- [RFC 8200 - Internet Protocol, Version 6 (IPv6) Specification](https://www.rfc-editor.org/rfc/rfc8200)
+- [RFC 4291 - IPv6 Addressing Architecture](https://www.rfc-editor.org/rfc/rfc4291)
+- [RFC 4861 - Neighbor Discovery for IP version 6 (NDP)](https://www.rfc-editor.org/rfc/rfc4861)
+- [RFC 4862 - IPv6 Stateless Address Autoconfiguration (SLAAC)](https://www.rfc-editor.org/rfc/rfc4862)
+- [RFC 4193 - Unique Local IPv6 Unicast Addresses (ULA)](https://www.rfc-editor.org/rfc/rfc4193)
+- [RFC 4941 - Privacy Extensions for Stateless Address Autoconfiguration](https://www.rfc-editor.org/rfc/rfc4941)
+- [RFC 6724 - Default Address Selection for IPv6](https://www.rfc-editor.org/rfc/rfc6724)
 
-**Benchmark certifications** — use these to self-assess your understanding, not as a study guide:
+**Where this topic appears in certification syllabi:**
 
 | Cert | Vendor | Relevant Section |
 |---|---|---|
-| CCNA 200-301 | Cisco | 1.8 — Configure and verify IPv6 addressing and prefix |
+| CCNA 200-301 | Cisco | 1.8 - Configure and verify IPv6 addressing and prefix |
 | JNCIA-Junos JN0-103 | Juniper | IPv6 basics; neighbour discovery |
 | Nokia NRS I | Nokia | IPv6 addressing and configuration |
 | Huawei HCIA-Datacom | Huawei | IPv6 addressing, NDP, and SLAAC |
 
 ---
-
 ## References
 
-- IETF — [RFC 8200: Internet Protocol, Version 6 (IPv6) Specification](https://www.rfc-editor.org/rfc/rfc8200)
-- IETF — [RFC 4291: IPv6 Addressing Architecture](https://www.rfc-editor.org/rfc/rfc4291)
-- IETF — [RFC 4861: Neighbor Discovery for IP version 6](https://www.rfc-editor.org/rfc/rfc4861)
-- IETF — [RFC 4862: IPv6 Stateless Address Autoconfiguration](https://www.rfc-editor.org/rfc/rfc4862)
-- Odom, W. — *CCNA 200-301 Official Cert Guide, Volume 1*, Cisco Press, 2019 — Ch. 24–27 (IPv6 addressing and configuration)
-- Doyle, J.; Carroll, J. — *Routing TCP/IP, Volume I*, 2nd ed., Cisco Press, 2005 — Ch. 8 (IPv6)
+- IETF - [RFC 8200: Internet Protocol, Version 6 (IPv6) Specification](https://www.rfc-editor.org/rfc/rfc8200)
+- IETF - [RFC 4291: IPv6 Addressing Architecture](https://www.rfc-editor.org/rfc/rfc4291)
+- IETF - [RFC 4861: Neighbor Discovery for IP version 6](https://www.rfc-editor.org/rfc/rfc4861)
+- IETF - [RFC 4862: IPv6 Stateless Address Autoconfiguration](https://www.rfc-editor.org/rfc/rfc4862)
+- Odom, W. - *CCNA 200-301 Official Cert Guide, Volume 1*, Cisco Press, 2019 - Ch. 24–27 (IPv6 addressing and configuration)
+- Doyle, J.; Carroll, J. - *Routing TCP/IP, Volume I*, 2nd ed., Cisco Press, 2005 - Ch. 8 (IPv6)
 
 ---
-
 ## Attribution & Licensing
 
 **Author:** [@geekazoid80]
-**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — content
+**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) - content
 **AI assistance:** Draft written by Claude Sonnet 4.6. All RFC citations verified against IETF RFC index. Technical accuracy to be verified by human reviewer before `human_reviewed` is set to true.
 
 ---

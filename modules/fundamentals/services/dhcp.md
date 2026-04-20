@@ -1,6 +1,6 @@
 ---
-id: SV-002
-title: "DHCP — Dynamic Host Configuration Protocol"
+module_id: SV-002
+title: "DHCP - Dynamic Host Configuration Protocol"
 description: "How DHCP automatically assigns IP addresses and network configuration to hosts using the DORA exchange."
 version: "1.0.0"
 status: draft
@@ -23,11 +23,28 @@ created: 2026-04-19
 updated: 2026-04-19
 ---
 
-# SV-002 — DHCP — Dynamic Host Configuration Protocol
+# SV-002 - DHCP - Dynamic Host Configuration Protocol
+## Learning Objectives
 
+After completing this module you will be able to:
+
+1. Describe the DORA exchange and what each message does.
+2. Explain what a DHCP lease is and how renewal works.
+3. Describe the role of a DHCP relay agent.
+4. List the common DHCP options and their purpose.
+5. Configure a basic DHCP server and relay on router platforms.
+6. Troubleshoot common DHCP failures using debug and show commands.
+
+---
+## Prerequisites
+
+- IP-001 - IP Addressing Fundamentals
+- SV-001 - DNS (DHCP provides DNS server address as an option)
+
+---
 ## The Problem
 
-A new laptop joins the office network. It has no IP address. You need to assign one — and also tell it the subnet mask, the default gateway, the DNS server, and the NTP server. If you do this manually for every device, you need an IP address inventory, a process, and someone to do it. When the gateway changes, you update hundreds of devices.
+A new laptop joins the office network. It has no IP address. You need to assign one - and also tell it the subnet mask, the default gateway, the DNS server, and the NTP server. If you do this manually for every device, you need an IP address inventory, a process, and someone to do it. When the gateway changes, you update hundreds of devices.
 
 ### Step 1: Let the device ask
 
@@ -35,7 +52,7 @@ The laptop broadcasts a message: "I have no address. Does anyone have one for me
 
 ### Step 2: Leases, not permanent assignments
 
-The server gives addresses as **leases** — time-limited assignments. When a device leaves the network and doesn't renew, the lease expires and the address returns to the pool. The pool serves a dynamic population without running out of addresses.
+The server gives addresses as **leases** - time-limited assignments. When a device leaves the network and doesn't renew, the lease expires and the address returns to the pool. The pool serves a dynamic population without running out of addresses.
 
 ### Step 3: What if the server is on a different subnet?
 
@@ -52,32 +69,11 @@ Broadcasts don't cross routers. A DHCP server on one subnet can't hear a broadca
 | The four-message exchange | DORA (Discover, Offer, Request, Acknowledge) |
 
 ---
-
-## Learning Objectives
-
-After completing this module you will be able to:
-
-1. Describe the DORA exchange and what each message does.
-2. Explain what a DHCP lease is and how renewal works.
-3. Describe the role of a DHCP relay agent.
-4. List the common DHCP options and their purpose.
-5. Configure a basic DHCP server and relay on router platforms.
-6. Troubleshoot common DHCP failures using debug and show commands.
-
----
-
-## Prerequisites
-
-- IP-001 — IP Addressing Fundamentals
-- SV-001 — DNS (DHCP provides DNS server address as an option)
-
----
-
 ## Core Content
 
 ### The DORA Exchange
 
-DHCP uses **UDP** — DISCOVER and REQUEST are broadcasts (dst 255.255.255.255, src 0.0.0.0); OFFER and ACK are unicast to the client's MAC (or broadcast if the client requests it).
+DHCP uses **UDP** - DISCOVER and REQUEST are broadcasts (dst 255.255.255.255, src 0.0.0.0); OFFER and ACK are unicast to the client's MAC (or broadcast if the client requests it).
 
 ```
 Client                              DHCP Server
@@ -109,7 +105,7 @@ A lease does not expire without warning:
 
 ### DHCP Options
 
-DHCP delivers configuration via **options** — numbered fields in the DHCP packet. Common options:
+DHCP delivers configuration via **options** - numbered fields in the DHCP packet. Common options:
 
 | Option | Name | Description |
 |---|---|---|
@@ -148,7 +144,7 @@ Some platforms use **ARP** instead of ICMP for conflict detection. Clients also 
 
 ### DHCPv6
 
-DHCPv6 (RFC 3315/RFC 8415) provides IPv6 address assignment to complement SLAAC. The exchange uses **Solicit / Advertise / Request / Reply** (SARR) — analogous to DORA. DHCPv6 uses link-local multicast (FF02::1:2) on UDP port 547 (server) / 546 (client).
+DHCPv6 (RFC 3315/RFC 8415) provides IPv6 address assignment to complement SLAAC. The exchange uses **Solicit / Advertise / Request / Reply** (SARR) - analogous to DORA. DHCPv6 uses link-local multicast (FF02::1:2) on UDP port 547 (server) / 546 (client).
 
 DHCPv6 can operate in:
 - **Stateful mode:** Server assigns addresses and records state (full DHCPv6).
@@ -157,7 +153,6 @@ DHCPv6 can operate in:
 See IP-003 for SLAAC/DHCPv6 interplay.
 
 ---
-
 ## Vendor Implementations
 
 === "Cisco IOS-XE"
@@ -229,10 +224,9 @@ See IP-003 for SLAAC/DHCPv6 interplay.
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/DHCP](https://help.mikrotik.com/docs/display/ROS/DHCP)
 
 ---
-
 ## Common Pitfalls
 
-1. **Forgetting to exclude static-IP addresses from the DHCP pool.** If a router gateway (192.168.10.1) is within the pool range and not excluded, DHCP may offer it to a client — causing a duplicate IP. Always exclude all static addresses before the pool starts.
+1. **Forgetting to exclude static-IP addresses from the DHCP pool.** If a router gateway (192.168.10.1) is within the pool range and not excluded, DHCP may offer it to a client - causing a duplicate IP. Always exclude all static addresses before the pool starts.
 
 2. **Relay agent not configured or pointed at wrong DHCP server.** Clients in a different subnet never receive a response. Verify with `debug ip dhcp server events` on the server and check that the relay interface has `ip helper-address` pointing to the correct server.
 
@@ -243,7 +237,6 @@ See IP-003 for SLAAC/DHCPv6 interplay.
 5. **Rogue DHCP servers.** Any device can run a DHCP server. A rogue server responding faster than the legitimate server can assign wrong gateways (routing all traffic through the attacker). Mitigate with DHCP Snooping (SW-005).
 
 ---
-
 ## Practice Problems
 
 **Q1.** A DHCP client sends a DISCOVER. Two servers respond with OFFERs. What does the client do?
@@ -267,27 +260,24 @@ See IP-003 for SLAAC/DHCPv6 interplay.
     Because other DHCP servers in the broadcast domain may have also sent OFFERs and are holding reserved addresses waiting for the client to accept. A broadcast REQUEST allows all servers to see which one was selected, so the others can release their holds. A unicast would leave those reserved addresses locked unnecessarily.
 
 ---
-
 ## Summary & Key Takeaways
 
 - DHCP automatically assigns IP addresses and configuration via the **DORA** (Discover, Offer, Request, Acknowledge) exchange.
-- Addresses are **leased** for a configured duration — clients renew at 50% (T1) and 87.5% (T2) of lease time.
+- Addresses are **leased** for a configured duration - clients renew at 50% (T1) and 87.5% (T2) of lease time.
 - DHCP options deliver subnet mask, default gateway, DNS servers, NTP, domain name, and more.
-- **Relay agents** forward DHCP broadcasts across subnet boundaries — required in any routed environment.
-- Option 82 carries relay agent information — used by servers to select the correct pool.
+- **Relay agents** forward DHCP broadcasts across subnet boundaries - required in any routed environment.
+- Option 82 carries relay agent information - used by servers to select the correct pool.
 - **DHCP Snooping** (SW-005) prevents rogue DHCP servers and builds binding tables for DAI.
 - DHCPv6 provides the same service for IPv6, complementing SLAAC.
 
 ---
-
 ## Where to Next
 
-- **SV-003 — NAT & PAT:** DHCP assigns private IPs; NAT translates them to reach the internet.
-- **SW-005 — Port Security & DAI:** DHCP Snooping and Dynamic ARP Inspection.
-- **PROTO-010 — DHCP Deep Dive:** Full DHCP option set, LDAP integration, failover.
+- **SV-003 - NAT & PAT:** DHCP assigns private IPs; NAT translates them to reach the internet.
+- **SW-005 - Port Security & DAI:** DHCP Snooping and Dynamic ARP Inspection.
+- **PROTO-010 - DHCP Deep Dive:** Full DHCP option set, LDAP integration, failover.
 
 ---
-
 ## Standards & Certifications
 
 | Standard / Cert | Relevance |
@@ -300,15 +290,13 @@ See IP-003 for SLAAC/DHCPv6 interplay.
 | CompTIA Network+ | DHCP concepts, DORA exchange |
 
 ---
-
 ## References
 
-- RFC 2131 — Dynamic Host Configuration Protocol. [https://www.rfc-editor.org/rfc/rfc2131](https://www.rfc-editor.org/rfc/rfc2131)
-- RFC 2132 — DHCP Options and BOOTP Vendor Extensions. [https://www.rfc-editor.org/rfc/rfc2132](https://www.rfc-editor.org/rfc/rfc2132)
-- RFC 8415 — Dynamic Host Configuration Protocol for IPv6. [https://www.rfc-editor.org/rfc/rfc8415](https://www.rfc-editor.org/rfc/rfc8415)
+- RFC 2131 - Dynamic Host Configuration Protocol. [https://www.rfc-editor.org/rfc/rfc2131](https://www.rfc-editor.org/rfc/rfc2131)
+- RFC 2132 - DHCP Options and BOOTP Vendor Extensions. [https://www.rfc-editor.org/rfc/rfc2132](https://www.rfc-editor.org/rfc/rfc2132)
+- RFC 8415 - Dynamic Host Configuration Protocol for IPv6. [https://www.rfc-editor.org/rfc/rfc8415](https://www.rfc-editor.org/rfc/rfc8415)
 
 ---
-
 ## Attribution & Licensing
 
 - Module content: original draft, AI-assisted (Claude Sonnet 4.6), 2026-04-19.

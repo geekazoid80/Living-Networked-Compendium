@@ -48,6 +48,10 @@ desktop.ini
 .vscode/settings.json
 *.code-workspace
 
+# ─── Pandoc build artefacts ───────────────────────────────────────────────────
+# pandoc leaves empty media-* dirs in the repo root when a build fails mid-run.
+media-*/
+
 # ─── Temporary files ──────────────────────────────────────────────────────────
 *.tmp
 *.temp

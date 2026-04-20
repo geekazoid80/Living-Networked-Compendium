@@ -13,52 +13,8 @@ ai_assisted: "drafting"
 tags: [subnetting, vlsm, cidr, ip, network-design, addressing]
 vendors: []
 language: en
-cert_alignment: "CCNA 200-301 — 1.6; CompTIA Network+ — 1.4; JNCIA-Junos — IP Addressing"
+cert_alignment: "CCNA 200-301 - 1.6; CompTIA Network+ - 1.4; JNCIA-Junos - IP Addressing"
 ---
-
-## The Problem
-
-You've been given a block of 256 IP addresses for your company's network: `192.168.1.0` to `192.168.1.255`. Everyone shares the same pool.
-
-It works — at first. But then you notice something: every time the marketing team runs a broadcast announcement ("who has this address?"), every single device on the network gets interrupted, even the servers in the data room. Two hundred and fifty-four devices, all stopping what they're doing to read a message meant for one device.
-
-### Step 1: The broadcast problem
-
-Broadcasts are unavoidable in IP networks — devices need them to find each other (ARP, DHCP). But there's no reason every device needs to hear every broadcast. If you could isolate groups of devices so they only see broadcasts from their own group, you'd reduce the noise dramatically.
-
-The solution: divide your address block into smaller pieces. Each piece becomes its own isolated group — its own **broadcast domain**. Traffic stays within the group unless it needs to cross to another group via a router.
-
-That isolation is **subnetting**. You've just invented it.
-
-### Step 2: But every wing needs a different size
-
-Marketing has 50 people. The server room has 6 machines. The WAN link between two buildings only needs 2 addresses. If you give everyone a block of 64 addresses, the server room wastes 58 and the WAN link wastes 62.
-
-You need to be able to cut different-sized pieces from the same block — big pieces where you need them, small pieces where you don't.
-
-That's **Variable Length Subnet Masking (VLSM)**. Instead of carving equal slices, you carve by need.
-
-### Step 3: The cutting tool
-
-How do you carve? You steal bits. Your `/24` has 8 host bits — 256 addresses. If you take 1 bit from the host side and give it to the network side, you now have 2 subnets of 128 each. Take 2 bits: 4 subnets of 64. Take 3: 8 subnets of 32. Every bit you borrow doubles the number of subnets and halves their size.
-
-The tool doing the cutting is the **subnet mask** — it defines exactly where the network portion ends and the host portion begins.
-
-### What You Just Built
-
-Subnetting is the practice of dividing an IP address block into smaller broadcast domains by extending the network portion (borrowing host bits). VLSM extends this by allowing different-sized masks for different subnets, allocating address space efficiently.
-
-| Scenario element | Technical term |
-|---|---|
-| The full block of addresses | Address space (e.g., `192.168.1.0/24`) |
-| An isolated group with its own broadcasts | Subnet (broadcast domain) |
-| The boundary between groups | Router interface |
-| Cutting the block into pieces | Subnetting — borrowing host bits |
-| Different-sized pieces for different needs | VLSM — Variable Length Subnet Masking |
-| The cutting rule | Subnet mask / prefix length |
-
----
-
 ## Learning Objectives
 
 By the end of this module, you will be able to:
@@ -70,33 +26,72 @@ By the end of this module, you will be able to:
 5. **Verify** that two given IP addresses are on the same subnet
 
 ---
-
 ## Prerequisites
 
-- [The OSI Model](../networking/osi-model.md) (`NW-001`) — Layer 3 context
-- [IP Addressing Fundamentals](ip-addressing.md) (`IP-001`) — binary conversion, subnet masks, CIDR notation
+- [The OSI Model](../networking/osi-model.md) (`NW-001`) - Layer 3 context
+- [IP Addressing Fundamentals](ip-addressing.md) (`IP-001`) - binary conversion, subnet masks, CIDR notation
 
-You must be comfortable converting IP addresses between binary and dotted-decimal. If you can't do that yet, do `IP-001` first — this module builds directly on it.
+You must be comfortable converting IP addresses between binary and dotted-decimal. If you can't do that yet, do `IP-001` first - this module builds directly on it.
 
 ---
+## The Problem
 
+You've been given a block of 256 IP addresses for your company's network: `192.168.1.0` to `192.168.1.255`. Everyone shares the same pool.
+
+It works - at first. But then you notice something: every time the marketing team runs a broadcast announcement ("who has this address?"), every single device on the network gets interrupted, even the servers in the data room. Two hundred and fifty-four devices, all stopping what they're doing to read a message meant for one device.
+
+### Step 1: The broadcast problem
+
+Broadcasts are unavoidable in IP networks - devices need them to find each other (ARP, DHCP). But there's no reason every device needs to hear every broadcast. If you could isolate groups of devices so they only see broadcasts from their own group, you'd reduce the noise dramatically.
+
+The solution: divide your address block into smaller pieces. Each piece becomes its own isolated group - its own **broadcast domain**. Traffic stays within the group unless it needs to cross to another group via a router.
+
+That isolation is **subnetting**. You've just invented it.
+
+### Step 2: But every wing needs a different size
+
+Marketing has 50 people. The server room has 6 machines. The WAN link between two buildings only needs 2 addresses. If you give everyone a block of 64 addresses, the server room wastes 58 and the WAN link wastes 62.
+
+You need to be able to cut different-sized pieces from the same block - big pieces where you need them, small pieces where you don't.
+
+That's **Variable Length Subnet Masking (VLSM)**. Instead of carving equal slices, you carve by need.
+
+### Step 3: The cutting tool
+
+How do you carve? You steal bits. Your `/24` has 8 host bits - 256 addresses. If you take 1 bit from the host side and give it to the network side, you now have 2 subnets of 128 each. Take 2 bits: 4 subnets of 64. Take 3: 8 subnets of 32. Every bit you borrow doubles the number of subnets and halves their size.
+
+The tool doing the cutting is the **subnet mask** - it defines exactly where the network portion ends and the host portion begins.
+
+### What You Just Built
+
+Subnetting is the practice of dividing an IP address block into smaller broadcast domains by extending the network portion (borrowing host bits). VLSM extends this by allowing different-sized masks for different subnets, allocating address space efficiently.
+
+| Scenario element | Technical term |
+|---|---|
+| The full block of addresses | Address space (e.g., `192.168.1.0/24`) |
+| An isolated group with its own broadcasts | Subnet (broadcast domain) |
+| The boundary between groups | Router interface |
+| Cutting the block into pieces | Subnetting - borrowing host bits |
+| Different-sized pieces for different needs | VLSM - Variable Length Subnet Masking |
+| The cutting rule | Subnet mask / prefix length |
+
+---
 ## Why This Matters
 
 Every network engineer subnets. Every day. Whether you're assigning addresses to a new office, designing a data centre, configuring VLANs, or troubleshooting a routing problem, you will need to know which subnet an address belongs to, how many hosts fit in a subnet, and how to divide address space efficiently.
 
-Subnetting is also one of the most heavily tested topics on the CCNA exam. But more than that — getting subnetting wrong in production causes real problems: duplicate addresses, broken routing, wrong broadcast domains. It's one of those skills where "close enough" isn't good enough.
+Subnetting is also one of the most heavily tested topics on the CCNA exam. But more than that - getting subnetting wrong in production causes real problems: duplicate addresses, broken routing, wrong broadcast domains. It's one of those skills where "close enough" isn't good enough.
 
 The maths isn't hard. There's a pattern to it, and once you see the pattern, subnetting becomes fast and mostly automatic.
 
 ---
-
 ## Core Content
 
 ### Why Subnet?
 
 A subnet is a logical subdivision of an IP network. The original motivation was simple: one large flat network is inefficient and hard to manage.
 
-**Problem 1: Broadcast traffic.** Every device on a network receives every broadcast packet. A /16 network with 65,534 hosts generates enormous broadcast traffic. Subnetting creates **broadcast domains** — smaller groups where broadcasts are contained.
+**Problem 1: Broadcast traffic.** Every device on a network receives every broadcast packet. A /16 network with 65,534 hosts generates enormous broadcast traffic. Subnetting creates **broadcast domains** - smaller groups where broadcasts are contained.
 
 **Problem 2: Security.** You want to separate departments. Finance shouldn't be on the same network segment as the guest Wi-Fi. Subnetting makes it possible to apply access control at network boundaries.
 
@@ -110,12 +105,12 @@ A subnet is a logical subdivision of an IP network. The original motivation was 
 
 Subnetting works by **borrowing bits** from the host portion of an IP address and reassigning them to the network portion. Each bit you borrow doubles the number of subnets but halves the number of hosts per subnet.
 
-Start with: `192.168.1.0/24` — one network, 254 usable hosts.
+Start with: `192.168.1.0/24` - one network, 254 usable hosts.
 
-Borrow 1 bit: `/25` — 2 subnets, 126 hosts each
-Borrow 2 bits: `/26` — 4 subnets, 62 hosts each
-Borrow 3 bits: `/27` — 8 subnets, 30 hosts each
-Borrow 4 bits: `/28` — 16 subnets, 14 hosts each
+Borrow 1 bit: `/25` - 2 subnets, 126 hosts each
+Borrow 2 bits: `/26` - 4 subnets, 62 hosts each
+Borrow 3 bits: `/27` - 8 subnets, 30 hosts each
+Borrow 4 bits: `/28` - 16 subnets, 14 hosts each
 
 The formula:
 - **Number of subnets** = 2^(borrowed bits)
@@ -125,7 +120,7 @@ The formula:
 
 ### Finding Subnet Boundaries
 
-The fastest way to subnet is to work out the **block size** — how big each subnet is.
+The fastest way to subnet is to work out the **block size** - how big each subnet is.
 
 Block size = 256 − the interesting octet of the subnet mask
 
@@ -181,7 +176,7 @@ Shortcut: apply the block size method to both. If they fall in the same block, t
 - Subnets: `192.168.1.0` (hosts .1–.126) and `192.168.1.128` (hosts .129–.254)
 - `.100` → in `192.168.1.0/25`
 - `.200` → in `192.168.1.128/25`
-- **Different subnets.** These hosts cannot communicate directly — traffic between them must go through a router.
+- **Different subnets.** These hosts cannot communicate directly - traffic between them must go through a router.
 
 ---
 
@@ -197,7 +192,7 @@ A /24 with 5 host bits = 24 + (8−5) = /27. Block size = 256 − 224 = 32.
 
 **Step 2:** How many subnets does /27 give?
 
-From a /24, borrowing 3 bits → 2^3 = 8 subnets. We need 6. 8 ≥ 6 — this works.
+From a /24, borrowing 3 bits → 2^3 = 8 subnets. We need 6. 8 ≥ 6 - this works.
 
 **Step 3:** List the subnets:
 
@@ -210,7 +205,7 @@ From a /24, borrowing 3 bits → 2^3 = 8 subnets. We need 6. 8 ≥ 6 — this wo
 | 5 | 192.168.10.128 | 192.168.10.159 | 192.168.10.129 | 192.168.10.158 | 30 |
 | 6 | 192.168.10.160 | 192.168.10.191 | 192.168.10.161 | 192.168.10.190 | 30 |
 
-Subnets 7 and 8 (192.168.10.192/27 and 192.168.10.224/27) exist but are unallocated — keep them for future use.
+Subnets 7 and 8 (192.168.10.192/27 and 192.168.10.224/27) exist but are unallocated - keep them for future use.
 
 ---
 
@@ -218,7 +213,7 @@ Subnets 7 and 8 (192.168.10.192/27 and 192.168.10.224/27) exist but are unalloca
 
 Fixed-size subnets waste addresses. If you have one department with 100 hosts and another with 10, giving both a /27 (30 hosts) fails for the first, and giving both a /25 (126 hosts) wastes 116 addresses in the second.
 
-**VLSM** lets you use different-sized masks for different subnets within the same address space — giving each subnet exactly the size it needs.
+**VLSM** lets you use different-sized masks for different subnets within the same address space - giving each subnet exactly the size it needs.
 
 **The rule:** Allocate largest subnets first. This prevents fragmentation.
 
@@ -249,18 +244,17 @@ Fixed-size subnets waste addresses. If you have one department with 100 hosts an
 | WAN A–B | `172.16.0.112/30` | 172.16.0.112 | 172.16.0.115 | 2 |
 | WAN A–C | `172.16.0.116/30` | 172.16.0.116 | 172.16.0.119 | 2 |
 
-Remaining address space: `172.16.0.120` through `172.16.0.255` — available for future use.
+Remaining address space: `172.16.0.120` through `172.16.0.255` - available for future use.
 
 !!! tip "WAN links use /30"
-    Point-to-point links between two routers only need 2 addresses. A /30 gives exactly 2 usable host addresses (2^2 − 2 = 2), with zero waste. Some engineers use /31 (RFC 3021) — no broadcast, both addresses usable — but /30 is more universally supported.
+    Point-to-point links between two routers only need 2 addresses. A /30 gives exactly 2 usable host addresses (2^2 − 2 = 2), with zero waste. Some engineers use /31 (RFC 3021) - no broadcast, both addresses usable - but /30 is more universally supported.
 
 ---
-
 ## Common Pitfalls
 
 ### Pitfall 1: Forgetting to subtract 2 for network and broadcast
 
-The number of **usable** hosts is always 2^(host bits) − 2. New engineers regularly calculate the total hosts (2^n) without subtracting. A /28 gives 16 total addresses, not 14 usable — the network and broadcast addresses are not assignable.
+The number of **usable** hosts is always 2^(host bits) − 2. New engineers regularly calculate the total hosts (2^n) without subtracting. A /28 gives 16 total addresses, not 14 usable - the network and broadcast addresses are not assignable.
 
 ### Pitfall 2: Not sorting by size in VLSM
 
@@ -268,16 +262,15 @@ If you assign small subnets first in VLSM, you may back yourself into a corner w
 
 ### Pitfall 3: Overlapping subnets
 
-Two subnets overlap if their address ranges intersect. This is catastrophic — routers will be confused about which subnet to use. Always double-check that your subnet boundaries don't cross.
+Two subnets overlap if their address ranges intersect. This is catastrophic - routers will be confused about which subnet to use. Always double-check that your subnet boundaries don't cross.
 
 **Check:** The broadcast address of one subnet must be less than the network address of the next. If `192.168.1.63` (broadcast of subnet 1) is followed by `192.168.1.64` (network of subnet 2), there's no overlap. If you see `.64` appear in two subnets, you have an error.
 
 ### Pitfall 4: The "interesting octet" is in the wrong place
 
-For networks larger than /24 (like `10.0.0.0/8` or `172.16.0.0/16`), the interesting octet may be the second or third octet, not the fourth. Work out which octet is "partially masked" — that's your interesting octet. The fully-masked octets are fixed; the interesting octet is where the boundaries land.
+For networks larger than /24 (like `10.0.0.0/8` or `172.16.0.0/16`), the interesting octet may be the second or third octet, not the fourth. Work out which octet is "partially masked" - that's your interesting octet. The fully-masked octets are fixed; the interesting octet is where the boundaries land.
 
 ---
-
 ## Practice Problems
 
 1. How many subnets and usable hosts per subnet does `10.0.0.0/22` provide from a /8 starting point? Show the first three subnet ranges.
@@ -326,7 +319,6 @@ For networks larger than /24 (like `10.0.0.0/8` or `172.16.0.0/16`), the interes
     **5.** No, they're wrong. `/26` gives 2^6 = 64 **total** addresses, but 2 are reserved (network `.192` and broadcast `.255`). **62 usable hosts**, not 64.
 
 ---
-
 ## Lab
 
 ### Lab: Subnetting Design Exercise with Packet Tracer
@@ -378,64 +370,59 @@ Router-A# show ip route
 ```
 PC1> ping <PC-in-Admin-LAN>
 ```
-This should fail until you add static routes or a routing protocol. That's expected — you'll fix it when you do the routing modules.
+This should fail until you add static routes or a routing protocol. That's expected - you'll fix it when you do the routing modules.
 
 **Stretch goal:** Add a second WAN link and Admin LAN, subnetting the remainder of your /24 to fit.
 
 ---
-
 ## Summary & Key Takeaways
 
 - Subnetting divides a network into smaller **broadcast domains**, improving security, efficiency, and routing
-- **Block size** = 256 − (interesting octet of subnet mask) — the spacing between subnet boundaries
+- **Block size** = 256 − (interesting octet of subnet mask) - the spacing between subnet boundaries
 - For any IP and mask: find which block the host falls in → that's the subnet; subnet−1 = broadcast
 - Number of subnets = 2^(borrowed bits); usable hosts = 2^(host bits) − 2
-- **VLSM** uses different masks for different subnets — always allocate largest subnets first
+- **VLSM** uses different masks for different subnets - always allocate largest subnets first
 - Point-to-point WAN links use /30 (2 usable addresses) or /31 (RFC 3021)
 - Two hosts are on the same subnet if their network addresses (IP AND mask) are identical
 
 ---
-
 ## Where to Next
 
-- **Continue the sequence:** [IPv6 Addressing](ipv6-addressing.md) (`IP-003`) — the long-term solution to IPv4 exhaustion
-- **Apply what you've learned:** [Routing Fundamentals](../routing/routing-fundamentals.md) (`RT-001`) — how routers use subnet information to forward packets
-- **Design context:** [Data Network Engineer Learning Path](../../applied/data-network-engineer/overview.md) — where subnetting sits in the full engineering curriculum
+- **Continue the sequence:** [IPv6 Addressing](ipv6-addressing.md) (`IP-003`) - the long-term solution to IPv4 exhaustion
+- **Apply what you've learned:** [Routing Fundamentals](../routing/routing-fundamentals.md) (`RT-001`) - how routers use subnet information to forward packets
+- **Design context:** [Data Network Engineer Learning Path](../../applied/data-network-engineer/overview.md) - where subnetting sits in the full engineering curriculum
 
 ---
-
 ## Standards & Certifications
 
 **Relevant standards:**
-- IETF RFC 4632 — Classless Inter-Domain Routing (CIDR)
-- IETF RFC 3021 — Using 31-Bit Prefixes on IPv4 Point-to-Point Links
-- IETF RFC 1918 — Address Allocation for Private Internets
+- IETF RFC 4632 - Classless Inter-Domain Routing (CIDR)
+- IETF RFC 3021 - Using 31-Bit Prefixes on IPv4 Point-to-Point Links
+- IETF RFC 1918 - Address Allocation for Private Internets
 
-**Benchmark certifications** — use these to self-assess your understanding, not as a study guide:
+**Where this topic appears in certification syllabi:**
 
 | Cert | Vendor | Relevant section |
 |---|---|---|
-| CCNA 200-301 | Cisco | 1.6 — IPv4 addressing and subnetting |
-| CompTIA Network+ | CompTIA | 1.4 — Subnetting |
+| CCNA 200-301 | Cisco | 1.6 - IPv4 addressing and subnetting |
+| CompTIA Network+ | CompTIA | 1.4 - Subnetting |
 | JNCIA-Junos JN0-103 | Juniper | IP addressing |
 | HCIA-Routing & Switching | Huawei | IP addressing fundamentals |
 
 ---
-
 ## References
 
-- IETF — RFC 1918: Address Allocation for Private Internets
-- IETF — RFC 4632: Classless Inter-domain Routing (CIDR)
-- IETF — RFC 3021: Using 31-Bit Prefixes on IPv4 Point-to-Point Links
-- Odom, Wendell — *CCNA 200-301 Official Cert Guide, Volume 1*, Cisco Press, 2020 — Chapters 13–14
-- Lammle, Todd — *CompTIA Network+ Study Guide*, 5th ed., Sybex, 2021 — Chapter 3
+- IETF - RFC 1918: Address Allocation for Private Internets
+- IETF - RFC 4632: Classless Inter-domain Routing (CIDR)
+- IETF - RFC 3021: Using 31-Bit Prefixes on IPv4 Point-to-Point Links
+- Odom, Wendell - *CCNA 200-301 Official Cert Guide, Volume 1*, Cisco Press, 2020 - Chapters 13–14
+- Lammle, Todd - *CompTIA Network+ Study Guide*, 5th ed., Sybex, 2021 - Chapter 3
 
 ---
-
 ## Attribution & Licensing
 
 **Author:** @geekazoid80
-**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — content
+**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) - content
 **AI assistance:** Claude used for initial draft structure and worked examples. All calculations verified manually. Technical content verified against Odom's CCNA Official Cert Guide and RFC 4632.
 
 ---
@@ -447,15 +434,15 @@ This should fail until you add static routes or a routing protocol. That's expec
 
 | Module ID | Title | Context | Last Checked |
 |---|---|---|---|
-| RT-001 | Routing Fundamentals | Prerequisite — routers use subnet masks to make forwarding decisions | 2026-04-17 |
-| SW-002 | VLANs & 802.1Q Trunking | Prerequisite — each VLAN is typically assigned its own subnet | 2026-04-17 |
+| RT-001 | Routing Fundamentals | Prerequisite - routers use subnet masks to make forwarding decisions | 2026-04-17 |
+| SW-002 | VLANs & 802.1Q Trunking | Prerequisite - each VLAN is typically assigned its own subnet | 2026-04-17 |
 
 ### Modules This Module References
 
 | Module ID | Title | Context | Last Checked |
 |---|---|---|---|
-| NW-001 | The OSI Model | Prerequisite — Layer 3 context | 2026-04-17 |
-| IP-001 | IP Addressing Fundamentals | Prerequisite — binary, subnet masks, CIDR | 2026-04-17 |
+| NW-001 | The OSI Model | Prerequisite - Layer 3 context | 2026-04-17 |
+| IP-001 | IP Addressing Fundamentals | Prerequisite - binary, subnet masks, CIDR | 2026-04-17 |
 | IP-003 | IPv6 Addressing | "Where to Next" forward reference | 2026-04-17 |
 | RT-001 | Routing Fundamentals | "Where to Next" forward reference | 2026-04-17 |
 

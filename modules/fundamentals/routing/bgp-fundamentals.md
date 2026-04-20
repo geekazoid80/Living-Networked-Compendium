@@ -11,32 +11,51 @@ maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
 tags: ["bgp", "ebgp", "ibgp", "as-path", "local-pref", "med", "path-vector", "autonomous-system", "route-reflector", "bgp-attributes", "internet-routing"]
-cert_alignment: "CCNA 200-301 — 3.5 (awareness) | CCNP ENCOR 350-401 | JNCIS-SP JN0-362 | Nokia NRS II"
+cert_alignment: "CCNA 200-301 - 3.5 (awareness) | CCNP ENCOR 350-401 | JNCIS-SP JN0-362 | Nokia NRS II"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "Huawei VRP", "MikroTik RouterOS"]
 language: "en"
 ---
+## Learning Objectives
 
+By the end of this module, you will be able to:
+
+1. **Explain** what BGP is, why it exists, and how it differs from IGPs (OSPF, IS-IS)
+2. **Distinguish** between eBGP and iBGP sessions and explain when each is used
+3. **Describe** how AS_PATH works as both a routing attribute and a loop-prevention mechanism
+4. **List** the key BGP attributes (AS_PATH, NEXT_HOP, LOCAL_PREF, MED, COMMUNITIES) and explain what each controls
+5. **Explain** the BGP best-path selection algorithm at a high level and apply it to a simple scenario
+6. **Describe** the iBGP full-mesh requirement and how Route Reflectors address the scaling problem
+
+---
+## Prerequisites
+
+- [Routing Fundamentals](routing-fundamentals.md) (`RT-001`) - routing table, AD, metric concepts
+- [OSPF Fundamentals](ospf-fundamentals.md) (`RT-004`) - IGP context; contrast with BGP's role
+- [IP Addressing Fundamentals](../ip/ip-addressing.md) (`IP-001`) - CIDR notation; prefix aggregation
+- [IP Subnetting & VLSM](../ip/subnetting.md) (`IP-002`) - prefix lengths; understanding BGP table entries
+
+---
 ## The Problem
 
-Two separate companies — ISP-A in Asia and ISP-B in Europe. Each runs its own internal network, its own IGP (OSPF or IS-IS), and its own addressing. Their customers want to reach each other. The two ISPs need to exchange routing information.
+Two separate companies - ISP-A in Asia and ISP-B in Europe. Each runs its own internal network, its own IGP (OSPF or IS-IS), and its own addressing. Their customers want to reach each other. The two ISPs need to exchange routing information.
 
 Can they just use OSPF?
 
 ### Step 1: Internal routing doesn't cross trust boundaries
 
-OSPF floods its entire topology to every router in the domain. If ISP-A ran OSPF with ISP-B, ISP-A would see the complete internal topology of ISP-B's network — every router, every link, every address. ISP-B would see ISP-A's. Neither is willing to share this.
+OSPF floods its entire topology to every router in the domain. If ISP-A ran OSPF with ISP-B, ISP-A would see the complete internal topology of ISP-B's network - every router, every link, every address. ISP-B would see ISP-A's. Neither is willing to share this.
 
-More fundamentally: routing policy. ISP-A wants to control which of ISP-B's customers it carries traffic for, how much, and via which paths. ISP-B wants the same control. An IGP has no mechanism for policy — it just finds the shortest path and uses it.
+More fundamentally: routing policy. ISP-A wants to control which of ISP-B's customers it carries traffic for, how much, and via which paths. ISP-B wants the same control. An IGP has no mechanism for policy - it just finds the shortest path and uses it.
 
-What's needed is a protocol where each party **explicitly decides** what routes to accept, what to advertise, and what policy to apply. The peering relationship itself must be intentional — not auto-discovered.
+What's needed is a protocol where each party **explicitly decides** what routes to accept, what to advertise, and what policy to apply. The peering relationship itself must be intentional - not auto-discovered.
 
 ### Step 2: An explicit session between trusted peers
 
-BGP establishes a **TCP session** between two routers that are explicitly configured to peer with each other (TCP port 179). Nothing happens automatically — you must configure the neighbour's address and the relationship before any routes are exchanged.
+BGP establishes a **TCP session** between two routers that are explicitly configured to peer with each other (TCP port 179). Nothing happens automatically - you must configure the neighbour's address and the relationship before any routes are exchanged.
 
-The session is between **Autonomous Systems (AS)** — each organisation's independently managed network is identified by an AS number. ISP-A is AS 65001. ISP-B is AS 65002. The BGP session between them is **eBGP (external BGP)** — a session crossing AS boundaries.
+The session is between **Autonomous Systems (AS)** - each organisation's independently managed network is identified by an AS number. ISP-A is AS 65001. ISP-B is AS 65002. The BGP session between them is **eBGP (external BGP)** - a session crossing AS boundaries.
 
-### Step 3: Path-vector — carry the full route history
+### Step 3: Path-vector - carry the full route history
 
 BGP is not distance-vector (doesn't share hop counts) and not link-state (doesn't share topology). BGP is **path-vector**: every route advertisement carries the full list of AS numbers the route has traversed.
 
@@ -52,33 +71,33 @@ Network: 203.0.113.0/24
 AS_PATH: 65002 65001    (entered via 65002, originated in 65001)
 ```
 
-If ISP-C tries to advertise this back to ISP-A: ISP-A sees its own AS number (65001) in the AS_PATH and **rejects the route** — loop detected. This is BGP's loop prevention mechanism: the AS_PATH attribute.
+If ISP-C tries to advertise this back to ISP-A: ISP-A sees its own AS number (65001) in the AS_PATH and **rejects the route** - loop detected. This is BGP's loop prevention mechanism: the AS_PATH attribute.
 
-### Step 4: Not all paths are equal — attributes control policy
+### Step 4: Not all paths are equal - attributes control policy
 
-ISP-B has two paths to `203.0.113.0/24`: one via ISP-A (shorter), one via ISP-C (longer AS_PATH). ISP-B prefers the shorter path — but ISP-B has a business reason to prefer the path via ISP-C (cheaper transit).
+ISP-B has two paths to `203.0.113.0/24`: one via ISP-A (shorter), one via ISP-C (longer AS_PATH). ISP-B prefers the shorter path - but ISP-B has a business reason to prefer the path via ISP-C (cheaper transit).
 
 BGP provides attributes that let operators express policy:
-- **AS_PATH** — the list of ASes; shorter is generally preferred
-- **LOCAL_PREF** — a local preference value; higher is better; used internally to prefer one exit point
-- **MED (Multi-Exit Discriminator)** — a hint to the adjacent AS about preferred entry point; lower is better
-- **COMMUNITIES** — arbitrary tags that carry policy information across AS boundaries
+- **AS_PATH** - the list of ASes; shorter is generally preferred
+- **LOCAL_PREF** - a local preference value; higher is better; used internally to prefer one exit point
+- **MED (Multi-Exit Discriminator)** - a hint to the adjacent AS about preferred entry point; lower is better
+- **COMMUNITIES** - arbitrary tags that carry policy information across AS boundaries
 
-An operator can set LOCAL_PREF=200 on the ISP-C path, overriding the default preference for shorter AS_PATH. BGP does what the operator decides — not what the shortest path is.
+An operator can set LOCAL_PREF=200 on the ISP-C path, overriding the default preference for shorter AS_PATH. BGP does what the operator decides - not what the shortest path is.
 
 ### Step 5: Distributing BGP inside one AS
 
 ISP-A has 20 routers. Only 2 of them peer with external ASes (the border routers). But packets arriving at any of the 20 routers might need to reach external destinations. The internal routers need to know BGP routes.
 
-BGP also runs inside one AS — called **iBGP (internal BGP)**. The border routers distribute externally learned routes to all internal routers via iBGP sessions. iBGP does not add AS numbers to the AS_PATH (same AS — no loop risk), but it has a critical rule: **iBGP-learned routes cannot be re-advertised to other iBGP peers** — preventing internal loops.
+BGP also runs inside one AS - called **iBGP (internal BGP)**. The border routers distribute externally learned routes to all internal routers via iBGP sessions. iBGP does not add AS numbers to the AS_PATH (same AS - no loop risk), but it has a critical rule: **iBGP-learned routes cannot be re-advertised to other iBGP peers** - preventing internal loops.
 
-This means all iBGP speakers in an AS must be fully connected to each other — a **full mesh** of iBGP sessions. With 20 routers, that's 190 sessions. At 100 routers: 4,950 sessions. This doesn't scale.
+This means all iBGP speakers in an AS must be fully connected to each other - a **full mesh** of iBGP sessions. With 20 routers, that's 190 sessions. At 100 routers: 4,950 sessions. This doesn't scale.
 
 The solution: **Route Reflectors (RR)**. A Route Reflector re-advertises iBGP-learned routes to other iBGP peers, breaking the full-mesh requirement. Client routers peer only with the RR; the RR distributes routes to all clients. Loop prevention is handled by the RR via the ORIGINATOR_ID and CLUSTER_LIST attributes.
 
 ### What You Just Built
 
-BGP — Border Gateway Protocol. A path-vector protocol that establishes explicit TCP peer relationships, carries full AS-path history to prevent loops, uses rich attributes to implement inter-domain routing policy, and scales inside an AS using route reflectors.
+BGP - Border Gateway Protocol. A path-vector protocol that establishes explicit TCP peer relationships, carries full AS-path history to prevent loops, uses rich attributes to implement inter-domain routing policy, and scales inside an AS using route reflectors.
 
 | Scenario element | Technical term |
 |---|---|
@@ -93,29 +112,6 @@ BGP — Border Gateway Protocol. A path-vector protocol that establishes explici
 | iBGP router that re-advertises routes to other iBGP peers | Route Reflector |
 
 ---
-
-## Learning Objectives
-
-By the end of this module, you will be able to:
-
-1. **Explain** what BGP is, why it exists, and how it differs from IGPs (OSPF, IS-IS)
-2. **Distinguish** between eBGP and iBGP sessions and explain when each is used
-3. **Describe** how AS_PATH works as both a routing attribute and a loop-prevention mechanism
-4. **List** the key BGP attributes (AS_PATH, NEXT_HOP, LOCAL_PREF, MED, COMMUNITIES) and explain what each controls
-5. **Explain** the BGP best-path selection algorithm at a high level and apply it to a simple scenario
-6. **Describe** the iBGP full-mesh requirement and how Route Reflectors address the scaling problem
-
----
-
-## Prerequisites
-
-- [Routing Fundamentals](routing-fundamentals.md) (`RT-001`) — routing table, AD, metric concepts
-- [OSPF Fundamentals](ospf-fundamentals.md) (`RT-004`) — IGP context; contrast with BGP's role
-- [IP Addressing Fundamentals](../ip/ip-addressing.md) (`IP-001`) — CIDR notation; prefix aggregation
-- [IP Subnetting & VLSM](../ip/subnetting.md) (`IP-002`) — prefix lengths; understanding BGP table entries
-
----
-
 ## Core Content
 
 ### Autonomous Systems and AS Numbers
@@ -126,28 +122,28 @@ AS numbers are 32-bit values (since RFC 6793), written as plain integers (`65001
 
 | Range | Purpose |
 |---|---|
-| 1 – 64511 | Public ASNs — assigned by Regional Internet Registries (ARIN, RIPE, APNIC, etc.) |
-| 64512 – 65534 | Private ASNs — for internal use (like RFC 1918 addresses); not advertised on internet |
+| 1 – 64511 | Public ASNs - assigned by Regional Internet Registries (ARIN, RIPE, APNIC, etc.) |
+| 64512 – 65534 | Private ASNs - for internal use (like RFC 1918 addresses); not advertised on internet |
 | 65535 | Reserved |
 | 65536 – 4199999999 | 32-bit public ASNs |
 | 4200000000 – 4294967294 | 32-bit private ASNs |
 
 Every BGP speaker has an AS number. In eBGP, you always know which AS your peer belongs to. In iBGP, both ends are in the same AS.
 
-### BGP vs IGP — Fundamental Differences
+### BGP vs IGP - Fundamental Differences
 
 | Property | IGP (OSPF / IS-IS) | BGP |
 |---|---|---|
 | Scope | Within one AS | Between ASes (and within large ASes) |
 | Goal | Find the shortest path | Apply routing policy; exchange reachability |
-| Discovery | Automatic (hellos) | Manual — explicitly configured neighbours |
+| Discovery | Automatic (hellos) | Manual - explicitly configured neighbours |
 | Transport | IP (OSPF) or L2 (IS-IS) | TCP port 179 |
 | Metric | Cost / hop count | Policy attributes (no single metric) |
 | Convergence | Seconds | Minutes (large internet tables) |
 | Table size | Hundreds to thousands of routes | ~1 million+ prefixes (full internet BGP table) |
 | Use case | Fast convergence inside one org | Policy-driven inter-org routing |
 
-BGP is not a replacement for an IGP — every AS still runs an IGP internally. BGP sits on top, exchanging external reachability between ASes.
+BGP is not a replacement for an IGP - every AS still runs an IGP internally. BGP sits on top, exchanging external reachability between ASes.
 
 ### BGP Session States
 
@@ -162,13 +158,13 @@ BGP sessions progress through a state machine before routes are exchanged:
 | **OpenConfirm** | OPEN received; waiting for KEEPALIVE |
 | **Established** | Session up; UPDATE messages (routes) can now be exchanged |
 
-A session stuck in **Active** state means the TCP connection is failing — check IP reachability, ACLs, and whether the far-end is configured.
+A session stuck in **Active** state means the TCP connection is failing - check IP reachability, ACLs, and whether the far-end is configured.
 
 **BGP message types:**
-- **OPEN** — establishes session; negotiates AS number, BGP version, hold timer, Router ID
-- **UPDATE** — advertises or withdraws routes; carries path attributes
-- **KEEPALIVE** — keeps session alive when no UPDATE to send (default interval: 60s; hold time: 180s)
-- **NOTIFICATION** — reports an error; closes the session
+- **OPEN** - establishes session; negotiates AS number, BGP version, hold timer, Router ID
+- **UPDATE** - advertises or withdraws routes; carries path attributes
+- **KEEPALIVE** - keeps session alive when no UPDATE to send (default interval: 60s; hold time: 180s)
+- **NOTIFICATION** - reports an error; closes the session
 
 ### AS_PATH and Loop Prevention
 
@@ -186,16 +182,16 @@ AS 65003 re-advertises to 65001 (original AS):
 ```
 
 **AS_PATH manipulation:**
-- **AS_PATH prepending** — artificially lengthening the AS_PATH by repeating your own ASN, making a path appear less attractive:
+- **AS_PATH prepending** - artificially lengthening the AS_PATH by repeating your own ASN, making a path appear less attractive:
   ```text
   Normal:    AS_PATH: 65001
   Prepended: AS_PATH: 65001 65001 65001
   ```
-  Used to make one path less preferred by other ASes — influences inbound traffic from peers.
+  Used to make one path less preferred by other ASes - influences inbound traffic from peers.
 
 ### BGP Path Attributes
 
-BGP carries rich attributes with every route. These attributes encode policy and preference — they are what distinguish BGP from simple distance-based protocols.
+BGP carries rich attributes with every route. These attributes encode policy and preference - they are what distinguish BGP from simple distance-based protocols.
 
 **Mandatory attributes (in every UPDATE):**
 
@@ -216,20 +212,20 @@ BGP carries rich attributes with every route. These attributes encode policy and
 
 | Attribute | Code | Description |
 |---|---|---|
-| COMMUNITY | 8 | Policy tags — 32-bit values; used to signal routing policy between ASes |
+| COMMUNITY | 8 | Policy tags - 32-bit values; used to signal routing policy between ASes |
 | AS4_PATH | 17 | AS_PATH in 4-byte AS format |
 
 **Optional non-transitive attributes (not carried to other ASes):**
 
 | Attribute | Code | Scope | Description |
 |---|---|---|---|
-| MED | 4 | Between two ASes | Multi-Exit Discriminator — **lower = preferred**; hint to neighbour AS about preferred entry |
-| ORIGINATOR_ID | 9 | Within AS | Set by Route Reflector — prevents loops in RR clusters |
-| CLUSTER_LIST | 10 | Within AS | RR cluster path — prevents RR loops |
+| MED | 4 | Between two ASes | Multi-Exit Discriminator - **lower = preferred**; hint to neighbour AS about preferred entry |
+| ORIGINATOR_ID | 9 | Within AS | Set by Route Reflector - prevents loops in RR clusters |
+| CLUSTER_LIST | 10 | Within AS | RR cluster path - prevents RR loops |
 
-**NEXT_HOP behaviour — a critical detail:**
+**NEXT_HOP behaviour - a critical detail:**
 - In **eBGP**: NEXT_HOP is set to the advertising router's IP (the directly connected eBGP peer address)
-- In **iBGP**: NEXT_HOP is **not changed** — iBGP passes the eBGP NEXT_HOP through unchanged
+- In **iBGP**: NEXT_HOP is **not changed** - iBGP passes the eBGP NEXT_HOP through unchanged
 - This means internal routers must be able to reach the eBGP next-hop address, usually via the IGP
 - If the iBGP next-hop is unreachable in the IGP, the BGP route exists but is not installed in the routing table
 
@@ -237,13 +233,13 @@ This is the common `next-hop-self` configuration on iBGP sessions from border ro
 ```cisco-ios
 neighbor 10.0.0.2 next-hop-self
 ```
-This rewrites NEXT_HOP to the border router's own address before advertising to iBGP peers — ensuring internal routers have a reachable next-hop.
+This rewrites NEXT_HOP to the border router's own address before advertising to iBGP peers - ensuring internal routers have a reachable next-hop.
 
 ### BGP Best-Path Selection
 
 When BGP has multiple paths to the same prefix from different peers, it selects the **best path** using a sequential decision process. The first criterion to produce a winner ends the comparison.
 
-**Cisco IOS BGP best-path algorithm (simplified — memorise the order):**
+**Cisco IOS BGP best-path algorithm (simplified - memorise the order):**
 
 | Step | Attribute | Prefer |
 |---|---|---|
@@ -266,19 +262,19 @@ In practice: **LOCAL_PREF controls outbound exit selection** (which path this AS
     BGP Communities (RFC 1997) are 32-bit values attached to routes, formatted as `AS:value` (e.g., `65001:100`). They are used to pass policy signals between networks.
 
     Well-known communities:
-    - `INTERNET` (0x00000000) — advertise to all BGP peers
-    - `NO_EXPORT` (0xFFFFFF01) — do not advertise outside the AS
-    - `NO_ADVERTISE` (0xFFFFFF02) — do not advertise to any BGP peer
-    - `LOCAL_AS` (0xFFFFFF03) — do not send outside the sub-AS (confederation)
+    - `INTERNET` (0x00000000) - advertise to all BGP peers
+    - `NO_EXPORT` (0xFFFFFF01) - do not advertise outside the AS
+    - `NO_ADVERTISE` (0xFFFFFF02) - do not advertise to any BGP peer
+    - `LOCAL_AS` (0xFFFFFF03) - do not send outside the sub-AS (confederation)
 
     Large communities (RFC 8092) extend this to 96-bit values (`AS:administrator:value`) for richer policy signalling in large networks.
 
-    Example use: a customer tags their route with `65001:100` meaning "deprioritise this route." ISP-A has a route-map that reads this community and sets LOCAL_PREF=50 on the route. Policy is conveyed in the BGP attribute — no out-of-band configuration needed.
+    Example use: a customer tags their route with `65001:100` meaning "deprioritise this route." ISP-A has a route-map that reads this community and sets LOCAL_PREF=50 on the route. Policy is conveyed in the BGP attribute - no out-of-band configuration needed.
 
 ### iBGP, Full Mesh, and Route Reflectors
 
 **The iBGP full-mesh requirement:**
-The rule "do not re-advertise iBGP-learned routes to other iBGP peers" prevents internal routing loops. But it means every router in the AS must have a direct iBGP session to every other router — a full mesh.
+The rule "do not re-advertise iBGP-learned routes to other iBGP peers" prevents internal routing loops. But it means every router in the AS must have a direct iBGP session to every other router - a full mesh.
 
 ```text
 N routers → N×(N-1)/2 sessions
@@ -301,8 +297,8 @@ With RR (RR-A is the reflector — 3 sessions):
 ```
 
 **RR loop prevention:**
-- **ORIGINATOR_ID** — the RR sets this to the Route ID of the originating client. If a reflected route arrives back at the originating router, it recognises its own ORIGINATOR_ID and ignores the route.
-- **CLUSTER_LIST** — a list of RR cluster IDs. If an RR receives a route with its own Cluster ID in the CLUSTER_LIST, it discards it.
+- **ORIGINATOR_ID** - the RR sets this to the Route ID of the originating client. If a reflected route arrives back at the originating router, it recognises its own ORIGINATOR_ID and ignores the route.
+- **CLUSTER_LIST** - a list of RR cluster IDs. If an RR receives a route with its own Cluster ID in the CLUSTER_LIST, it discards it.
 
 Best practice: deploy **two RRs** per cluster for redundancy. Clients peer with both RRs; both RRs peer with each other (non-client iBGP session). Single RR failure doesn't break BGP.
 
@@ -320,15 +316,14 @@ eBGP session: AS 65001 (R1: 10.0.0.1) ↔ AS 65002 (R2: 10.0.0.2)
 ```
 
 ---
-
 ## Vendor Implementations
 
 BGP is standardised in RFC 4271 (BGP-4). All compliant implementations form sessions with any other. The path attributes and best-path algorithm are standardised, though Cisco adds a local "Weight" attribute (not in the RFC) as step 1 in its decision process.
 
-!!! success "Standard — RFC 4271 (BGP-4)"
+!!! success "Standard - RFC 4271 (BGP-4)"
     BGP-4 is universally implemented. Multi-vendor eBGP sessions are routine at every internet exchange point on earth. Verify AS numbers, neighbour addresses, and hold timers match across vendors.
 
-!!! warning "Proprietary — Cisco Weight"
+!!! warning "Proprietary - Cisco Weight"
     Cisco IOS/IOS-XE/IOS-XR adds a **Weight** attribute (local to the router, not carried in UPDATE messages). Weight overrides all other BGP selection criteria on Cisco routers (step 1, higher = preferred). It is not in RFC 4271 and does not exist on Juniper, Nokia, Arista, or Huawei. Weight-based policy configured on a Cisco router has no effect on path selection at any other vendor.
 
 === "Cisco IOS-XE"
@@ -355,7 +350,7 @@ BGP is standardised in RFC 4271 (BGP-4). All compliant implementations form sess
     show bgp ipv4 unicast
     show bgp ipv4 unicast 203.0.113.0/24
     ```
-    `update-source Loopback0` sets the source IP of iBGP sessions to the loopback — ensures the session survives individual interface failures. Always use loopbacks for iBGP.
+    `update-source Loopback0` sets the source IP of iBGP sessions to the loopback - ensures the session survives individual interface failures. Always use loopbacks for iBGP.
 
     Full configuration reference: [Cisco BGP Configuration Guide](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-16/irg-xe-16-book.html)
 
@@ -382,7 +377,7 @@ BGP is standardised in RFC 4271 (BGP-4). All compliant implementations form sess
     show bgp neighbor 10.0.0.2
     show route protocol bgp
     ```
-    Junos uses groups to organise BGP peers — all peers in a group share the same type (internal/external) and policy. Policy is applied as an export/import policy to the group, not per-neighbour. `cluster` configures this router as a Route Reflector for that group.
+    Junos uses groups to organise BGP peers - all peers in a group share the same type (internal/external) and policy. Policy is applied as an export/import policy to the group, not per-neighbour. `cluster` configures this router as a Route Reflector for that group.
 
     Full configuration reference: [Juniper BGP Configuration Guide](https://www.juniper.net/documentation/us/en/software/junos/bgp/index.html)
 
@@ -498,12 +493,11 @@ BGP is standardised in RFC 4271 (BGP-4). All compliant implementations form sess
     Full configuration reference: [MikroTik BGP Reference](https://help.mikrotik.com/docs/display/ROS/BGP)
 
 ---
-
 ## Common Pitfalls
 
 ### Pitfall 1: Session stuck in Active state
 
-BGP Active state means TCP connections are failing. Check: is the neighbour IP reachable (ping)? Is TCP port 179 permitted by any firewall or ACL? Is the `remote-as` number correct on both sides? Are both routers using the correct source address (especially for iBGP using loopbacks — verify `update-source` is set)?
+BGP Active state means TCP connections are failing. Check: is the neighbour IP reachable (ping)? Is TCP port 179 permitted by any firewall or ACL? Is the `remote-as` number correct on both sides? Are both routers using the correct source address (especially for iBGP using loopbacks - verify `update-source` is set)?
 
 ### Pitfall 2: Routes in BGP table but not in routing table
 
@@ -515,14 +509,13 @@ Cisco BGP `network` statements only advertise a prefix if an **exact match** exi
 
 ### Pitfall 4: AS_PATH loop prevention blocking a valid path
 
-In some designs (BGP confederations, private ASNs stripped before advertisement), the AS_PATH may legitimately contain your own AS number. The default loop-prevention check will reject these routes. Fix: `allowas-in` permits receiving routes with your own AS in the path (use with care — only when you understand why the loop check is triggering).
+In some designs (BGP confederations, private ASNs stripped before advertisement), the AS_PATH may legitimately contain your own AS number. The default loop-prevention check will reject these routes. Fix: `allowas-in` permits receiving routes with your own AS in the path (use with care - only when you understand why the loop check is triggering).
 
 ### Pitfall 5: iBGP full mesh incomplete
 
-If any iBGP session is missing in a full-mesh design (or any client is not peering with the Route Reflector), routes don't propagate to that router. Symptom: some internal routers can reach external destinations; others cannot. Audit iBGP session topology with `show bgp summary` on every router — every expected session should show `Established`.
+If any iBGP session is missing in a full-mesh design (or any client is not peering with the Route Reflector), routes don't propagate to that router. Symptom: some internal routers can reach external destinations; others cannot. Audit iBGP session topology with `show bgp summary` on every router - every expected session should show `Established`.
 
 ---
-
 ## Practice Problems
 
 1. Router R1 (AS 65001) has three BGP paths to `198.51.100.0/24`:
@@ -540,79 +533,74 @@ If any iBGP session is missing in a full-mesh design (or any client is not peeri
 5. Two BGP paths to the same prefix: Path A has LOCAL_PREF=100, AS_PATH: 65002 65003 (2 ASes). Path B has LOCAL_PREF=100, AS_PATH: 65004 (1 AS). Which does BGP prefer after LOCAL_PREF is compared? Can an operator make Path A preferred? If so, how?
 
 ??? "Answers"
-    **1.** Step 1 — LOCAL_PREF: Path A and Path C both have LP=200; Path B has LP=100 → Path B is eliminated. Step 2 — AS_PATH length: Path A has 2 ASes (65002 65010); Path C has 1 AS (65004) → **Path C wins** (shorter AS_PATH). Answer: Path C is best.
+    **1.** Step 1 - LOCAL_PREF: Path A and Path C both have LP=200; Path B has LP=100 → Path B is eliminated. Step 2 - AS_PATH length: Path A has 2 ASes (65002 65010); Path C has 1 AS (65004) → **Path C wins** (shorter AS_PATH). Answer: Path C is best.
 
-    **2.** The eBGP NEXT_HOP (`10.0.0.2`) is the border router's external peer address — it is reachable from the border router but not from internal routers (not in the IGP). Internal routers receive the route with NEXT_HOP=10.0.0.2; when they try to resolve this for forwarding, the IGP has no route to 10.0.0.2 → BGP route is not installed in their routing table. Fix: configure `next-hop-self` on the border router's iBGP sessions so internal routers see the border router's loopback as the NEXT_HOP (which is in the IGP).
+    **2.** The eBGP NEXT_HOP (`10.0.0.2`) is the border router's external peer address - it is reachable from the border router but not from internal routers (not in the IGP). Internal routers receive the route with NEXT_HOP=10.0.0.2; when they try to resolve this for forwarding, the IGP has no route to 10.0.0.2 → BGP route is not installed in their routing table. Fix: configure `next-hop-self` on the border router's iBGP sessions so internal routers see the border router's loopback as the NEXT_HOP (which is in the IGP).
 
     **3.** Full mesh: 8×7/2 = **28 sessions** total. With 1 RR and 7 clients: each client peers only with the RR → **7 sessions** total. Each client has 1 session; the RR has 7 sessions.
 
     **4.** AS_PATH prepending makes a BGP path appear longer (less attractive) by repeating your own AS number. Use case: you have two upstream providers. You want most traffic to use Provider A (lower cost) but keep Provider B as backup. You prepend your AS twice on advertisements to Provider B: `AS_PATH: 65001 65001 65001`. Provider B's other customers see a 3-hop path via you; Provider A's customers see a 1-hop path. Traffic flows primarily via Provider A.
 
-    **5.** After LOCAL_PREF tie (both 100), step 4 is AS_PATH length: Path B (1 AS) is shorter → **Path B wins**. To make Path A preferred: raise LOCAL_PREF on Path A above 100 (e.g., LP=200) — LOCAL_PREF is evaluated before AS_PATH length and overrides it. Alternatively, use AS_PATH prepending on Path B to artificially lengthen it to 2+ ASes.
+    **5.** After LOCAL_PREF tie (both 100), step 4 is AS_PATH length: Path B (1 AS) is shorter → **Path B wins**. To make Path A preferred: raise LOCAL_PREF on Path A above 100 (e.g., LP=200) - LOCAL_PREF is evaluated before AS_PATH length and overrides it. Alternatively, use AS_PATH prepending on Path B to artificially lengthen it to 2+ ASes.
 
 ---
-
 ## Summary & Key Takeaways
 
-- **BGP (Border Gateway Protocol)** is the routing protocol of the internet — it exchanges reachability between Autonomous Systems
+- **BGP (Border Gateway Protocol)** is the routing protocol of the internet - it exchanges reachability between Autonomous Systems
 - Each organisation managing its own network is an **Autonomous System (AS)**, identified by an AS number
 - **eBGP** (external BGP) runs between different ASes; **iBGP** (internal BGP) distributes routes within one AS
-- BGP establishes **TCP sessions (port 179)** to explicitly configured peers — nothing is auto-discovered
-- BGP is **path-vector**: every route advertisement carries the full AS_PATH — the ordered list of ASes traversed
+- BGP establishes **TCP sessions (port 179)** to explicitly configured peers - nothing is auto-discovered
+- BGP is **path-vector**: every route advertisement carries the full AS_PATH - the ordered list of ASes traversed
 - **Loop prevention**: if a router sees its own AS in the AS_PATH, it rejects the route
-- Key attributes: **LOCAL_PREF** (outbound exit selection — higher wins), **MED** (inbound hint — lower wins), **AS_PATH** (loop prevention and path length), **COMMUNITIES** (policy tags)
+- Key attributes: **LOCAL_PREF** (outbound exit selection - higher wins), **MED** (inbound hint - lower wins), **AS_PATH** (loop prevention and path length), **COMMUNITIES** (policy tags)
 - BGP best-path selection is sequential: LOCAL_PREF → AS_PATH length → ORIGIN → MED → eBGP>iBGP → IGP metric → Router ID
 - **iBGP full mesh** is required when no Route Reflectors are used: N routers need N×(N-1)/2 sessions
 - **Route Reflectors** (RFC 4456) break the full-mesh requirement; clients peer only with the RR; the RR reflects routes between clients using ORIGINATOR_ID and CLUSTER_LIST for loop prevention
-- BGP NEXT_HOP is not changed on iBGP sessions — internal routers must reach the eBGP next-hop via the IGP; use `next-hop-self` on border routers to fix this
+- BGP NEXT_HOP is not changed on iBGP sessions - internal routers must reach the eBGP next-hop via the IGP; use `next-hop-self` on border routers to fix this
 
 ---
-
 ## Where to Next
 
-- **Continue:** [MPLS Fundamentals](../carrier-transport/mpls-fundamentals.md) (`CT-001`) — MPLS builds on BGP and IGP foundations; BGP VPNs (L3VPN) use MP-BGP
-- **Advanced:** [BGP Advanced — Attributes, Policies, Communities](bgp-advanced.md) (`RT-008`) — route-maps, prefix-lists, community policy, confederations
-- **Related:** [OSPF Fundamentals](ospf-fundamentals.md) (`RT-004`) / [IS-IS Fundamentals](isis-fundamentals.md) (`RT-006`) — the IGP that runs under BGP in every AS
-- **Applied context:** [Learning Path: Data Network Engineer](../../../learning-paths/data-network-engineer.md) — Stage 3, position 15 in the DNE path
+- **Continue:** [MPLS Fundamentals](../carrier-transport/mpls-fundamentals.md) (`CT-001`) - MPLS builds on BGP and IGP foundations; BGP VPNs (L3VPN) use MP-BGP
+- **Advanced:** [BGP Advanced - Attributes, Policies, Communities](bgp-advanced.md) (`RT-008`) - route-maps, prefix-lists, community policy, confederations
+- **Related:** [OSPF Fundamentals](ospf-fundamentals.md) (`RT-004`) / [IS-IS Fundamentals](isis-fundamentals.md) (`RT-006`) - the IGP that runs under BGP in every AS
+- **Applied context:** [Learning Path: Data Network Engineer](../../../learning-paths/data-network-engineer.md) - Stage 3, position 15 in the DNE path
 
 ---
-
 ## Standards & Certifications
 
 **Relevant standards:**
-- [RFC 4271 — BGP-4](https://www.rfc-editor.org/rfc/rfc4271)
-- [RFC 4456 — BGP Route Reflection](https://www.rfc-editor.org/rfc/rfc4456)
-- [RFC 1997 — BGP Communities Attribute](https://www.rfc-editor.org/rfc/rfc1997)
-- [RFC 8092 — BGP Large Communities](https://www.rfc-editor.org/rfc/rfc8092)
-- [RFC 6793 — BGP Support for Four-Octet AS Numbers](https://www.rfc-editor.org/rfc/rfc6793)
-- [RFC 4760 — Multiprotocol Extensions for BGP-4 (MP-BGP)](https://www.rfc-editor.org/rfc/rfc4760)
+- [RFC 4271 - BGP-4](https://www.rfc-editor.org/rfc/rfc4271)
+- [RFC 4456 - BGP Route Reflection](https://www.rfc-editor.org/rfc/rfc4456)
+- [RFC 1997 - BGP Communities Attribute](https://www.rfc-editor.org/rfc/rfc1997)
+- [RFC 8092 - BGP Large Communities](https://www.rfc-editor.org/rfc/rfc8092)
+- [RFC 6793 - BGP Support for Four-Octet AS Numbers](https://www.rfc-editor.org/rfc/rfc6793)
+- [RFC 4760 - Multiprotocol Extensions for BGP-4 (MP-BGP)](https://www.rfc-editor.org/rfc/rfc4760)
 
-**Benchmark certifications** — use these to self-assess your understanding, not as a study guide:
+**Where this topic appears in certification syllabi:**
 
 | Cert | Vendor | Relevant Section |
 |---|---|---|
-| CCNA 200-301 | Cisco | 3.5 — BGP awareness; eBGP/iBGP concepts |
+| CCNA 200-301 | Cisco | 3.5 - BGP awareness; eBGP/iBGP concepts |
 | CCNP ENCOR 350-401 | Cisco | BGP attributes; path selection; route reflectors |
 | JNCIS-SP JN0-362 | Juniper | BGP fundamentals; eBGP/iBGP; attributes |
 | Nokia NRS II | Nokia | BGP in SP context; attributes; RR design |
 
 ---
-
 ## References
 
-- IETF — [RFC 4271: A Border Gateway Protocol 4 (BGP-4)](https://www.rfc-editor.org/rfc/rfc4271)
-- IETF — [RFC 4456: BGP Route Reflection](https://www.rfc-editor.org/rfc/rfc4456)
-- IETF — [RFC 4760: Multiprotocol Extensions for BGP-4](https://www.rfc-editor.org/rfc/rfc4760)
-- Odom, W. — *CCNA 200-301 Official Cert Guide, Volume 2*, Cisco Press, 2019 — Ch. 14 (BGP awareness)
-- Doyle, J.; Carroll, J. — *Routing TCP/IP, Volume II*, Cisco Press, 2001 — Ch. 9–13 (BGP)
-- Halabi, S. — *Internet Routing Architectures*, 2nd ed., Cisco Press, 2000
+- IETF - [RFC 4271: A Border Gateway Protocol 4 (BGP-4)](https://www.rfc-editor.org/rfc/rfc4271)
+- IETF - [RFC 4456: BGP Route Reflection](https://www.rfc-editor.org/rfc/rfc4456)
+- IETF - [RFC 4760: Multiprotocol Extensions for BGP-4](https://www.rfc-editor.org/rfc/rfc4760)
+- Odom, W. - *CCNA 200-301 Official Cert Guide, Volume 2*, Cisco Press, 2019 - Ch. 14 (BGP awareness)
+- Doyle, J.; Carroll, J. - *Routing TCP/IP, Volume II*, Cisco Press, 2001 - Ch. 9–13 (BGP)
+- Halabi, S. - *Internet Routing Architectures*, 2nd ed., Cisco Press, 2000
 
 ---
-
 ## Attribution & Licensing
 
 **Author:** [@geekazoid80]
-**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — content
+**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) - content
 **AI assistance:** Draft written by Claude Sonnet 4.6. RFC citations verified against IETF RFC index. Technical accuracy to be verified by human reviewer before `human_reviewed` is set to true.
 
 ---

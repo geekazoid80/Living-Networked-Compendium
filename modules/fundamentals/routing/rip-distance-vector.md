@@ -11,20 +11,36 @@ maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
 tags: ["rip", "distance-vector", "bellman-ford", "routing-loops", "split-horizon", "poison-reverse", "convergence", "hop-count"]
-cert_alignment: "CCNA 200-301 — 3.4 (context) | JNCIA-Junos JN0-103"
+cert_alignment: "CCNA 200-301 - 3.4 (context) | JNCIA-Junos JN0-103"
 vendors: ["Cisco IOS-XE", "MikroTik RouterOS"]
 language: "en"
 ---
+## Learning Objectives
 
+By the end of this module, you will be able to:
+
+1. **Explain** how distance-vector routing works - what is shared, how often, and how routes propagate
+2. **Describe** the counting-to-infinity problem and why it occurs in distance-vector protocols
+3. **Explain** split horizon and poison reverse, and why they only partially solve the loop problem
+4. **Describe** RIP's key characteristics - hop-count metric, 15-hop limit, update interval, and version differences
+5. **Explain** why RIP is rarely used in modern networks and what limitations drove the development of link-state protocols
+
+---
+## Prerequisites
+
+- [Routing Fundamentals](routing-fundamentals.md) (`RT-001`) - routing table, metric, administrative distance, convergence
+- [Static Routing](static-routing.md) (`RT-002`) - understanding of what problem dynamic routing replaces
+
+---
 ## The Problem
 
-Ten routers, each connected to a few others. Every router knows its directly connected networks. But Router A doesn't know about the networks behind Router J on the far side of the topology. You could type a static route on every router for every destination — but with 10 routers and 20 networks, that's 200 static routes to enter and maintain by hand. Add one new network, update 10 routers. A link fails, update again.
+Ten routers, each connected to a few others. Every router knows its directly connected networks. But Router A doesn't know about the networks behind Router J on the far side of the topology. You could type a static route on every router for every destination - but with 10 routers and 20 networks, that's 200 static routes to enter and maintain by hand. Add one new network, update 10 routers. A link fails, update again.
 
-There has to be a better way.
+A more scalable routing mechanism is clearly needed.
 
 ### Step 1: Routers share what they know
 
-What if each router told its neighbours what it knows? Router A knows about Network 1 (directly connected). It tells Router B: "I can reach Network 1." Router B now knows Network 1 is reachable via Router A. Router B tells Router C what it knows — including the route to Network 1. Router C tells Router D, and so on.
+What if each router told its neighbours what it knows? Router A knows about Network 1 (directly connected). It tells Router B: "I can reach Network 1." Router B now knows Network 1 is reachable via Router A. Router B tells Router C what it knows - including the route to Network 1. Router C tells Router D, and so on.
 
 Within a few rounds of exchange, every router knows about every network in the topology. Nobody had to type anything. The routing tables self-populated.
 
@@ -32,36 +48,36 @@ This is the core of **distance-vector routing**: each router periodically sends 
 
 ### Step 2: How far is "far"?
 
-But which path is better when there are multiple? Router C can reach Network 5 via Router B (2 hops) or via Router D (4 hops). The cost metric used in early distance-vector protocols was the simplest possible: **hop count** — how many routers does the packet pass through?
+But which path is better when there are multiple? Router C can reach Network 5 via Router B (2 hops) or via Router D (4 hops). The cost metric used in early distance-vector protocols was the simplest possible: **hop count** - how many routers does the packet pass through?
 
 Fewer hops = shorter path = lower metric = preferred route.
 
 Network 5 via Router B: 2 hops → metric = 2
 Network 5 via Router D: 4 hops → metric = 4
 
-Router B's route wins. The maximum hop count allowed is 15. A hop count of 16 means "unreachable" — the route is considered dead.
+Router B's route wins. The maximum hop count allowed is 15. A hop count of 16 means "unreachable" - the route is considered dead.
 
-### Step 3: A link fails — and the problem begins
+### Step 3: A link fails - and the problem begins
 
 Router B, the only path to Network 5, goes down. Router C immediately loses its best route to Network 5. Router C's next advertisement will say "Network 5: unreachable" to Router D.
 
-But wait — Router D heard about Network 5 *from* Router C. Router D still has it in its table (from the previous advertisement, saying 4 hops). Router D now tells Router C: "I can reach Network 5 — it's 5 hops via me." Router C thinks: "A new path! I'll use that." It updates its table to say Network 5 = 5 hops via Router D.
+But wait - Router D heard about Network 5 *from* Router C. Router D still has it in its table (from the previous advertisement, saying 4 hops). Router D now tells Router C: "I can reach Network 5 - it's 5 hops via me." Router C thinks: "A new path! I'll use that." It updates its table to say Network 5 = 5 hops via Router D.
 
 Next round: Router C tells Router D: "Network 5 = 6 hops via me." Router D updates: 7 hops. Next round: 8, 9, 10... the metric slowly counts up to 16 (infinity), then the route is declared unreachable. This process is called **counting to infinity**. Until it completes, both routers believe they have a valid path to a network that is actually unreachable. Packets loop between them until TTL expires.
 
-### Step 4: Split horizon and poison reverse — partial fixes
+### Step 4: Split horizon and poison reverse - partial fixes
 
 Two mechanisms reduce (but don't eliminate) the counting-to-infinity problem:
 
 **Split horizon:** "Never advertise a route back out the interface you learned it from." Router D learned about Network 5 from Router C. Under split horizon, Router D will not advertise Network 5 back to Router C. This breaks the immediate loop between two adjacent routers.
 
-**Poison reverse:** Instead of silently not advertising, actively advertise the route with metric = 16 (infinity) back to the source. "I learned Network 5 from you — here it is with metric=16." This makes the poisoning explicit and faster.
+**Poison reverse:** Instead of silently not advertising, actively advertise the route with metric = 16 (infinity) back to the source. "I learned Network 5 from you - here it is with metric=16." This makes the poisoning explicit and faster.
 
 These help for simple topologies. They don't fully solve the problem in larger, messier topologies with multiple paths.
 
 ### What You Just Built
 
-RIP — the Routing Information Protocol. A distance-vector routing protocol that uses hop count as its metric, exchanges full routing tables periodically with neighbours, and uses split horizon and poison reverse to limit routing loops.
+RIP - the Routing Information Protocol. A distance-vector routing protocol that uses hop count as its metric, exchanges full routing tables periodically with neighbours, and uses split horizon and poison reverse to limit routing loops.
 
 | Scenario element | Technical term |
 |---|---|
@@ -73,31 +89,11 @@ RIP — the Routing Information Protocol. A distance-vector routing protocol tha
 | Advertise a dead route back with metric=∞ | Poison reverse |
 
 ---
-
-## Learning Objectives
-
-By the end of this module, you will be able to:
-
-1. **Explain** how distance-vector routing works — what is shared, how often, and how routes propagate
-2. **Describe** the counting-to-infinity problem and why it occurs in distance-vector protocols
-3. **Explain** split horizon and poison reverse, and why they only partially solve the loop problem
-4. **Describe** RIP's key characteristics — hop-count metric, 15-hop limit, update interval, and version differences
-5. **Explain** why RIP is rarely used in modern networks and what limitations drove the development of link-state protocols
-
----
-
-## Prerequisites
-
-- [Routing Fundamentals](routing-fundamentals.md) (`RT-001`) — routing table, metric, administrative distance, convergence
-- [Static Routing](static-routing.md) (`RT-002`) — understanding of what problem dynamic routing replaces
-
----
-
 ## Core Content
 
 ### How Distance-Vector Routing Works
 
-In a distance-vector protocol, each router maintains a **distance table** — essentially its routing table — containing the best known distance (metric) to every destination. Routers send their entire distance table to directly connected neighbours at regular intervals.
+In a distance-vector protocol, each router maintains a **distance table** - essentially its routing table - containing the best known distance (metric) to every destination. Routers send their entire distance table to directly connected neighbours at regular intervals.
 
 The process:
 
@@ -108,7 +104,7 @@ The process:
    - If N+1 is better than what the router currently knows → update the entry
 4. Updated tables propagate outward, hop by hop, until stable (converged)
 
-**Example — 3 routers in a line:**
+**Example - 3 routers in a line:**
 ```text
 Round 0 (initial):
   R1 knows: N1=0 (connected)
@@ -128,7 +124,7 @@ Round 2 (after second exchange):
 Converged — every router knows every network.
 ```
 
-The convergence time scales with the network diameter (number of hops across the widest path) multiplied by the update interval. A 10-hop network with 30-second updates takes up to 300 seconds (5 minutes) to converge — very slow by modern standards.
+The convergence time scales with the network diameter (number of hops across the widest path) multiplied by the update interval. A 10-hop network with 30-second updates takes up to 300 seconds (5 minutes) to converge - very slow by modern standards.
 
 ### The Counting-to-Infinity Problem
 
@@ -174,7 +170,7 @@ So when N3 fails, R3 cannot count-to-infinity with R2 — no loop between adjace
 ```
 
 **Poison Reverse:**
-Instead of silently omitting the route, advertise it back with metric = 16 (infinity) — explicitly poisoned.
+Instead of silently omitting the route, advertise it back with metric = 16 (infinity) - explicitly poisoned.
 
 ```text
 R2 learned N3 from R3 via Gi0/1.
@@ -218,7 +214,7 @@ When a route is marked unreachable, the router ignores any new advertisement for
 | Standard | RFC 1058 | RFC 2453 | RFC 2080 |
 | Address family | IPv4 | IPv4 | IPv6 |
 | Classful/Classless | Classful | Classless (CIDR) | Classless |
-| Authentication | None | MD5 (plain text or MD5) | — (use IPsec) |
+| Authentication | None | MD5 (plain text or MD5) | - (use IPsec) |
 | Multicast updates | No (broadcast) | Yes (`224.0.0.9`) | Yes (`FF02::9`) |
 | Metric | Hop count | Hop count | Hop count |
 | Maximum hops | 15 (16 = infinity) | 15 (16 = infinity) | 15 (16 = infinity) |
@@ -228,7 +224,7 @@ When a route is marked unreachable, the router ignores any new advertisement for
 | Flush timer | 240 seconds | 240 seconds | 240 seconds |
 
 **Key limitations of hop count as a metric:**
-- All hops are equal — a 1 Gbps link and a 9.6 kbps link both count as 1 hop
+- All hops are equal - a 1 Gbps link and a 9.6 kbps link both count as 1 hop
 - RIP may choose a 10-hop path over 100 Mbps links rather than a 2-hop path over 56 kbps links
 - No consideration of link bandwidth, delay, or congestion
 - OSPF and IS-IS use cost (bandwidth-based) instead of hop count for this reason
@@ -237,7 +233,7 @@ When a route is marked unreachable, the router ignores any new advertisement for
 
 RIP is rarely deployed in new networks. It survives in some very small networks or embedded systems where simplicity outweighs performance concerns. Understanding it matters because:
 
-1. It illustrates the core distance-vector algorithm — the same algorithm EIGRP and BGP are based on
+1. It illustrates the core distance-vector algorithm - the same algorithm EIGRP and BGP are based on
 2. The counting-to-infinity problem and its partial fixes motivate the design of link-state protocols (OSPF, IS-IS), which share the full topology rather than just distances
 3. It appears in CCNA and professional certification exams as historical context
 4. Legacy equipment still running RIPv1 or RIPv2 exists in older installations
@@ -245,12 +241,11 @@ RIP is rarely deployed in new networks. It survives in some very small networks 
 OSPF (RT-004) is the standard for enterprise networks; IS-IS (RT-006) for carrier networks; BGP (RT-007) for inter-AS routing.
 
 ---
-
 ## Vendor Implementations
 
-RIP is standardised in RFC 2453 (RIPv2) and RFC 2080 (RIPng). All implementations share the same algorithm and timers. Configuration is straightforward — RIP requires minimal parameters compared to link-state protocols.
+RIP is standardised in RFC 2453 (RIPv2) and RFC 2080 (RIPng). All implementations share the same algorithm and timers. Configuration is straightforward - RIP requires minimal parameters compared to link-state protocols.
 
-!!! success "Standard — RFC 2453 (RIPv2), RFC 2080 (RIPng)"
+!!! success "Standard - RFC 2453 (RIPv2), RFC 2080 (RIPng)"
     RIPv2 is fully standardised. Any compliant implementation interoperates with any other. Only configuration syntax differs.
 
 === "Cisco IOS-XE"
@@ -269,7 +264,7 @@ RIP is standardised in RFC 2453 (RIPv2) and RFC 2080 (RIPng). All implementation
     show ip route rip
     debug ip rip
     ```
-    `no auto-summary` is critical in IOS — without it, RIP summarises at classful boundaries and breaks VLSM. `network` statements use classful network addresses, not CIDR notation.
+    `no auto-summary` is critical in IOS - without it, RIP summarises at classful boundaries and breaks VLSM. `network` statements use classful network addresses, not CIDR notation.
 
     Full configuration reference: [Cisco RIP Configuration](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_rip/configuration/xe-16/irip-xe-16-book.html)
 
@@ -289,11 +284,10 @@ RIP is standardised in RFC 2453 (RIPv2) and RFC 2080 (RIPng). All implementation
 
     Full configuration reference: [MikroTik RIP Reference](https://help.mikrotik.com/docs/display/ROS/RIP)
 
-!!! warning "Proprietary — EIGRP (Cisco)"
+!!! warning "Proprietary - EIGRP (Cisco)"
     EIGRP (Enhanced Interior Gateway Routing Protocol) is a Cisco-originated distance-vector protocol that addresses most of RIP's limitations: it uses a composite metric (bandwidth + delay), supports VLSM, converges faster via the DUAL algorithm (no counting-to-infinity), and scales to larger networks. EIGRP was Cisco proprietary until RFC 7868 documented it in 2016, but interoperability with non-Cisco implementations remains limited in practice. EIGRP is covered in RT-010.
 
 ---
-
 ## Common Pitfalls
 
 ### Pitfall 1: Running RIPv1 by default on Cisco (no auto-summary)
@@ -306,19 +300,18 @@ When a link or router fails, RIP with default timers can take several minutes to
 
 ### Pitfall 3: 15-hop limit silently drops routes
 
-A network larger than 15 hops in diameter simply cannot use RIP — routes beyond 15 hops are advertised with metric=16 (unreachable). There is no warning; packets to those destinations are silently dropped. Always verify that the maximum hop count in your network is below 15 before deploying RIP.
+A network larger than 15 hops in diameter simply cannot use RIP - routes beyond 15 hops are advertised with metric=16 (unreachable). There is no warning; packets to those destinations are silently dropped. Always verify that the maximum hop count in your network is below 15 before deploying RIP.
 
 ### Pitfall 4: All hops treated equally
 
 RIP chooses the path with the fewest hops regardless of link speed. A 5-hop path over 10 Gbps links loses to a 3-hop path over 1 Mbps links. This is counterintuitive and causes performance problems in real networks. Use OSPF (cost = bandwidth-based) or IS-IS for any network where bandwidth varies significantly between links.
 
 ---
-
 ## Practice Problems
 
-1. R1, R2, R3, and R4 are in a line (R1—R2—R3—R4). Network N5 is directly connected to R4. After RIP converges, what hop count does R1 report for N5? If R4 goes down, how many update cycles does it take for R1 to declare N5 unreachable (counting-to-infinity)?
+1. R1, R2, R3, and R4 are in a line (R1-R2-R3-R4). Network N5 is directly connected to R4. After RIP converges, what hop count does R1 report for N5? If R4 goes down, how many update cycles does it take for R1 to declare N5 unreachable (counting-to-infinity)?
 
-2. In a simple R1—R2 topology, R2 learns network N1 from R1. With split horizon enabled: does R2 advertise N1 back to R1? What about with poison reverse enabled?
+2. In a simple R1-R2 topology, R2 learns network N1 from R1. With split horizon enabled: does R2 advertise N1 back to R1? What about with poison reverse enabled?
 
 3. A network engineer deploys RIP on a new campus with 12 routers in series. After deployment, routes from the first router are visible on the last router. Six months later, three more routers are added in series. What problem do you anticipate?
 
@@ -328,51 +321,48 @@ RIP chooses the path with the fewest hops regardless of link speed. A 5-hop path
 
 ??? "Answers"
     **1.** N5 = 1 hop from R4. R3 learns it as 2 hops. R2 = 3 hops. R1 = **4 hops**.
-    If R4 goes down: R3 loses N5. R3 hears from R2 (3 hops) → updates to 4. R2 hears from R3 (4) → 5. Then 6, 7... to 16. With 30-second updates, each round is 30 seconds. From 4 to 16 = 12 increments × 30 seconds = **approximately 6 minutes** (plus holddown timers — up to 3–5 minutes more in practice).
+    If R4 goes down: R3 loses N5. R3 hears from R2 (3 hops) → updates to 4. R2 hears from R3 (4) → 5. Then 6, 7... to 16. With 30-second updates, each round is 30 seconds. From 4 to 16 = 12 increments × 30 seconds = **approximately 6 minutes** (plus holddown timers - up to 3–5 minutes more in practice).
 
-    **2.** Split horizon: **R2 does NOT advertise N1 back to R1** — it learned N1 from the interface facing R1. With poison reverse: **R2 DOES advertise N1 back to R1, but with metric=16** (explicitly unreachable). Poison reverse is the active form of split horizon.
+    **2.** Split horizon: **R2 does NOT advertise N1 back to R1** - it learned N1 from the interface facing R1. With poison reverse: **R2 DOES advertise N1 back to R1, but with metric=16** (explicitly unreachable). Poison reverse is the active form of split horizon.
 
-    **3.** With 15 total routers in series, the maximum hop count from end to end = 14 hops. This is within the 15-hop limit. However, if any future expansion adds more routers in series, the 16th hop becomes unreachable. Also, with 15 update cycles needed for full convergence (one per hop at 30s each), convergence time approaches **7.5 minutes** — already problematic.
+    **3.** With 15 total routers in series, the maximum hop count from end to end = 14 hops. This is within the 15-hop limit. However, if any future expansion adds more routers in series, the 16th hop becomes unreachable. Also, with 15 update cycles needed for full convergence (one per hop at 30s each), convergence time approaches **7.5 minutes** - already problematic.
 
-    **4.** 30 seconds balances convergence speed against bandwidth/CPU overhead. Shorter intervals: faster convergence, but more bandwidth consumed and CPU load on routers from processing updates. Longer intervals: less overhead, but slower convergence — routes take longer to propagate or be declared dead. In modern networks, 30 seconds is too slow; OSPF reacts in seconds using event-triggered updates rather than periodic full-table dumps.
+    **4.** 30 seconds balances convergence speed against bandwidth/CPU overhead. Shorter intervals: faster convergence, but more bandwidth consumed and CPU load on routers from processing updates. Longer intervals: less overhead, but slower convergence - routes take longer to propagate or be declared dead. In modern networks, 30 seconds is too slow; OSPF reacts in seconds using event-triggered updates rather than periodic full-table dumps.
 
-    **5.** RIP chooses the **2-hop satellite path** — fewer hops. This is the wrong choice; the 128 kbps link is a massive bottleneck. OSPF uses a cost metric based on reference bandwidth ÷ link bandwidth — the 10 Gbps path would have a much lower cost (better) and win. IS-IS has a configurable metric system that can also account for bandwidth.
+    **5.** RIP chooses the **2-hop satellite path** - fewer hops. This is the wrong choice; the 128 kbps link is a massive bottleneck. OSPF uses a cost metric based on reference bandwidth ÷ link bandwidth - the 10 Gbps path would have a much lower cost (better) and win. IS-IS has a configurable metric system that can also account for bandwidth.
 
 ---
-
 ## Summary & Key Takeaways
 
 - **Distance-vector routing** works by sharing routing tables (distances to all known destinations) with directly connected neighbours at regular intervals
-- Knowledge spreads **hop by hop** — each router adds 1 to the metric as it forwards the information
+- Knowledge spreads **hop by hop** - each router adds 1 to the metric as it forwards the information
 - **RIP** uses **hop count** as its metric; max hop count = 15; hop count = 16 means unreachable
 - When a link fails, distance-vector routers can enter **counting-to-infinity**: metrics increment toward 16 while packets loop between routers
-- **Split horizon**: don't advertise a route back the interface it arrived from — breaks two-node loops
+- **Split horizon**: don't advertise a route back the interface it arrived from - breaks two-node loops
 - **Poison reverse**: advertise a dead route back with metric=16 (explicit, faster than silent omission)
 - **Triggered updates** send route changes immediately rather than waiting for the next 30-second timer
-- **Holddown timers** delay reinstalling a failed route — prevents false convergence, but slows recovery
+- **Holddown timers** delay reinstalling a failed route - prevents false convergence, but slows recovery
 - RIP converges in **minutes**; modern link-state protocols (OSPF, IS-IS) converge in **seconds**
-- RIP treats all hops equally regardless of bandwidth — cannot distinguish a 10 Gbps link from a 56 kbps link
-- RIP is rarely used in new deployments; its value today is **conceptual** — understanding it explains why OSPF and IS-IS were designed the way they were
+- RIP treats all hops equally regardless of bandwidth - cannot distinguish a 10 Gbps link from a 56 kbps link
+- RIP is rarely used in new deployments; its value today is **conceptual** - understanding it explains why OSPF and IS-IS were designed the way they were
 
 ---
-
 ## Where to Next
 
-- **Continue:** [OSPF Fundamentals](ospf-fundamentals.md) (`RT-004`) — link-state routing that solves the problems RIP introduced; shares full topology maps rather than just distances
-- **Related:** [Routing Fundamentals](routing-fundamentals.md) (`RT-001`) — routing table and metric concepts underlying RIP
-- **Deep dive:** EIGRP (`RT-010`) — distance-vector with DUAL algorithm; resolves counting-to-infinity; Cisco-originated
-- **Applied context:** [Learning Path: Data Network Engineer](../../../learning-paths/data-network-engineer.md) — Stage 3, position 13 in the DNE path
+- **Continue:** [OSPF Fundamentals](ospf-fundamentals.md) (`RT-004`) - link-state routing that solves the problems RIP introduced; shares full topology maps rather than just distances
+- **Related:** [Routing Fundamentals](routing-fundamentals.md) (`RT-001`) - routing table and metric concepts underlying RIP
+- **Deep dive:** EIGRP (`RT-010`) - distance-vector with DUAL algorithm; resolves counting-to-infinity; Cisco-originated
+- **Applied context:** [Learning Path: Data Network Engineer](../../../learning-paths/data-network-engineer.md) - Stage 3, position 13 in the DNE path
 
 ---
-
 ## Standards & Certifications
 
 **Relevant standards:**
-- [RFC 1058 — Routing Information Protocol (RIPv1)](https://www.rfc-editor.org/rfc/rfc1058)
-- [RFC 2453 — RIP Version 2](https://www.rfc-editor.org/rfc/rfc2453)
-- [RFC 2080 — RIPng for IPv6](https://www.rfc-editor.org/rfc/rfc2080)
+- [RFC 1058 - Routing Information Protocol (RIPv1)](https://www.rfc-editor.org/rfc/rfc1058)
+- [RFC 2453 - RIP Version 2](https://www.rfc-editor.org/rfc/rfc2453)
+- [RFC 2080 - RIPng for IPv6](https://www.rfc-editor.org/rfc/rfc2080)
 
-**Benchmark certifications** — use these to self-assess your understanding, not as a study guide:
+**Where this topic appears in certification syllabi:**
 
 | Cert | Vendor | Relevant Section |
 |---|---|---|
@@ -380,20 +370,18 @@ RIP chooses the path with the fewest hops regardless of link speed. A 5-hop path
 | JNCIA-Junos JN0-103 | Juniper | Distance-vector routing principles |
 
 ---
-
 ## References
 
-- IETF — [RFC 2453: RIP Version 2](https://www.rfc-editor.org/rfc/rfc2453)
-- Bellman, R. — *Dynamic Programming*, Princeton University Press, 1957 — mathematical basis of the Bellman-Ford algorithm underlying distance-vector routing
-- Odom, W. — *CCNA 200-301 Official Cert Guide, Volume 2*, Cisco Press, 2019 — Ch. 19 (RIP and distance-vector)
-- Doyle, J.; Carroll, J. — *Routing TCP/IP, Volume I*, 2nd ed., Cisco Press, 2005 — Ch. 4 (RIP)
+- IETF - [RFC 2453: RIP Version 2](https://www.rfc-editor.org/rfc/rfc2453)
+- Bellman, R. - *Dynamic Programming*, Princeton University Press, 1957 - mathematical basis of the Bellman-Ford algorithm underlying distance-vector routing
+- Odom, W. - *CCNA 200-301 Official Cert Guide, Volume 2*, Cisco Press, 2019 - Ch. 19 (RIP and distance-vector)
+- Doyle, J.; Carroll, J. - *Routing TCP/IP, Volume I*, 2nd ed., Cisco Press, 2005 - Ch. 4 (RIP)
 
 ---
-
 ## Attribution & Licensing
 
 **Author:** [@geekazoid80]
-**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — content
+**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) - content
 **AI assistance:** Draft written by Claude Sonnet 4.6. RFC citations verified against IETF RFC index. Technical accuracy to be verified by human reviewer before `human_reviewed` is set to true.
 
 ---
@@ -405,7 +393,7 @@ RIP chooses the path with the fewest hops regardless of link speed. A 5-hop path
 
 | Module ID | Title | Context | Last Checked |
 |---|---|---|---|
-| [RT-004](ospf-fundamentals.md) | OSPF Fundamentals | OSPF motivation — solving problems introduced by distance-vector | 2026-04-17 |
+| [RT-004](ospf-fundamentals.md) | OSPF Fundamentals | OSPF motivation - solving problems introduced by distance-vector | 2026-04-17 |
 
 ### Modules This Module References
 
@@ -426,6 +414,6 @@ RIP chooses the path with the fewest hops regardless of link speed. A 5-hop path
 ### Maintenance Notes
 
 - When RT-004 (OSPF Fundamentals) is written, add a forward reference here to that module as "how link-state solves counting-to-infinity"
-- RT-010 (EIGRP) will describe the DUAL algorithm — add a reference here when written
+- RT-010 (EIGRP) will describe the DUAL algorithm - add a reference here when written
 
 <!-- XREF-END -->

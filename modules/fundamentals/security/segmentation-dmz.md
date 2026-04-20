@@ -1,7 +1,7 @@
 ---
-id: SEC-006
+module_id: SEC-006
 title: "Network Segmentation & DMZ"
-description: "How to design multi-zone network architectures — DMZ, management plane, micro-segmentation — to contain breaches and enforce least privilege."
+description: "How to design multi-zone network architectures - DMZ, management plane, micro-segmentation - to contain breaches and enforce least privilege."
 version: "1.0.0"
 status: draft
 human_reviewed: false
@@ -27,11 +27,30 @@ created: 2026-04-19
 updated: 2026-04-19
 ---
 
-# SEC-006 — Network Segmentation & DMZ
+# SEC-006 - Network Segmentation & DMZ
+## Learning Objectives
 
+After completing this module you will be able to:
+
+1. Describe common security zone models and the purpose of each zone.
+2. Explain DMZ architecture and why DMZ servers cannot initiate connections to the trust zone.
+3. Describe the management plane and why it should be separated.
+4. Explain micro-segmentation with VLANs, ACLs, and private VLANs.
+5. Describe Zero Trust networking concepts.
+6. Design a segmented architecture for a typical enterprise.
+
+---
+## Prerequisites
+
+- SEC-001 - ACLs (inter-zone traffic filtering)
+- SEC-002 - Firewall Concepts (zone-based policy model)
+- SW-002 - VLANs & 802.1Q (VLANs as segmentation mechanism)
+- RT-001 - Routing Fundamentals (routing at zone boundaries)
+
+---
 ## The Problem
 
-A flat network — all devices in the same broadcast domain, no zone boundaries — is a single security perimeter. One compromised workstation can reach every server, every router's management interface, every other workstation. The blast radius of any breach is the entire network.
+A flat network - all devices in the same broadcast domain, no zone boundaries - is a single security perimeter. One compromised workstation can reach every server, every router's management interface, every other workstation. The blast radius of any breach is the entire network.
 
 ### Step 1: Define security zones
 
@@ -39,11 +58,11 @@ Group devices by trust level and access requirements. The internet is untrusted.
 
 ### Step 2: Apply policies at zone boundaries
 
-Only a firewall (or router with ACLs) interconnects zones. All inter-zone traffic must cross this chokepoint — where policy is enforced. A compromised device in the DMZ cannot reach internal users because the firewall policy forbids DMZ → Trust traffic.
+Only a firewall (or router with ACLs) interconnects zones. All inter-zone traffic must cross this chokepoint - where policy is enforced. A compromised device in the DMZ cannot reach internal users because the firewall policy forbids DMZ → Trust traffic.
 
 ### Step 3: Segment within zones
 
-Even within the "trust" zone, HR servers should not be reachable from Engineering workstations, and no workstation should reach the management interface of any network device. **Micro-segmentation** enforces least privilege within a zone — each segment can only reach what it needs.
+Even within the "trust" zone, HR servers should not be reachable from Engineering workstations, and no workstation should reach the management interface of any network device. **Micro-segmentation** enforces least privilege within a zone - each segment can only reach what it needs.
 
 ### What You Just Built
 
@@ -57,29 +76,6 @@ Even within the "trust" zone, HR servers should not be reachable from Engineerin
 | Model assuming no implicit trust | Zero Trust |
 
 ---
-
-## Learning Objectives
-
-After completing this module you will be able to:
-
-1. Describe common security zone models and the purpose of each zone.
-2. Explain DMZ architecture and why DMZ servers cannot initiate connections to the trust zone.
-3. Describe the management plane and why it should be separated.
-4. Explain micro-segmentation with VLANs, ACLs, and private VLANs.
-5. Describe Zero Trust networking concepts.
-6. Design a segmented architecture for a typical enterprise.
-
----
-
-## Prerequisites
-
-- SEC-001 — ACLs (inter-zone traffic filtering)
-- SEC-002 — Firewall Concepts (zone-based policy model)
-- SW-002 — VLANs & 802.1Q (VLANs as segmentation mechanism)
-- RT-001 — Routing Fundamentals (routing at zone boundaries)
-
----
-
 ## Core Content
 
 ### Security Zones
@@ -139,11 +135,11 @@ If FW1 is compromised, FW2 (different vendor, different codebase) still blocks D
 
 ### Management Plane Separation
 
-Network device management (SSH, SNMP, Syslog) should be isolated from the data plane — the same interfaces carrying user traffic.
+Network device management (SSH, SNMP, Syslog) should be isolated from the data plane - the same interfaces carrying user traffic.
 
 **In-band management:** Management access over production interfaces. Simpler. Risk: a data-plane compromise can reach management interfaces; management traffic competes with user traffic; compromised routing means management access may be disrupted at the same time as the network problem you're trying to fix.
 
-**Out-of-band (OoB) management:** A dedicated management network — separate physical ports (management Ethernet on routers), or a separate VLAN that is never routed to the data plane. Access via a jump host or bastion host in the management zone.
+**Out-of-band (OoB) management:** A dedicated management network - separate physical ports (management Ethernet on routers), or a separate VLAN that is never routed to the data plane. Access via a jump host or bastion host in the management zone.
 
 ```
 [Production network] ─── Data VLAN ─── [Router data port]
@@ -151,7 +147,7 @@ Network device management (SSH, SNMP, Syslog) should be isolated from the data p
 [Management network] ─── Mgmt VLAN ─── [Router mgmt port] ─── [NMS / Bastion]
 ```
 
-OoB management means you can still access network devices even if the data-plane routing is broken — critical for incident response.
+OoB management means you can still access network devices even if the data-plane routing is broken - critical for incident response.
 
 **Management plane VRF (Virtual Routing and Forwarding):** Alternatively, configure a separate VRF for management traffic on the same physical interface. Management traffic is isolated in its own routing table, not shared with user routing. Less strict than true OoB but better than no isolation.
 
@@ -161,7 +157,7 @@ Micro-segmentation enforces least privilege within zones. Even inside the Trust 
 
 **VLAN-based segmentation:** Each department or function in a separate VLAN. Inter-VLAN routing controlled by the L3 switch or firewall. ACLs on SVIs restrict which VLANs can communicate.
 
-**Private VLANs (PVLANs):** Ports in a PVLAN are isolated from each other at Layer 2 — they can only communicate via the promiscuous port (typically a firewall or gateway). All traffic between hosts in the PVLAN is forced through the gateway for inspection. Used in hosting environments where tenants share a VLAN but must not reach each other.
+**Private VLANs (PVLANs):** Ports in a PVLAN are isolated from each other at Layer 2 - they can only communicate via the promiscuous port (typically a firewall or gateway). All traffic between hosts in the PVLAN is forced through the gateway for inspection. Used in hosting environments where tenants share a VLAN but must not reach each other.
 
 **Host-based firewall:** When VLANs are not fine-grained enough, host-based firewalls (Windows Defender Firewall, `iptables`/`nftables`) enforce policy at the individual host level. Essential for server environments where multiple server roles share a VLAN.
 
@@ -172,7 +168,7 @@ Traditional security model: trust everything inside the perimeter. Zero Trust ch
 > Never trust, always verify. Authenticate every request regardless of source location.
 
 Zero Trust principles:
-- **Verify explicitly:** Every access request is authenticated and authorised — network location (inside vs outside) grants no implicit trust.
+- **Verify explicitly:** Every access request is authenticated and authorised - network location (inside vs outside) grants no implicit trust.
 - **Least privilege:** Users and devices get only the access they need, when they need it.
 - **Assume breach:** Design assuming the perimeter has been breached; contain lateral movement.
 
@@ -184,7 +180,6 @@ Practical implementations:
 Zero Trust is a framework, not a single product. It represents the evolution of perimeter security to identity and context-based access.
 
 ---
-
 ## Common Pitfalls
 
 1. **DMZ → Trust policy with overly broad rules.** "Permit any from DMZ to Trust" or "permit any from DMZ to database server" is not sufficient segmentation. Specify exact source/destination IP:port pairs. Update the rules whenever the DMZ application changes.
@@ -198,7 +193,6 @@ Zero Trust is a framework, not a single product. It represents the evolution of 
 5. **Guest WiFi on the Trust VLAN.** Guest access on the same VLAN as internal users allows guests to attack internal systems. Guest WiFi must be in a separate VLAN, internet-only, with no route to internal subnets. Use captive portal and rate limiting as additional controls.
 
 ---
-
 ## Practice Problems
 
 **Q1.** A web server in the DMZ serves an internal HR application. Internal users authenticate against Active Directory (AD). Which traffic flows are needed between DMZ and Trust, and how should they be scoped?
@@ -211,7 +205,7 @@ Zero Trust is a framework, not a single product. It represents the evolution of 
 **Q2.** Why is a dual-firewall DMZ (two firewalls from different vendors) more secure than a single firewall?
 
 ??? answer
-    A single firewall from one vendor may have a zero-day vulnerability exploitable by attackers to bypass the firewall entirely. A dual-firewall design uses two different vendors' products — a vulnerability in vendor A's firewall doesn't apply to vendor B's firewall. An attacker who exploits FW1 still cannot pass FW2 without exploiting a different vulnerability. The cost is higher complexity and operational overhead, but the security benefit is significant for high-value environments.
+    A single firewall from one vendor may have a zero-day vulnerability exploitable by attackers to bypass the firewall entirely. A dual-firewall design uses two different vendors' products - a vulnerability in vendor A's firewall doesn't apply to vendor B's firewall. An attacker who exploits FW1 still cannot pass FW2 without exploiting a different vulnerability. The cost is higher complexity and operational overhead, but the security benefit is significant for high-value environments.
 
 **Q3.** What is the management plane and why should it be separated from the data plane?
 
@@ -219,28 +213,25 @@ Zero Trust is a framework, not a single product. It represents the evolution of 
     The management plane is the set of protocols and interfaces used to manage network devices (SSH, SNMP, Syslog, NETCONF). The data plane is the set of interfaces and protocols carrying user traffic. Separation ensures: (1) Management access remains available even if the data plane is congested or broken. (2) Data-plane compromises (user traffic interception, routing attacks) don't automatically reach management interfaces. (3) Management traffic is isolated from potential eavesdropping in the data plane.
 
 ---
-
 ## Summary & Key Takeaways
 
 - **Security zones** group devices by trust level; policies are applied between zones.
-- **DMZ** is semi-trusted — servers accessible from the internet, but default-deny DMZ → Trust protects internal network from compromised DMZ servers.
+- **DMZ** is semi-trusted - servers accessible from the internet, but default-deny DMZ → Trust protects internal network from compromised DMZ servers.
 - **Dual-firewall DMZ** (different vendors) provides defence-in-depth against vendor-specific vulnerabilities.
 - **Management plane separation** (out-of-band management, VRF, bastion host) keeps device management accessible even during data-plane failures or attacks.
 - **Micro-segmentation** (VLANs, PVLANs, ACLs, host firewalls) enforces least privilege within zones.
-- **Zero Trust:** "Never trust, always verify" — every access request authenticated and authorised regardless of source location.
-- Guest WiFi must be on a separate, internet-only VLAN — never on the Trust VLAN.
+- **Zero Trust:** "Never trust, always verify" - every access request authenticated and authorised regardless of source location.
+- Guest WiFi must be on a separate, internet-only VLAN - never on the Trust VLAN.
 - Design for breach containment: assume attackers will get past the perimeter; limit lateral movement.
 
 ---
-
 ## Where to Next
 
-- **AUTO-001 — Python for Network Engineers:** Automating security policy deployment.
-- **CT-006 — EVPN Fundamentals:** Micro-segmentation in data centre using EVPN.
-- **DC-001 — Data Centre Network Design:** Spine-leaf and micro-segmentation in DC environments.
+- **AUTO-001 - Python for Network Engineers:** Automating security policy deployment.
+- **CT-006 - EVPN Fundamentals:** Micro-segmentation in data centre using EVPN.
+- **DC-001 - Data Centre Network Design:** Spine-leaf and micro-segmentation in DC environments.
 
 ---
-
 ## Standards & Certifications
 
 | Standard / Cert | Relevance |
@@ -253,14 +244,12 @@ Zero Trust is a framework, not a single product. It represents the evolution of 
 | CompTIA Network+ | Segmentation concepts, DMZ |
 
 ---
-
 ## References
 
-- NIST SP 800-207 — Zero Trust Architecture. [https://csrc.nist.gov/publications/detail/sp/800-207/final](https://csrc.nist.gov/publications/detail/sp/800-207/final)
-- NIST SP 800-41 Rev.1 — Guidelines on Firewalls and Firewall Policy. [https://csrc.nist.gov/publications/detail/sp/800-41/rev-1/final](https://csrc.nist.gov/publications/detail/sp/800-41/rev-1/final)
+- NIST SP 800-207 - Zero Trust Architecture. [https://csrc.nist.gov/publications/detail/sp/800-207/final](https://csrc.nist.gov/publications/detail/sp/800-207/final)
+- NIST SP 800-41 Rev.1 - Guidelines on Firewalls and Firewall Policy. [https://csrc.nist.gov/publications/detail/sp/800-41/rev-1/final](https://csrc.nist.gov/publications/detail/sp/800-41/rev-1/final)
 
 ---
-
 ## Attribution & Licensing
 
 - Module content: original draft, AI-assisted (Claude Sonnet 4.6), 2026-04-19.

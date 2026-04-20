@@ -1,5 +1,5 @@
 ---
-title: "Applied: Carrier / Service Provider Network Engineer — Overview"
+title: "Applied: Carrier / Service Provider Network Engineer - Overview"
 module_id: "CE-000"
 domain: "applied/carrier-engineer"
 difficulty: "advanced"
@@ -15,7 +15,7 @@ tags: [applied, carrier, service-provider, telco, mpls, sr, evpn, bgp]
 
 ## What Is a Carrier / Service Provider Network Engineer?
 
-A carrier or service provider (SP) network engineer designs, builds, and operates the networks that connect cities, countries, and continents — the infrastructure that other networks ride on top of. This includes:
+A carrier or service provider (SP) network engineer designs, builds, and operates the networks that connect cities, countries, and continents - the infrastructure that other networks ride on top of. This includes:
 
 - ISP and telco backbone networks
 - MPLS VPN services (L2 and L3) sold to enterprise customers
@@ -33,7 +33,7 @@ Vendors you'll encounter most in this space: **Cisco (IOS-XR, ASR/NCS/CRS)**, **
 Enterprise engineers who step into carrier roles often find that the technology is familiar in name but radically different in scale and philosophy:
 
 - IS-IS is the routing protocol of choice, not OSPF
-- BGP carries far more than just internet routes — it carries VPN, EVPN, and policy information
+- BGP carries far more than just internet routes - it carries VPN, EVPN, and policy information
 - MPLS label stacks are everywhere
 - Traffic engineering is routine, not exceptional
 - Operations processes (OSS, BSS, ticketing) are formal and contractual
@@ -44,25 +44,25 @@ This path assumes you have completed at minimum the first three stages of the **
 
 See [learning-paths/carrier-engineer.md](../../../learning-paths/carrier-engineer.md) for the complete ordered module sequence.
 
-*(This learning path file is pending — see TASK.md item A1.)*
+*(This learning path file is pending - see TASK.md item A1.)*
 
 ## Proposed Stage Overview
 
-**Stage 1 — Foundation (from DNE path):** NW-001, IP-001, IP-002, RT-004 (OSPF), RT-007 (BGP), SW-001
+**Stage 1 - Foundation (from DNE path):** NW-001, IP-001, IP-002, RT-004 (OSPF), RT-007 (BGP), SW-001
 
-**Stage 2 — Carrier Routing:**
+**Stage 2 - Carrier Routing:**
 IS-IS (CT-domain), BGP Advanced (RT-008), Route Policy and Filtering
 
-**Stage 3 — MPLS:**
+**Stage 3 - MPLS:**
 MPLS Fundamentals (CT-001), MPLS L3VPN (CT-002), MPLS L2VPN (CT-003)
 
-**Stage 4 — Segment Routing:**
+**Stage 4 - Segment Routing:**
 SR-MPLS (CT-004), SRv6 (CT-005), Traffic Engineering (CT-012)
 
-**Stage 5 — EVPN & Carrier Ethernet:**
+**Stage 5 - EVPN & Carrier Ethernet:**
 EVPN (CT-006), MEF Standards (CT-008), Carrier Ethernet Services (CT-009)
 
-**Stage 6 — Operations & Automation:**
+**Stage 6 - Operations & Automation:**
 QoS in MPLS (QOS-005), Telemetry (PROTO-007), NETCONF (PROTO-008), Automation toolchain
 
 ## Call for Contributors

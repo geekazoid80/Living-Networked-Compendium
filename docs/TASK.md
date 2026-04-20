@@ -5,7 +5,7 @@ Cross-session progress tracker for the Living Networked Compendium.
 **How to use:**
 - Update this file at the start and end of every Claude session
 - One task per row. Move status as work progresses
-- Add follow-ups discovered during work immediately — don't lose them
+- Add follow-ups discovered during work immediately - don't lose them
 - `blocked` tasks need human input before proceeding
 
 **Statuses:** `pending` | `in-progress` | `done` | `blocked`
@@ -14,7 +14,7 @@ Cross-session progress tracker for the Living Networked Compendium.
 
 ## Current Session Focus
 
-**Current area:** Content production — Problem-First pedagogy, seed module retrofit, shared spine (IP → Routing)
+**Current area:** Content production - Problem-First pedagogy, seed module retrofit, shared spine (IP → Routing)
 
 ---
 
@@ -45,13 +45,13 @@ Cross-session progress tracker for the Living Networked Compendium.
 | 21 | Retrofit seed modules (NW-001, IP-001, IP-002) to new template | Content | done | Rewrote openings to Problem-First pattern; fixed XREF block scope; added Standards & Certs section; added XREF tables |
 | 22 | Update `README.md` for expanded scope | Architecture | pending | Multi-vendor, new paths, three-bucket model |
 | 23 | Resolve `services/` domain overlap with `protocols/` + `functions/` | Architecture | blocked | See follow-up D |
-| 24 | Update `docs/MODULE_TEMPLATE.md` — replace Analogy section with The Problem pattern | Architecture | done | Problem-First pedagogical approach; MikroTik added as peer vendor; vendor tab rules added |
-| 25 | Update `docs/INSTRUCTION.md` — Section 5 (Problem-First) and Section 6 (MikroTik + vendor tab rules) | Architecture | done | |
+| 24 | Update `docs/MODULE_TEMPLATE.md` - replace Analogy section with The Problem pattern | Architecture | done | Problem-First pedagogical approach; MikroTik added as peer vendor; vendor tab rules added |
+| 25 | Update `docs/INSTRUCTION.md` - Section 5 (Problem-First) and Section 6 (MikroTik + vendor tab rules) | Architecture | done | |
 | 26 | Resolve RT module ID conflict | Architecture | done | RT-003=RIP, RT-004=OSPF, RT-007=BGP; DNE learning path updated to match |
 
 ---
 
-## Seed Modules (Session 1 — Done)
+## Seed Modules (Session 1 - Done)
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -61,7 +61,7 @@ Cross-session progress tracker for the Living Networked Compendium.
 
 ---
 
-## Content Backlog — Fundamentals/Networking
+## Content Backlog - Fundamentals/Networking
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -70,7 +70,7 @@ Cross-session progress tracker for the Living Networked Compendium.
 
 ---
 
-## Content Backlog — Fundamentals/Access Media (NEW)
+## Content Backlog - Fundamentals/Access Media (NEW)
 
 Covers physical medium evolution: how we connect devices, from the beginning to now.
 
@@ -82,7 +82,7 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 | C06 | AM-004 | DSL Technologies | pending | ADSL, ADSL2+, VDSL, VDSL2; copper limits |
 | C07 | AM-005 | Coaxial Cable & Cable Broadband | pending | DOCSIS 1.x/2.0/3.0/3.1/4.0; HFC networks |
 | C08 | AM-006 | Grey Optical (Uncoloured / Direct) | pending | Single-mode, multimode; SFP/QSFP types; reach/wavelength |
-| C09 | AM-007 | Coloured Optical — CWDM & DWDM | pending | ITU grid, channel spacing, amplification (EDFA), ROADMs |
+| C09 | AM-007 | Coloured Optical - CWDM & DWDM | pending | ITU grid, channel spacing, amplification (EDFA), ROADMs |
 | C10 | AM-008 | RF over Optical (Analogue/Digital) | pending | HFC, RFoG, Remote PHY |
 | C11 | AM-009 | Wi-Fi (802.11 Evolution) | pending | 802.11a/b/g/n/ac/ax/be; bands, channels, MU-MIMO, OFDMA |
 | C12 | AM-010 | Mobile Networks (2G→5G) | pending | GSM, UMTS, LTE, 5G NR; backhaul, roaming, network slicing |
@@ -90,7 +90,7 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 ---
 
-## Content Backlog — Fundamentals/IP
+## Content Backlog - Fundamentals/IP
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -99,7 +99,7 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 ---
 
-## Content Backlog — Fundamentals/Routing
+## Content Backlog - Fundamentals/Routing
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -117,7 +117,7 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 ---
 
-## Content Backlog — Fundamentals/Switching
+## Content Backlog - Fundamentals/Switching
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -130,7 +130,7 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 ---
 
-## Content Backlog — Fundamentals/Carrier-Transport (NEW)
+## Content Backlog - Fundamentals/Carrier-Transport (NEW)
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -149,7 +149,7 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 ---
 
-## Content Backlog — Fundamentals/Data Centre (NEW)
+## Content Backlog - Fundamentals/Data Centre (NEW)
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -162,13 +162,13 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 ---
 
-## Content Backlog — Fundamentals/Protocols (NEW)
+## Content Backlog - Fundamentals/Protocols (NEW)
 
-Standard and widely-used protocols — one module per protocol.
+Standard and widely-used protocols - one module per protocol.
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C51 | PROTO-001 | DNS — Domain Name System | pending | Hierarchy, resolution, record types (A, AAAA, MX, CNAME, PTR, NS, SOA) |
+| C51 | PROTO-001 | DNS - Domain Name System | pending | Hierarchy, resolution, record types (A, AAAA, MX, CNAME, PTR, NS, SOA) |
 | C52 | PROTO-002 | ARP & GARP | pending | IPv4 ARP; Gratuitous ARP; proxy ARP; DAI mitigation |
 | C53 | PROTO-003 | NTP & PTP | pending | NTP strata, NTPv4; PTP/IEEE 1588 for precision timing |
 | C54 | PROTO-004 | Syslog | pending | RFC 5424; severity levels; centralised logging |
@@ -183,14 +183,14 @@ Standard and widely-used protocols — one module per protocol.
 
 ---
 
-## Content Backlog — Fundamentals/Functions (NEW)
+## Content Backlog - Fundamentals/Functions (NEW)
 
-Network functions — conceptual and implementation, multi-vendor.
+Network functions - conceptual and implementation, multi-vendor.
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C63 | FN-001 | Switching — How It Works | pending | CAM/TCAM; hardware forwarding; cut-through vs store-forward |
-| C64 | FN-002 | Routing — How It Works | pending | Control plane vs data plane; RIB, FIB, CEF |
+| C63 | FN-001 | Switching - How It Works | pending | CAM/TCAM; hardware forwarding; cut-through vs store-forward |
+| C64 | FN-002 | Routing - How It Works | pending | Control plane vs data plane; RIB, FIB, CEF |
 | C65 | FN-003 | NAT & PAT | pending | Static, dynamic, overload (PAT); CGNAT; RFC 3022 |
 | C66 | FN-004 | Stateless ACLs | pending | Packet filtering; standard vs extended; match criteria |
 | C67 | FN-005 | Stateful Firewall & ACLs | pending | Connection tracking; reflexive ACLs; zone-based FW |
@@ -200,7 +200,7 @@ Network functions — conceptual and implementation, multi-vendor.
 
 ---
 
-## Content Backlog — Fundamentals/Services
+## Content Backlog - Fundamentals/Services
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -214,20 +214,20 @@ Network functions — conceptual and implementation, multi-vendor.
 
 ---
 
-## Content Backlog — Fundamentals/Security
+## Content Backlog - Fundamentals/Security
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
 | C76 | SEC-001 | ACLs | done | Standard vs extended, wildcard masks, inbound/outbound, TCP established, IPv6 |
 | C77 | SEC-002 | Firewall Concepts | done | Stateful inspection, session table, zone-based policy, DMZ, SYN flood, NGFW |
 | C78 | SEC-003 | VPN & IPSec | done | IKEv1/v2, ESP/AH, tunnel mode, NAT-T, certificate vs PSK |
-| C79 | SEC-004 | AAA — TACACS+ & RADIUS | done | TACACS+ vs RADIUS, 802.1X, command accounting, local fallback |
+| C79 | SEC-004 | AAA - TACACS+ & RADIUS | done | TACACS+ vs RADIUS, 802.1X, command accounting, local fallback |
 | C80 | SEC-005 | Encryption Standards & PKI | done | AES/RSA/ECDSA, X.509, CA hierarchy, CRL/OCSP, TLS 1.3 |
 | C81 | SEC-006 | Network Segmentation & DMZ | done | Zone model, DMZ, dual-firewall, OoB management, micro-segmentation, Zero Trust |
 
 ---
 
-## Content Backlog — Fundamentals/QoS
+## Content Backlog - Fundamentals/QoS
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -239,7 +239,7 @@ Network functions — conceptual and implementation, multi-vendor.
 
 ---
 
-## Content Backlog — Fundamentals/Automation
+## Content Backlog - Fundamentals/Automation
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -251,7 +251,7 @@ Network functions — conceptual and implementation, multi-vendor.
 
 ---
 
-## Content Backlog — Fundamentals/RF
+## Content Backlog - Fundamentals/RF
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -262,28 +262,28 @@ Network functions — conceptual and implementation, multi-vendor.
 
 ---
 
-## Content Backlog — Fundamentals/Professional Standards (NEW)
+## Content Backlog - Fundamentals/Professional Standards (NEW)
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
 | C93 | PS-001 | ITIL 4 for Network Engineers | needed | Service management; incident/change/problem processes |
-| C94 | PS-002 | NIST SP 800-53 — Security Controls | needed | Control families; relevance to network config |
-| C95 | PS-003 | BCP38 / BCP84 — Anti-Spoofing | needed | Ingress filtering; why it matters for DDoS |
-| C96 | PS-004 | TIA-942 — Data Centre Tiers | needed | Tier I–IV; redundancy levels; common misconceptions |
+| C94 | PS-002 | NIST SP 800-53 - Security Controls | needed | Control families; relevance to network config |
+| C95 | PS-003 | BCP38 / BCP84 - Anti-Spoofing | needed | Ingress filtering; why it matters for DDoS |
+| C96 | PS-004 | TIA-942 - Data Centre Tiers | needed | Tier I–IV; redundancy levels; common misconceptions |
 | C97 | PS-005 | ISO/IEC 27001 for Engineers | needed | ISMS; risk treatment; network security controls |
-| C98 | PS-006 | MEF 3.0 — LSO and Carrier Ethernet | needed | Service orchestration; MEF service attributes |
+| C98 | PS-006 | MEF 3.0 - LSO and Carrier Ethernet | needed | Service orchestration; MEF service attributes |
 | C99 | PS-007 | IEEE 802 Standards Overview | needed | 802.1, 802.3, 802.11, 802.1Q, 802.1X landscape |
 | C100 | PS-008 | RFC Track Explained | needed | Standards-track vs BCP vs Informational vs Experimental |
 
 ---
 
-## Content Backlog — Applied: RF-Coax / Cable Engineer
+## Content Backlog - Applied: RF-Coax / Cable Engineer
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| RC1 | RCE-001 | DOCSIS 3.0 — Channel Bonding | needed | |
-| RC2 | RCE-002 | DOCSIS 3.1 — OFDM and OFDMA | needed | |
-| RC3 | RCE-003 | DOCSIS 4.0 — Full Duplex and Extended Spectrum | needed | |
+| RC1 | RCE-001 | DOCSIS 3.0 - Channel Bonding | needed | |
+| RC2 | RCE-002 | DOCSIS 3.1 - OFDM and OFDMA | needed | |
+| RC3 | RCE-003 | DOCSIS 4.0 - Full Duplex and Extended Spectrum | needed | |
 | RC4 | RCE-004 | CMTS Architecture and Configuration | needed | |
 | RC5 | RCE-005 | Subscriber Provisioning (DHCP, TFTP, config files) | needed | |
 | RC6 | RCE-006 | QoS in DOCSIS (Service Flows, Classifiers) | needed | |
@@ -294,26 +294,26 @@ Network functions — conceptual and implementation, multi-vendor.
 
 ---
 
-## Content Backlog — Applied: Voice / Telephony Engineer
+## Content Backlog - Applied: Voice / Telephony Engineer
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| VT1 | VTE-001 | SIP — Session Initiation Protocol (RFC 3261) | needed | |
-| VT2 | VTE-002 | RTP/RTCP — Real-time Transport Protocol | needed | |
-| VT3 | VTE-003 | Codecs — G.711, G.729, Opus, iLBC | needed | |
+| VT1 | VTE-001 | SIP - Session Initiation Protocol (RFC 3261) | needed | |
+| VT2 | VTE-002 | RTP/RTCP - Real-time Transport Protocol | needed | |
+| VT3 | VTE-003 | Codecs - G.711, G.729, Opus, iLBC | needed | |
 | VT4 | VTE-004 | DTMF Handling (RFC 2833 / RFC 4733) | needed | |
 | VT5 | VTE-005 | H.323 Overview | needed | Legacy, still deployed |
-| VT6 | VTE-006 | PSTN Architecture — Switching Hierarchy | needed | |
-| VT7 | VTE-007 | ISDN — BRI and PRI | needed | |
-| VT8 | VTE-008 | SS7 — Signalling System 7 Architecture | needed | |
-| VT9 | VTE-009 | SIGTRAN — SS7 over IP (RFC 3057) | needed | |
+| VT6 | VTE-006 | PSTN Architecture - Switching Hierarchy | needed | |
+| VT7 | VTE-007 | ISDN - BRI and PRI | needed | |
+| VT8 | VTE-008 | SS7 - Signalling System 7 Architecture | needed | |
+| VT9 | VTE-009 | SIGTRAN - SS7 over IP (RFC 3057) | needed | |
 | VT10 | VTE-010 | SIP PBX Design and Architecture | needed | |
 | VT11 | VTE-011 | Session Border Controllers (SBCs) | needed | |
 | VT12 | VTE-012 | NAT Traversal for VoIP (STUN, TURN, ICE) | needed | |
-| VT13 | VTE-013 | SIP Trunking — Enterprise to Carrier | needed | |
+| VT13 | VTE-013 | SIP Trunking - Enterprise to Carrier | needed | |
 | VT14 | VTE-014 | MOS, Jitter, and Call Quality Measurement | needed | |
 | VT15 | VTE-015 | Wireshark for VoIP (SIP and RTP capture) | needed | |
-| VT16 | VTE-016 | VoIP Security — Toll Fraud, SIP Brute Force | needed | |
+| VT16 | VTE-016 | VoIP Security - Toll Fraud, SIP Brute Force | needed | |
 | VT17 | VTE-017 | WebRTC Fundamentals | needed | |
 | VT18 | VTE-018 | Microsoft Teams Direct Routing | needed | |
 | VT19 | VTE-019 | Contact Centre Telephony Architecture | needed | |
@@ -321,32 +321,32 @@ Network functions — conceptual and implementation, multi-vendor.
 
 ---
 
-## Content Backlog — Applied: RF Mobile / Cellular Engineer
+## Content Backlog - Applied: RF Mobile / Cellular Engineer
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
 | RM1 | RME-001 | LTE RAN Architecture (eNB, S1/X2 interfaces) | needed | |
 | RM2 | RME-002 | 5G NR Architecture (gNB, CU/DU split, F1 interface) | needed | |
-| RM3 | RME-003 | Cell Planning — Coverage, Capacity, Interference | needed | |
+| RM3 | RME-003 | Cell Planning - Coverage, Capacity, Interference | needed | |
 | RM4 | RME-004 | Massive MIMO and Beamforming | needed | |
-| RM5 | RME-005 | SON — Self-Organising Networks | needed | |
+| RM5 | RME-005 | SON - Self-Organising Networks | needed | |
 | RM6 | RME-006 | Microwave Point-to-Point Backhaul | needed | |
 | RM7 | RME-007 | 4G EPC Architecture (MME, SGW, PGW, HSS, PCRF) | needed | |
-| RM8 | RME-008 | GTP — GPRS Tunnelling Protocol | needed | |
+| RM8 | RME-008 | GTP - GPRS Tunnelling Protocol | needed | |
 | RM9 | RME-009 | 5G Core SBA Architecture (AMF, SMF, UPF, UDM, PCF) | needed | |
 | RM10 | RME-010 | DIAMETER Protocol (4G charging, AAA) | needed | |
 | RM11 | RME-011 | Roaming Architecture (GRX, IPX, SS7/DIAMETER) | needed | |
 | RM12 | RME-012 | RF KPIs (RSRP, RSRQ, SINR, CQI, MCS) | needed | |
 | RM13 | RME-013 | RAN Optimisation Techniques | needed | |
 | RM14 | RME-014 | Drive Testing and Post-Processing | needed | |
-| RM15 | RME-015 | Private 5G — Enterprise Campus Networks | needed | |
+| RM15 | RME-015 | Private 5G - Enterprise Campus Networks | needed | |
 | RM16 | RME-016 | Open RAN (O-RAN Alliance) | needed | |
 | RM17 | RME-017 | Network Slicing for Vertical Industries | needed | |
 | RM18 | RME-018 | Multi-access Edge Computing (MEC) | needed | |
 
 ---
 
-## Content Backlog — Applied: Storage Network Engineer
+## Content Backlog - Applied: Storage Network Engineer
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
@@ -354,15 +354,15 @@ Network functions — conceptual and implementation, multi-vendor.
 | SN2 | SNE-002 | RAID Levels and Storage Resiliency | needed | |
 | SN3 | SNE-003 | LUN Design and Multipathing | needed | |
 | SN4 | SNE-004 | Fibre Channel Protocol (FC frames, port types) | needed | |
-| SN5 | SNE-005 | FC Fabric — FLOGI, PLOGI, FDISC, Zoning | needed | |
+| SN5 | SNE-005 | FC Fabric - FLOGI, PLOGI, FDISC, Zoning | needed | |
 | SN6 | SNE-006 | FC Switch Topologies and ISL Design | needed | |
 | SN7 | SNE-007 | FC Switch Platforms (Cisco MDS, Brocade/Broadcom) | needed | |
-| SN8 | SNE-008 | iSCSI — IP-based Block Storage (RFC 7143) | needed | |
+| SN8 | SNE-008 | iSCSI - IP-based Block Storage (RFC 7143) | needed | |
 | SN9 | SNE-009 | DCB / Priority Flow Control (IEEE 802.1Qbb) | needed | |
-| SN10 | SNE-010 | FCoE — Fibre Channel over Ethernet | needed | |
-| SN11 | SNE-011 | NAS — NFS (RFC 7530) and SMB/CIFS | needed | |
+| SN10 | SNE-010 | FCoE - Fibre Channel over Ethernet | needed | |
+| SN11 | SNE-011 | NAS - NFS (RFC 7530) and SMB/CIFS | needed | |
 | SN12 | SNE-012 | NVMe-oF Concepts and Architectures | needed | |
-| SN13 | SNE-013 | RDMA — RoCE and iWARP | needed | |
+| SN13 | SNE-013 | RDMA - RoCE and iWARP | needed | |
 | SN14 | SNE-014 | NVMe/TCP (RFC 8041) | needed | |
 | SN15 | SNE-015 | Synchronous vs Asynchronous Replication | needed | |
 | SN16 | SNE-016 | RPO, RTO, and Storage SLAs | needed | |
@@ -370,7 +370,7 @@ Network functions — conceptual and implementation, multi-vendor.
 
 ---
 
-## Applied Paths — Status
+## Applied Paths - Status
 
 | # | Path | Status | Notes |
 |---|---|---|---|
@@ -395,23 +395,23 @@ Network functions — conceptual and implementation, multi-vendor.
 | 2026-04-15 | Singapore poly/university IS/CS/EE as baseline | Target audience |
 | 2026-04-15 | Multi-vendor scope: Cisco, Juniper, Nokia, Arista, Huawei, ZTE, MikroTik | Fair representation; carrier/DC environments use all of these |
 | 2026-04-15 | Standard / Proprietary-seeking-standard / Proprietary-specific distinction | Readers must know what they can rely on in mixed environments |
-| 2026-04-15 | Carrier-transport domain added (CT) | MPLS, SR, EVPN, MEF — essential for telco/SP roles |
-| 2026-04-15 | Data centre domain added (DC) | Spine-leaf, VXLAN, EVPN-DC — distinct enough to warrant own domain |
+| 2026-04-15 | Carrier-transport domain added (CT) | MPLS, SR, EVPN, MEF - essential for telco/SP roles |
+| 2026-04-15 | Data centre domain added (DC) | Spine-leaf, VXLAN, EVPN-DC - distinct enough to warrant own domain |
 | 2026-04-15 | Access-media domain added (AM) | Physical layer evolution from serial to 400G to wireless |
 | 2026-04-15 | Protocols domain added (PROTO) | One module per standard protocol for atomic reference |
 | 2026-04-15 | Functions domain added (FN) | Switching, routing, NAT, ACL, IDS/IPS, DPI, ALG as distinct concepts |
-| 2026-04-15 | `private/` folder created and gitignored | Local research, uploads, parsed docs — never public |
+| 2026-04-15 | `private/` folder created and gitignored | Local research, uploads, parsed docs - never public |
 | 2026-04-15 | Three-bucket content model adopted | Critical (all outputs), Supplementary (collapsed/notes/speaker), XREF (markdown-only) |
 | 2026-04-15 | Analogy-first mandatory structure | Every module opens with layman analogy + mapping table before any technical content |
 | 2026-04-15 | `preprocess-module.py` handles output-specific transformation | Strips/transforms buckets for pdf and pptx targets; web passes through unchanged |
-| 2026-04-15 | Certs as benchmarks only — not curriculum anchors | Curriculum follows standards and skills, not exam objectives |
+| 2026-04-15 | Certs as benchmarks only - not curriculum anchors | Curriculum follows standards and skills, not exam objectives |
 | 2026-04-15 | Target audience is global, not Singapore-specific | Singapore IS/CS/EE reference is illustrative of typical reader background only |
 | 2026-04-17 | Problem-First pedagogy adopted | Modules open with progressive build-up (two parties + constraints) instead of static analogy; reader constructs the concept before it is formally named |
 | 2026-04-17 | MikroTik RouterOS added as peer vendor | No editorial positioning; platform context lives in platform-overview.md; vendor tabs show minimal config snippets + link to official docs |
 | 2026-04-17 | Vendor tabs show minimal config snippet + doc link | Not full working configs; highlight concept-critical parameters; follow with official documentation link |
 | 2026-04-17 | RT module IDs finalised: RT-003=RIP, RT-004=OSPF, RT-007=BGP | DNE learning path updated to match; spine production order follows this numbering |
 | 2026-04-17 | Content production order: spine first (IP→Routing), then DNE deep dive, then CE deep dive | Spine modules used by both paths; write once, reference from both |
-| 2026-04-15 | Professional Standards domain added (PS) | ITIL, NIST, BCP38, TIA-942, ISO 27001, MEF, IEEE — what engineers are audited against |
+| 2026-04-15 | Professional Standards domain added (PS) | ITIL, NIST, BCP38, TIA-942, ISO 27001, MEF, IEEE - what engineers are audited against |
 | 2026-04-15 | Multilingual support via file naming convention | `module.md` = EN default; `module.zh-CN.md`, `module.ms.md`, `module.ta.md` for translations |
 
 ---
@@ -426,4 +426,4 @@ Network functions — conceptual and implementation, multi-vendor.
 | D | Should `services/` domain be kept as a distinct folder or merged into `protocols/` + `functions/`? | 2026-04-15 |
 | E | Are there existing training materials or lesson plans to upload to `private/uploads/` as source material? | 2026-04-15 |
 | F | Should ZTE vendor CLI examples be included (limited English documentation available)? | 2026-04-15 |
-| G | Priority order for content backlog — which domains/modules to tackle first? | 2026-04-15 |
+| G | Priority order for content backlog - which domains/modules to tackle first? | 2026-04-15 |

@@ -1,5 +1,5 @@
 ---
-title: "Applied: Data Centre Network Engineer — Overview"
+title: "Applied: Data Centre Network Engineer - Overview"
 module_id: "DCE-000"
 domain: "applied/datacentre-engineer"
 difficulty: "advanced"
@@ -15,7 +15,7 @@ tags: [applied, datacentre, spine-leaf, vxlan, evpn, bgp, fabric]
 
 ## What Is a Data Centre Network Engineer?
 
-A data centre (DC) network engineer designs and operates the network infrastructure inside data centres — the switching fabric, server connectivity, storage networking, and the links that connect DCs to each other and to the outside world.
+A data centre (DC) network engineer designs and operates the network infrastructure inside data centres - the switching fabric, server connectivity, storage networking, and the links that connect DCs to each other and to the outside world.
 
 Key responsibilities include:
 - Designing spine-leaf fabric topologies
@@ -43,26 +43,26 @@ This path assumes solid foundation in IP networking and switching, then builds t
 
 See [learning-paths/datacentre-engineer.md](../../../learning-paths/datacentre-engineer.md) for the complete ordered module sequence.
 
-*(This learning path file is pending — see TASK.md item A2.)*
+*(This learning path file is pending - see TASK.md item A2.)*
 
 ## Proposed Stage Overview
 
-**Stage 1 — Foundation:**
+**Stage 1 - Foundation:**
 NW-001, IP-001, IP-002, SW-001, SW-002 (VLANs), RT-007 (BGP fundamentals)
 
-**Stage 2 — DC Design:**
+**Stage 2 - DC Design:**
 DC-001 (Spine-Leaf Design), FN-001 (Switching internals), FN-002 (Routing internals)
 
-**Stage 3 — Overlay:**
+**Stage 3 - Overlay:**
 DC-002 (VXLAN Fundamentals), CT-006 (EVPN), DC-004 (EVPN in DC)
 
-**Stage 4 — DC BGP:**
+**Stage 4 - DC BGP:**
 DC-003 (BGP in DC / RFC 7938), RT-008 (BGP Advanced)
 
-**Stage 5 — DCI & Storage:**
+**Stage 5 - DCI & Storage:**
 DC-005 (Data Centre Interconnect), DC-006 (Storage Networking Basics)
 
-**Stage 6 — Automation:**
+**Stage 6 - Automation:**
 AUTO-001 (Python), AUTO-002 (REST APIs), AUTO-004 (Ansible), AUTO-005 (Terraform)
 
 ## Call for Contributors

@@ -1,6 +1,6 @@
 ---
-id: RT-005
-title: "OSPF Advanced — Multi-Area, Redistribution & Filtering"
+module_id: RT-005
+title: "OSPF Advanced - Multi-Area, Redistribution & Filtering"
 description: "Multi-area OSPF design, LSA filtering, summarisation, virtual links, stub/NSSA areas, and route redistribution into and out of OSPF."
 version: "1.0.0"
 status: draft
@@ -25,19 +25,37 @@ created: 2026-04-19
 updated: 2026-04-19
 ---
 
-# RT-005 — OSPF Advanced — Multi-Area, Redistribution & Filtering
+# RT-005 - OSPF Advanced - Multi-Area, Redistribution & Filtering
+## Learning Objectives
 
+After completing this module you will be able to:
+
+1. Explain why multi-area OSPF is necessary at scale and how the area hierarchy works.
+2. Describe the role of ABR and ASBR and the LSA types they generate.
+3. Configure inter-area summarisation on an ABR.
+4. Explain stub areas and NSSA and when to use each.
+5. Configure route redistribution into OSPF with seed metrics.
+6. Use distribute-lists and prefix-lists to filter OSPF advertisements.
+7. Explain virtual links and when they are needed.
+
+---
+## Prerequisites
+
+- RT-004 - OSPF Fundamentals (LSA types 1–5, neighbor state machine, areas, cost)
+- IP-002 - Subnetting (understanding prefix ranges for summarisation)
+
+---
 ## The Problem
 
 A single OSPF area works for small networks. When the network grows to hundreds of routers, the Link State Database (LSDB) grows with it. Every router holds the full topology map. Every topology change triggers SPF recalculation on every router simultaneously. Convergence slows; memory consumption grows; CPU spikes.
 
 ### Step 1: Divide the topology into areas
 
-Group routers into areas. Each area runs SPF only for its own topology. Routers at the boundary between areas (**ABRs — Area Border Routers**) summarise the internal topology and advertise summary routes into other areas, rather than flooding full topology detail everywhere. Area 0 (the backbone) is the transit area — all inter-area traffic flows through it.
+Group routers into areas. Each area runs SPF only for its own topology. Routers at the boundary between areas (**ABRs - Area Border Routers**) summarise the internal topology and advertise summary routes into other areas, rather than flooding full topology detail everywhere. Area 0 (the backbone) is the transit area - all inter-area traffic flows through it.
 
 ### Step 2: Filter and summarise at the boundary
 
-Not every route from one area needs to be seen in precise detail by another area. The ABR can summarise ten /24 prefixes into one /20 summary — smaller LSDB, less SPF work, controlled topology information flow. A distribution point within an area can filter which routes are advertised or received using distribute-lists and prefix-lists.
+Not every route from one area needs to be seen in precise detail by another area. The ABR can summarise ten /24 prefixes into one /20 summary - smaller LSDB, less SPF work, controlled topology information flow. A distribution point within an area can filter which routes are advertised or received using distribute-lists and prefix-lists.
 
 ### Step 3: What about external routes?
 
@@ -55,35 +73,13 @@ OSPF runs inside one routing domain. But the network also uses EIGRP, static rou
 | Area that allows limited external routes | NSSA (Not-So-Stubby Area) |
 
 ---
-
-## Learning Objectives
-
-After completing this module you will be able to:
-
-1. Explain why multi-area OSPF is necessary at scale and how the area hierarchy works.
-2. Describe the role of ABR and ASBR and the LSA types they generate.
-3. Configure inter-area summarisation on an ABR.
-4. Explain stub areas and NSSA and when to use each.
-5. Configure route redistribution into OSPF with seed metrics.
-6. Use distribute-lists and prefix-lists to filter OSPF advertisements.
-7. Explain virtual links and when they are needed.
-
----
-
-## Prerequisites
-
-- RT-004 — OSPF Fundamentals (LSA types 1–5, neighbor state machine, areas, cost)
-- IP-002 — Subnetting (understanding prefix ranges for summarisation)
-
----
-
 ## Core Content
 
 ### Multi-Area OSPF Review
 
 Every OSPF router in an area maintains an identical LSDB for that area. SPF is run once per area per topology change. The area count controls SPF scope.
 
-**Area 0 (backbone):** All other areas must connect to it. Inter-area traffic flows through Area 0. ABRs connect non-backbone areas to Area 0 — they maintain separate LSDBs for each connected area.
+**Area 0 (backbone):** All other areas must connect to it. Inter-area traffic flows through Area 0. ABRs connect non-backbone areas to Area 0 - they maintain separate LSDBs for each connected area.
 
 **Hierarchy rule:** Non-backbone areas cannot connect to each other directly for inter-area routing. All inter-area routes must transit Area 0. If a non-backbone area cannot physically reach Area 0, a **virtual link** is used as a workaround.
 
@@ -110,10 +106,10 @@ This replaces multiple specific Type 3 LSAs with a single summary route. The sum
 
 **Benefits:**
 - Smaller LSDB in other areas.
-- Topology change in one area (flapping link) doesn't trigger SPF in all areas — ABR only updates the summary if the summary itself changes (if any component is reachable).
+- Topology change in one area (flapping link) doesn't trigger SPF in all areas - ABR only updates the summary if the summary itself changes (if any component is reachable).
 - Smaller routing tables in non-ABR routers.
 
-**Discard route:** When summarisation is configured, the ABR installs a null0 (discard) route for the summary prefix in its own routing table. This prevents routing loops if the specific routes are absent — packets matching the summary with no more-specific route are dropped (rather than forwarded based on a default route toward a loop).
+**Discard route:** When summarisation is configured, the ABR installs a null0 (discard) route for the summary prefix in its own routing table. This prevents routing loops if the specific routes are absent - packets matching the summary with no more-specific route are dropped (rather than forwarded based on a default route toward a loop).
 
 ### Stub Areas
 
@@ -127,7 +123,7 @@ A **stub area** does not receive Type 5 (External) LSAs. The ABR injects a defau
 | NSSA | Yes | No (Type 7 internally) | Optional |
 | Totally NSSA | Only default | No (Type 7 internally) | Yes |
 
-**Totally stubby (Cisco extension):** ABR doesn't send Type 3 LSAs either — only a default route. Routers have the smallest possible LSDB. Use in hub-spoke branch topologies where all traffic exits via the ABR.
+**Totally stubby (Cisco extension):** ABR doesn't send Type 3 LSAs either - only a default route. Routers have the smallest possible LSDB. Use in hub-spoke branch topologies where all traffic exits via the ABR.
 
 **NSSA:** A stub area that also has an ASBR (e.g., a branch site importing static routes from a CPE). The ASBR generates Type 7 LSAs locally. The ABR converts them to Type 5 when advertising into the backbone. Type 5 from the rest of the network is still blocked.
 
@@ -178,7 +174,6 @@ area <transit-area-id> virtual-link <remote-ABR-router-id>
 ```
 
 ---
-
 ## Vendor Implementations
 
 === "Cisco IOS-XE"
@@ -277,7 +272,6 @@ area <transit-area-id> virtual-link <remote-ABR-router-id>
     Full configuration reference: [https://www.arista.com/en/um-eos/eos-ospf](https://www.arista.com/en/um-eos/eos-ospf)
 
 ---
-
 ## Common Pitfalls
 
 1. **Forgetting `subnets` on Cisco redistribution.** Without `redistribute static subnets`, only classful routes are redistributed. All /25–/30 and other non-classful routes are silently omitted. Always include `subnets`.
@@ -286,12 +280,11 @@ area <transit-area-id> virtual-link <remote-ABR-router-id>
 
 3. **E2 metric type when multiple ASBRs import the same prefix.** With E2 (default), all routers in the domain see the same external metric regardless of which ASBR is closer. Traffic may not take the optimal path to the nearest ASBR. Use E1 when multiple ASBRs import the same external prefix.
 
-4. **Virtual link through a stub area.** Virtual links cannot traverse stub or NSSA areas — stub areas block certain LSA types that virtual links need. The transit area for a virtual link must be a normal OSPF area.
+4. **Virtual link through a stub area.** Virtual links cannot traverse stub or NSSA areas - stub areas block certain LSA types that virtual links need. The transit area for a virtual link must be a normal OSPF area.
 
-5. **ABR summarisation discard route.** When `area range` is configured, the ABR installs a null0 route for the summary. If a component route is withdrawn (e.g., a specific /24 goes down), the summary persists (other components still exist), but packets for the withdrawn /24 are blackholed at the ABR. This is correct behaviour — the ABR correctly aggregates and drops traffic for unreachable sub-prefixes within the summary range.
+5. **ABR summarisation discard route.** When `area range` is configured, the ABR installs a null0 route for the summary. If a component route is withdrawn (e.g., a specific /24 goes down), the summary persists (other components still exist), but packets for the withdrawn /24 are blackholed at the ABR. This is correct behaviour - the ABR correctly aggregates and drops traffic for unreachable sub-prefixes within the summary range.
 
 ---
-
 ## Practice Problems
 
 **Q1.** Area 1 has 50 routers with prefixes in the 10.1.0.0/16 range. Without summarisation, how many Type 3 LSAs does Area 2 receive for Area 1 routes? With summarisation using `area 1 range 10.1.0.0/16`?
@@ -307,33 +300,30 @@ area <transit-area-id> virtual-link <remote-ABR-router-id>
 **Q3.** You redistribute EIGRP into OSPF with metric-type 2 (E2). Two ASBRs (A1 and A2) both redistribute the same prefix 192.168.50.0/24. From a router deep in the network, which ASBR is preferred?
 
 ??? answer
-    With E2, the metric is the external seed metric only — OSPF internal cost to reach the ASBR is not added. Both ASBRs would have the same external metric (E2 = seed metric only). The router uses the lowest cost to reach the ASBR router ID as tiebreaker — effectively choosing the topologically closer ASBR. But if both have the same internal cost to reach, it becomes a tie broken by router ID. Using E1 would explicitly prefer the closer ASBR.
+    With E2, the metric is the external seed metric only - OSPF internal cost to reach the ASBR is not added. Both ASBRs would have the same external metric (E2 = seed metric only). The router uses the lowest cost to reach the ASBR router ID as tiebreaker - effectively choosing the topologically closer ASBR. But if both have the same internal cost to reach, it becomes a tie broken by router ID. Using E1 would explicitly prefer the closer ASBR.
 
 ---
-
 ## Summary & Key Takeaways
 
-- Multi-area OSPF limits SPF scope — each area runs SPF independently; ABRs summarise between areas.
+- Multi-area OSPF limits SPF scope - each area runs SPF independently; ABRs summarise between areas.
 - **Area 0** is the backbone; all inter-area routes transit it.
 - **ABRs** generate Type 3 LSAs; **ASBRs** generate Type 5 LSAs.
 - Inter-area summarisation (`area range`) reduces LSDB size and prevents micro-failures from rippling across areas.
 - **Stub areas** block Type 5 LSAs; the ABR injects a default route.
-- **Totally stubby** (Cisco) also blocks Type 3 LSAs — only a default route enters.
+- **Totally stubby** (Cisco) also blocks Type 3 LSAs - only a default route enters.
 - **NSSA** allows a local ASBR but blocks inbound Type 5; Type 7 LSAs are converted to Type 5 at the ABR.
 - Redistribution requires explicit seed metrics and `subnets` keyword (Cisco).
 - E1 metric type prefers the closer ASBR; E2 ignores internal cost to the ASBR.
-- Virtual links extend Area 0 through transit areas — use as a last resort.
+- Virtual links extend Area 0 through transit areas - use as a last resort.
 
 ---
-
 ## Where to Next
 
-- **RT-007 — BGP Fundamentals:** BGP and OSPF redistribution is common at ISP boundaries.
-- **RT-009 — Route Redistribution & Policy:** Mutual redistribution between OSPF and other protocols.
-- **CT-001 — MPLS Fundamentals:** OSPF is typically the IGP underpinning MPLS label distribution.
+- **RT-007 - BGP Fundamentals:** BGP and OSPF redistribution is common at ISP boundaries.
+- **RT-009 - Route Redistribution & Policy:** Mutual redistribution between OSPF and other protocols.
+- **CT-001 - MPLS Fundamentals:** OSPF is typically the IGP underpinning MPLS label distribution.
 
 ---
-
 ## Standards & Certifications
 
 | Standard / Cert | Relevance |
@@ -345,15 +335,13 @@ area <transit-area-id> virtual-link <remote-ABR-router-id>
 | Juniper JNCIP | OSPF advanced configuration |
 
 ---
-
 ## References
 
-- RFC 2328 — OSPF Version 2. [https://www.rfc-editor.org/rfc/rfc2328](https://www.rfc-editor.org/rfc/rfc2328)
-- RFC 5340 — OSPF for IPv6. [https://www.rfc-editor.org/rfc/rfc5340](https://www.rfc-editor.org/rfc/rfc5340)
-- RFC 3101 — The OSPF Not-So-Stubby Area (NSSA) Option. [https://www.rfc-editor.org/rfc/rfc3101](https://www.rfc-editor.org/rfc/rfc3101)
+- RFC 2328 - OSPF Version 2. [https://www.rfc-editor.org/rfc/rfc2328](https://www.rfc-editor.org/rfc/rfc2328)
+- RFC 5340 - OSPF for IPv6. [https://www.rfc-editor.org/rfc/rfc5340](https://www.rfc-editor.org/rfc/rfc5340)
+- RFC 3101 - The OSPF Not-So-Stubby Area (NSSA) Option. [https://www.rfc-editor.org/rfc/rfc3101](https://www.rfc-editor.org/rfc/rfc3101)
 
 ---
-
 ## Attribution & Licensing
 
 - Module content: original draft, AI-assisted (Claude Sonnet 4.6), 2026-04-19.
@@ -385,6 +373,6 @@ area <transit-area-id> virtual-link <remote-ABR-router-id>
 
 | Module ID | Title | Relationship |
 |---|---|---|
-| RT-004 | OSPF Fundamentals | Prerequisite — single-area OSPF, LSA types 1–5, DR/BDR |
+| RT-004 | OSPF Fundamentals | Prerequisite - single-area OSPF, LSA types 1–5, DR/BDR |
 | IP-002 | IP Subnetting | Prefix ranges for summarisation |
 <!-- XREF-END -->

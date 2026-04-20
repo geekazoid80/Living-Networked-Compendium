@@ -1,5 +1,5 @@
 ---
-title: "Applied: [Path Name] — Overview"
+title: "Applied: [Path Name] - Overview"
 module_id: "XYZ-000"
 domain: "applied/_new-path-template"
 difficulty: "intermediate"

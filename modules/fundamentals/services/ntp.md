@@ -1,6 +1,6 @@
 ---
-id: SV-004
-title: "NTP — Network Time Protocol"
+module_id: SV-004
+title: "NTP - Network Time Protocol"
 description: "How NTP synchronises clocks across network devices using a stratum hierarchy, and why accurate time is critical for network operations."
 version: "1.0.0"
 status: draft
@@ -23,15 +23,32 @@ created: 2026-04-19
 updated: 2026-04-19
 ---
 
-# SV-004 — NTP — Network Time Protocol
+# SV-004 - NTP - Network Time Protocol
+## Learning Objectives
 
+After completing this module you will be able to:
+
+1. Explain why accurate time matters for network operations and security.
+2. Describe the NTP stratum hierarchy and how accuracy degrades with each hop.
+3. Distinguish NTP client mode, server mode, and peer mode.
+4. Configure an NTP client and NTP server on router platforms.
+5. Verify NTP synchronisation status.
+6. Explain PTP/IEEE 1588 and when it is needed over NTP.
+
+---
+## Prerequisites
+
+- IP-001 - IP Addressing Fundamentals
+- RT-001 - Routing Fundamentals (reachability to NTP servers)
+
+---
 ## The Problem
 
-A router logs an event at 03:47:12 and a firewall logs a related event at 14:23:05. These timestamps are meaningless for correlation — the clocks drifted. Security incidents, routing protocol adjacency timers, Kerberos authentication tickets, log correlation, and certificate validation all require clocks to agree within seconds. Hardware clocks drift. Without synchronisation, every device tells its own time.
+A router logs an event at 03:47:12 and a firewall logs a related event at 14:23:05. These timestamps are meaningless for correlation - the clocks drifted. Security incidents, routing protocol adjacency timers, Kerberos authentication tickets, log correlation, and certificate validation all require clocks to agree within seconds. Hardware clocks drift. Without synchronisation, every device tells its own time.
 
 ### Step 1: One device knows the correct time
 
-An authoritative time source — a GPS receiver, an atomic clock, a radio clock — provides the reference time. Every other device sets its clock from this source.
+An authoritative time source - a GPS receiver, an atomic clock, a radio clock - provides the reference time. Every other device sets its clock from this source.
 
 ### Step 2: Hierarchy for scale
 
@@ -39,7 +56,7 @@ One reference clock can't serve millions of devices directly. A **stratum hierar
 
 ### Step 3: Continuous adjustment, not one-time sync
 
-Clocks drift continuously. NTP doesn't just set the clock once — it periodically re-queries the server and applies **slew corrections** (gradual adjustments) to keep the clock accurate without disrupting time-sensitive applications. Only if the clock is very far off does NTP **step** (jump) the clock.
+Clocks drift continuously. NTP doesn't just set the clock once - it periodically re-queries the server and applies **slew corrections** (gradual adjustments) to keep the clock accurate without disrupting time-sensitive applications. Only if the clock is very far off does NTP **step** (jump) the clock.
 
 ### What You Just Built
 
@@ -53,37 +70,16 @@ Clocks drift continuously. NTP doesn't just set the clock once — it periodical
 | Client that both receives and provides time | NTP peer |
 
 ---
-
-## Learning Objectives
-
-After completing this module you will be able to:
-
-1. Explain why accurate time matters for network operations and security.
-2. Describe the NTP stratum hierarchy and how accuracy degrades with each hop.
-3. Distinguish NTP client mode, server mode, and peer mode.
-4. Configure an NTP client and NTP server on router platforms.
-5. Verify NTP synchronisation status.
-6. Explain PTP/IEEE 1588 and when it is needed over NTP.
-
----
-
-## Prerequisites
-
-- IP-001 — IP Addressing Fundamentals
-- RT-001 — Routing Fundamentals (reachability to NTP servers)
-
----
-
 ## Core Content
 
 ### Why Time Matters
 
 | Use case | Time requirement |
 |---|---|
-| Log correlation (syslog, SNMP) | Seconds — events must be cross-referenced across devices |
-| Kerberos authentication | ±5 minutes — tickets rejected if clocks differ more |
-| TLS/X.509 certificates | Days — valid-from/valid-to dates checked against current time |
-| OSPF/BGP hold timers | Seconds — not clock-based, but protocol state may log with timestamps |
+| Log correlation (syslog, SNMP) | Seconds - events must be cross-referenced across devices |
+| Kerberos authentication | ±5 minutes - tickets rejected if clocks differ more |
+| TLS/X.509 certificates | Days - valid-from/valid-to dates checked against current time |
+| OSPF/BGP hold timers | Seconds - not clock-based, but protocol state may log with timestamps |
 | TACACS+/RADIUS accounting | Accurate timestamps in accounting records for billing/compliance |
 | Forensics and incident response | Sub-second correlation across dozens of devices |
 | RSVP-TE / circuit provisioning | Synchronised activation windows |
@@ -100,10 +96,10 @@ After completing this module you will be able to:
 [NTP stratum 3 client]  ← e.g., your routers and switches
 ```
 
-- Stratum 0: Physical reference (GPS, cesium clock, CDMA). Not a network entity — it's the input to a stratum 1 server.
+- Stratum 0: Physical reference (GPS, cesium clock, CDMA). Not a network entity - it's the input to a stratum 1 server.
 - Stratum 1: The first network-accessible tier. Examples: time.google.com, time.cloudflare.com, pool.ntp.org.
 - Stratum 2–15: Synchronised from the layer above. Error accumulates slightly per level; stratum 3–4 is sufficient for enterprise networking.
-- Stratum 16: Unsynchronised — clock is not reliable.
+- Stratum 16: Unsynchronised - clock is not reliable.
 
 ### NTP Modes
 
@@ -111,30 +107,29 @@ After completing this module you will be able to:
 |---|---|
 | **Client** | Queries one or more servers, adjusts its own clock. Does not serve time. |
 | **Server** | Receives queries from clients, provides time. Must be synchronised itself. |
-| **Peer** | Two devices mutually synchronise — used between distribution and core devices for resilience. |
+| **Peer** | Two devices mutually synchronise - used between distribution and core devices for resilience. |
 | **Broadcast/Multicast** | Server sends periodic time announcements; clients apply without querying. Less accurate. |
 
 ### NTP Authentication
 
-NTP traffic can be spoofed — a fake NTP server could cause a device to adopt incorrect time, breaking Kerberos, certificates, and logging. **NTP authentication** uses a shared key (MD5 or SHA-1) to verify that responses come from a trusted server.
+NTP traffic can be spoofed - a fake NTP server could cause a device to adopt incorrect time, breaking Kerberos, certificates, and logging. **NTP authentication** uses a shared key (MD5 or SHA-1) to verify that responses come from a trusted server.
 
 NTP version 4 (RFC 5905, current standard) supports authentication and IPv6.
 
-### PTP / IEEE 1588 — When NTP Is Not Enough
+### PTP / IEEE 1588 - When NTP Is Not Enough
 
 NTP achieves accuracy of **1–50 milliseconds** over the internet, **< 1 ms** on a LAN. This is sufficient for most network operations.
 
 **PTP (Precision Time Protocol / IEEE 1588)** achieves **sub-microsecond accuracy** by using hardware timestamping at the physical layer. Required for:
 
 - Financial trading (sub-millisecond regulatory requirements).
-- Mobile networks (5G RAN synchronisation — requires ±1.5 µs).
+- Mobile networks (5G RAN synchronisation - requires ±1.5 µs).
 - Industrial control systems, power grid synchronisation (SyncE + PTP).
 - Telecom carrier nodes where ITU-T G.8265/G.8275 standards apply.
 
 PTP uses a **Grandmaster Clock** (analogous to NTP's stratum 1) and requires network devices to support **transparent clock** or **boundary clock** modes for accurate hardware timestamping at each hop.
 
 ---
-
 ## Vendor Implementations
 
 === "Cisco IOS-XE"
@@ -204,27 +199,25 @@ PTP uses a **Grandmaster Clock** (analogous to NTP's stratum 1) and requires net
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/NTP](https://help.mikrotik.com/docs/display/ROS/NTP)
 
 ---
-
 ## Common Pitfalls
 
-1. **`ntp master` without a real upstream reference.** On Cisco, `ntp master` makes the device act as a stratum server for downstream clients even if it has no valid time source. Used in isolation, it lets the device's drifting hardware clock become the authoritative time source for the network — silently degrading accuracy. Only use `ntp master` with a real upstream NTP reference.
+1. **`ntp master` without a real upstream reference.** On Cisco, `ntp master` makes the device act as a stratum server for downstream clients even if it has no valid time source. Used in isolation, it lets the device's drifting hardware clock become the authoritative time source for the network - silently degrading accuracy. Only use `ntp master` with a real upstream NTP reference.
 
 2. **NTP blocked by firewall.** NTP uses **UDP port 123**. If the ACL or firewall doesn't permit UDP 123 to NTP servers, clients will never synchronise. Check with `debug ntp events` or verify `show ntp status` shows `unsynchronised`.
 
-3. **Not configuring NTP authentication.** An attacker who can insert NTP responses can shift a device's clock by hours — defeating Kerberos authentication and invalidating log timestamps. Always enable NTP authentication with a shared key on production devices.
+3. **Not configuring NTP authentication.** An attacker who can insert NTP responses can shift a device's clock by hours - defeating Kerberos authentication and invalidating log timestamps. Always enable NTP authentication with a shared key on production devices.
 
 4. **All devices pointing to external NTP servers.** In large networks, all devices querying external public NTP servers creates unnecessary external traffic and adds latency. Configure 2–3 internal NTP servers (stratum 2) that synchronise from external sources, then point all devices to the internal servers.
 
 5. **Clock jumping and syslog correlation errors.** A sudden clock step (jump) can cause syslog timestamps to go backward or forward, breaking log correlation tools. NTP uses **slew** (gradual adjustment at ≤0.5 ms/s) for small corrections and only steps for large offsets. Verify that your NTP implementation is slewing, not stepping, under normal operation.
 
 ---
-
 ## Practice Problems
 
 **Q1.** A device shows `stratum 16` in `show ntp status`. What does this mean and how do you fix it?
 
 ??? answer
-    Stratum 16 means the device is not synchronised — it has no valid time reference. The device either can't reach its configured NTP servers (check connectivity and UDP 123 firewall rules) or the servers haven't been configured. Fix by verifying reachability to NTP servers and checking `show ntp associations` for the association state.
+    Stratum 16 means the device is not synchronised - it has no valid time reference. The device either can't reach its configured NTP servers (check connectivity and UDP 123 firewall rules) or the servers haven't been configured. Fix by verifying reachability to NTP servers and checking `show ntp associations` for the association state.
 
 **Q2.** Your Kerberos authentication is failing intermittently. What NTP-related issue could cause this?
 
@@ -234,10 +227,9 @@ PTP uses a **Grandmaster Clock** (analogous to NTP's stratum 1) and requires net
 **Q3.** What is the difference between NTP slew and NTP step?
 
 ??? answer
-    NTP **slew** gradually adjusts the clock rate (up to ±0.5 ms per second) to bring it into sync without a sudden jump — suitable for small offsets. NTP **step** jumps the clock immediately — used when the offset is too large for slew (typically > 128 ms in many implementations). Stepping can disrupt time-sensitive processes but is necessary when clocks are far out of sync.
+    NTP **slew** gradually adjusts the clock rate (up to ±0.5 ms per second) to bring it into sync without a sudden jump - suitable for small offsets. NTP **step** jumps the clock immediately - used when the offset is too large for slew (typically > 128 ms in many implementations). Stepping can disrupt time-sensitive processes but is necessary when clocks are far out of sync.
 
 ---
-
 ## Summary & Key Takeaways
 
 - Accurate time is critical for log correlation, Kerberos, certificate validation, billing, and forensics.
@@ -250,14 +242,12 @@ PTP uses a **Grandmaster Clock** (analogous to NTP's stratum 1) and requires net
 - Run 2–3 internal NTP servers; point all devices to them rather than to external sources directly.
 
 ---
-
 ## Where to Next
 
-- **SV-005 — SNMP & Syslog:** Network monitoring — both rely on accurate timestamps.
-- **SEC-004 — AAA (TACACS+ & RADIUS):** Kerberos authentication requires synchronised clocks.
+- **SV-005 - SNMP & Syslog:** Network monitoring - both rely on accurate timestamps.
+- **SEC-004 - AAA (TACACS+ & RADIUS):** Kerberos authentication requires synchronised clocks.
 
 ---
-
 ## Standards & Certifications
 
 | Standard / Cert | Relevance |
@@ -269,13 +259,11 @@ PTP uses a **Grandmaster Clock** (analogous to NTP's stratum 1) and requires net
 | CompTIA Network+ | NTP concepts, time synchronisation importance |
 
 ---
-
 ## References
 
-- RFC 5905 — Network Time Protocol Version 4: Protocol and Algorithms Specification. [https://www.rfc-editor.org/rfc/rfc5905](https://www.rfc-editor.org/rfc/rfc5905)
+- RFC 5905 - Network Time Protocol Version 4: Protocol and Algorithms Specification. [https://www.rfc-editor.org/rfc/rfc5905](https://www.rfc-editor.org/rfc/rfc5905)
 
 ---
-
 ## Attribution & Licensing
 
 - Module content: original draft, AI-assisted (Claude Sonnet 4.6), 2026-04-19.
@@ -290,7 +278,7 @@ PTP uses a **Grandmaster Clock** (analogous to NTP's stratum 1) and requires net
 | Module ID | Title | Relationship |
 |---|---|---|
 | SV-005 | SNMP & Syslog | Accurate timestamps depend on NTP |
-| SEC-004 | AAA — TACACS+ & RADIUS | Kerberos requires NTP for ticket validation |
+| SEC-004 | AAA - TACACS+ & RADIUS | Kerberos requires NTP for ticket validation |
 
 ### Modules This Module References
 

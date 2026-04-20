@@ -11,16 +11,35 @@ maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
 tags: ["ospf", "link-state", "lsa", "spf", "dijkstra", "area", "dr-bdr", "neighbor", "adjacency", "cost", "ospfv3"]
-cert_alignment: "CCNA 200-301 — 3.4 | JNCIA-Junos JN0-103 | Nokia NRS I | Huawei HCIA-Datacom"
+cert_alignment: "CCNA 200-301 - 3.4 | JNCIA-Junos JN0-103 | Nokia NRS I | Huawei HCIA-Datacom"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "Huawei VRP", "MikroTik RouterOS"]
 language: "en"
 ---
+## Learning Objectives
 
+By the end of this module, you will be able to:
+
+1. **Explain** how link-state routing differs from distance-vector and why it solves the counting-to-infinity problem
+2. **Describe** the OSPF neighbour and adjacency formation process - the steps from "hello received" to "full adjacency"
+3. **Read** an OSPF neighbour table and identify the state of each relationship
+4. **Explain** OSPF cost and how it determines the best path
+5. **Describe** the role of DR and BDR on multi-access segments and how they are elected
+6. **Identify** the purpose of OSPF areas and explain why Area 0 is required
+
+---
+## Prerequisites
+
+- [Routing Fundamentals](routing-fundamentals.md) (`RT-001`) - routing table, metric, AD, RIB vs FIB
+- [Static Routing](static-routing.md) (`RT-002`) - manual routing context; what OSPF automates
+- [RIP & Distance-Vector](rip-distance-vector.md) (`RT-003`) - the problems OSPF was designed to solve
+- [Network Topologies](../networking/network-topologies.md) (`NW-002`) - broadcast domains; multi-access vs point-to-point links
+
+---
 ## The Problem
 
-Ten routers. Each knows its directly connected links. A link between Router A and Router B fails. With RIP (distance-vector), the routers slowly count to infinity — several minutes of loops and blackholes before the network stabilises. That's unacceptable.
+Ten routers. Each knows its directly connected links. A link between Router A and Router B fails. With RIP (distance-vector), the routers slowly count to infinity - several minutes of loops and blackholes before the network stabilises. That's unacceptable.
 
-The problem with distance-vector is fundamental: each router only knows distances reported by neighbours. It has no picture of the actual topology — where the links are, what they connect, which ones are healthy. When something changes, it can only react to what neighbours tell it, and neighbours might be wrong.
+The problem with distance-vector is fundamental: each router only knows distances reported by neighbours. It has no picture of the actual topology - where the links are, what they connect, which ones are healthy. When something changes, it can only react to what neighbours tell it, and neighbours might be wrong.
 
 What if every router had a complete, accurate map of the entire network?
 
@@ -28,33 +47,33 @@ What if every router had a complete, accurate map of the entire network?
 
 Instead of broadcasting "I can reach X in N hops," each router broadcasts something different: "Here is what I directly know. I am connected to Router B via a link that costs 10. I am connected to Router C via a link that costs 1."
 
-This information — a router's identity, its links, and their costs — is called a **Link State Advertisement (LSA)**. Every router generates its own LSA and floods it across the entire network. Every other router stores every LSA it receives in a **Link State Database (LSDB)**.
+This information - a router's identity, its links, and their costs - is called a **Link State Advertisement (LSA)**. Every router generates its own LSA and floods it across the entire network. Every other router stores every LSA it receives in a **Link State Database (LSDB)**.
 
 When every router has every other router's LSA, every router has an identical, complete picture of the entire network topology.
 
 ### Step 2: Calculate the best path yourself
 
-With a complete map, each router can now calculate the best path to every destination independently — it doesn't need to trust neighbours' distance claims. It runs **Dijkstra's Shortest Path First (SPF) algorithm** on its local copy of the LSDB. This is pure mathematics: given the graph of links and costs, find the minimum-cost path from this router to every other router.
+With a complete map, each router can now calculate the best path to every destination independently - it doesn't need to trust neighbours' distance claims. It runs **Dijkstra's Shortest Path First (SPF) algorithm** on its local copy of the LSDB. This is pure mathematics: given the graph of links and costs, find the minimum-cost path from this router to every other router.
 
 No counting-to-infinity. No dependency on what neighbours claim. Each router derives its own routing table from first principles, using the shared map.
 
-### Step 3: But the map gets large — use areas
+### Step 3: But the map gets large - use areas
 
-In a network with 500 routers, every router stores 500 LSAs and runs SPF over a 500-node graph. That's expensive — every link change causes every router to rerun SPF. And LSA flooding fills the network with chatter.
+In a network with 500 routers, every router stores 500 LSAs and runs SPF over a 500-node graph. That's expensive - every link change causes every router to rerun SPF. And LSA flooding fills the network with chatter.
 
-The solution: divide the network into **areas**. Routers within an area share full LSA detail with each other. Routers between areas exchange **summary routes** — compressed information. A router at the boundary of two areas (an **Area Border Router** or ABR) translates between the two.
+The solution: divide the network into **areas**. Routers within an area share full LSA detail with each other. Routers between areas exchange **summary routes** - compressed information. A router at the boundary of two areas (an **Area Border Router** or ABR) translates between the two.
 
 All areas must connect to **Area 0** (the backbone area). Area 0 is the spine; all other areas hang off it. This hierarchy reduces SPF complexity to a manageable level per area while still allowing full connectivity.
 
 ### Step 4: Not everyone needs a full adjacency
 
-On a multi-access network (an Ethernet segment) with 10 routers, each router could form an adjacency with every other — resulting in 45 adjacencies and 45 × 2 = 90 LSA exchanges. This doesn't scale. 
+On a multi-access network (an Ethernet segment) with 10 routers, each router could form an adjacency with every other, resulting in 45 adjacencies and 45 × 2 = 90 LSA exchanges. That O(n²) growth makes the approach unworkable on any segment with more than a few routers.
 
 The solution: elect a **Designated Router (DR)** and a **Backup Designated Router (BDR)**. Every other router (called a DROther) forms a full adjacency only with the DR and BDR. The DR collects all link-state information and redistributes to all. LSA flood count drops from O(n²) to O(n). The BDR monitors the DR and takes over instantly if it fails.
 
 ### What You Just Built
 
-OSPF — Open Shortest Path First. A link-state routing protocol where every router floods its LSA to the entire area, stores a complete topology map (LSDB), and independently calculates the best path using Dijkstra's SPF algorithm.
+OSPF - Open Shortest Path First. A link-state routing protocol where every router floods its LSA to the entire area, stores a complete topology map (LSDB), and independently calculates the best path using Dijkstra's SPF algorithm.
 
 | Scenario element | Technical term |
 |---|---|
@@ -67,50 +86,27 @@ OSPF — Open Shortest Path First. A link-state routing protocol where every rou
 | Elected router that controls LSA flooding on a segment | Designated Router (DR) |
 
 ---
-
-## Learning Objectives
-
-By the end of this module, you will be able to:
-
-1. **Explain** how link-state routing differs from distance-vector and why it solves the counting-to-infinity problem
-2. **Describe** the OSPF neighbour and adjacency formation process — the steps from "hello received" to "full adjacency"
-3. **Read** an OSPF neighbour table and identify the state of each relationship
-4. **Explain** OSPF cost and how it determines the best path
-5. **Describe** the role of DR and BDR on multi-access segments and how they are elected
-6. **Identify** the purpose of OSPF areas and explain why Area 0 is required
-
----
-
-## Prerequisites
-
-- [Routing Fundamentals](routing-fundamentals.md) (`RT-001`) — routing table, metric, AD, RIB vs FIB
-- [Static Routing](static-routing.md) (`RT-002`) — manual routing context; what OSPF automates
-- [RIP & Distance-Vector](rip-distance-vector.md) (`RT-003`) — the problems OSPF was designed to solve
-- [Network Topologies](../networking/network-topologies.md) (`NW-002`) — broadcast domains; multi-access vs point-to-point links
-
----
-
 ## Core Content
 
 ### Link State vs Distance Vector
 
 | Property | Distance-Vector (RIP) | Link-State (OSPF) |
 |---|---|---|
-| What is shared | Distance table (routing table) | LSAs — direct topology facts |
-| Who knows the full topology | Nobody — only local distances | Every router — LSDB is complete |
-| Path calculation | Neighbour's claim → add 1 → trust it | SPF on local full map — no trust needed |
-| Routing loops | Possible; counting-to-infinity | Not possible — full map prevents loops |
+| What is shared | Distance table (routing table) | LSAs - direct topology facts |
+| Who knows the full topology | Nobody - only local distances | Every router - LSDB is complete |
+| Path calculation | Neighbour's claim → add 1 → trust it | SPF on local full map - no trust needed |
+| Routing loops | Possible; counting-to-infinity | Not possible - full map prevents loops |
 | Convergence time | Minutes (periodic updates) | Seconds (event-triggered flooding) |
-| Scale | Limited — hop count max 15 | Large networks — areas allow scaling |
-| CPU/memory cost | Low | Higher — SPF computation + LSDB storage |
+| Scale | Limited - hop count max 15 | Large networks - areas allow scaling |
+| CPU/memory cost | Low | Higher - SPF computation + LSDB storage |
 
-The key insight: link-state is more complex and heavier, but it **cannot count to infinity** because no router trusts a neighbour's distance claim — it derives paths itself from the shared map.
+The key insight: link-state is more complex and heavier, but it **cannot count to infinity** because no router trusts a neighbour's distance claim - it derives paths itself from the shared map.
 
 ### OSPF Neighbor and Adjacency Formation
 
-Before exchanging LSAs, OSPF routers must become **neighbours** and then form a **full adjacency**. This happens through a state machine — a sequence of states from first contact to full database synchronisation.
+Before exchanging LSAs, OSPF routers must become **neighbours** and then form a **full adjacency**. This happens through a state machine - a sequence of states from first contact to full database synchronisation.
 
-**OSPF Hello packets** — the first contact mechanism:
+**OSPF Hello packets** - the first contact mechanism:
 - Sent every `hello-interval` seconds (default: 10s on point-to-point, 10s on broadcast, 30s on NBMA)
 - Contains: router ID, area ID, hello/dead intervals, authentication, DR/BDR, neighbour list
 - Received on `224.0.0.5` (all OSPF routers multicast)
@@ -123,22 +119,22 @@ Before exchanging LSAs, OSPF routers must become **neighbours** and then form a 
 - Stub area flags
 - MTU (on some platforms/IOS versions)
 
-**OSPF State Machine — from zero to full:**
+**OSPF State Machine - from zero to full:**
 
 | State | What it means |
 |---|---|
 | **Down** | No hellos received from this neighbour |
 | **Init** | Hello received, but our Router ID is not yet in their neighbour list |
-| **2-Way** | Our Router ID appears in their hello — bidirectional communication confirmed. DROther-DROther stops here |
+| **2-Way** | Our Router ID appears in their hello - bidirectional communication confirmed. DROther-DROther stops here |
 | **ExStart** | Negotiate who is Master/Slave for DBD exchange; establish sequence numbers |
-| **Exchange** | Exchange Database Description (DBD) packets — summaries of LSDB contents |
+| **Exchange** | Exchange Database Description (DBD) packets - summaries of LSDB contents |
 | **Loading** | Send Link State Requests (LSR) for LSAs the neighbour has that we don't; receive Link State Updates (LSU) |
 | **Full** | LSDB is synchronised; routing table can be computed |
 
 **On broadcast/Ethernet segments:**
 - DROther routers reach **Full** only with DR and BDR
 - DROther–DROther pairs stop at **2-Way**
-- This is correct and expected — not a problem
+- This is correct and expected - not a problem
 
 ```text
 Neighbour table example (Cisco):
@@ -152,7 +148,7 @@ Neighbor ID  Pri  State      Dead Time  Address       Interface
 
 ### OSPF Cost
 
-OSPF uses **cost** as its metric. Lower cost = better path. Cost is **additive** — the total cost of a path is the sum of costs of all outgoing interfaces along the path.
+OSPF uses **cost** as its metric. Lower cost = better path. Cost is **additive** - the total cost of a path is the sum of costs of all outgoing interfaces along the path.
 
 **Cost formula (Cisco default):**
 ```text
@@ -167,7 +163,7 @@ FastEthernet      100 Mbps   100M ÷ 100M  = 1
 T1/E1             1.544 Mbps 100M ÷ 1.544M ≈ 64
 ```
 
-**Problem:** The default reference bandwidth (100 Mbps) was designed in the 1990s. With the same formula, GigabitEthernet, 10GE, and 100GE all calculate to cost 1 — indistinguishable. OSPF cannot prefer a 100GE path over a 1GE path if both cost 1.
+**Problem:** The default reference bandwidth (100 Mbps) was designed in the 1990s. With the same formula, GigabitEthernet, 10GE, and 100GE all calculate to cost 1 - indistinguishable. OSPF cannot prefer a 100GE path over a 1GE path if both cost 1.
 
 **Fix:** Set the reference bandwidth to something larger than your fastest link:
 ```text
@@ -175,7 +171,7 @@ auto-cost reference-bandwidth 100000    (Cisco — sets reference to 100 Gbps)
 ```
 This must be configured consistently on ALL routers in the OSPF domain, or costs will be asymmetric and routing will be unpredictable.
 
-??? supplementary "OSPF Cost — Manual Override and Policy"
+??? supplementary "OSPF Cost - Manual Override and Policy"
     Cost can also be set manually per interface, overriding the formula:
     ```cisco-ios
     interface GigabitEthernet0/0
@@ -186,7 +182,7 @@ This must be configured consistently on ALL routers in the OSPF domain, or costs
     - The formula produces equal costs across unequal links (bandwidth ties)
     - You need to influence inbound traffic from remote OSPF neighbours (requires changing cost on the remote side)
 
-    Junos and Nokia set cost via `metric` under the routing protocol configuration, not the interface, by default — though interface-level settings are also possible.
+    Junos and Nokia set cost via `metric` under the routing protocol configuration, not the interface, by default - though interface-level settings are also possible.
 
 ### Designated Router (DR) and Backup Designated Router (BDR)
 
@@ -198,14 +194,14 @@ On any **multi-access network** (broadcast Ethernet, Frame Relay), OSPF elects a
 
 **With DR/BDR:**
 - All routers form Full adjacency with DR and BDR only
-- DROthers form 2-Way with each other — no exchange of LSAs between DROthers directly
+- DROthers form 2-Way with each other - no exchange of LSAs between DROthers directly
 - DR redistributes LSAs to all (`224.0.0.5`) after receiving them
 - 10 routers → 9 adjacencies to DR + 9 to BDR = 18 total (vs 45)
 
 **DR/BDR election:**
 1. Highest OSPF **priority** wins (0–255; default = 1; priority 0 = ineligible)
-2. Tie-break: highest **Router ID** (the OSPF Router ID — typically highest loopback IP or manually set)
-3. Election is **non-preemptive** — once elected, the DR keeps its role until it fails or OSPF restarts; a higher-priority router that comes up later does not displace the current DR
+2. Tie-break: highest **Router ID** (the OSPF Router ID - typically highest loopback IP or manually set)
+3. Election is **non-preemptive** - once elected, the DR keeps its role until it fails or OSPF restarts; a higher-priority router that comes up later does not displace the current DR
 
 ```text
 R1# show ip ospf interface GigabitEthernet0/0
@@ -220,7 +216,7 @@ GigabitEthernet0/0 is up, line protocol is up
   Neighbor Count is 2, Adjacent neighbor count is 2
 ```
 
-**On point-to-point links** (serial, PPP, MPLS tunnels): no DR/BDR election — both routers form Full adjacency directly.
+**On point-to-point links** (serial, PPP, MPLS tunnels): no DR/BDR election - both routers form Full adjacency directly.
 
 ### OSPF Areas
 
@@ -238,13 +234,13 @@ OSPF uses a **two-level hierarchy** to scale:
                └────────────────┘   └─────────────────┘
 ```
 
-- **Area 0** is mandatory — the backbone. All non-backbone areas must connect to Area 0.
+- **Area 0** is mandatory - the backbone. All non-backbone areas must connect to Area 0.
 - **Area Border Routers (ABRs)** sit at the boundary between areas. They have a full LSDB for each area they belong to. They generate **Type 3 LSAs** (summary LSAs) advertising networks from one area into another.
 - Routers **within an area** have full LSA detail for all routers in their area.
-- Routers in **different areas** only see summary routes (prefix + cost) for other areas — not the full topology detail.
+- Routers in **different areas** only see summary routes (prefix + cost) for other areas - not the full topology detail.
 
 **Why all areas must connect to Area 0:**
-OSPF guarantees loop-free routing because within a single area, every router has the complete topology. Between areas, routing is based on distance-vector-like summary information — which could theoretically loop if areas were connected in a ring. Forcing all areas through Area 0 prevents inter-area loops by ensuring all inter-area traffic passes through a common spine.
+OSPF guarantees loop-free routing because within a single area, every router has the complete topology. Between areas, routing is based on distance-vector-like summary information - which could theoretically loop if areas were connected in a ring. Forcing all areas through Area 0 prevents inter-area loops by ensuring all inter-area traffic passes through a common spine.
 
 **LSA Types:**
 
@@ -261,7 +257,7 @@ For CCNA/NRS I level: understand Type 1, 2, 3, and 5. Advanced area types (stub,
 
 ### OSPF Router ID
 
-Every OSPF router has a **Router ID (RID)** — a 32-bit value written in dotted-decimal like an IPv4 address, but it is an identifier, not a routable address.
+Every OSPF router has a **Router ID (RID)** - a 32-bit value written in dotted-decimal like an IPv4 address, but it is an identifier, not a routable address.
 
 **RID selection order (Cisco):**
 1. Manually configured RID: `router-id X.X.X.X`
@@ -277,15 +273,14 @@ router ospf 1
  router-id 1.1.1.1
 ```
 
-A loopback address used as a RID is also useful as a management address — always reachable as long as the router is up.
+A loopback address used as a RID is also useful as a management address - always reachable as long as the router is up.
 
 ---
-
 ## Vendor Implementations
 
-OSPF is standardised in RFC 2328 (OSPFv2 for IPv4) and RFC 5340 (OSPFv3 for IPv6). All compliant implementations share the same protocol behaviour — hello/dead intervals, state machine, LSA types, SPF algorithm. Syntax differences are in configuration only.
+OSPF is standardised in RFC 2328 (OSPFv2 for IPv4) and RFC 5340 (OSPFv3 for IPv6). All compliant implementations share the same protocol behaviour - hello/dead intervals, state machine, LSA types, SPF algorithm. Syntax differences are in configuration only.
 
-!!! success "Standard — RFC 2328 (OSPFv2), RFC 5340 (OSPFv3)"
+!!! success "Standard - RFC 2328 (OSPFv2), RFC 5340 (OSPFv3)"
     Any RFC-compliant OSPF implementation forms adjacencies with any other. Multi-vendor OSPF adjacencies are routine in real networks. Verify that hello intervals, dead intervals, area IDs, and MTU match across vendors.
 
 === "Cisco IOS-XE"
@@ -311,7 +306,7 @@ OSPF is standardised in RFC 2328 (OSPFv2 for IPv4) and RFC 5340 (OSPFv3 for IPv6
     show ip ospf database
     show ip route ospf
     ```
-    Cisco supports both interface-level (`ip ospf <pid> area <area>`) and process-level (`network` statements) OSPF assignment. Interface-level is more explicit and preferred in modern configs. The OSPF process ID (e.g., `ospf 1`) is local — two routers with different process IDs can still form an adjacency.
+    Cisco supports both interface-level (`ip ospf <pid> area <area>`) and process-level (`network` statements) OSPF assignment. Interface-level is more explicit and preferred in modern configs. The OSPF process ID (e.g., `ospf 1`) is local - two routers with different process IDs can still form an adjacency.
 
     Full configuration reference: [Cisco OSPF Configuration Guide](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/xe-16/iro-xe-16-book.html)
 
@@ -336,7 +331,7 @@ OSPF is standardised in RFC 2328 (OSPFv2 for IPv4) and RFC 5340 (OSPFv3 for IPv6
     show ospf database
     show route protocol ospf
     ```
-    In Junos, areas are written as dotted-decimal (Area 0 = `0.0.0.0`). The loopback interface should be added as `passive` — it advertises the address into OSPF but doesn't send hellos. The Router ID is set under `routing-options`, not under the OSPF stanza.
+    In Junos, areas are written as dotted-decimal (Area 0 = `0.0.0.0`). The loopback interface should be added as `passive` - it advertises the address into OSPF but doesn't send hellos. The Router ID is set under `routing-options`, not under the OSPF stanza.
 
     Full configuration reference: [Juniper OSPF Configuration](https://www.juniper.net/documentation/us/en/software/junos/ospf/index.html)
 
@@ -442,20 +437,19 @@ OSPF is standardised in RFC 2328 (OSPFv2 for IPv4) and RFC 5340 (OSPFv3 for IPv6
     Full configuration reference: [MikroTik OSPF Reference](https://help.mikrotik.com/docs/display/ROS/OSPF)
 
 ---
-
 ## Common Pitfalls
 
 ### Pitfall 1: Hello/dead interval mismatch
 
-The most common reason two OSPF routers never form an adjacency. If Router A sends hellos every 10 seconds and Router B expects them every 30 seconds, they will not form a neighbour relationship — the routers will see each other's hellos but the parameters won't match. Check `show ip ospf interface` on both sides and verify the hello and dead intervals are identical.
+The most common reason two OSPF routers never form an adjacency. If Router A sends hellos every 10 seconds and Router B expects them every 30 seconds, they will not form a neighbour relationship - the routers will see each other's hellos but the parameters won't match. Check `show ip ospf interface` on both sides and verify the hello and dead intervals are identical.
 
 ### Pitfall 2: MTU mismatch blocking adjacency
 
-On Cisco IOS, if two routers have different interface MTUs, OSPF may get stuck in the ExStart/Exchange state (trying to exchange DBD packets). The MTU in the DBD packet is checked — if it doesn't match, the exchange fails. Fix: set matching MTUs on both sides, or add `ip ospf mtu-ignore` on the interface to suppress the check (not recommended for production — it hides a real misconfiguration).
+On Cisco IOS, if two routers have different interface MTUs, OSPF may get stuck in the ExStart/Exchange state (trying to exchange DBD packets). The MTU in the DBD packet is checked - if it doesn't match, the exchange fails. Fix: set matching MTUs on both sides, or add `ip ospf mtu-ignore` on the interface to suppress the check (not recommended for production - it hides a real misconfiguration).
 
 ### Pitfall 3: Area 0 required for inter-area routing
 
-A common design error: connecting two non-backbone areas to each other without going through Area 0. OSPF will not route between them — inter-area routes require Area 0 in the path. All non-backbone areas must have an ABR connected to Area 0. If physical connectivity to Area 0 is not possible, use a **virtual link** through a transit area — but this is a design workaround, not a first choice.
+A common design error: connecting two non-backbone areas to each other without going through Area 0. OSPF will not route between them - inter-area routes require Area 0 in the path. All non-backbone areas must have an ABR connected to Area 0. If physical connectivity to Area 0 is not possible, use a **virtual link** through a transit area - but this is a design workaround, not a first choice.
 
 ### Pitfall 4: DR election locking out the intended DR
 
@@ -463,36 +457,34 @@ OSPF DR election is non-preemptive. If Router B (priority 1) comes up before Rou
 
 ### Pitfall 5: reference-bandwidth not set consistently
 
-If different routers have different reference-bandwidth values, cost calculations become inconsistent. Router A may see cost 1 to a network; Router B may see cost 10 for the same link — leading to asymmetric routing or suboptimal paths. Always set `auto-cost reference-bandwidth` to the same value on every router in the OSPF domain.
+If different routers have different reference-bandwidth values, cost calculations become inconsistent. Router A may see cost 1 to a network; Router B may see cost 10 for the same link - leading to asymmetric routing or suboptimal paths. Always set `auto-cost reference-bandwidth` to the same value on every router in the OSPF domain.
 
 ---
-
 ## Practice Problems
 
 1. Two routers are directly connected. R1 has hello interval = 10, dead interval = 40. R2 has hello interval = 30, dead interval = 120. Do they form an OSPF adjacency? What would you change?
 
 2. A Cisco router has reference-bandwidth = 100 Mbps (default). Calculate the OSPF cost for a 10 GigabitEthernet interface and a FastEthernet interface. What problem does this reveal?
 
-3. Five routers are on an Ethernet segment. All have priority 1. Router IDs are 1.1.1.1, 2.2.2.2, 3.3.3.3, 4.4.4.4, 5.5.5.5. All come up simultaneously. Which becomes DR? Which becomes BDR? A sixth router with RID 6.6.6.6 and priority 255 joins later — does it become DR?
+3. Five routers are on an Ethernet segment. All have priority 1. Router IDs are 1.1.1.1, 2.2.2.2, 3.3.3.3, 4.4.4.4, 5.5.5.5. All come up simultaneously. Which becomes DR? Which becomes BDR? A sixth router with RID 6.6.6.6 and priority 255 joins later - does it become DR?
 
 4. Draw (in words or ASCII) the OSPF adjacency state machine from Down to Full. At which state do DROther routers stop with other DROthers?
 
 5. A multi-area OSPF network has Area 0, Area 1, and Area 2. Area 1 and Area 2 are both connected only to Area 0. Can a router in Area 1 reach a network in Area 2? What LSA type carries the route from Area 2 into Area 1?
 
 ??? "Answers"
-    **1.** No adjacency — hello intervals must match (10 ≠ 30). Change R2 to hello=10, dead=40 (or change R1 to hello=30, dead=120, if 30s is acceptable). The dead interval should be at least 4× the hello interval.
+    **1.** No adjacency - hello intervals must match (10 ≠ 30). Change R2 to hello=10, dead=40 (or change R1 to hello=30, dead=120, if 30s is acceptable). The dead interval should be at least 4× the hello interval.
 
-    **2.** 10GE: 100M ÷ 10,000M = 0.01 → rounded to **1**. FastEthernet: 100M ÷ 100M = **1**. Both cost the same — OSPF cannot prefer the 10GE path over the FastEthernet path. Fix: set `auto-cost reference-bandwidth 10000` (10 Gbps) or higher so 10GE = 1 and FastEthernet = 100.
+    **2.** 10GE: 100M ÷ 10,000M = 0.01 → rounded to **1**. FastEthernet: 100M ÷ 100M = **1**. Both cost the same - OSPF cannot prefer the 10GE path over the FastEthernet path. Fix: set `auto-cost reference-bandwidth 10000` (10 Gbps) or higher so 10GE = 1 and FastEthernet = 100.
 
-    **3.** Highest RID wins DR election when priority is tied. **DR = 5.5.5.5, BDR = 4.4.4.4**. When the sixth router (RID 6.6.6.6, priority 255) joins later — **it does not become DR**. DR election is non-preemptive; the current DR (5.5.5.5) keeps its role until it fails. The new router forms Full adjacency with the DR and BDR as a DROther.
+    **3.** Highest RID wins DR election when priority is tied. **DR = 5.5.5.5, BDR = 4.4.4.4**. When the sixth router (RID 6.6.6.6, priority 255) joins later - **it does not become DR**. DR election is non-preemptive; the current DR (5.5.5.5) keeps its role until it fails. The new router forms Full adjacency with the DR and BDR as a DROther.
 
     **4.** Down → Init → 2-Way → ExStart → Exchange → Loading → Full.
     DROther–DROther pairs stop at **2-Way**. This is correct; they exchange only hellos, not LSAs.
 
-    **5.** Yes — Area 1 can reach Area 2 via Area 0. An ABR connected to Area 2 generates **Type 3 Summary LSAs** for Area 2 networks and floods them into Area 0. An ABR connected to Area 1 then generates Type 3 LSAs into Area 1 summarising the Area 2 networks. Routers in Area 1 see the prefix + cost but not the full Area 2 topology.
+    **5.** Yes - Area 1 can reach Area 2 via Area 0. An ABR connected to Area 2 generates **Type 3 Summary LSAs** for Area 2 networks and floods them into Area 0. An ABR connected to Area 1 then generates Type 3 LSAs into Area 1 summarising the Area 2 networks. Routers in Area 1 see the prefix + cost but not the full Area 2 topology.
 
 ---
-
 ## Lab
 
 ### Lab: Configure a Two-Router OSPF Adjacency
@@ -556,7 +548,7 @@ If different routers have different reference-bandwidth values, cost calculation
     O    10.2.0.0/24 [110/2] via 10.12.0.2, Gi0/0
     ```
 
-4. Check the LSDB — both routers should have identical entries:
+4. Check the LSDB - both routers should have identical entries:
 
     ```text
     R1# show ip ospf database
@@ -579,14 +571,13 @@ If different routers have different reference-bandwidth values, cost calculation
     interface GigabitEthernet0/2
      ip ospf cost 100
     ```
-    Check `show ip route` — R1 now uses only the lower-cost path. OSPF has made a policy-based forwarding decision based purely on cost, without any manual route configuration.
+    Check `show ip route` - R1 now uses only the lower-cost path. OSPF has made a policy-based forwarding decision based purely on cost, without any manual route configuration.
 
 ---
-
 ## Summary & Key Takeaways
 
 - OSPF is a **link-state** protocol: every router floods its LSA (its direct links and costs) to all routers in the area
-- Every router builds an identical **LSDB** (Link State Database) — a full map of the area topology
+- Every router builds an identical **LSDB** (Link State Database) - a full map of the area topology
 - Each router independently runs **Dijkstra's SPF** algorithm on its LSDB to calculate the shortest path to every destination
 - Because every router has the full map and derives paths independently, **routing loops cannot form** within an OSPF area
 - OSPF neighbours must **match**: area ID, hello/dead intervals, authentication, and MTU (on Cisco)
@@ -596,51 +587,47 @@ If different routers have different reference-bandwidth values, cost calculation
 - **OSPF cost** = reference bandwidth ÷ interface bandwidth; set `auto-cost reference-bandwidth` consistently across all routers
 - OSPF **areas** reduce LSDB size and SPF computation; all areas must connect to **Area 0** (backbone)
 - ABRs advertise **Type 3 Summary LSAs** between areas; Type 5 External LSAs carry redistributed routes
-- OSPFv3 (RFC 5340) is the IPv6 version — same algorithm, different address family
+- OSPFv3 (RFC 5340) is the IPv6 version - same algorithm, different address family
 
 ---
-
 ## Where to Next
 
-- **Continue:** [BGP Fundamentals](bgp-fundamentals.md) (`RT-007`) — the routing protocol between autonomous systems; builds on OSPF understanding of path selection
-- **Continue:** [OSPF Advanced](ospf-advanced.md) (`RT-005`) — multi-area design, stub areas, NSSA, redistribution, virtual links, route filtering
-- **Related:** [IS-IS Fundamentals](isis-fundamentals.md) (`RT-006`) — another link-state protocol; widely used in carrier and DC networks; compare with OSPF
-- **Applied context:** [Learning Path: Data Network Engineer](../../../learning-paths/data-network-engineer.md) — Stage 3, position 14 in the DNE path
+- **Continue:** [BGP Fundamentals](bgp-fundamentals.md) (`RT-007`) - the routing protocol between autonomous systems; builds on OSPF understanding of path selection
+- **Continue:** [OSPF Advanced](ospf-advanced.md) (`RT-005`) - multi-area design, stub areas, NSSA, redistribution, virtual links, route filtering
+- **Related:** [IS-IS Fundamentals](isis-fundamentals.md) (`RT-006`) - another link-state protocol; widely used in carrier and DC networks; compare with OSPF
+- **Applied context:** [Learning Path: Data Network Engineer](../../../learning-paths/data-network-engineer.md) - Stage 3, position 14 in the DNE path
 
 ---
-
 ## Standards & Certifications
 
 **Relevant standards:**
-- [RFC 2328 — OSPF Version 2](https://www.rfc-editor.org/rfc/rfc2328)
-- [RFC 5340 — OSPF for IPv6 (OSPFv3)](https://www.rfc-editor.org/rfc/rfc5340)
-- [RFC 4940 — IANA Considerations for OSPF](https://www.rfc-editor.org/rfc/rfc4940)
+- [RFC 2328 - OSPF Version 2](https://www.rfc-editor.org/rfc/rfc2328)
+- [RFC 5340 - OSPF for IPv6 (OSPFv3)](https://www.rfc-editor.org/rfc/rfc5340)
+- [RFC 4940 - IANA Considerations for OSPF](https://www.rfc-editor.org/rfc/rfc4940)
 
-**Benchmark certifications** — use these to self-assess your understanding, not as a study guide:
+**Where this topic appears in certification syllabi:**
 
 | Cert | Vendor | Relevant Section |
 |---|---|---|
-| CCNA 200-301 | Cisco | 3.4 — Configure and verify single-area OSPFv2 |
+| CCNA 200-301 | Cisco | 3.4 - Configure and verify single-area OSPFv2 |
 | JNCIA-Junos JN0-103 | Juniper | OSPF fundamentals; neighbour states; cost |
 | Nokia NRS I | Nokia | OSPF link-state concepts; DR/BDR; areas |
 | Huawei HCIA-Datacom | Huawei | OSPF neighbour states; DR election; LSA types |
 
 ---
-
 ## References
 
-- IETF — [RFC 2328: OSPF Version 2](https://www.rfc-editor.org/rfc/rfc2328)
-- IETF — [RFC 5340: OSPF for IPv6](https://www.rfc-editor.org/rfc/rfc5340)
-- Odom, W. — *CCNA 200-301 Official Cert Guide, Volume 2*, Cisco Press, 2019 — Ch. 20–22 (OSPF)
-- Doyle, J.; Carroll, J. — *Routing TCP/IP, Volume I*, 2nd ed., Cisco Press, 2005 — Ch. 8–11 (OSPF)
-- Dijkstra, E. W. — "A Note on Two Problems in Connexion with Graphs," *Numerische Mathematik*, vol. 1, 1959 — original SPF algorithm paper
+- IETF - [RFC 2328: OSPF Version 2](https://www.rfc-editor.org/rfc/rfc2328)
+- IETF - [RFC 5340: OSPF for IPv6](https://www.rfc-editor.org/rfc/rfc5340)
+- Odom, W. - *CCNA 200-301 Official Cert Guide, Volume 2*, Cisco Press, 2019 - Ch. 20–22 (OSPF)
+- Doyle, J.; Carroll, J. - *Routing TCP/IP, Volume I*, 2nd ed., Cisco Press, 2005 - Ch. 8–11 (OSPF)
+- Dijkstra, E. W. - "A Note on Two Problems in Connexion with Graphs," *Numerische Mathematik*, vol. 1, 1959 - original SPF algorithm paper
 
 ---
-
 ## Attribution & Licensing
 
 **Author:** [@geekazoid80]
-**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — content
+**License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) - content
 **AI assistance:** Draft written by Claude Sonnet 4.6. RFC citations verified against IETF RFC index. Technical accuracy to be verified by human reviewer before `human_reviewed` is set to true.
 
 ---
@@ -652,7 +639,7 @@ If different routers have different reference-bandwidth values, cost calculation
 
 | Module ID | Title | Context | Last Checked |
 |---|---|---|---|
-| [RT-005](ospf-advanced.md) | OSPF Advanced | Builds directly on this module — multi-area, stub areas, redistribution | 2026-04-17 |
+| [RT-005](ospf-advanced.md) | OSPF Advanced | Builds directly on this module - multi-area, stub areas, redistribution | 2026-04-17 |
 | [RT-007](bgp-fundamentals.md) | BGP Fundamentals | BGP runs alongside OSPF in most enterprise networks; AD comparison | 2026-04-17 |
 | [CT-001](../carrier-transport/mpls-fundamentals.md) | MPLS Fundamentals | OSPF is the most common IGP running under MPLS networks | 2026-04-17 |
 
@@ -680,7 +667,7 @@ If different routers have different reference-bandwidth values, cost calculation
 ### Maintenance Notes
 
 - When RT-005 (OSPF Advanced) is written, add a back-reference there to this module for all foundational concepts
-- When RT-006 (IS-IS Fundamentals) is written, add a comparison reference — link-state concept is shared; implementation differs
+- When RT-006 (IS-IS Fundamentals) is written, add a comparison reference - link-state concept is shared; implementation differs
 - When CT-001 (MPLS Fundamentals) is written, add a reference: OSPF is the typical IGP in MPLS networks; LDP/RSVP-TE builds on OSPF adjacency
 
 <!-- XREF-END -->
