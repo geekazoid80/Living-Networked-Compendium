@@ -16,25 +16,67 @@ language: en
 cert_alignment: "CCNA 200-301 — 1.1; CompTIA Network+ — 1.1; JNCIA-Junos — Networking Fundamentals"
 ---
 
-## The Analogy
+## The Problem
 
-Imagine sending a physical parcel to someone overseas. You don't just hand a bare object to a courier and hope for the best — there's a whole system of wrapping and labelling that happens along the way.
+Two people are standing next to each other. They want to communicate. One opens their mouth and speaks. The other hears it. Done — it works perfectly.
 
-You write a letter and put it in an envelope (content). The envelope goes into a postbag with a routing label. The postbag goes on a truck. The truck drives on a road. At every stage, someone adds or reads a "label" relevant to their job — the postal worker reads the street address, the trucking company reads the destination depot, the road just carries the weight.
+Now let's make this harder, one problem at a time.
 
-At the other end, the process reverses: the road delivers the truck, the truck delivers the postbag, the postbag yields the envelope, the envelope reveals the letter.
+### Step 1: They're in different rooms
 
-The OSI model is exactly this — a layered system where each layer adds and reads its own label as data travels from one machine to another.
+They can no longer hear each other through the wall. They need something to carry the signal — a string between two tin cans, a wire, a radio transmitter. Whatever they choose, it just moves the raw signal from one side to the other. It doesn't know who is speaking or what they're saying.
 
-| Postal system | OSI layer |
+They've just invented the concept of a **medium** — something that carries the signal. In networking: the **Physical layer (Layer 1)**.
+
+### Step 2: There are now five people in the room
+
+One person speaks — and everyone hears it. How does anyone know which message is meant for them? They agree: every message starts with the recipient's name. "Alice: can you hear me?" Now Alice knows it's for her, and the others ignore it.
+
+They've just invented **addressing at the local level** — identifying who on this shared medium should pay attention. In networking: **MAC addressing**, the **Data Link layer (Layer 2)**.
+
+### Step 3: They're in different buildings
+
+Alice is in one building. Bob is in another, three blocks away. There's no direct wire between them. They need someone in the middle — a relay — who can pass the message along. But the relay needs to know *which building* to forward it to, not just which person.
+
+They've invented **logical addressing across multiple locations** — a way to identify not just who, but *where on the network* they are. In networking: **IP addresses**, the **Network layer (Layer 3)**.
+
+### Step 4: The message must arrive reliably
+
+Some messages get lost in transit. Important messages — contracts, instructions — need confirmation: "I got it." If no confirmation arrives, resend. For quick, casual messages — "are you there?" — the overhead isn't worth it.
+
+They've invented **reliable vs. best-effort delivery**, and the concept of a connection before sending. In networking: **TCP** (reliable) and **UDP** (best-effort), the **Transport layer (Layer 4)**.
+
+### Step 5: Alice speaks French, Bob speaks English
+
+They can transmit and route the message reliably — but Bob can't read it. They need to agree on a common format, or use a translator. They also might want to compress the message to save time, or encrypt it so only Bob can read it.
+
+They've invented **data formatting, encryption, and encoding agreements**. In networking: the **Presentation layer (Layer 6)**.
+
+### Step 6: They're having a long conversation with multiple topics
+
+One wire, two people, many messages going back and forth over time. How do they track which reply belongs to which question? How do they resume if the connection drops mid-conversation?
+
+They've invented **session management** — tracking the state of an ongoing exchange. In networking: the **Session layer (Layer 5)**.
+
+### Step 7: The actual content of the message
+
+All of the above is infrastructure. Alice still needs to actually say something — ask a question, request a file, send an email. The content itself, and the interface that lets her compose and send it.
+
+In networking: the **Application layer (Layer 7)** — HTTP, DNS, SMTP, SSH.
+
+### What You Just Built
+
+Working through those seven constraints, you constructed the OSI model from scratch. Each layer exists because a real problem required it.
+
+| Scenario element | Technical term |
 |---|---|
-| The road and the vehicle | Layer 1 — Physical |
-| The street address on the envelope (local neighbourhood) | Layer 2 — Data Link |
-| The city/country address (routing across cities) | Layer 3 — Network |
-| Choosing registered post (guaranteed) vs. regular post | Layer 4 — Transport |
-| Opening a formal account with the post office | Layer 5 — Session |
-| Translating your letter into the recipient's language | Layer 6 — Presentation |
-| Writing the letter itself (what you want to say) | Layer 7 — Application |
+| The wire, string, or radio signal | Physical layer — Layer 1 |
+| "Start every message with the recipient's name" | MAC addressing — Data Link layer — Layer 2 |
+| Building + room logical addressing | IP addressing — Network layer — Layer 3 |
+| Guaranteed delivery with confirmation | TCP — Transport layer — Layer 4 |
+| Tracking a multi-part conversation | Session layer — Layer 5 |
+| Agreeing on a common language / encoding / encryption | Presentation layer — Layer 6 |
+| The message itself, and the app that sends it | Application layer — Layer 7 |
 
 ---
 
@@ -368,7 +410,6 @@ Vendors, exam questions, and colleagues all use them: **bit** (L1), **frame** (L
 
 ---
 
-<!-- XREF-START -->
 ## Where to Next
 
 - **Continue the sequence:** [Network Topologies](network-topologies.md) (`NW-002`) — star, mesh, bus, ring, and hybrid topologies
@@ -377,11 +418,28 @@ Vendors, exam questions, and colleagues all use them: **bit** (L1), **frame** (L
 
 ---
 
+## Standards & Certifications
+
+**Relevant standards:**
+- ISO/IEC 7498-1:1994 — Information Technology — Open Systems Interconnection — Basic Reference Model
+- IETF RFC 1122 — Requirements for Internet Hosts — Communication Layers
+
+**Benchmark certifications** — use these to self-assess your understanding, not as a study guide:
+
+| Cert | Vendor | Relevant section |
+|---|---|---|
+| CCNA 200-301 | Cisco | 1.1 — Network fundamentals |
+| CompTIA Network+ | CompTIA | 1.1 — OSI model |
+| JNCIA-Junos JN0-103 | Juniper | Networking fundamentals |
+| HCIA-Routing & Switching | Huawei | Network fundamentals |
+
+---
+
 ## References
 
 - ISO/IEC 7498-1:1994 — Information Technology — Open Systems Interconnection — Basic Reference Model
 - Forouzan, Behrouz A. — *Data Communications and Networking*, 5th ed., McGraw-Hill, 2013 — Chapter 2
-- Cisco — OSI Model Reference (cisco.com/c/en/us/support/docs/ibm-technologies/logical-link-control/25862-way.html)
+- Cisco — OSI Model Reference: cisco.com/c/en/us/support/docs/ibm-technologies/logical-link-control/25862-way.html
 - IETF — RFC 1122: Requirements for Internet Hosts — Communication Layers
 
 ---
@@ -391,4 +449,37 @@ Vendors, exam questions, and colleagues all use them: **bit** (L1), **frame** (L
 **Author:** @geekazoid80
 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — content
 **AI assistance:** Claude used for initial draft structure and prose. All technical claims verified against Cisco documentation and Forouzan's textbook.
+
+---
+
+<!-- XREF-START -->
+## Internal Cross-References
+
+### Modules That Reference This Module
+
+| Module ID | Title | Context | Last Checked |
+|---|---|---|---|
+| NW-002 | Network Topologies | Prerequisite — OSI model used to classify where topology decisions operate | 2026-04-17 |
+| IP-001 | IP Addressing Fundamentals | Prerequisite — Layer 3 (Network) context | 2026-04-17 |
+| SW-001 | Switching Fundamentals | Prerequisite — Layer 2 (Data Link) context | 2026-04-17 |
+| RT-001 | Routing Fundamentals | Prerequisite — Layer 3 (Network) context | 2026-04-17 |
+
+### Modules This Module References
+
+| Module ID | Title | Context | Last Checked |
+|---|---|---|---|
+| NW-002 | Network Topologies | "Where to Next" forward reference | 2026-04-17 |
+| IP-001 | IP Addressing Fundamentals | "Where to Next" forward reference | 2026-04-17 |
+| SW-001 | Switching Fundamentals | "Where to Next" forward reference | 2026-04-17 |
+
+### Vendor Mapping
+
+| Concept | Standard |
+|---|---|
+| OSI Reference Model | ISO/IEC 7498-1 |
+| TCP/IP (practical 4-layer collapse) | IETF RFC 1122 |
+
+### Maintenance Notes
+
+- When any layer's protocol coverage is updated in a downstream module, verify the layer description here remains consistent.
 <!-- XREF-END -->

@@ -16,23 +16,46 @@ language: en
 cert_alignment: "CCNA 200-301 — 1.6; CompTIA Network+ — 1.4; JNCIA-Junos — IP Addressing"
 ---
 
-## The Analogy
+## The Problem
 
-Imagine a company moves into a large office building with 1000 rooms. You could give every department access to every room, but that's chaos — the finance team walking through the engineering lab, the sales team accidentally in the server room. Instead, you divide the building into wings: Finance Wing (floors 1–3), Engineering Wing (floors 4–7), and so on. Each wing has its own entrance and can't be accessed from another without going through reception (the router).
+You've been given a block of 256 IP addresses for your company's network: `192.168.1.0` to `192.168.1.255`. Everyone shares the same pool.
 
-Subnetting is exactly this. You take a large block of IP addresses and carve it into smaller, isolated wings — **subnets** — each one its own broadcast domain, separated from others by a router.
+It works — at first. But then you notice something: every time the marketing team runs a broadcast announcement ("who has this address?"), every single device on the network gets interrupted, even the servers in the data room. Two hundred and fifty-four devices, all stopping what they're doing to read a message meant for one device.
 
-VLSM (Variable Length Subnet Masking) takes it further: rather than giving every wing the same number of rooms, you allocate based on need. Finance gets 60 rooms, the server room gets 6. No waste.
+### Step 1: The broadcast problem
 
-| Building analogy | IP subnetting |
+Broadcasts are unavoidable in IP networks — devices need them to find each other (ARP, DHCP). But there's no reason every device needs to hear every broadcast. If you could isolate groups of devices so they only see broadcasts from their own group, you'd reduce the noise dramatically.
+
+The solution: divide your address block into smaller pieces. Each piece becomes its own isolated group — its own **broadcast domain**. Traffic stays within the group unless it needs to cross to another group via a router.
+
+That isolation is **subnetting**. You've just invented it.
+
+### Step 2: But every wing needs a different size
+
+Marketing has 50 people. The server room has 6 machines. The WAN link between two buildings only needs 2 addresses. If you give everyone a block of 64 addresses, the server room wastes 58 and the WAN link wastes 62.
+
+You need to be able to cut different-sized pieces from the same block — big pieces where you need them, small pieces where you don't.
+
+That's **Variable Length Subnet Masking (VLSM)**. Instead of carving equal slices, you carve by need.
+
+### Step 3: The cutting tool
+
+How do you carve? You steal bits. Your `/24` has 8 host bits — 256 addresses. If you take 1 bit from the host side and give it to the network side, you now have 2 subnets of 128 each. Take 2 bits: 4 subnets of 64. Take 3: 8 subnets of 32. Every bit you borrow doubles the number of subnets and halves their size.
+
+The tool doing the cutting is the **subnet mask** — it defines exactly where the network portion ends and the host portion begins.
+
+### What You Just Built
+
+Subnetting is the practice of dividing an IP address block into smaller broadcast domains by extending the network portion (borrowing host bits). VLSM extends this by allowing different-sized masks for different subnets, allocating address space efficiently.
+
+| Scenario element | Technical term |
 |---|---|
-| The building (all 1000 rooms) | Your address block (e.g., 192.168.1.0/24) |
-| A wing (floors 1–3) | A subnet |
-| Wing boundary (fire door / stairwell) | Router interface |
-| Room count per wing | Usable hosts per subnet |
-| Wing numbering scheme | Subnet mask / prefix length |
-| Reception (between wings) | Router (inter-subnet routing) |
-| Assigning wings by size of department | VLSM — right-sizing each subnet |
+| The full block of addresses | Address space (e.g., `192.168.1.0/24`) |
+| An isolated group with its own broadcasts | Subnet (broadcast domain) |
+| The boundary between groups | Router interface |
+| Cutting the block into pieces | Subnetting — borrowing host bits |
+| Different-sized pieces for different needs | VLSM — Variable Length Subnet Masking |
+| The cutting rule | Subnet mask / prefix length |
 
 ---
 
@@ -373,12 +396,29 @@ This should fail until you add static routes or a routing protocol. That's expec
 
 ---
 
-<!-- XREF-START -->
 ## Where to Next
 
 - **Continue the sequence:** [IPv6 Addressing](ipv6-addressing.md) (`IP-003`) — the long-term solution to IPv4 exhaustion
 - **Apply what you've learned:** [Routing Fundamentals](../routing/routing-fundamentals.md) (`RT-001`) — how routers use subnet information to forward packets
 - **Design context:** [Data Network Engineer Learning Path](../../applied/data-network-engineer/overview.md) — where subnetting sits in the full engineering curriculum
+
+---
+
+## Standards & Certifications
+
+**Relevant standards:**
+- IETF RFC 4632 — Classless Inter-Domain Routing (CIDR)
+- IETF RFC 3021 — Using 31-Bit Prefixes on IPv4 Point-to-Point Links
+- IETF RFC 1918 — Address Allocation for Private Internets
+
+**Benchmark certifications** — use these to self-assess your understanding, not as a study guide:
+
+| Cert | Vendor | Relevant section |
+|---|---|---|
+| CCNA 200-301 | Cisco | 1.6 — IPv4 addressing and subnetting |
+| CompTIA Network+ | CompTIA | 1.4 — Subnetting |
+| JNCIA-Junos JN0-103 | Juniper | IP addressing |
+| HCIA-Routing & Switching | Huawei | IP addressing fundamentals |
 
 ---
 
@@ -397,4 +437,37 @@ This should fail until you add static routes or a routing protocol. That's expec
 **Author:** @geekazoid80
 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — content
 **AI assistance:** Claude used for initial draft structure and worked examples. All calculations verified manually. Technical content verified against Odom's CCNA Official Cert Guide and RFC 4632.
+
+---
+
+<!-- XREF-START -->
+## Internal Cross-References
+
+### Modules That Reference This Module
+
+| Module ID | Title | Context | Last Checked |
+|---|---|---|---|
+| RT-001 | Routing Fundamentals | Prerequisite — routers use subnet masks to make forwarding decisions | 2026-04-17 |
+| SW-002 | VLANs & 802.1Q Trunking | Prerequisite — each VLAN is typically assigned its own subnet | 2026-04-17 |
+
+### Modules This Module References
+
+| Module ID | Title | Context | Last Checked |
+|---|---|---|---|
+| NW-001 | The OSI Model | Prerequisite — Layer 3 context | 2026-04-17 |
+| IP-001 | IP Addressing Fundamentals | Prerequisite — binary, subnet masks, CIDR | 2026-04-17 |
+| IP-003 | IPv6 Addressing | "Where to Next" forward reference | 2026-04-17 |
+| RT-001 | Routing Fundamentals | "Where to Next" forward reference | 2026-04-17 |
+
+### Vendor Mapping
+
+| Concept | Standard |
+|---|---|
+| CIDR / variable-length subnet masks | RFC 4632 |
+| /31 point-to-point links | RFC 3021 |
+
+### Maintenance Notes
+
+- When RT-001 (Routing Fundamentals) is written, add a back-reference in that module's XREF section pointing here.
+- When SW-002 (VLANs) is written, add a back-reference in that module's XREF section pointing here.
 <!-- XREF-END -->

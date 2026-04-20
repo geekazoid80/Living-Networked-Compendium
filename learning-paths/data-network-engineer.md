@@ -55,9 +55,10 @@ This path takes you from network fundamentals through to professional-level ente
 |---|---|---|---|
 | 11 | RT-001 | Routing Fundamentals | 45 min |
 | 12 | RT-002 | Static Routing | 40 min |
-| 13 | RT-003 | OSPF Fundamentals | 60 min |
-| 14 | RT-004 | BGP Fundamentals | 60 min |
-| 15 | IP-003 | IPv6 Addressing | 45 min |
+| 13 | RT-003 | RIP & Distance-Vector Concepts | 30 min |
+| 14 | RT-004 | OSPF Fundamentals | 60 min |
+| 15 | RT-007 | BGP Fundamentals | 60 min |
+| 16 | IP-003 | IPv6 Addressing | 45 min |
 
 **Stage 3 milestone:** You can configure and verify static routes and OSPF. You understand what BGP is and can describe its role in the internet.
 

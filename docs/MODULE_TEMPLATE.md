@@ -38,22 +38,42 @@ language: "en"                # en | zh-CN | ms | ta (for translated versions, a
      └──────────────────────────────────────────────────────────────────────┘
 -->
 
-## The Analogy
+## The Problem
 
-<!-- MANDATORY. Start here. No jargon. One real-world analogy that maps to the concept.
-     Then explicitly map analogy terms → technical terms. -->
+<!-- MANDATORY. Start here. No jargon. No technical terms.
+     Begin with the simplest possible scenario involving two parties trying to do something.
+     Add one constraint at a time. Each constraint surfaces a problem — solve it, name what was just invented.
+     By the end of the build-up, the reader has constructed the concept themselves.
+     Then the formal name and definition lands with meaning.
 
-Think of [concept] like [real-world thing].
+     For FOUNDATIONAL modules: use two humans trying to communicate.
+     For ADVANCED modules: use two systems/operators with a specific technical problem to solve.
+     Don't force a fixed number of steps — use as many as the concept genuinely requires. -->
 
-[One paragraph describing the analogy in plain, jargon-free language. A layman should understand this completely.]
+[Starting scenario — two parties, minimum viable situation, zero jargon.
+Describe it working perfectly. Then introduce one constraint that breaks it.]
 
-**Mapping to the technical:**
+### Step 1: [First constraint or missing element]
 
-| Analogy | Technical Term |
+[Describe the problem plainly. One or two sentences — what breaks, and why.
+Then: how do they solve it? What do they invent or agree on?
+End with the plain-language name of what was just created, then its technical name in parentheses.]
+
+### Step 2: [Second constraint]
+
+[Repeat the pattern: problem → solution → name.]
+
+<!-- Add as many steps as the concept requires. -->
+
+### What You Just Built
+
+[One or two sentences formally naming the concept.]
+
+| Scenario element | Technical term |
 |---|---|
-| [analogy element 1] | [technical term 1] |
-| [analogy element 2] | [technical term 2] |
-| [analogy element 3] | [technical term 3] |
+| [element 1] | [term 1] |
+| [element 2] | [term 2] |
+| [element 3] | [term 3] |
 
 ---
 
@@ -161,10 +181,23 @@ The standard behaviour is defined in [RFC XXXX / IEEE 802.xx]. All compliant imp
     # [Minimal working configuration]
     ```
 
-<!-- Add or remove vendor tabs based on what's relevant for this topic.
-     Minimum for routing/switching: Cisco + Juniper + Nokia.
-     Add Arista for DC topics. Add Huawei for SP/DC topics.
-     Use proprietary callouts where appropriate: -->
+=== "MikroTik RouterOS"
+    ```mikrotik-ros
+    # [Minimal working configuration]
+    ```
+    Full configuration reference: [MikroTik documentation](https://help.mikrotik.com)
+
+<!-- VENDOR TAB RULES:
+     - Show a MINIMAL config snippet — enough to understand the key parameters and compare syntax across vendors.
+       This is not a full working config; it highlights the concept-critical lines only.
+     - Follow each snippet with: Full configuration reference: [vendor doc link]
+     - Add or remove tabs based on what's relevant for this topic.
+       Minimum for routing/switching: Cisco + Juniper + Nokia.
+       Add Arista for DC topics. Add Huawei for SP/DC/carrier topics. Add MikroTik where docs exist.
+     - If documentation for a feature cannot be found for a vendor, omit that tab silently.
+     - Platform context (what each OS runs on, where it is commonly deployed) lives in the
+       Platform Overview reference page — do not repeat it in module content.
+     - Use proprietary callouts where appropriate: -->
 
 !!! warning "Proprietary — Vendor Specific"
     [Vendor X feature name] — only works on [Vendor X] equipment. Does not interoperate.

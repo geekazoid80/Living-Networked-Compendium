@@ -99,6 +99,26 @@ def supplementary_to_pptx_notes(content: str) -> str:
     pattern = r'^\?\?\?[+]?\s+supplementary\s+"([^"]+)"\n((?:(?:    |\t)[^\n]*\n?)*)'
     return re.sub(pattern, replace_block, content, flags=re.MULTILINE)
 
+def answer_to_pdf_notes(content: str) -> str:
+    """Convert ??? answer blocks to a visible blockquote for PDF output."""
+    def replace_block(m):
+        body = m.group(1)
+        lines = body.split('\n')
+        de_indented = []
+        for line in lines:
+            if line.startswith('    '):
+                de_indented.append(line[4:])
+            elif line.startswith('\t'):
+                de_indented.append(line[1:])
+            else:
+                de_indented.append(line)
+        body_text = '\n'.join(de_indented).strip()
+        body_quoted = '\n'.join(f'> {l}' if l else '>' for l in body_text.split('\n'))
+        return f'\n> **Answer:**\n>\n{body_quoted}\n'
+
+    pattern = r'^\?\?\?[+]?\s+answer\n((?:(?:    |\t)[^\n]*\n?)*)'
+    return re.sub(pattern, replace_block, content, flags=re.MULTILINE)
+
 def strip_html_comments(content: str) -> str:
     """Remove HTML comments (template guidance) — used for PPTX/PDF."""
     return re.sub(r'<!--(?!.*XREF).*?-->', '', content, flags=re.DOTALL)
@@ -115,6 +135,7 @@ def process(input_path: str, output_path: str, target: str) -> None:
     elif target == 'pdf':
         result = strip_xref(content)
         result = supplementary_to_pdf_notes(result)
+        result = answer_to_pdf_notes(result)
         result = strip_html_comments(result)
 
     elif target == 'pptx':

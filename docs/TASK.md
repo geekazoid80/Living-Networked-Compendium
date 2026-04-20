@@ -14,7 +14,7 @@ Cross-session progress tracker for the Living Networked Compendium.
 
 ## Current Session Focus
 
-**Current area:** Architecture expansion — multi-vendor scope, new domains, private research folder
+**Current area:** Content production — Problem-First pedagogy, seed module retrofit, shared spine (IP → Routing)
 
 ---
 
@@ -42,9 +42,12 @@ Cross-session progress tracker for the Living Networked Compendium.
 | 18 | Create professional-standards domain stub | Architecture | done | modules/fundamentals/professional-standards/overview.md; PS-000 |
 | 19 | Create `preprocess-module.py` | Tooling | done | Three-bucket transformation for pdf/pptx output targets |
 | 20 | Integrate preprocessor into `build-pdf.sh` and `build-pptx.sh` | Tooling | done | Both scripts now call preprocess-module.py before Pandoc/Marp |
-| 21 | Retrofit seed modules (NW-001, IP-001, IP-002) to new template | Content | pending | Add analogy section, ??? supplementary blocks, XREF markers |
+| 21 | Retrofit seed modules (NW-001, IP-001, IP-002) to new template | Content | done | Rewrote openings to Problem-First pattern; fixed XREF block scope; added Standards & Certs section; added XREF tables |
 | 22 | Update `README.md` for expanded scope | Architecture | pending | Multi-vendor, new paths, three-bucket model |
 | 23 | Resolve `services/` domain overlap with `protocols/` + `functions/` | Architecture | blocked | See follow-up D |
+| 24 | Update `docs/MODULE_TEMPLATE.md` — replace Analogy section with The Problem pattern | Architecture | done | Problem-First pedagogical approach; MikroTik added as peer vendor; vendor tab rules added |
+| 25 | Update `docs/INSTRUCTION.md` — Section 5 (Problem-First) and Section 6 (MikroTik + vendor tab rules) | Architecture | done | |
+| 26 | Resolve RT module ID conflict | Architecture | done | RT-003=RIP, RT-004=OSPF, RT-007=BGP; DNE learning path updated to match |
 
 ---
 
@@ -62,8 +65,8 @@ Cross-session progress tracker for the Living Networked Compendium.
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C01 | NW-002 | Network Topologies | pending | Star, mesh, bus, ring, hybrid |
-| C02 | NW-003 | Ethernet Standards & Cabling | pending | Cat5e/6/6a/7, SFP, DAC, fibre types |
+| C01 | NW-002 | Network Topologies | done | Star, mesh, bus, ring, hybrid |
+| C02 | NW-003 | Ethernet Standards & Cabling | done | Cat5e/6/6a/7, SFP, DAC, fibre types |
 
 ---
 
@@ -91,7 +94,7 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C14 | IP-003 | IPv6 Addressing | pending | Format, types, EUI-64, NDP, DHCPv6 |
+| C14 | IP-003 | IPv6 Addressing | done | Format, types, EUI-64, NDP, SLAAC, DHCPv6, coexistence |
 | C15 | IP-004 | IPv4 Exhaustion & Transition | pending | CGNAT, 6rd, DS-Lite, NAT64 |
 
 ---
@@ -100,15 +103,15 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C16 | RT-001 | Routing Fundamentals | pending | Routing table, longest-prefix match, AD |
-| C17 | RT-002 | Static Routing | pending | Default route, floating static, next-hop vs exit-if |
-| C18 | RT-003 | RIP & Distance-Vector Concepts | pending | Brief; mainly historical context |
-| C19 | RT-004 | OSPF Fundamentals | pending | LSA types, DR/BDR, areas, cost; multi-vendor |
-| C20 | RT-005 | OSPF Advanced | pending | Multi-area, redistribution, filtering, virtual links |
-| C21 | RT-006 | IS-IS Fundamentals | pending | Used heavily in SP/DC; multi-vendor |
-| C22 | RT-007 | BGP Fundamentals | pending | EBGP/IBGP, attributes, path selection; multi-vendor |
-| C23 | RT-008 | BGP Advanced | pending | Communities, policies, route-maps, filtering |
-| C24 | RT-009 | Route Redistribution & Policy | pending | |
+| C16 | RT-001 | Routing Fundamentals | done | Routing table, LPM, AD, RIB vs FIB, convergence |
+| C17 | RT-002 | Static Routing | done | Default route, floating static, next-hop vs exit-if, Null0 |
+| C18 | RT-003 | RIP & Distance-Vector Concepts | done | Distance-vector algorithm, counting-to-infinity, split horizon, poison reverse, timers |
+| C19 | RT-004 | OSPF Fundamentals | done | LSA types 1-5, DR/BDR, area 0, cost/SPF, state machine; multi-vendor |
+| C20 | RT-005 | OSPF Advanced | done | Multi-area, ABR/ASBR, summarisation, stub/NSSA, redistribution, tagging |
+| C21 | RT-006 | IS-IS Fundamentals | done | NET, L1/L2, DIS, wide metrics, TLV extensibility; multi-vendor |
+| C22 | RT-007 | BGP Fundamentals | done | eBGP/iBGP, AS_PATH, attributes, best-path, route reflectors; multi-vendor |
+| C23 | RT-008 | BGP Advanced | done | Communities (RFC 1997/4360/8092), route-maps, prefix-lists, prepending, MED |
+| C24 | RT-009 | Route Redistribution & Policy | done | Mutual redistribution, seed metrics, tagging, loop prevention |
 | C25 | RT-010 | EIGRP | pending | Cisco proprietary (now RFC 7868); seeking-standardisation callout |
 | C26 | RT-011 | Multicast Routing | pending | IGMP, PIM-SM, PIM-DM, SSM, RP |
 
@@ -118,11 +121,11 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C27 | SW-001 | Switching Fundamentals | pending | MAC learning, forwarding, flooding; multi-vendor |
-| C28 | SW-002 | VLANs & 802.1Q Trunking | pending | Access/trunk ports, native VLAN |
-| C29 | SW-003 | Spanning Tree Protocol (STP/RSTP/MSTP) | pending | 802.1D, 802.1w, 802.1s; per-vendor flavours |
-| C30 | SW-004 | EtherChannel / LAG (LACP) | pending | 802.3ad LACP vs Cisco PAgP (proprietary) |
-| C31 | SW-005 | Port Security & DAI | pending | MAC limiting, DHCP snooping, Dynamic ARP Inspection |
+| C27 | SW-001 | Switching Fundamentals | done | MAC learning, forwarding, flooding; multi-vendor |
+| C28 | SW-002 | VLANs & 802.1Q Trunking | done | Access/trunk ports, native VLAN, 802.1Q frame structure, VLAN hopping |
+| C29 | SW-003 | Spanning Tree Protocol (STP/RSTP/MSTP) | done | 802.1D, 802.1w, 802.1s; PVST+/RPVST+; PortFast/BPDU Guard |
+| C30 | SW-004 | EtherChannel / LAG (LACP) | done | 802.3ad LACP vs Cisco PAgP; load-balancing hash; port-channel config |
+| C31 | SW-005 | Port Security & DAI | done | MAC limiting, sticky MAC, violation modes, DHCP Snooping, DAI, ARP ACL |
 | C32 | SW-006 | Layer 3 Switching & SVIs | pending | |
 
 ---
@@ -131,18 +134,18 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C33 | CT-001 | MPLS Fundamentals | pending | Labels, FEC, LDP, RSVP-TE; standard + multi-vendor |
-| C34 | CT-002 | MPLS VPNs (L3VPN / VRF) | pending | RFC 4364; PE-CE routing |
-| C35 | CT-003 | MPLS L2VPN (VPLS, Pseudowire) | pending | RFC 4761, 4762 |
-| C36 | CT-004 | Segment Routing (SR-MPLS) | pending | IETF standard; Cisco, Nokia, Juniper implementations |
-| C37 | CT-005 | SRv6 | pending | SR over IPv6 data plane |
-| C38 | CT-006 | EVPN Fundamentals | pending | RFC 7432; MAC/IP advertisement; multi-vendor |
-| C39 | CT-007 | EVPN-VXLAN | pending | Overlay + underlay; DC and carrier use |
-| C40 | CT-008 | Metro Ethernet Forum (MEF) Standards | pending | E-Line, E-LAN, E-Tree, E-Access; MEF 3.0 |
-| C41 | CT-009 | Carrier Ethernet Services | pending | CE 2.0 attributes, CoS, bandwidth profiles |
-| C42 | CT-010 | SDH/SONET & OTN Basics | pending | Legacy transport; still present in carrier core |
-| C43 | CT-011 | Optical Transport Network (OTN) | pending | G.709; ODU multiplexing |
-| C44 | CT-012 | Traffic Engineering (RSVP-TE & SR-TE) | pending | Tunnels, path computation, fast-reroute |
+| C33 | CT-001 | MPLS Fundamentals | done | Labels, FEC, LDP, LSP, PHP, L3VPN/TE/FRR overview; multi-vendor |
+| C34 | CT-002 | MPLS VPNs (L3VPN / VRF) | done | RFC 4364; PE-CE routing |
+| C35 | CT-003 | MPLS L2VPN (VPLS, Pseudowire) | done | RFC 4761, 4762 |
+| C36 | CT-004 | Segment Routing (SR-MPLS) | done | IETF standard; Cisco, Nokia, Juniper implementations |
+| C37 | CT-005 | SRv6 | done | SR over IPv6 data plane |
+| C38 | CT-006 | EVPN Fundamentals | done | RFC 7432; MAC/IP advertisement; multi-vendor |
+| C39 | CT-007 | EVPN-VXLAN | done | Overlay + underlay; DC and carrier use |
+| C40 | CT-008 | Metro Ethernet Forum (MEF) Standards | done | E-Line, E-LAN, E-Tree, E-Access; MEF 3.0 |
+| C41 | CT-009 | Carrier Ethernet Services | done | CE 2.0 attributes, CoS, bandwidth profiles |
+| C42 | CT-010 | SDH/SONET & OTN Basics | done | Legacy transport; still present in carrier core |
+| C43 | CT-011 | Optical Transport Network (OTN) | done | G.709; ODU multiplexing |
+| C44 | CT-012 | Traffic Engineering (RSVP-TE & SR-TE) | done | Tunnels, path computation, fast-reroute |
 
 ---
 
@@ -201,11 +204,11 @@ Network functions — conceptual and implementation, multi-vendor.
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C71 | SV-001 | DNS | pending | Covered by PROTO-001; link or merge |
-| C72 | SV-002 | DHCP | pending | Covered by PROTO-010; link or merge |
-| C73 | SV-003 | NAT & PAT | pending | Covered by FN-003; link or merge |
-| C74 | SV-004 | NTP | pending | Covered by PROTO-003; link or merge |
-| C75 | SV-005 | SNMP & Syslog | pending | Covered by PROTO-004/005; link or merge |
+| C71 | SV-001 | DNS | done | Hierarchy, resolution, DORA analogy, record types, TTL |
+| C72 | SV-002 | DHCP | done | DORA exchange, leases, relay agents, Option 82, DHCPv6 |
+| C73 | SV-003 | NAT & PAT | done | Static/dynamic/PAT, DNAT, translation table, ALG, NAT-T |
+| C74 | SV-004 | NTP | done | Stratum hierarchy, slew vs step, NTP auth, PTP/IEEE 1588 |
+| C75 | SV-005 | SNMP & Syslog | done | SNMPv3 authPriv, MIB/OID, Trap/Inform, Syslog severity |
 
 > **Note:** There is overlap between `services/` and `protocols/` + `functions/`. Decision needed: keep `services/` as an alias/redirect layer, or merge the content. Flag for human decision.
 
@@ -215,12 +218,12 @@ Network functions — conceptual and implementation, multi-vendor.
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C76 | SEC-001 | ACLs | pending | Link to FN-004/005 for function; cover config multi-vendor |
-| C77 | SEC-002 | Firewall Concepts | pending | |
-| C78 | SEC-003 | VPN & IPSec | pending | IKEv1/v2, ESP/AH, tunnel vs transport |
-| C79 | SEC-004 | AAA — TACACS+ & RADIUS | pending | TACACS+ (Cisco-originated; now standard); RADIUS RFC 2865 |
-| C80 | SEC-005 | Encryption Standards & PKI | pending | AES, RSA, certificates, CA; brief |
-| C81 | SEC-006 | Network Segmentation & DMZ | pending | |
+| C76 | SEC-001 | ACLs | done | Standard vs extended, wildcard masks, inbound/outbound, TCP established, IPv6 |
+| C77 | SEC-002 | Firewall Concepts | done | Stateful inspection, session table, zone-based policy, DMZ, SYN flood, NGFW |
+| C78 | SEC-003 | VPN & IPSec | done | IKEv1/v2, ESP/AH, tunnel mode, NAT-T, certificate vs PSK |
+| C79 | SEC-004 | AAA — TACACS+ & RADIUS | done | TACACS+ vs RADIUS, 802.1X, command accounting, local fallback |
+| C80 | SEC-005 | Encryption Standards & PKI | done | AES/RSA/ECDSA, X.509, CA hierarchy, CRL/OCSP, TLS 1.3 |
+| C81 | SEC-006 | Network Segmentation & DMZ | done | Zone model, DMZ, dual-firewall, OoB management, micro-segmentation, Zero Trust |
 
 ---
 
@@ -228,10 +231,10 @@ Network functions — conceptual and implementation, multi-vendor.
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C82 | QOS-001 | QoS Fundamentals | pending | Delay, jitter, loss, bandwidth |
-| C83 | QOS-002 | Classification & Marking | pending | DSCP (RFC 2474), 802.1p CoS; multi-vendor |
-| C84 | QOS-003 | Queuing Mechanisms | pending | FIFO, PQ, WFQ, CBWFQ, LLQ |
-| C85 | QOS-004 | Traffic Policing & Shaping | pending | Token bucket; vendor implementations |
+| C82 | QOS-001 | QoS Fundamentals | done | Delay, jitter, loss, bandwidth; DSCP; trust boundary; ITU G.114 |
+| C83 | QOS-002 | Classification & Marking | done | MQC class-map/policy-map; DSCP/802.1p; NBAR; trust config |
+| C84 | QOS-003 | Queuing Mechanisms | done | FIFO, WFQ, CBWFQ, LLQ; WRED; priority queue policing |
+| C85 | QOS-004 | Traffic Policing & Shaping | done | Token bucket; CIR/Bc/Be/PIR; two-rate three-colour; HQoS |
 | C86 | QOS-005 | QoS in MPLS Networks | pending | EXP/TC bits; pipe vs uniform mode |
 
 ---
@@ -240,10 +243,10 @@ Network functions — conceptual and implementation, multi-vendor.
 
 | # | Module ID | Title | Status | Notes |
 |---|---|---|---|---|
-| C87 | AUTO-001 | Python for Network Engineers | pending | Netmiko, Paramiko, NAPALM |
-| C88 | AUTO-002 | REST APIs | pending | JSON/XML; HTTP methods; Postman |
-| C89 | AUTO-003 | NETCONF & YANG | pending | Link to PROTO-008 |
-| C90 | AUTO-004 | Ansible for Networks | pending | Playbooks, roles, vendor modules |
+| C87 | AUTO-001 | Python for Network Engineers | done | Netmiko, Paramiko, NAPALM |
+| C88 | AUTO-002 | REST APIs & Network Automation | done | JSON/XML; HTTP methods; RESTCONF; eAPI; NX-API |
+| C89 | AUTO-003 | NETCONF, YANG & gRPC | done | ncclient; gNMI streaming telemetry |
+| C90 | AUTO-004 | Ansible for Network Automation | done | Playbooks, roles, vendor modules; resource modules |
 | C91 | AUTO-005 | Terraform for Networks | pending | Infrastructure as code |
 
 ---
@@ -403,6 +406,11 @@ Network functions — conceptual and implementation, multi-vendor.
 | 2026-04-15 | `preprocess-module.py` handles output-specific transformation | Strips/transforms buckets for pdf and pptx targets; web passes through unchanged |
 | 2026-04-15 | Certs as benchmarks only — not curriculum anchors | Curriculum follows standards and skills, not exam objectives |
 | 2026-04-15 | Target audience is global, not Singapore-specific | Singapore IS/CS/EE reference is illustrative of typical reader background only |
+| 2026-04-17 | Problem-First pedagogy adopted | Modules open with progressive build-up (two parties + constraints) instead of static analogy; reader constructs the concept before it is formally named |
+| 2026-04-17 | MikroTik RouterOS added as peer vendor | No editorial positioning; platform context lives in platform-overview.md; vendor tabs show minimal config snippets + link to official docs |
+| 2026-04-17 | Vendor tabs show minimal config snippet + doc link | Not full working configs; highlight concept-critical parameters; follow with official documentation link |
+| 2026-04-17 | RT module IDs finalised: RT-003=RIP, RT-004=OSPF, RT-007=BGP | DNE learning path updated to match; spine production order follows this numbering |
+| 2026-04-17 | Content production order: spine first (IP→Routing), then DNE deep dive, then CE deep dive | Spine modules used by both paths; write once, reference from both |
 | 2026-04-15 | Professional Standards domain added (PS) | ITIL, NIST, BCP38, TIA-942, ISO 27001, MEF, IEEE — what engineers are audited against |
 | 2026-04-15 | Multilingual support via file naming convention | `module.md` = EN default; `module.zh-CN.md`, `module.ms.md`, `module.ta.md` for translations |
 

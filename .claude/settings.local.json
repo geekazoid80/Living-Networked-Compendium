@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd.exe /c \"dir \\\\\"C:\\\\Users\\\\SengChyeLEE\\\\AppData\\\\Local\\\\Programs\\\\MiKTeX\\\\\" /s /b 2>&1 | findstr /i xelatex\")",
+      "Bash(cmd.exe /c \"reg query HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall /s /f MiKTeX 2>&1 | findstr /i \\\\\"InstallLocation DisplayName\\\\\"\")",
+      "Bash(cmd.exe /c \"reg query HKCU\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall /s 2>&1 | findstr /i \\\\\"miktex install\\\\\"\")"
+    ]
+  }
+}

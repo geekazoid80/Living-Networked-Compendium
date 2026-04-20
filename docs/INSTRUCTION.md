@@ -113,7 +113,7 @@ Everything between `<!-- XREF-START -->` and `<!-- XREF-END -->` is stripped by 
 Every module follows this exact section order. Do not reorder, do not skip (except Lab, which is optional).
 
 1. **Frontmatter** (YAML)
-2. **The Analogy** — layman explanation first, always. One concrete real-world analogy that maps to the concept. Then explicitly map the analogy to the technical terms.
+2. **The Problem** — progressive build-up from first principles. Two parties, simplest possible scenario. Add constraints one at a time; solve each; name what was invented. End with a summary mapping table. See Section 5 for the full pattern.
 3. **Learning Objectives** — 3–5 measurable outcomes (Bloom's verbs)
 4. **Prerequisites** — list of module IDs + one line on what specifically you need from each
 5. **Core Content** — Bucket 1 content, with Bucket 2 `???` blocks inline where relevant
@@ -130,27 +130,52 @@ Every module follows this exact section order. Do not reorder, do not skip (exce
 
 ---
 
-## 5. The Analogy-First Pattern
+## 5. The Problem-First Pattern
 
-Every module must open with a layman analogy **before** any technical content. This is mandatory — not optional.
+Every module must open with a **progressive problem build-up** before any technical content. This is mandatory — not optional.
 
-The pattern:
-1. **Describe the analogy** in plain language. One paragraph. No jargon.
-2. **Explicitly map** the analogy to the technical terms in a table or short list.
-3. **Then** proceed with the technical explanation.
+The reader constructs the concept themselves by solving a series of constraints. By the time the formal name appears, they already understand what it is and why it exists.
 
-**Example (OSPF):**
+### The Pattern
 
-> Imagine a city where every intersection has a noticeboard. When you arrive at an intersection, you read all the notices, then pin your own: "I'm at this corner, and here's how far I am from every other corner I know about." Every intersection does this. After a few minutes, every intersection has the same complete map of the city — and can calculate the shortest path to anywhere.
->
-> In OSPF:
-> - **Intersection** → Router
-> - **Noticeboard notice** → Link State Advertisement (LSA)
-> - **Complete city map** → Link State Database (LSDB)
-> - **Calculating shortest path** → Dijkstra's SPF algorithm
-> - **The city** → OSPF Area
+1. **Starting scenario** — two parties in the simplest possible situation. No jargon, no technical terms. Describe it working.
+2. **Add one constraint** — something breaks or becomes impossible. Describe the problem plainly.
+3. **Solve it** — what do the parties invent or agree on? Name it in plain language first, then in technical terms.
+4. **Repeat** — add the next constraint, solve it, name it. Use as many steps as the concept genuinely requires.
+5. **Summary table** — at the end, map each scenario element to its technical term.
 
-This makes the concept accessible to someone who has never heard of OSPF — and it gives experienced engineers a clean mental model to hang the details on.
+### Which scenario to use
+
+- **Foundational modules** (OSI, IP addressing, subnetting, topologies, cabling): two humans trying to communicate. Start literally — two people standing next to each other.
+- **Advanced modules** (OSPF, BGP, MPLS, VLANs, etc.): two systems or operators with a specific technical problem. The scenario is still plain-language, but adapted to the domain.
+
+### Example — NW-001 (OSI Model)
+
+Two people standing next to each other. They want to communicate. They open their mouths and speak. It works — problem solved.
+
+Now move them to different rooms. They can't hear each other. They need a medium — a string between tin cans, a wire, a radio signal. They've just invented the **Physical layer**.
+
+Now there are five people in the room. When you speak, everyone hears you. How does anyone know which message is for them? You agree to start every message with the recipient's name. They've just invented **addressing** — the foundation of the **Data Link layer**.
+
+Now they're in different buildings, with many rooms each. The street-level name alone isn't enough. You need to know which building and which room. They've just invented **logical addressing** — the **Network layer**.
+
+...and so on, through Transport, Session, Presentation, Application.
+
+**Summary table:**
+
+| Scenario element | Technical term |
+|---|---|
+| The wire, radio wave, or string | Physical layer (L1) |
+| "Start every message with the recipient's name" | MAC addressing, Data Link layer (L2) |
+| Building + room addressing | IP addressing, Network layer (L3) |
+| Guaranteed vs. unguaranteed delivery | TCP vs. UDP, Transport layer (L4) |
+| Tracking a long multi-part conversation | Session layer (L5) |
+| Agreeing on a shared language / encoding | Presentation layer (L6) |
+| The message itself | Application layer (L7) |
+
+### What this achieves
+
+A reader who has never heard of the OSI model now understands *why each layer exists* — not just what it is called. This is the engineering mindset: decompose the problem, identify each constraint, solve it. The same method applies across every domain in the compendium.
 
 ---
 
@@ -222,13 +247,20 @@ When showing configuration examples for multiple vendors, use MkDocs tabbed synt
 
 Not every module needs every vendor. Minimum for routing/switching topics: **Cisco + Juniper + Nokia**. Add Arista for DC topics. Add Huawei where it's widely deployed. MikroTik for ISP/SME-relevant topics.
 
+### Vendor Tab Rules
+
+- Show a **minimal config snippet** — the lines that illustrate the concept-critical parameters. Not a full working config.
+- Follow each snippet with a link to the official vendor documentation for that specific feature: `Full configuration reference: [link]`
+- If official documentation for a feature cannot be found for a vendor, **omit that tab silently** — no warning, no explanation.
+- Platform context (what each OS runs on, where it is commonly deployed) lives in the **Platform Overview** reference page (`modules/fundamentals/networking/platform-overview.md`). Do not repeat it in module content.
+
 ### Vendor Coverage by Domain
 
-| Domain | Priority Vendors |
+| Domain | Vendors |
 |---|---|
-| Enterprise routing/switching | Cisco, Juniper, Arista, Huawei, MikroTik |
-| Carrier / SP | Cisco (IOS-XR), Juniper, Nokia, Huawei, ZTE |
-| Data Centre | Arista, Cisco (NX-OS), Juniper, Nokia, Huawei |
+| Enterprise routing/switching | Cisco IOS-XE, Juniper Junos, Arista EOS, Huawei VRP, MikroTik RouterOS |
+| Carrier / SP | Cisco IOS-XR, Juniper Junos, Nokia SR-OS, Huawei VRP, ZTE |
+| Data Centre | Arista EOS, Cisco NX-OS, Juniper, Nokia, Huawei |
 | RF / Satellite | Vendor-neutral (standards-dominated: DVB, ITU) |
 | Cable / HFC | Cisco, Harmonic, Casa Systems (DOCSIS-focused) |
 | Mobile / Cellular | Ericsson, Nokia, Huawei, ZTE (RAN-specific), Cisco (core) |

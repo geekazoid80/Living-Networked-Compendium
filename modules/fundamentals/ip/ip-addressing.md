@@ -16,22 +16,43 @@ language: en
 cert_alignment: "CCNA 200-301 — 1.6; CompTIA Network+ — 1.4; JNCIA-Junos — Networking Fundamentals"
 ---
 
-## The Analogy
+## The Problem
 
-Think of an IP address like a postal address — but one with two parts working together.
+You've just moved into a new building. It's a big one — hundreds of rooms. You want to send a letter to someone in Room 47. You write "Room 47" on the envelope and hand it to the courier.
 
-The postal address "23 Maple Street, Springfield" has a suburb part (Springfield) and a house number part (23 Maple Street). The suburb tells the postal system which neighbourhood to route the parcel to. The street number tells the local postman which specific house to deliver it to.
+The courier looks at the envelope and asks: "Which building?" You forgot — Room 47 exists in every building on the street. The courier has no idea where to go.
 
-An IP address works the same way. Part of the address identifies the **network** (like the suburb), and part identifies the **host** (like the house). The **subnet mask** is the rule that tells you which bits are "suburb" and which bits are "house number."
+### Step 1: You need a building identifier
 
-| Postal system | IP addressing |
+You add the building number: "Building 3, Room 47." Now the courier can find the right building first, then locate the room. Two pieces of information working together: *where is the building*, and *which room inside it*.
+
+This is the core idea behind an IP address. It has two parts: one that identifies the **network** (the building), and one that identifies the **host** (the room). Both are encoded in a single number.
+
+### Step 2: But how do you know where the building ends and the room begins?
+
+"Building 3, Room 47" only works if everyone agrees on how many digits belong to the building number and how many to the room number. If the courier reads it as "Building 33, Room 47" you've got a problem.
+
+You need a rule — a boundary — that says: "the first N digits identify the building; the rest identify the room." That rule is the **subnet mask**. It doesn't add new information — it just tells you how to read the address you already have.
+
+### Step 3: The building numbers are running out
+
+There are only so many buildings you can number with the digits you've chosen. If your numbering scheme supports 4 billion addresses and the world needs more, you hit a wall.
+
+One solution: let many buildings share the same external-facing number, using a translator at the door who swaps internal room numbers for external ones. That's **NAT** — Network Address Translation. The building has a public address on the street, and private numbering inside.
+
+### What You Just Built
+
+An IPv4 address is a 32-bit number divided into two parts by the subnet mask — a **network portion** and a **host portion**. The mask tells you the boundary. Private address ranges let millions of internal networks reuse the same number space without conflict.
+
+| Scenario element | Technical term |
 |---|---|
-| Full address (suburb + street) | IP address (e.g., 192.168.1.100) |
-| Suburb — tells the system which neighbourhood | Network portion (determined by subnet mask) |
-| Street + house number — specific house | Host portion |
-| The rule for where suburbs end and streets begin | Subnet mask |
-| Suburb/postal area designation | Network address (e.g., 192.168.1.0/24) |
-| "Deliver to everyone in this suburb" | Broadcast address |
+| Building number | Network portion of the IP address |
+| Room number | Host portion of the IP address |
+| The rule for where building ends and room begins | Subnet mask |
+| The full "Building 3, Room 47" label | IP address in dotted-decimal notation |
+| Buildings that reuse internal numbers | Private address ranges (RFC 1918) |
+| The translator at the door | NAT — Network Address Translation |
+| "Deliver to every room in this building" | Broadcast address |
 
 ---
 
@@ -338,12 +359,29 @@ ifconfig
 
 ---
 
-<!-- XREF-START -->
 ## Where to Next
 
 - **Continue the sequence:** [IP Subnetting & VLSM](subnetting.md) (`IP-002`) — how to divide a network into smaller subnets
 - **Related topic:** [Routing Fundamentals](../routing/routing-fundamentals.md) (`RT-001`) — how IP addresses are used to move packets across networks
 - **Services that use IP:** [DHCP](../services/dhcp.md) (`SV-002`) — how devices get their IP addresses automatically
+
+---
+
+## Standards & Certifications
+
+**Relevant standards:**
+- IETF RFC 791 — Internet Protocol (original IPv4 specification)
+- IETF RFC 1918 — Address Allocation for Private Internets
+- IETF RFC 4632 — Classless Inter-Domain Routing (CIDR)
+
+**Benchmark certifications** — use these to self-assess your understanding, not as a study guide:
+
+| Cert | Vendor | Relevant section |
+|---|---|---|
+| CCNA 200-301 | Cisco | 1.6 — IPv4 addressing |
+| CompTIA Network+ | CompTIA | 1.4 — IP addressing |
+| JNCIA-Junos JN0-103 | Juniper | Networking fundamentals |
+| HCIA-Routing & Switching | Huawei | Network fundamentals |
 
 ---
 
@@ -362,4 +400,38 @@ ifconfig
 **Author:** @geekazoid80
 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — content
 **AI assistance:** Claude used for initial draft structure and prose. All technical claims verified against RFC 791, RFC 1918, and Odom's CCNA Official Cert Guide.
+
+---
+
+<!-- XREF-START -->
+## Internal Cross-References
+
+### Modules That Reference This Module
+
+| Module ID | Title | Context | Last Checked |
+|---|---|---|---|
+| IP-002 | IP Subnetting & VLSM | Prerequisite — network/host portion and subnet mask concepts | 2026-04-17 |
+| RT-001 | Routing Fundamentals | Prerequisite — IP addressing is the foundation of routing decisions | 2026-04-17 |
+| SV-002 | DHCP | Prerequisite — DHCP assigns addresses from the address space defined here | 2026-04-17 |
+
+### Modules This Module References
+
+| Module ID | Title | Context | Last Checked |
+|---|---|---|---|
+| NW-001 | The OSI Model | Prerequisite — IP lives at Layer 3 (Network layer) | 2026-04-17 |
+| IP-002 | IP Subnetting & VLSM | "Where to Next" forward reference | 2026-04-17 |
+| RT-001 | Routing Fundamentals | "Where to Next" forward reference | 2026-04-17 |
+
+### Vendor Mapping
+
+| Concept | Standard |
+|---|---|
+| IPv4 address format | RFC 791 |
+| Private address ranges | RFC 1918 |
+| CIDR notation | RFC 4632 |
+
+### Maintenance Notes
+
+- When IP-003 (IPv6) is added, update this module's "Where to Next" to include a forward reference to IPv6 addressing.
+- NAT & PAT (FN-003 / SV-003) references the private address space defined here — update both XREF sections when that module is written.
 <!-- XREF-END -->
