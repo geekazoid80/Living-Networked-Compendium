@@ -1,0 +1,13 @@
+# Template for .envrc (which is gitignored, per-machine).
+#
+# direnv: use the personal-account PAT for `gh` in this repo.
+# Keychain entry name: gh_personal_pat
+#
+# Setup on a new machine:
+#   brew install direnv
+#   echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
+#   security add-generic-password -s 'gh_personal_pat' -a "$USER" -w '<paste-fine-grained-pat>'
+#   cp .envrc.example .envrc
+#   direnv allow .
+
+export GH_TOKEN="$(security find-generic-password -s 'gh_personal_pat' -a "$USER" -w 2>/dev/null)"

@@ -63,3 +63,10 @@ media-*/
 *.tmp
 *.temp
 *.log
+
+# ─── direnv: per-machine token wiring ─────────────────────────────────────────
+# .envrc is local-only (sources GH_TOKEN from macOS Keychain entry gh_personal_pat).
+# .envrc.example is the committed template; copy it on a new machine.
+.envrc
+!.envrc.example
+.direnv/
