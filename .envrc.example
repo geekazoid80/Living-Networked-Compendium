@@ -6,8 +6,15 @@
 # Setup on a new machine:
 #   brew install direnv
 #   echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
-#   security add-generic-password -s 'gh_personal_pat' -a "$USER" -w '<paste-fine-grained-pat>'
+#   security add-generic-password -s 'gh_personal_pat' -a "$USER" -W   # -W prompts; PAT never enters history
 #   cp .envrc.example .envrc
 #   direnv allow .
+#
+# Rotate the PAT (e.g. on expiry):
+#   security delete-generic-password -s 'gh_personal_pat'
+#   security add-generic-password    -s 'gh_personal_pat' -a "$USER" -W
+# `-W` reads the new PAT from a TTY prompt; it never appears in shell history,
+# transcripts, or process lists. (The .envrc itself reads the stored PAT via
+# `find-generic-password ... -w` inside a subshell capture, which is also safe.)
 
 export GH_TOKEN="$(security find-generic-password -s 'gh_personal_pat' -a "$USER" -w 2>/dev/null)"
