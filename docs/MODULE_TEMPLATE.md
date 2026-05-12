@@ -89,9 +89,10 @@ By the end of this module, you will be able to:
      Example: OSI model should not be a prerequisite for a module that constructs the OSI model
      step by step - it IS the thing being taught. -->
 
-- [Module Name](../domain/module-file.md) (`XX-NNN`) - specifically, [what you need from it]
+<!-- Placeholder example. Replace with real prerequisite links once filled in. -->
+- **Module Name** (`../domain/module-file.md`, `XX-NNN`) - specifically, [what you need from it]
 
-If you're new to networking entirely, start with [NW-001 - The OSI Model](../networking/osi-model.md).
+If you're new to networking entirely, start with [NW-001 - The OSI Model](modules/fundamentals/networking/osi-model.md).
 
 ---
 
@@ -322,9 +323,10 @@ Close with what the reader can now do that they could not do before.]
 
 ## Where to Next
 
-- **Continue:** [Module Name](../domain/module-file.md) (`XX-NNN`) - [one line]
-- **Related:** [Module Name](../domain/module-file.md) (`XX-NNN`) - [why relevant]
-- **Applied context:** [Learning Path or Applied Module](../../applied/path/file.md) - [how this is used in role]
+<!-- Placeholder examples. Replace each line with a real link once filled in. -->
+- **Continue:** **Module Name** (`../domain/module-file.md`, `XX-NNN`) - [one line]
+- **Related:** **Module Name** (`../domain/module-file.md`, `XX-NNN`) - [why relevant]
+- **Applied context:** **Learning Path or Applied Module** (`../../applied/path/file.md`) - [how this is used in role]
 
 ---
 
@@ -381,13 +383,13 @@ Close with what the reader can now do that they could not do before.]
 
 | Module ID | Title | Context | Last Checked |
 |---|---|---|---|
-| [XX-NNN](../path/file.md) | [Title] | [Why it references this module] | YYYY-MM-DD |
+| `XX-NNN` | [Title] | [Why it references this module] | YYYY-MM-DD |
 
 ### Modules This Module References
 
 | Module ID | Title | Context | Last Checked |
 |---|---|---|---|
-| [XX-NNN](../path/file.md) | [Title] | [What it is needed for] | YYYY-MM-DD |
+| `XX-NNN` | [Title] | [What it is needed for] | YYYY-MM-DD |
 
 ### Vendor Mapping
 
