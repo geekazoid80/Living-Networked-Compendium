@@ -146,14 +146,17 @@ jobs:
           # Extract version number from the v0NN string
           VER_NUM=$(echo "${{ steps.version.outputs.version }}" | grep -oP '[0-9]+')
           ./tools/scripts/build-pdf.sh "$VER_NUM"
-        continue-on-error: true   # Don't fail the whole job if PDF build fails
+        # No `continue-on-error` here. The earlier flag masked a real pandoc
+        # invocation bug (--syntax-highlighting=tango is not a pandoc flag;
+        # --highlight-style=tango is) for several releases. We want loud
+        # failure if the PDF build breaks again.
 
       - name: Build PPTX slides
         run: |
           chmod +x tools/scripts/build-pptx.sh
           VER_NUM=$(echo "${{ steps.version.outputs.version }}" | grep -oP '[0-9]+')
           ./tools/scripts/build-pptx.sh "$VER_NUM"
-        continue-on-error: true
+        continue-on-error: true   # marp can fail per-module legitimately; tolerate
 
       - name: Upload handout artifacts
         uses: actions/upload-artifact@v4
@@ -161,6 +164,11 @@ jobs:
           name: handouts-${{ steps.version.outputs.version }}
           path: handouts/versions/${{ steps.version.outputs.version_dir }}/
           retention-days: 90
+          # If nothing was produced (e.g. PDF build hard-failed AND no PPTX
+          # slides were written), surface that loudly rather than silently
+          # uploading nothing and then watching Create Release fall over
+          # with "Artifact not found".
+          if-no-files-found: error
 
   # ─────────────────────────────────────────────────────────────────────────────
   # Job 4: Create GitHub Release with handout artifacts
