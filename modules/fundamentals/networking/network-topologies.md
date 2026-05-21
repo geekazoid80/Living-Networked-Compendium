@@ -558,7 +558,7 @@ When something stops working, topology tells you where to look. A collision doma
 
 - **Continue the sequence:** [Ethernet Standards & Cabling](ethernet-cabling.md) (`NW-003`) - the physical media that carries the signal
 - **Apply to switching:** [Switching Fundamentals](../switching/switching-fundamentals.md) (`SW-001`) - how switches learn, forward, and create collision domain boundaries
-- **Broadcast domain segmentation:** [VLANs & 802.1Q Trunking](../switching/vlans-trunking.md) (`SW-002`) - how VLANs create multiple broadcast domains on one switch
+- **Broadcast domain segmentation:** [VLANs & 802.1Q Trunking](../switching/vlans-8021q.md) (`SW-002`) - how VLANs create multiple broadcast domains on one switch
 - **Topology at scale:** [Data Centre Network Design](../datacentre/dc-network-design.md) (`DC-001`) - spine-leaf as structured partial mesh
 
 ---

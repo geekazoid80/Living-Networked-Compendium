@@ -120,7 +120,7 @@ Certifications referenced include: Cisco CCNA/CCNP/CCIE, Juniper JNCIA/JNCIS/JNC
 Read [CONTRIBUTING.md](CONTRIBUTING.md) and [CONTRIBUTION_SPEC.md](CONTRIBUTION_SPEC.md) first.
 
 Key requirements:
-- Every module must follow the template in [docs/MODULE_TEMPLATE.md](docs/MODULE_TEMPLATE.md)
+- Every module must follow the template in [MODULE_TEMPLATE.md](MODULE_TEMPLATE.md)
 - AI assistance is allowed but all content requires human review before `human_reviewed: true`
 - One concept per module — keep it atomic
 - Attribution is mandatory — never pass off third-party material as original

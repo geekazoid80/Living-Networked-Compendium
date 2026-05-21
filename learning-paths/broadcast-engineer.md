@@ -101,7 +101,7 @@ If you have experience in broadcast or media networking, your knowledge is exact
 **How to start:**
 1. Read [CONTRIBUTING.md](../CONTRIBUTING.md) and [CONTRIBUTION_SPEC.md](../CONTRIBUTION_SPEC.md)
 2. Pick a module from the table above that you know well
-3. Use [docs/MODULE_TEMPLATE.md](../docs/MODULE_TEMPLATE.md) to structure your contribution
+3. Use [MODULE_TEMPLATE.md](../MODULE_TEMPLATE.md) to structure your contribution
 4. Open a pull request — describe your experience in the PR description
 
 **Questions?** Open a GitHub Issue with the label `broadcast-path` and we'll get back to you.
