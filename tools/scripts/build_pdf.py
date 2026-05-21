@@ -234,7 +234,7 @@ def main() -> None:
                 f"--metadata=title=Living Networked Compendium {version}",
                 "--metadata=author=Community Contributors",
                 f"--metadata=date={build_date}",
-                "--syntax-highlighting=tango",
+                "--highlight-style=tango",
             ],
             check=True,
             cwd=str(tmp_dir),
