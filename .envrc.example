@@ -1,0 +1,27 @@
+# .envrc.example — direnv template that reads a GitHub PAT from macOS Keychain.
+#
+# Copy to .envrc (per-machine, gitignored), then run `direnv allow .`.
+# direnv will export GH_TOKEN when this directory is entered, so `gh` and
+# `git push` over HTTPS authenticate without prompting.
+#
+# One-time macOS setup on a new machine:
+#
+#   brew install direnv
+#   echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc   # or your shell's equivalent
+#   exec zsh
+#
+#   # Store the PAT in Keychain (paste a fine-grained PAT when prompted):
+#   security add-generic-password -s 'gh_personal_pat' -a "$USER" -W
+#
+#   cp .envrc.example .envrc
+#   direnv allow .
+#
+# PAT scopes (fine-grained): Contents R/W, Pull requests R/W, Metadata R,
+# Issues R/W (optional), Checks R (for `gh pr checks`), Actions R/W (if you
+# edit .github/workflows/* files).
+#
+# Non-macOS: replace `security find-generic-password` with your platform's
+# secret-store CLI (gnome-keyring, KWallet, pass, etc.) so the token is never
+# written to disk in plaintext.
+
+export GH_TOKEN="$(security find-generic-password -s 'gh_personal_pat' -a "$USER" -w 2>/dev/null)"
