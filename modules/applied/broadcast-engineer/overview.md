@@ -46,7 +46,7 @@ If you work in broadcast or media networking, your expertise is exactly what thi
 **To contribute:**
 1. Read [CONTRIBUTING.md](../../../CONTRIBUTING.md)
 2. Pick a module from the [learning path](../../../learning-paths/broadcast-engineer.md)
-3. Use the [module template](../../../docs/MODULE_TEMPLATE.md)
+3. Use the [module template](../../../MODULE_TEMPLATE.md)
 4. Open a pull request
 
 Open a GitHub Issue with the label `broadcast-path` if you want to discuss scope or approach first.

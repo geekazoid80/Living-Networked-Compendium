@@ -23,15 +23,6 @@ not_in_nav: |
   TASK.md
   front-matter/
 
-# `--strict` would otherwise fail the build on content-level broken links
-# (e.g. forward-references to modules not yet written, like `access-media/`
-# placeholders). Downgrade `links.not_found` to `info` so those warnings
-# do not block CI. Real broken-link cleanup is tracked as a separate
-# content-audit task — see follow-up issues filed alongside this change.
-validation:
-  links:
-    not_found: info
-
 theme:
   name: material
   palette:
@@ -128,11 +119,15 @@ nav:
     - IP Addressing:
       - IP Addressing Fundamentals: modules/fundamentals/ip/ip-addressing.md
       - IP Subnetting & VLSM: modules/fundamentals/ip/subnetting.md
-    - Access Media: []
-    - Routing: []
+    - Access Media:
+      - Grey Optical (AM-006): modules/fundamentals/access-media/grey-optical.md
+      - Coloured Optics CWDM/DWDM (AM-007): modules/fundamentals/access-media/coloured-optical.md
+    - Routing:
+      - Multicast Routing (RT-011): modules/fundamentals/routing/multicast-routing.md
     - Switching: []
     - Carrier & Transport: []
-    - Data Centre: []
+    - Data Centre:
+      - DC Network Design (DC-001): modules/fundamentals/datacentre/dc-network-design.md
     - Protocols: []
     - Network Functions: []
     - Services: []
