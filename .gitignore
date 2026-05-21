@@ -7,6 +7,17 @@ private/*
 # ─── MkDocs build output ──────────────────────────────────────────────────────
 site/
 
+# ─── MkDocs staged content (copied from repo root by build-web.sh) ───────────
+# tools/scripts/build-web.sh copies these into docs/ before `mkdocs build`
+# because mkdocs does not allow docs_dir to be the parent of mkdocs.yml.
+# The copies are ephemeral build artefacts, not source of truth.
+docs/README.md
+docs/CONTRIBUTING.md
+docs/CONTRIBUTION_SPEC.md
+docs/AI_GUARDRAILS.md
+docs/learning-paths/
+docs/modules/
+
 # ─── Generated handout artifacts ─────────────────────────────────────────────
 # Handouts are published as GitHub Release artifacts, not committed to the repo.
 # Remove this line only if you decide to track handout history in git.
