@@ -46,7 +46,7 @@ tags: [applied, template, seeking-contributors]
 
 *Link to the corresponding file in learning-paths/:*
 
-See [learning-paths/your-path-name.md](../../../learning-paths/your-path-name.md) for the complete ordered sequence.
+See `learning-paths/your-path-name.md` for the complete ordered sequence.
 
 ## Call for Contributors
 
