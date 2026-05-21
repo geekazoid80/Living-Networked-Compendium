@@ -1,0 +1,3736 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A progressive, community-built guide for network engineers — enterprise, carrier, data centre, RF/satellite, and beyond.">
+      
+      
+        <meta name="author" content="Community Contributors">
+      
+      
+      
+        <link rel="prev" href="../ip-addressing/">
+      
+      
+        <link rel="next" href="../../professional-standards/overview/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>IP Subnetting & VLSM - Living Networked Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-objectives" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Living Networked Compendium" class="md-header__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Living Networked Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IP Subnetting & VLSM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../learning-paths/data-network-engineer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learning Paths
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../networking/osi-model/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../applied/data-network-engineer/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Applied
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../CONTRIBUTING/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Living Networked Compendium" class="md-nav__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Living Networked Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Paths
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learning Paths
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/data-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/carrier-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/datacentre-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-satellite-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-coax-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/voice-telephony-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-mobile-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/storage-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/broadcast-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking/osi-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSI Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IP Addressing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip-addressing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-the-broadcast-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: The broadcast problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-but-every-wing-needs-a-different-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: But every wing needs a different size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-the-cutting-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: The cutting tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-just-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Just Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-subnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Subnet?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-subnetting-mechanic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Subnetting Mechanic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-subnet-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding Subnet Boundaries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Finding Subnet Boundaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-block-size-method-step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Block Size Method (Step by Step)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#determining-if-two-hosts-are-on-the-same-subnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Determining if Two Hosts Are on the Same Subnet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subnetting-a-network-design-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subnetting a Network: Design Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-length-subnet-masking-vlsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variable Length Subnet Masking (VLSM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-1-forgetting-to-subtract-2-for-network-and-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 1: Forgetting to subtract 2 for network and broadcast
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-2-not-sorting-by-size-in-vlsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 2: Not sorting by size in VLSM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-3-overlapping-subnets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 3: Overlapping subnets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-4-the-interesting-octet-is-in-the-wrong-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 4: The "interesting octet" is in the wrong place
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practice Problems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-subnetting-design-exercise-with-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab: Subnetting Design Exercise with Packet Tracer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary &amp; Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standards-certifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standards &amp; Certifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution &amp; Licensing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Cross-References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Cross-References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modules-that-reference-this-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules That Reference This Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules-this-module-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules This Module References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access Media
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Switching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier & Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocols
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../professional-standards/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Professional Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/data-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/carrier-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/datacentre-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-satellite-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-coax-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/voice-telephony-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-mobile-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/storage-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/broadcast-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/_new-path-template/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start a New Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTION_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../AI_GUARDRAILS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Guardrails
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../MODULE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../INSTRUCTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-the-broadcast-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: The broadcast problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-but-every-wing-needs-a-different-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: But every wing needs a different size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-the-cutting-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: The cutting tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-just-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Just Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-subnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Subnet?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-subnetting-mechanic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Subnetting Mechanic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-subnet-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding Subnet Boundaries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Finding Subnet Boundaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-block-size-method-step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Block Size Method (Step by Step)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#determining-if-two-hosts-are-on-the-same-subnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Determining if Two Hosts Are on the Same Subnet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subnetting-a-network-design-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subnetting a Network: Design Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-length-subnet-masking-vlsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variable Length Subnet Masking (VLSM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-1-forgetting-to-subtract-2-for-network-and-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 1: Forgetting to subtract 2 for network and broadcast
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-2-not-sorting-by-size-in-vlsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 2: Not sorting by size in VLSM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-3-overlapping-subnets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 3: Overlapping subnets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-4-the-interesting-octet-is-in-the-wrong-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 4: The "interesting octet" is in the wrong place
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practice Problems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-subnetting-design-exercise-with-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab: Subnetting Design Exercise with Packet Tracer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary &amp; Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standards-certifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standards &amp; Certifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution &amp; Licensing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Cross-References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Cross-References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modules-that-reference-this-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules That Reference This Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules-this-module-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules This Module References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">addressing</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">cidr</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">ip</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">network-design</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">subnetting</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">vlsm</span>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium/edit/main/modules/fundamentals/ip/subnetting.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>IP Subnetting & VLSM</h1>
+
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ol>
+<li><strong>Explain</strong> why subnetting is needed and what problem it solves</li>
+<li><strong>Calculate</strong> subnet addresses, broadcast addresses, and usable host ranges for any given network and mask</li>
+<li><strong>Divide</strong> a given network into a required number of subnets</li>
+<li><strong>Apply</strong> Variable Length Subnet Masking (VLSM) to design an efficient IP addressing scheme</li>
+<li><strong>Verify</strong> that two given IP addresses are on the same subnet</li>
+</ol>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../networking/osi-model/">The OSI Model</a> (<code>NW-001</code>) - Layer 3 context</li>
+<li><a href="../ip-addressing/">IP Addressing Fundamentals</a> (<code>IP-001</code>) - binary conversion, subnet masks, CIDR notation</li>
+</ul>
+<p>You must be comfortable converting IP addresses between binary and dotted-decimal. If you can't do that yet, do <code>IP-001</code> first - this module builds directly on it.</p>
+<hr />
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
+<p>You've been given a block of 256 IP addresses for your company's network: <code>192.168.1.0</code> to <code>192.168.1.255</code>. Everyone shares the same pool.</p>
+<p>It works - at first. But then you notice something: every time the marketing team runs a broadcast announcement ("who has this address?"), every single device on the network gets interrupted, even the servers in the data room. Two hundred and fifty-four devices, all stopping what they're doing to read a message meant for one device.</p>
+<h3 id="step-1-the-broadcast-problem">Step 1: The broadcast problem<a class="headerlink" href="#step-1-the-broadcast-problem" title="Permanent link">&para;</a></h3>
+<p>Broadcasts are unavoidable in IP networks - devices need them to find each other (ARP, DHCP). But there's no reason every device needs to hear every broadcast. If you could isolate groups of devices so they only see broadcasts from their own group, you'd reduce the noise dramatically.</p>
+<p>The solution: divide your address block into smaller pieces. Each piece becomes its own isolated group - its own <strong>broadcast domain</strong>. Traffic stays within the group unless it needs to cross to another group via a router.</p>
+<p>That isolation is <strong>subnetting</strong>. You've just invented it.</p>
+<h3 id="step-2-but-every-wing-needs-a-different-size">Step 2: But every wing needs a different size<a class="headerlink" href="#step-2-but-every-wing-needs-a-different-size" title="Permanent link">&para;</a></h3>
+<p>Marketing has 50 people. The server room has 6 machines. The WAN link between two buildings only needs 2 addresses. If you give everyone a block of 64 addresses, the server room wastes 58 and the WAN link wastes 62.</p>
+<p>You need to be able to cut different-sized pieces from the same block - big pieces where you need them, small pieces where you don't.</p>
+<p>That's <strong>Variable Length Subnet Masking (VLSM)</strong>. Instead of carving equal slices, you carve by need.</p>
+<h3 id="step-3-the-cutting-tool">Step 3: The cutting tool<a class="headerlink" href="#step-3-the-cutting-tool" title="Permanent link">&para;</a></h3>
+<p>How do you carve? You steal bits. Your <code>/24</code> has 8 host bits - 256 addresses. If you take 1 bit from the host side and give it to the network side, you now have 2 subnets of 128 each. Take 2 bits: 4 subnets of 64. Take 3: 8 subnets of 32. Every bit you borrow doubles the number of subnets and halves their size.</p>
+<p>The tool doing the cutting is the <strong>subnet mask</strong> - it defines exactly where the network portion ends and the host portion begins.</p>
+<h3 id="what-you-just-built">What You Just Built<a class="headerlink" href="#what-you-just-built" title="Permanent link">&para;</a></h3>
+<p>Subnetting is the practice of dividing an IP address block into smaller broadcast domains by extending the network portion (borrowing host bits). VLSM extends this by allowing different-sized masks for different subnets, allocating address space efficiently.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario element</th>
+<th>Technical term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The full block of addresses</td>
+<td>Address space (e.g., <code>192.168.1.0/24</code>)</td>
+</tr>
+<tr>
+<td>An isolated group with its own broadcasts</td>
+<td>Subnet (broadcast domain)</td>
+</tr>
+<tr>
+<td>The boundary between groups</td>
+<td>Router interface</td>
+</tr>
+<tr>
+<td>Cutting the block into pieces</td>
+<td>Subnetting - borrowing host bits</td>
+</tr>
+<tr>
+<td>Different-sized pieces for different needs</td>
+<td>VLSM - Variable Length Subnet Masking</td>
+</tr>
+<tr>
+<td>The cutting rule</td>
+<td>Subnet mask / prefix length</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="why-this-matters">Why This Matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>Every network engineer subnets. Every day. Whether you're assigning addresses to a new office, designing a data centre, configuring VLANs, or troubleshooting a routing problem, you will need to know which subnet an address belongs to, how many hosts fit in a subnet, and how to divide address space efficiently.</p>
+<p>Subnetting is also one of the most heavily tested topics on the CCNA exam. But more than that - getting subnetting wrong in production causes real problems: duplicate addresses, broken routing, wrong broadcast domains. It's one of those skills where "close enough" isn't good enough.</p>
+<p>The maths isn't hard. There's a pattern to it, and once you see the pattern, subnetting becomes fast and mostly automatic.</p>
+<hr />
+<h2 id="core-content">Core Content<a class="headerlink" href="#core-content" title="Permanent link">&para;</a></h2>
+<h3 id="why-subnet">Why Subnet?<a class="headerlink" href="#why-subnet" title="Permanent link">&para;</a></h3>
+<p>A subnet is a logical subdivision of an IP network. The original motivation was simple: one large flat network is inefficient and hard to manage.</p>
+<p><strong>Problem 1: Broadcast traffic.</strong> Every device on a network receives every broadcast packet. A /16 network with 65,534 hosts generates enormous broadcast traffic. Subnetting creates <strong>broadcast domains</strong> - smaller groups where broadcasts are contained.</p>
+<p><strong>Problem 2: Security.</strong> You want to separate departments. Finance shouldn't be on the same network segment as the guest Wi-Fi. Subnetting makes it possible to apply access control at network boundaries.</p>
+<p><strong>Problem 3: Address efficiency.</strong> If you have 30 hosts in one office and 6 in another, giving both a /24 (254 hosts each) wastes 218 addresses per subnet. VLSM lets you right-size each subnet.</p>
+<p><strong>Problem 4: Routing.</strong> Routers route by network prefix. Subnetting creates more specific routes, enabling routers to make smarter forwarding decisions and reducing routing table size through summarisation.</p>
+<hr />
+<h3 id="the-subnetting-mechanic">The Subnetting Mechanic<a class="headerlink" href="#the-subnetting-mechanic" title="Permanent link">&para;</a></h3>
+<p>Subnetting works by <strong>borrowing bits</strong> from the host portion of an IP address and reassigning them to the network portion. Each bit you borrow doubles the number of subnets but halves the number of hosts per subnet.</p>
+<p>Start with: <code>192.168.1.0/24</code> - one network, 254 usable hosts.</p>
+<p>Borrow 1 bit: <code>/25</code> - 2 subnets, 126 hosts each
+Borrow 2 bits: <code>/26</code> - 4 subnets, 62 hosts each
+Borrow 3 bits: <code>/27</code> - 8 subnets, 30 hosts each
+Borrow 4 bits: <code>/28</code> - 16 subnets, 14 hosts each</p>
+<p>The formula:
+- <strong>Number of subnets</strong> = 2^(borrowed bits)
+- <strong>Hosts per subnet</strong> = 2^(remaining host bits) − 2</p>
+<hr />
+<h3 id="finding-subnet-boundaries">Finding Subnet Boundaries<a class="headerlink" href="#finding-subnet-boundaries" title="Permanent link">&para;</a></h3>
+<p>The fastest way to subnet is to work out the <strong>block size</strong> - how big each subnet is.</p>
+<p>Block size = 256 − the interesting octet of the subnet mask</p>
+<p><strong>Example:</strong> Mask is <code>255.255.255.192</code> (which is /26).</p>
+<p>The "interesting octet" is the last one: 192. Block size = 256 − 192 = <strong>64</strong>.</p>
+<p>That means subnets start at multiples of 64 in the last octet:
+- <code>192.168.1.0</code> → hosts .1 to .62, broadcast .63
+- <code>192.168.1.64</code> → hosts .65 to .126, broadcast .127
+- <code>192.168.1.128</code> → hosts .129 to .190, broadcast .191
+- <code>192.168.1.192</code> → hosts .193 to .254, broadcast .255</p>
+<p>Four subnets, 62 usable hosts each. That's your /26.</p>
+<h4 id="the-block-size-method-step-by-step">The Block Size Method (Step by Step)<a class="headerlink" href="#the-block-size-method-step-by-step" title="Permanent link">&para;</a></h4>
+<p>Given a network and mask, find:
+1. <strong>Block size</strong> = 256 − (interesting octet of mask)
+2. <strong>Subnets</strong> start at: 0, block size, 2×block size, 3×block size, ...
+3. <strong>Network address</strong> = the start of the block
+4. <strong>Broadcast address</strong> = (next subnet start) − 1
+5. <strong>First host</strong> = network address + 1
+6. <strong>Last host</strong> = broadcast address − 1</p>
+<p><strong>Example:</strong> What subnet is <code>10.4.77.200/20</code> in?</p>
+<p>Step 1: /20 mask = <code>255.255.240.0</code>. Interesting octet is the <strong>third</strong> (240). Block size = 256 − 240 = <strong>16</strong>.</p>
+<p>Step 2: Subnet boundaries in the third octet: 0, 16, 32, 48, 64, 80 → 77 falls between 64 and 80.</p>
+<p>Step 3: Network address = <code>10.4.64.0</code></p>
+<p>Step 4: Broadcast address = <code>10.4.79.255</code> (next subnet is 10.4.80.0, so broadcast is .79.255)</p>
+<p>Step 5: First host = <code>10.4.64.1</code></p>
+<p>Step 6: Last host = <code>10.4.79.254</code></p>
+<p><strong>Answer:</strong> <code>10.4.77.200</code> is in subnet <code>10.4.64.0/20</code>, which goes from <code>10.4.64.1</code> to <code>10.4.79.254</code>.</p>
+<hr />
+<h3 id="determining-if-two-hosts-are-on-the-same-subnet">Determining if Two Hosts Are on the Same Subnet<a class="headerlink" href="#determining-if-two-hosts-are-on-the-same-subnet" title="Permanent link">&para;</a></h3>
+<p>Two hosts are on the same subnet if they share the same <strong>network address</strong> (IP address AND'd with subnet mask).</p>
+<p>Shortcut: apply the block size method to both. If they fall in the same block, they're on the same subnet.</p>
+<p><strong>Example:</strong> Are <code>192.168.1.100</code> and <code>192.168.1.200</code> on the same subnet, if both use /25?</p>
+<ul>
+<li>Block size = 256 − 128 = 128</li>
+<li>Subnets: <code>192.168.1.0</code> (hosts .1–.126) and <code>192.168.1.128</code> (hosts .129–.254)</li>
+<li><code>.100</code> → in <code>192.168.1.0/25</code></li>
+<li><code>.200</code> → in <code>192.168.1.128/25</code></li>
+<li><strong>Different subnets.</strong> These hosts cannot communicate directly - traffic between them must go through a router.</li>
+</ul>
+<hr />
+<h3 id="subnetting-a-network-design-approach">Subnetting a Network: Design Approach<a class="headerlink" href="#subnetting-a-network-design-approach" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario:</strong> You're given <code>192.168.10.0/24</code> and need 6 subnets, each with at least 20 hosts.</p>
+<p><strong>Step 1:</strong> Determine the required subnet size.</p>
+<p>20 hosts needed → host bits needed = at least 5 (2^5 − 2 = 30 ≥ 20). So use 5 host bits.</p>
+<p>A /24 with 5 host bits = 24 + (8−5) = /27. Block size = 256 − 224 = 32.</p>
+<p><strong>Step 2:</strong> How many subnets does /27 give?</p>
+<p>From a /24, borrowing 3 bits → 2^3 = 8 subnets. We need 6. 8 ≥ 6 - this works.</p>
+<p><strong>Step 3:</strong> List the subnets:</p>
+<table>
+<thead>
+<tr>
+<th>Subnet</th>
+<th>Network Address</th>
+<th>Broadcast</th>
+<th>First Host</th>
+<th>Last Host</th>
+<th>Hosts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>192.168.10.0</td>
+<td>192.168.10.31</td>
+<td>192.168.10.1</td>
+<td>192.168.10.30</td>
+<td>30</td>
+</tr>
+<tr>
+<td>2</td>
+<td>192.168.10.32</td>
+<td>192.168.10.63</td>
+<td>192.168.10.33</td>
+<td>192.168.10.62</td>
+<td>30</td>
+</tr>
+<tr>
+<td>3</td>
+<td>192.168.10.64</td>
+<td>192.168.10.95</td>
+<td>192.168.10.65</td>
+<td>192.168.10.94</td>
+<td>30</td>
+</tr>
+<tr>
+<td>4</td>
+<td>192.168.10.96</td>
+<td>192.168.10.127</td>
+<td>192.168.10.97</td>
+<td>192.168.10.126</td>
+<td>30</td>
+</tr>
+<tr>
+<td>5</td>
+<td>192.168.10.128</td>
+<td>192.168.10.159</td>
+<td>192.168.10.129</td>
+<td>192.168.10.158</td>
+<td>30</td>
+</tr>
+<tr>
+<td>6</td>
+<td>192.168.10.160</td>
+<td>192.168.10.191</td>
+<td>192.168.10.161</td>
+<td>192.168.10.190</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>Subnets 7 and 8 (192.168.10.192/27 and 192.168.10.224/27) exist but are unallocated - keep them for future use.</p>
+<hr />
+<h3 id="variable-length-subnet-masking-vlsm">Variable Length Subnet Masking (VLSM)<a class="headerlink" href="#variable-length-subnet-masking-vlsm" title="Permanent link">&para;</a></h3>
+<p>Fixed-size subnets waste addresses. If you have one department with 100 hosts and another with 10, giving both a /27 (30 hosts) fails for the first, and giving both a /25 (126 hosts) wastes 116 addresses in the second.</p>
+<p><strong>VLSM</strong> lets you use different-sized masks for different subnets within the same address space - giving each subnet exactly the size it needs.</p>
+<p><strong>The rule:</strong> Allocate largest subnets first. This prevents fragmentation.</p>
+<p><strong>Scenario:</strong> You have <code>172.16.0.0/24</code> and need:
+- Site A: 60 hosts
+- Site B: 28 hosts
+- Site C: 12 hosts
+- WAN link A–B: 2 hosts (point-to-point)
+- WAN link A–C: 2 hosts</p>
+<p><strong>Step 1:</strong> Sort by size, largest first.</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Hosts needed</th>
+<th>Min host bits</th>
+<th>Mask</th>
+<th>Block size</th>
+<th>Hosts provided</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Site A</td>
+<td>60</td>
+<td>6</td>
+<td>/26</td>
+<td>64</td>
+<td>62</td>
+</tr>
+<tr>
+<td>Site B</td>
+<td>28</td>
+<td>5</td>
+<td>/27</td>
+<td>32</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Site C</td>
+<td>12</td>
+<td>4</td>
+<td>/28</td>
+<td>16</td>
+<td>14</td>
+</tr>
+<tr>
+<td>WAN A–B</td>
+<td>2</td>
+<td>2</td>
+<td>/30</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>WAN A–C</td>
+<td>2</td>
+<td>2</td>
+<td>/30</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 2:</strong> Assign subnets sequentially from the start of your address space.</p>
+<table>
+<thead>
+<tr>
+<th>Subnet</th>
+<th>Allocation</th>
+<th>Network</th>
+<th>Broadcast</th>
+<th>Hosts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Site A</td>
+<td><code>172.16.0.0/26</code></td>
+<td>172.16.0.0</td>
+<td>172.16.0.63</td>
+<td>62</td>
+</tr>
+<tr>
+<td>Site B</td>
+<td><code>172.16.0.64/27</code></td>
+<td>172.16.0.64</td>
+<td>172.16.0.95</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Site C</td>
+<td><code>172.16.0.96/28</code></td>
+<td>172.16.0.96</td>
+<td>172.16.0.111</td>
+<td>14</td>
+</tr>
+<tr>
+<td>WAN A–B</td>
+<td><code>172.16.0.112/30</code></td>
+<td>172.16.0.112</td>
+<td>172.16.0.115</td>
+<td>2</td>
+</tr>
+<tr>
+<td>WAN A–C</td>
+<td><code>172.16.0.116/30</code></td>
+<td>172.16.0.116</td>
+<td>172.16.0.119</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Remaining address space: <code>172.16.0.120</code> through <code>172.16.0.255</code> - available for future use.</p>
+<div class="admonition tip">
+<p class="admonition-title">WAN links use /30</p>
+<p>Point-to-point links between two routers only need 2 addresses. A /30 gives exactly 2 usable host addresses (2^2 − 2 = 2), with zero waste. Some engineers use /31 (RFC 3021) - no broadcast, both addresses usable - but /30 is more universally supported.</p>
+</div>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<h3 id="pitfall-1-forgetting-to-subtract-2-for-network-and-broadcast">Pitfall 1: Forgetting to subtract 2 for network and broadcast<a class="headerlink" href="#pitfall-1-forgetting-to-subtract-2-for-network-and-broadcast" title="Permanent link">&para;</a></h3>
+<p>The number of <strong>usable</strong> hosts is always 2^(host bits) − 2. New engineers regularly calculate the total hosts (2^n) without subtracting. A /28 gives 16 total addresses, not 14 usable - the network and broadcast addresses are not assignable.</p>
+<h3 id="pitfall-2-not-sorting-by-size-in-vlsm">Pitfall 2: Not sorting by size in VLSM<a class="headerlink" href="#pitfall-2-not-sorting-by-size-in-vlsm" title="Permanent link">&para;</a></h3>
+<p>If you assign small subnets first in VLSM, you may back yourself into a corner where you can't fit the large subnet without overlapping. Always allocate largest first.</p>
+<h3 id="pitfall-3-overlapping-subnets">Pitfall 3: Overlapping subnets<a class="headerlink" href="#pitfall-3-overlapping-subnets" title="Permanent link">&para;</a></h3>
+<p>Two subnets overlap if their address ranges intersect. This is catastrophic - routers will be confused about which subnet to use. Always double-check that your subnet boundaries don't cross.</p>
+<p><strong>Check:</strong> The broadcast address of one subnet must be less than the network address of the next. If <code>192.168.1.63</code> (broadcast of subnet 1) is followed by <code>192.168.1.64</code> (network of subnet 2), there's no overlap. If you see <code>.64</code> appear in two subnets, you have an error.</p>
+<h3 id="pitfall-4-the-interesting-octet-is-in-the-wrong-place">Pitfall 4: The "interesting octet" is in the wrong place<a class="headerlink" href="#pitfall-4-the-interesting-octet-is-in-the-wrong-place" title="Permanent link">&para;</a></h3>
+<p>For networks larger than /24 (like <code>10.0.0.0/8</code> or <code>172.16.0.0/16</code>), the interesting octet may be the second or third octet, not the fourth. Work out which octet is "partially masked" - that's your interesting octet. The fully-masked octets are fixed; the interesting octet is where the boundaries land.</p>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>How many subnets and usable hosts per subnet does <code>10.0.0.0/22</code> provide from a /8 starting point? Show the first three subnet ranges.</p>
+</li>
+<li>
+<p>Given <code>172.16.32.0/20</code>, calculate: network address, broadcast address, first usable host, last usable host.</p>
+</li>
+<li>
+<p>Design a VLSM addressing scheme for <code>192.168.5.0/24</code> with:</p>
+<ul>
+<li>LAN A: 50 hosts</li>
+<li>LAN B: 25 hosts</li>
+<li>LAN C: 10 hosts</li>
+<li>WAN link 1: 2 hosts</li>
+<li>WAN link 2: 2 hosts</li>
+</ul>
+</li>
+<li>
+<p>Are <code>10.1.4.200</code> and <code>10.1.5.10</code> on the same subnet if both use <code>255.255.254.0</code>?</p>
+</li>
+<li>
+<p>A junior engineer tells you that <code>192.168.1.192/26</code> has 64 usable hosts. Are they correct? Explain.</p>
+</li>
+</ol>
+<details class="supplementary">
+<summary>Answers</summary>
+<p><strong>1.</strong> From <code>10.0.0.0/8</code>, a /22 borrows 22−8 = 14 bits. Subnets = 2^14 = 16,384. Host bits = 32−22 = 10. Usable hosts = 2^10 − 2 = 1,022.
+Block size in the third octet = 256 − 252 = 4.
+- <code>10.0.0.0/22</code> → hosts 10.0.0.1 to 10.0.3.254
+- <code>10.0.4.0/22</code> → hosts 10.0.4.1 to 10.0.7.254
+- <code>10.0.8.0/22</code> → hosts 10.0.8.1 to 10.0.11.254</p>
+<p><strong>2.</strong> /20 mask = <code>255.255.240.0</code>. Interesting octet = third (240). Block size = 16.
+Boundaries in third octet: 0, 16, 32, 48. <code>32</code> is a boundary → network = <code>172.16.32.0</code>.
+Next boundary = 48 → broadcast = <code>172.16.47.255</code>.
+- Network: <code>172.16.32.0</code>
+- Broadcast: <code>172.16.47.255</code>
+- First host: <code>172.16.32.1</code>
+- Last host: <code>172.16.47.254</code></p>
+<p><strong>3.</strong> Sort largest first: LAN A (50→/26), LAN B (25→/27), LAN C (10→/28), WAN1 (2→/30), WAN2 (2→/30).
+- LAN A: <code>192.168.5.0/26</code> (hosts .1–.62, broadcast .63)
+- LAN B: <code>192.168.5.64/27</code> (hosts .65–.94, broadcast .95)
+- LAN C: <code>192.168.5.96/28</code> (hosts .97–.110, broadcast .111)
+- WAN1: <code>192.168.5.112/30</code> (hosts .113–.114, broadcast .115)
+- WAN2: <code>192.168.5.116/30</code> (hosts .117–.118, broadcast .119)</p>
+<p><strong>4.</strong> <code>255.255.254.0</code> = /23. Interesting octet = third (254). Block size = 2.
+Boundaries in third octet: 0, 2, 4, 6...
+- <code>10.1.4.200</code> → third octet 4 → subnet <code>10.1.4.0/23</code> (covers .4.x and .5.x)
+- <code>10.1.5.10</code> → third octet 5 → same subnet <code>10.1.4.0/23</code>
+<strong>Same subnet.</strong> Both addresses fall within <code>10.1.4.0</code>–<code>10.1.5.255</code>.</p>
+<p><strong>5.</strong> No, they're wrong. <code>/26</code> gives 2^6 = 64 <strong>total</strong> addresses, but 2 are reserved (network <code>.192</code> and broadcast <code>.255</code>). <strong>62 usable hosts</strong>, not 64.</p>
+</details>
+<hr />
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<h3 id="lab-subnetting-design-exercise-with-packet-tracer">Lab: Subnetting Design Exercise with Packet Tracer<a class="headerlink" href="#lab-subnetting-design-exercise-with-packet-tracer" title="Permanent link">&para;</a></h3>
+<p><strong>Tools needed:</strong> Cisco Packet Tracer (free with Cisco Networking Academy registration)
+<strong>Estimated time:</strong> 30 minutes</p>
+<p><strong>Objective:</strong> Design a subnetting scheme, configure it in Packet Tracer, and verify connectivity.</p>
+<p><strong>Scenario:</strong>
+You are given the network <code>192.168.20.0/24</code>. Design a VLSM scheme for:
+- Engineering LAN: 50 hosts
+- Admin LAN: 20 hosts
+- Point-to-point WAN: 2 hosts</p>
+<p><strong>Step 1:</strong> Work out your VLSM plan on paper before touching Packet Tracer.</p>
+<p><strong>Step 2:</strong> In Packet Tracer, build this topology:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[PC1-PC50]---[Switch-Eng]---[Router-A Gi0/0]---[Router-B Gi0/0]---[Switch-Admin]---[PC51-PC70]
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                  Gi0/1
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                  |
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                               (WAN link)
+</span></code></pre></div>
+<p><strong>Step 3:</strong> Configure Router-A interfaces with the addresses from your design:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Router-A# configure terminal
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Router-A(config)# interface GigabitEthernet0/0
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Router-A(config-if)# ip address &lt;engineering-first-host&gt; &lt;mask&gt;
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Router-A(config-if)# no shutdown
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Router-A(config-if)# exit
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Router-A(config)# interface GigabitEthernet0/1
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Router-A(config-if)# ip address &lt;WAN-first-host&gt; &lt;mask&gt;
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Router-A(config-if)# no shutdown
+</span></code></pre></div>
+<p><strong>Step 4:</strong> Configure a PC in each subnet with an appropriate IP address and the router interface as its default gateway.</p>
+<p><strong>Step 5:</strong> Verify:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Router-A# show ip interface brief
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Router-A# show ip route
+</span></code></pre></div></p>
+<p><strong>Step 6:</strong> Test connectivity:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PC1&gt; ping &lt;PC-in-Admin-LAN&gt;
+</span></code></pre></div>
+This should fail until you add static routes or a routing protocol. That's expected - you'll fix it when you do the routing modules.</p>
+<p><strong>Stretch goal:</strong> Add a second WAN link and Admin LAN, subnetting the remainder of your /24 to fit.</p>
+<hr />
+<h2 id="summary-key-takeaways">Summary &amp; Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Subnetting divides a network into smaller <strong>broadcast domains</strong>, improving security, efficiency, and routing</li>
+<li><strong>Block size</strong> = 256 − (interesting octet of subnet mask) - the spacing between subnet boundaries</li>
+<li>For any IP and mask: find which block the host falls in → that's the subnet; subnet−1 = broadcast</li>
+<li>Number of subnets = 2^(borrowed bits); usable hosts = 2^(host bits) − 2</li>
+<li><strong>VLSM</strong> uses different masks for different subnets - always allocate largest subnets first</li>
+<li>Point-to-point WAN links use /30 (2 usable addresses) or /31 (RFC 3021)</li>
+<li>Two hosts are on the same subnet if their network addresses (IP AND mask) are identical</li>
+</ul>
+<hr />
+<h2 id="where-to-next">Where to Next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Continue the sequence:</strong> <a href="../ipv6-addressing/">IPv6 Addressing</a> (<code>IP-003</code>) - the long-term solution to IPv4 exhaustion</li>
+<li><strong>Apply what you've learned:</strong> <a href="../../routing/routing-fundamentals/">Routing Fundamentals</a> (<code>RT-001</code>) - how routers use subnet information to forward packets</li>
+<li><strong>Design context:</strong> <a href="../../../applied/data-network-engineer/overview/">Data Network Engineer Learning Path</a> - where subnetting sits in the full engineering curriculum</li>
+</ul>
+<hr />
+<h2 id="standards-certifications">Standards &amp; Certifications<a class="headerlink" href="#standards-certifications" title="Permanent link">&para;</a></h2>
+<p><strong>Relevant standards:</strong>
+- IETF RFC 4632 - Classless Inter-Domain Routing (CIDR)
+- IETF RFC 3021 - Using 31-Bit Prefixes on IPv4 Point-to-Point Links
+- IETF RFC 1918 - Address Allocation for Private Internets</p>
+<p><strong>Where this topic appears in certification syllabi:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cert</th>
+<th>Vendor</th>
+<th>Relevant section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CCNA 200-301</td>
+<td>Cisco</td>
+<td>1.6 - IPv4 addressing and subnetting</td>
+</tr>
+<tr>
+<td>CompTIA Network+</td>
+<td>CompTIA</td>
+<td>1.4 - Subnetting</td>
+</tr>
+<tr>
+<td>JNCIA-Junos JN0-103</td>
+<td>Juniper</td>
+<td>IP addressing</td>
+</tr>
+<tr>
+<td>HCIA-Routing &amp; Switching</td>
+<td>Huawei</td>
+<td>IP addressing fundamentals</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>IETF - RFC 1918: Address Allocation for Private Internets</li>
+<li>IETF - RFC 4632: Classless Inter-domain Routing (CIDR)</li>
+<li>IETF - RFC 3021: Using 31-Bit Prefixes on IPv4 Point-to-Point Links</li>
+<li>Odom, Wendell - <em>CCNA 200-301 Official Cert Guide, Volume 1</em>, Cisco Press, 2020 - Chapters 13–14</li>
+<li>Lammle, Todd - <em>CompTIA Network+ Study Guide</em>, 5th ed., Sybex, 2021 - Chapter 3</li>
+</ul>
+<hr />
+<h2 id="attribution-licensing">Attribution &amp; Licensing<a class="headerlink" href="#attribution-licensing" title="Permanent link">&para;</a></h2>
+<p><strong>Author:</strong> @geekazoid80
+<strong>License:</strong> <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> - content
+<strong>AI assistance:</strong> Claude used for initial draft structure and worked examples. All calculations verified manually. Technical content verified against Odom's CCNA Official Cert Guide and RFC 4632.</p>
+<hr />
+<!-- XREF-START -->
+<h2 id="internal-cross-references">Internal Cross-References<a class="headerlink" href="#internal-cross-references" title="Permanent link">&para;</a></h2>
+<h3 id="modules-that-reference-this-module">Modules That Reference This Module<a class="headerlink" href="#modules-that-reference-this-module" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RT-001</td>
+<td>Routing Fundamentals</td>
+<td>Prerequisite - routers use subnet masks to make forwarding decisions</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>SW-002</td>
+<td>VLANs &amp; 802.1Q Trunking</td>
+<td>Prerequisite - each VLAN is typically assigned its own subnet</td>
+<td>2026-04-17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modules-this-module-references">Modules This Module References<a class="headerlink" href="#modules-this-module-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NW-001</td>
+<td>The OSI Model</td>
+<td>Prerequisite - Layer 3 context</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>IP-001</td>
+<td>IP Addressing Fundamentals</td>
+<td>Prerequisite - binary, subnet masks, CIDR</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>IP-003</td>
+<td>IPv6 Addressing</td>
+<td>"Where to Next" forward reference</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>RT-001</td>
+<td>Routing Fundamentals</td>
+<td>"Where to Next" forward reference</td>
+<td>2026-04-17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vendor-mapping">Vendor Mapping<a class="headerlink" href="#vendor-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CIDR / variable-length subnet masks</td>
+<td>RFC 4632</td>
+</tr>
+<tr>
+<td>/31 point-to-point links</td>
+<td>RFC 3021</td>
+</tr>
+</tbody>
+</table>
+<h3 id="maintenance-notes">Maintenance Notes<a class="headerlink" href="#maintenance-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>When RT-001 (Routing Fundamentals) is written, add a back-reference in that module's XREF section pointing here.</li>
+<li>When SW-002 (VLANs) is written, add a back-reference in that module's XREF section pointing here.</li>
+</ul>
+<!-- XREF-END -->
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

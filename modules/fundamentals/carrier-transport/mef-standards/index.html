@@ -1,0 +1,2992 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How MEF defines Carrier Ethernet service types, attributes, and performance metrics - E-Line, E-LAN, E-Tree, E-Access - standardising the commercial and technical vocabulary for Ethernet services.">
+      
+      
+        <meta name="author" content="Community Contributors">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>MEF Standards & Carrier Ethernet Framework - Living Networked Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ct-008-mef-standards-carrier-ethernet-framework" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Living Networked Compendium" class="md-header__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Living Networked Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MEF Standards & Carrier Ethernet Framework
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../learning-paths/data-network-engineer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learning Paths
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../networking/osi-model/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../applied/data-network-engineer/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Applied
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../CONTRIBUTING/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Living Networked Compendium" class="md-nav__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Living Networked Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Paths
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learning Paths
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/data-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/carrier-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/datacentre-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-satellite-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-coax-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/voice-telephony-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-mobile-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/storage-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/broadcast-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking/osi-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSI Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IP Addressing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/ip-addressing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/subnetting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access Media
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Switching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier & Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocols
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../professional-standards/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Professional Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/data-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/carrier-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/datacentre-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-satellite-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-coax-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/voice-telephony-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-mobile-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/storage-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/broadcast-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/_new-path-template/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start a New Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTION_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../AI_GUARDRAILS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Guardrails
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../MODULE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../INSTRUCTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-define-service-connectivity-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Define service connectivity types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-standardise-the-interface-and-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Standardise the interface and attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-define-performance-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Define performance metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-just-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Just Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mef-evc-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MEF EVC Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uni-user-network-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UNI - User-Network Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mef-bandwidth-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MEF Bandwidth Profiles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mef-performance-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MEF Performance Attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8021ad-qinq-provider-bridging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        802.1ad (QinQ) - Provider Bridging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enni-external-network-to-network-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ENNI - External Network-to-Network Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technology-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technology Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practice Problems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary &amp; Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standards-certifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standards &amp; Certifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution &amp; Licensing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modules-that-reference-this-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules That Reference This Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules-this-module-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules This Module References
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">carrier-ethernet</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">cen</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">e-lan</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">e-line</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">e-tree</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">evc</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">mef</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">service-attributes</span>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium/edit/main/modules/fundamentals/carrier-transport/mef-standards.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="ct-008-mef-standards-carrier-ethernet-framework">CT-008 - MEF Standards &amp; Carrier Ethernet Framework<a class="headerlink" href="#ct-008-mef-standards-carrier-ethernet-framework" title="Permanent link">&para;</a></h1>
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>After completing this module you will be able to:</p>
+<ol>
+<li>Describe the four MEF EVC types and their connectivity models.</li>
+<li>Explain UNI and its key attributes.</li>
+<li>Describe MEF bandwidth profiles - CIR, EIR, CBS, EBS, and their token bucket model.</li>
+<li>Explain MEF service attributes - frame delivery, multiplexing, bundling.</li>
+<li>Describe MEF performance parameters - FD, FDV, FLR.</li>
+<li>Map MEF service types to underlying MPLS/Ethernet technologies.</li>
+</ol>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>CT-003 - MPLS L2VPN (VPLS &amp; Pseudowire): underlying technology for MEF services</li>
+<li>SW-002 - VLANs &amp; 802.1Q Trunking: CE-VLAN and S-tag (802.1ad) framing</li>
+</ul>
+<hr />
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
+<p>An enterprise customer wants a WAN Ethernet service between their sites. They contact three service providers. Each provider describes the service differently:</p>
+<ul>
+<li>Provider A: "Point-to-point Ethernet over our MPLS backbone"</li>
+<li>Provider B: "Virtual private LAN service, full mesh"</li>
+<li>Provider C: "Any-to-any Ethernet service with CIR/EIR bandwidth"</li>
+</ul>
+<p>The customer cannot compare these services technically or contractually - the vocabulary is inconsistent. What bandwidth guarantee means, what service attributes are included, how performance is measured, what failover behaviour looks like - all differ by provider and sometimes by salesperson.</p>
+<p><strong>MEF</strong> (MEF Forum, formerly Metro Ethernet Forum) solves this by defining standard service types, attributes, and performance parameters for Carrier Ethernet services - giving providers and customers a common vocabulary.</p>
+<h3 id="step-1-define-service-connectivity-types">Step 1: Define service connectivity types<a class="headerlink" href="#step-1-define-service-connectivity-types" title="Permanent link">&para;</a></h3>
+<p>MEF defines four <strong>Ethernet Virtual Connection (EVC)</strong> types based on connectivity topology:
+- <strong>E-Line:</strong> Point-to-point (two UNIs). A virtual circuit between exactly two sites.
+- <strong>E-LAN:</strong> Multipoint-to-multipoint (any-to-any). All sites can communicate with all others.
+- <strong>E-Tree:</strong> Rooted multipoint. One hub (root) communicates with all spokes (leaves); leaves cannot communicate directly with each other.
+- <strong>E-Access:</strong> Wholesale access. An access provider delivers connectivity to a service provider's network.</p>
+<h3 id="step-2-standardise-the-interface-and-attributes">Step 2: Standardise the interface and attributes<a class="headerlink" href="#step-2-standardise-the-interface-and-attributes" title="Permanent link">&para;</a></h3>
+<p>The <strong>UNI (User-Network Interface)</strong> is the demarcation point between the customer's equipment and the provider's network. MEF specifies UNI attributes: speed, frame format, COS (Class of Service) identification, and bandwidth profiles.</p>
+<h3 id="step-3-define-performance-metrics">Step 3: Define performance metrics<a class="headerlink" href="#step-3-define-performance-metrics" title="Permanent link">&para;</a></h3>
+<p>MEF specifies standardised performance metrics (delay, jitter, frame loss) for each EVC. Providers can advertise exact performance guarantees that customers can independently verify.</p>
+<h3 id="what-you-just-built">What You Just Built<a class="headerlink" href="#what-you-just-built" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scenario element</th>
+<th>Technical term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provider's standardised Ethernet service framework</td>
+<td>MEF (MEF Forum) standards</td>
+</tr>
+<tr>
+<td>Virtual circuit between UNIs</td>
+<td>EVC (Ethernet Virtual Connection)</td>
+</tr>
+<tr>
+<td>Demarcation point between customer and provider</td>
+<td>UNI (User-Network Interface)</td>
+</tr>
+<tr>
+<td>Point-to-point EVC</td>
+<td>E-Line</td>
+</tr>
+<tr>
+<td>Any-to-any multipoint EVC</td>
+<td>E-LAN</td>
+</tr>
+<tr>
+<td>Hub-and-spoke EVC</td>
+<td>E-Tree</td>
+</tr>
+<tr>
+<td>Committed information rate (guaranteed bandwidth)</td>
+<td>CIR</td>
+</tr>
+<tr>
+<td>Excess information rate (burst rate)</td>
+<td>EIR</td>
+</tr>
+<tr>
+<td>Committed burst size</td>
+<td>CBS</td>
+</tr>
+<tr>
+<td>Excess burst size</td>
+<td>EBS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="core-content">Core Content<a class="headerlink" href="#core-content" title="Permanent link">&para;</a></h2>
+<h3 id="mef-evc-types">MEF EVC Types<a class="headerlink" href="#mef-evc-types" title="Permanent link">&para;</a></h3>
+<p><strong>E-Line (MEF 6.x):</strong>
+Point-to-point connection between exactly two UNIs. Equivalent to a leased line or pseudowire.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Site A ─── UNI-A ─── [Provider Network] ─── UNI-Z ─── Site Z
+</span></code></pre></div>
+<p>Variants:
+- <strong>EPL (Ethernet Private Line):</strong> Dedicated, non-multiplexed - one EVC per UNI port. Full transparency of Ethernet frames including VLAN tags.
+- <strong>EVPL (Ethernet Virtual Private Line):</strong> Multiplexed - multiple EVCs per UNI (multiple customers or services per port). Uses CE-VLAN ID to identify each EVC.</p>
+<p><strong>E-LAN (MEF 6.x):</strong>
+Multipoint-to-multipoint - all UNIs can communicate with all others. Equivalent to VPLS.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Site A ─── UNI-A ─┐
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Site B ─── UNI-B ─┤ Any-to-any
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Site C ─── UNI-C ─┘
+</span></code></pre></div>
+<p>Variants:
+- <strong>EP-LAN (Ethernet Private LAN):</strong> One EVC per port. Full transparency.
+- <strong>EVP-LAN (Ethernet Virtual Private LAN):</strong> Multiplexed EVCs per port using CE-VLAN.</p>
+<p><strong>E-Tree (MEF 6.x):</strong>
+Rooted multipoint - one root UNI, multiple leaf UNIs. Root can communicate with all leaves; leaves cannot communicate with each other. Used for point-to-multipoint services (IPTV, internet access from a hub).</p>
+<p><strong>E-Access (MEF 51.x):</strong>
+Wholesale access service. An access provider (separate from the service provider) delivers connectivity from a UNI at the customer site to an ENNI (External Network-to-Network Interface) at the service provider edge. E-Access is the Carrier Ethernet equivalent of a local loop.</p>
+<h3 id="uni-user-network-interface">UNI - User-Network Interface<a class="headerlink" href="#uni-user-network-interface" title="Permanent link">&para;</a></h3>
+<p>The UNI is the physical and logical interface between the customer equipment (CE) and the provider's network (CEN - Carrier Ethernet Network). Key UNI attributes:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Physical speed</strong></td>
+<td>10 Mbps, 100 Mbps, 1 GbE, 10 GbE, 100 GbE</td>
+</tr>
+<tr>
+<td><strong>Frame format</strong></td>
+<td>Standard Ethernet; 802.1Q tagged or untagged</td>
+</tr>
+<tr>
+<td><strong>CE-VLAN ID preservation</strong></td>
+<td>Whether customer VLAN tags are preserved transparently</td>
+</tr>
+<tr>
+<td><strong>Max frame size</strong></td>
+<td>Maximum frame size accepted (default 1522 bytes for tagged)</td>
+</tr>
+<tr>
+<td><strong>UNI multiplexing</strong></td>
+<td>Whether multiple EVCs share the UNI</td>
+</tr>
+<tr>
+<td><strong>Bundling</strong></td>
+<td>Multiple CE-VLANs mapped to one EVC</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mef-bandwidth-profiles">MEF Bandwidth Profiles<a class="headerlink" href="#mef-bandwidth-profiles" title="Permanent link">&para;</a></h3>
+<p>MEF defines bandwidth profiles using a <strong>dual token bucket model</strong> (two rate, three colour):</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CIR (Committed Information Rate)</strong></td>
+<td>Guaranteed throughput - green traffic</td>
+</tr>
+<tr>
+<td><strong>CBS (Committed Burst Size)</strong></td>
+<td>Maximum burst at CIR rate - green bucket depth</td>
+</tr>
+<tr>
+<td><strong>EIR (Excess Information Rate)</strong></td>
+<td>Best-effort additional bandwidth - yellow traffic</td>
+</tr>
+<tr>
+<td><strong>EBS (Excess Burst Size)</strong></td>
+<td>Maximum excess burst - yellow bucket depth</td>
+</tr>
+</tbody>
+</table>
+<p>Traffic colouring:
+- <strong>Green (≤ CIR + CBS bucket):</strong> Forwarded with lowest drop probability.
+- <strong>Yellow (≤ EIR + EBS bucket, exceeds CIR):</strong> Forwarded if bandwidth is available; dropped first under congestion.
+- <strong>Red (exceeds both):</strong> Dropped at the UNI.</p>
+<p>Bandwidth profiles can be applied per-UNI (ingress policing for all traffic entering the UNI) or per-EVC (per-service policing for multiplexed services).</p>
+<h3 id="mef-performance-attributes">MEF Performance Attributes<a class="headerlink" href="#mef-performance-attributes" title="Permanent link">&para;</a></h3>
+<p>MEF specifies performance attributes per EVC with objective values the provider commits to in the SLA:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>MEF Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-way frame delay</td>
+<td>FD</td>
+<td>Maximum delay for a frame from UNI-A to UNI-Z</td>
+</tr>
+<tr>
+<td>Frame delay variation</td>
+<td>FDV (jitter)</td>
+<td>Maximum variation in delay between successive frames</td>
+</tr>
+<tr>
+<td>Frame loss ratio</td>
+<td>FLR</td>
+<td>Ratio of lost frames to total transmitted frames</td>
+</tr>
+<tr>
+<td>Availability</td>
+<td>Availability</td>
+<td>Percentage of time the service meets FD and FLR objectives</td>
+</tr>
+<tr>
+<td>Mean time to restore</td>
+<td>MTTR</td>
+<td>Average recovery time after a fault</td>
+</tr>
+</tbody>
+</table>
+<p>These parameters map directly to ITU-T Y.1731 OAM measurements - providers use Y.1731 to measure and report these values.</p>
+<h3 id="8021ad-qinq-provider-bridging">802.1ad (QinQ) - Provider Bridging<a class="headerlink" href="#8021ad-qinq-provider-bridging" title="Permanent link">&para;</a></h3>
+<p>For services that carry customer VLAN tags (CE-VLAN) transparently, the provider wraps an additional VLAN tag (S-VLAN, service VLAN) around the customer's frame using <strong>802.1ad (QinQ)</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[Provider S-VLAN 802.1ad tag][Customer C-VLAN 802.1Q tag][Ethernet payload]
+</span></code></pre></div>
+<ul>
+<li><strong>S-VLAN:</strong> Provider-assigned, identifies the EVC.</li>
+<li><strong>C-VLAN:</strong> Customer-assigned, preserved transparently.</li>
+</ul>
+<p>This allows the provider to carry thousands of customer VLANs without VLAN ID conflicts (customer VLANs in different EVCs can have the same number - they're in different S-VLAN tunnels).</p>
+<h3 id="enni-external-network-to-network-interface">ENNI - External Network-to-Network Interface<a class="headerlink" href="#enni-external-network-to-network-interface" title="Permanent link">&para;</a></h3>
+<p>The <strong>ENNI</strong> is the interface between two provider networks. Used in multi-carrier deployments where E-Line or E-LAN services span multiple providers (inter-carrier Ethernet). The ENNI defines how operators interconnect their networks to deliver end-to-end EVCs.</p>
+<h3 id="technology-mapping">Technology Mapping<a class="headerlink" href="#technology-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>MEF Service</th>
+<th>Common implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E-Line / EPL</td>
+<td>Pseudowire (EoMPLS), dedicated physical circuit</td>
+</tr>
+<tr>
+<td>E-Line / EVPL</td>
+<td>MPLS pseudowire with VLAN-based mux, QinQ</td>
+</tr>
+<tr>
+<td>E-LAN / EP-LAN</td>
+<td>VPLS (RFC 4762/4761), EVPN (RFC 7432)</td>
+</tr>
+<tr>
+<td>E-LAN / EVP-LAN</td>
+<td>VPLS with CE-VLAN bridging, EVPN-VXLAN</td>
+</tr>
+<tr>
+<td>E-Tree</td>
+<td>VPLS with split-horizon, EVPN E-Tree (RFC 8317)</td>
+</tr>
+<tr>
+<td>E-Access</td>
+<td>NNI hand-off from access provider to service provider</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Confusing CIR with link speed.</strong> CIR is the guaranteed bandwidth for the EVC - it may be much less than the UNI physical speed. An enterprise may have a 1 GbE UNI but only a 100 Mbps CIR for their E-Line service. Traffic above CIR is yellow (best-effort) up to EIR, then red (dropped). Many customers assume their service is as fast as the physical port.</p>
+</li>
+<li>
+<p><strong>CE-VLAN bundling vs multiplexing.</strong> Bundling maps multiple CE-VLANs to one EVC (e.g., CE-VLANs 10–20 all in one EVC, losing VLAN distinction at the far end). Multiplexing creates separate EVCs per CE-VLAN (each VLAN gets its own bandwidth profile and QoS). These are different services - verify which the customer needs before ordering.</p>
+</li>
+<li>
+<p><strong>EVPL without CE-VLAN preservation.</strong> Some EVPL implementations do not preserve CE-VLAN tags - they strip and re-tag at the far end. This breaks customer protocols that rely on VLAN identity. Verify the provider's CE-VLAN ID preservation attribute in the service specification.</p>
+</li>
+<li>
+<p><strong>Misunderstanding E-Tree leaf isolation.</strong> In E-Tree, leaves cannot communicate with each other - traffic between two leaf sites must flow through the root. If an enterprise needs any-to-any connectivity between all sites, they need E-LAN, not E-Tree. E-Tree is for hub-and-spoke architectures (internet breakout from hub, content delivery from root to leaves).</p>
+</li>
+<li>
+<p><strong>Applying bandwidth profiles in the wrong direction.</strong> MEF bandwidth profiles are typically applied on ingress at the UNI (policing traffic entering the provider network from the customer). Applying them on egress (toward the customer) means the provider is policing traffic it is delivering - this should instead be a scheduling/shaping commitment, not a policer.</p>
+</li>
+</ol>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<p><strong>Q1.</strong> A customer has 20 branches and a single head office. All branch traffic must pass through the head office before reaching other branches. Which MEF EVC type is appropriate, and why?</p>
+<details class="answer">
+<summary>Answer</summary>
+<p><strong>E-Tree</strong>: The head office is the root; branches are leaves. E-Tree enforces hub-and-spoke connectivity: leaves can communicate with the root but not directly with each other. This matches the customer's requirement exactly and is more efficient than E-LAN (which would allow direct branch-to-branch communication that the customer doesn't need and the IT team would need to block with firewalls anyway). E-Tree also simplifies security: only the head office firewall provides internet access and inter-branch routing.</p>
+</details>
+<p><strong>Q2.</strong> An enterprise orders a 500 Mbps CIR E-Line with EIR 200 Mbps on a 1 GbE UNI. They burst to 800 Mbps for 10 seconds. What happens to their traffic?</p>
+<details class="answer">
+<summary>Answer</summary>
+<p>Traffic up to 500 Mbps is green - forwarded with guaranteed delivery and lowest drop priority. Traffic from 500 Mbps to 700 Mbps (CIR + EIR) is yellow - forwarded on a best-effort basis; dropped first if the provider network is congested. Traffic above 700 Mbps is red - dropped at the UNI ingress policer. During the 800 Mbps burst: 500 Mbps guaranteed delivery, up to 200 Mbps additional is best-effort (may or may not get through depending on provider network load), and the remainder (up to 100 Mbps) is dropped. The 1 GbE physical port allows up to 1 GbE of physical throughput but the bandwidth profile enforces the CIR/EIR limits regardless.</p>
+</details>
+<p><strong>Q3.</strong> What is the difference between EPL and EVPL?</p>
+<details class="answer">
+<summary>Answer</summary>
+<p><strong>EPL (Ethernet Private Line):</strong> Dedicated UNI - one EVC per UNI port. All frames entering the UNI belong to the single EVC. The full UNI bandwidth is dedicated to this service. Provides complete Ethernet frame transparency including CE-VLAN tags (the customer's VLAN structure is preserved end-to-end). <strong>EVPL (Ethernet Virtual Private Line):</strong> Multiplexed UNI - multiple EVCs share one UNI port, distinguished by CE-VLAN ID. Each CE-VLAN maps to a different EVC (different bandwidth profile, different far-end UNI). Allows multiple services over one physical port. The trade-off: EVPL requires VLAN-based multiplexing at the UNI, and the number of EVCs is limited by CE-VLAN ID space.</p>
+</details>
+<hr />
+<h2 id="summary-key-takeaways">Summary &amp; Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>MEF</strong> standardises Carrier Ethernet service types, attributes, and performance metrics - enabling comparable, contractual service definitions between providers and customers.</li>
+<li><strong>EVC types:</strong> E-Line (point-to-point), E-LAN (any-to-any), E-Tree (hub-and-spoke), E-Access (wholesale).</li>
+<li><strong>EPL vs EVPL:</strong> Dedicated UNI vs multiplexed (multiple EVCs per UNI via CE-VLAN).</li>
+<li><strong>Bandwidth profile:</strong> CIR (guaranteed green), EIR (best-effort yellow), red (dropped) - dual token bucket.</li>
+<li><strong>Performance attributes:</strong> FD (frame delay), FDV (jitter), FLR (frame loss ratio) - independently measurable via Y.1731.</li>
+<li><strong>802.1ad (QinQ):</strong> Provider S-VLAN wraps customer C-VLAN - allows overlapping customer VLANs across the provider network.</li>
+<li>EVPL requires CE-VLAN preservation to be contractually specified; verify before ordering.</li>
+<li>Technology map: E-Line → pseudowire; E-LAN → VPLS or EVPN; E-Tree → VPLS split-horizon or EVPN E-Tree.</li>
+</ul>
+<hr />
+<h2 id="where-to-next">Where to Next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>CT-009 - Carrier Ethernet Services:</strong> Operational design and deployment of MEF services on MPLS/EVPN infrastructure.</li>
+<li><strong>CT-003 - MPLS L2VPN:</strong> VPLS and pseudowire implementation of MEF E-Line and E-LAN.</li>
+<li><strong>CT-006 - EVPN Fundamentals:</strong> EVPN implementation of MEF E-LAN and E-Tree.</li>
+</ul>
+<hr />
+<h2 id="standards-certifications">Standards &amp; Certifications<a class="headerlink" href="#standards-certifications" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Standard / Cert</th>
+<th>Relevance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MEF 6.3</td>
+<td>Ethernet Virtual Connection Services</td>
+</tr>
+<tr>
+<td>MEF 51.x</td>
+<td>E-Access Services</td>
+</tr>
+<tr>
+<td>MEF 10.4</td>
+<td>Ethernet Services Attributes</td>
+</tr>
+<tr>
+<td>MEF 23.x</td>
+<td>Bandwidth Profile</td>
+</tr>
+<tr>
+<td>ITU-T Y.1731</td>
+<td>OAM for Ethernet - performance measurement</td>
+</tr>
+<tr>
+<td>MEF CECP</td>
+<td>Carrier Ethernet Certification Programme</td>
+</tr>
+<tr>
+<td>Cisco CCIE Service Provider</td>
+<td>MEF services, E-Line, E-LAN</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>MEF 6.3 - Ethernet Virtual Connection Services. Available via MEF membership: <a href="https://www.mef.net/resources/mef-6-3/">https://www.mef.net/resources/mef-6-3/</a></li>
+<li>MEF 10.4 - Ethernet Service Attributes. <a href="https://www.mef.net/resources/mef-10-4/">https://www.mef.net/resources/mef-10-4/</a></li>
+<li>ITU-T Y.1731 - OAM Functions and Mechanisms for Ethernet-Based Networks. <a href="https://www.itu.int/rec/T-REC-Y.1731">https://www.itu.int/rec/T-REC-Y.1731</a></li>
+</ul>
+<hr />
+<h2 id="attribution-licensing">Attribution &amp; Licensing<a class="headerlink" href="#attribution-licensing" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Module content: original draft, AI-assisted (Claude Sonnet 4.6), 2026-04-19.</li>
+<li>No third-party text reproduced.</li>
+<li>License: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li>
+</ul>
+<!-- XREF-START -->
+<h2 id="cross-references">Cross-References<a class="headerlink" href="#cross-references" title="Permanent link">&para;</a></h2>
+<h3 id="modules-that-reference-this-module">Modules That Reference This Module<a class="headerlink" href="#modules-that-reference-this-module" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT-009</td>
+<td>Carrier Ethernet Services</td>
+<td>Operational deployment of MEF-defined services</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modules-this-module-references">Modules This Module References<a class="headerlink" href="#modules-this-module-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT-003</td>
+<td>MPLS L2VPN (VPLS &amp; Pseudowire)</td>
+<td>VPLS implements MEF E-LAN services</td>
+</tr>
+<tr>
+<td>SW-002</td>
+<td>VLANs &amp; 802.1Q Trunking</td>
+<td>CE-VLAN and 802.1ad (QinQ) for MEF services</td>
+</tr>
+</tbody>
+</table>
+<!-- XREF-END -->
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

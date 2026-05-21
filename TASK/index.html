@@ -1,0 +1,4450 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A progressive, community-built guide for network engineers — enterprise, carrier, data centre, RF/satellite, and beyond.">
+      
+      
+        <meta name="author" content="Community Contributors">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Task Tracker - Living Networked Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#task-tracker" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Living Networked Compendium" class="md-header__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Living Networked Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Task Tracker
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../learning-paths/data-network-engineer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learning Paths
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../modules/fundamentals/networking/osi-model/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../modules/applied/data-network-engineer/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Applied
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../CONTRIBUTING/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Living Networked Compendium" class="md-nav__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Living Networked Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Paths
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learning Paths
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/data-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/carrier-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/datacentre-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/rf-satellite-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/rf-coax-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/voice-telephony-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/rf-mobile-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/storage-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learning-paths/broadcast-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/fundamentals/networking/osi-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSI Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IP Addressing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/fundamentals/ip/ip-addressing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/fundamentals/ip/subnetting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access Media
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Switching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier & Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocols
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/fundamentals/professional-standards/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Professional Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/data-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/carrier-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/datacentre-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/rf-satellite-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/rf-coax-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/voice-telephony-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/rf-mobile-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/storage-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/broadcast-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/applied/_new-path-template/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start a New Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONTRIBUTION_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AI_GUARDRAILS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Guardrails
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MODULE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTRUCTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#current-session-focus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Session Focus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-tooling-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture &amp; Tooling Tasks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seed-modules-session-1-done" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seed Modules (Session 1 - Done)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsnetworking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Networking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsaccess-media-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Access Media (NEW)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsrouting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Routing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsswitching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Switching
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalscarrier-transport-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Carrier-Transport (NEW)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsdata-centre-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Data Centre (NEW)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsprotocols-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Protocols (NEW)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsfunctions-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Functions (NEW)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Services
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalssecurity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsqos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/QoS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsautomation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Automation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/RF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-fundamentalsprofessional-standards-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Fundamentals/Professional Standards (NEW)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-applied-rf-coax-cable-engineer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Applied: RF-Coax / Cable Engineer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-applied-voice-telephony-engineer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Applied: Voice / Telephony Engineer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-applied-rf-mobile-cellular-engineer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Applied: RF Mobile / Cellular Engineer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-backlog-applied-storage-network-engineer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Backlog - Applied: Storage Network Engineer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applied-paths-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applied Paths - Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisions-context-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisions &amp; Context Log
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#follow-ups-requiring-human-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Follow-ups Requiring Human Input
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium/edit/main/TASK.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="task-tracker">Task Tracker<a class="headerlink" href="#task-tracker" title="Permanent link">&para;</a></h1>
+<p>Cross-session progress tracker for the Living Networked Compendium.</p>
+<p><strong>How to use:</strong>
+- Update this file at the start and end of every Claude session
+- One task per row. Move status as work progresses
+- Add follow-ups discovered during work immediately - don't lose them
+- <code>blocked</code> tasks need human input before proceeding</p>
+<p><strong>Statuses:</strong> <code>pending</code> | <code>in-progress</code> | <code>done</code> | <code>blocked</code></p>
+<hr />
+<h2 id="current-session-focus">Current Session Focus<a class="headerlink" href="#current-session-focus" title="Permanent link">&para;</a></h2>
+<p><strong>Current area:</strong> Content production - Problem-First pedagogy, seed module retrofit, shared spine (IP → Routing)</p>
+<hr />
+<h2 id="architecture-tooling-tasks">Architecture &amp; Tooling Tasks<a class="headerlink" href="#architecture-tooling-tasks" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Task</th>
+<th>Area</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Create directory structure</td>
+<td>Architecture</td>
+<td>done</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Write <code>docs/INSTRUCTION.md</code></td>
+<td>Architecture</td>
+<td>done</td>
+<td>Updated with multi-vendor guidelines, new prefix table, private workflow</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Write <code>docs/TASK.md</code> (this file)</td>
+<td>Architecture</td>
+<td>done</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Write <code>docs/MODULE_TEMPLATE.md</code></td>
+<td>Architecture</td>
+<td>done</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Update <code>README.md</code></td>
+<td>Architecture</td>
+<td>done</td>
+<td>Needs refresh for expanded scope</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Create <code>private/</code> folder + <code>private/README.md</code></td>
+<td>Architecture</td>
+<td>done</td>
+<td>Gitignored; holds uploads, parsed, research, notes</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Create <code>.gitignore</code></td>
+<td>Architecture</td>
+<td>done</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Create build scripts</td>
+<td>Tooling</td>
+<td>done</td>
+<td>build-web, build-pdf, build-pptx, generate-changelog</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Create <code>tools/templates/</code></td>
+<td>Tooling</td>
+<td>done</td>
+<td>marp-theme.css</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Create <code>mkdocs.yml</code></td>
+<td>Tooling</td>
+<td>done</td>
+<td>Needs nav update for new domains</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Create <code>.github/workflows/build-deploy.yml</code></td>
+<td>CI/CD</td>
+<td>done</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Create <code>learning-paths/</code> files</td>
+<td>Architecture</td>
+<td>done</td>
+<td>data-network-engineer, rf-satellite-engineer, broadcast-engineer</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Create applied path stubs</td>
+<td>Architecture</td>
+<td>done</td>
+<td>DNE, RSE, BRD, RCE, VTE, RME, SNE, CE, DCE, _new-path-template</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Add new fundamentals domains</td>
+<td>Architecture</td>
+<td>done</td>
+<td>access-media, carrier-transport, datacentre, protocols, functions</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Add CE and DCE applied stubs</td>
+<td>Architecture</td>
+<td>done</td>
+<td>carrier-engineer/overview.md, datacentre-engineer/overview.md</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Create learning-path files for all roles</td>
+<td>Architecture</td>
+<td>done</td>
+<td>CE and DCE files added; all 9 paths now have learning-path files</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Update <code>mkdocs.yml</code> nav for new paths and domains</td>
+<td>Tooling</td>
+<td>done</td>
+<td>Added RF-Coax, Voice, RF Mobile, Storage, Carrier, DC paths; Professional Standards</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Create professional-standards domain stub</td>
+<td>Architecture</td>
+<td>done</td>
+<td>modules/fundamentals/professional-standards/overview.md; PS-000</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Create <code>preprocess-module.py</code></td>
+<td>Tooling</td>
+<td>done</td>
+<td>Three-bucket transformation for pdf/pptx output targets</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Integrate preprocessor into <code>build-pdf.sh</code> and <code>build-pptx.sh</code></td>
+<td>Tooling</td>
+<td>done</td>
+<td>Both scripts now call preprocess-module.py before Pandoc/Marp</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Retrofit seed modules (NW-001, IP-001, IP-002) to new template</td>
+<td>Content</td>
+<td>done</td>
+<td>Rewrote openings to Problem-First pattern; fixed XREF block scope; added Standards &amp; Certs section; added XREF tables</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Update <code>README.md</code> for expanded scope</td>
+<td>Architecture</td>
+<td>pending</td>
+<td>Multi-vendor, new paths, three-bucket model</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Resolve <code>services/</code> domain overlap with <code>protocols/</code> + <code>functions/</code></td>
+<td>Architecture</td>
+<td>blocked</td>
+<td>See follow-up D</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Update <code>docs/MODULE_TEMPLATE.md</code> - replace Analogy section with The Problem pattern</td>
+<td>Architecture</td>
+<td>done</td>
+<td>Problem-First pedagogical approach; MikroTik added as peer vendor; vendor tab rules added</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Update <code>docs/INSTRUCTION.md</code> - Section 5 (Problem-First) and Section 6 (MikroTik + vendor tab rules)</td>
+<td>Architecture</td>
+<td>done</td>
+<td></td>
+</tr>
+<tr>
+<td>26</td>
+<td>Resolve RT module ID conflict</td>
+<td>Architecture</td>
+<td>done</td>
+<td>RT-003=RIP, RT-004=OSPF, RT-007=BGP; DNE learning path updated to match</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="seed-modules-session-1-done">Seed Modules (Session 1 - Done)<a class="headerlink" href="#seed-modules-session-1-done" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>NW-001</td>
+<td>The OSI Model</td>
+<td>done</td>
+<td>Needs human review → set <code>human_reviewed: true</code></td>
+</tr>
+<tr>
+<td>S2</td>
+<td>IP-001</td>
+<td>IP Addressing Fundamentals</td>
+<td>done</td>
+<td>Needs human review</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>IP-002</td>
+<td>IP Subnetting &amp; VLSM</td>
+<td>done</td>
+<td>Needs human review</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsnetworking">Content Backlog - Fundamentals/Networking<a class="headerlink" href="#content-backlog-fundamentalsnetworking" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C01</td>
+<td>NW-002</td>
+<td>Network Topologies</td>
+<td>done</td>
+<td>Star, mesh, bus, ring, hybrid</td>
+</tr>
+<tr>
+<td>C02</td>
+<td>NW-003</td>
+<td>Ethernet Standards &amp; Cabling</td>
+<td>done</td>
+<td>Cat5e/6/6a/7, SFP, DAC, fibre types</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsaccess-media-new">Content Backlog - Fundamentals/Access Media (NEW)<a class="headerlink" href="#content-backlog-fundamentalsaccess-media-new" title="Permanent link">&para;</a></h2>
+<p>Covers physical medium evolution: how we connect devices, from the beginning to now.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C03</td>
+<td>AM-001</td>
+<td>Serial &amp; Rollover Cables</td>
+<td>pending</td>
+<td>DB-9/25, RJ-45 console, management access history</td>
+</tr>
+<tr>
+<td>C04</td>
+<td>AM-002</td>
+<td>Token Ring &amp; FDDI</td>
+<td>pending</td>
+<td>Historical; why they lost to Ethernet</td>
+</tr>
+<tr>
+<td>C05</td>
+<td>AM-003</td>
+<td>Ethernet Evolution</td>
+<td>pending</td>
+<td>10BASE-T → 100M → 1G → 10G → 25/40/100/400G</td>
+</tr>
+<tr>
+<td>C06</td>
+<td>AM-004</td>
+<td>DSL Technologies</td>
+<td>pending</td>
+<td>ADSL, ADSL2+, VDSL, VDSL2; copper limits</td>
+</tr>
+<tr>
+<td>C07</td>
+<td>AM-005</td>
+<td>Coaxial Cable &amp; Cable Broadband</td>
+<td>pending</td>
+<td>DOCSIS 1.x/2.0/3.0/3.1/4.0; HFC networks</td>
+</tr>
+<tr>
+<td>C08</td>
+<td>AM-006</td>
+<td>Grey Optical (Uncoloured / Direct)</td>
+<td>pending</td>
+<td>Single-mode, multimode; SFP/QSFP types; reach/wavelength</td>
+</tr>
+<tr>
+<td>C09</td>
+<td>AM-007</td>
+<td>Coloured Optical - CWDM &amp; DWDM</td>
+<td>pending</td>
+<td>ITU grid, channel spacing, amplification (EDFA), ROADMs</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>AM-008</td>
+<td>RF over Optical (Analogue/Digital)</td>
+<td>pending</td>
+<td>HFC, RFoG, Remote PHY</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>AM-009</td>
+<td>Wi-Fi (802.11 Evolution)</td>
+<td>pending</td>
+<td>802.11a/b/g/n/ac/ax/be; bands, channels, MU-MIMO, OFDMA</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>AM-010</td>
+<td>Mobile Networks (2G→5G)</td>
+<td>pending</td>
+<td>GSM, UMTS, LTE, 5G NR; backhaul, roaming, network slicing</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>AM-011</td>
+<td>VSAT &amp; Satellite Broadband Access</td>
+<td>pending</td>
+<td>Link to RF modules; DVB-RCS/RCS2, ACM, throughput</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsip">Content Backlog - Fundamentals/IP<a class="headerlink" href="#content-backlog-fundamentalsip" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C14</td>
+<td>IP-003</td>
+<td>IPv6 Addressing</td>
+<td>done</td>
+<td>Format, types, EUI-64, NDP, SLAAC, DHCPv6, coexistence</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>IP-004</td>
+<td>IPv4 Exhaustion &amp; Transition</td>
+<td>pending</td>
+<td>CGNAT, 6rd, DS-Lite, NAT64</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsrouting">Content Backlog - Fundamentals/Routing<a class="headerlink" href="#content-backlog-fundamentalsrouting" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C16</td>
+<td>RT-001</td>
+<td>Routing Fundamentals</td>
+<td>done</td>
+<td>Routing table, LPM, AD, RIB vs FIB, convergence</td>
+</tr>
+<tr>
+<td>C17</td>
+<td>RT-002</td>
+<td>Static Routing</td>
+<td>done</td>
+<td>Default route, floating static, next-hop vs exit-if, Null0</td>
+</tr>
+<tr>
+<td>C18</td>
+<td>RT-003</td>
+<td>RIP &amp; Distance-Vector Concepts</td>
+<td>done</td>
+<td>Distance-vector algorithm, counting-to-infinity, split horizon, poison reverse, timers</td>
+</tr>
+<tr>
+<td>C19</td>
+<td>RT-004</td>
+<td>OSPF Fundamentals</td>
+<td>done</td>
+<td>LSA types 1-5, DR/BDR, area 0, cost/SPF, state machine; multi-vendor</td>
+</tr>
+<tr>
+<td>C20</td>
+<td>RT-005</td>
+<td>OSPF Advanced</td>
+<td>done</td>
+<td>Multi-area, ABR/ASBR, summarisation, stub/NSSA, redistribution, tagging</td>
+</tr>
+<tr>
+<td>C21</td>
+<td>RT-006</td>
+<td>IS-IS Fundamentals</td>
+<td>done</td>
+<td>NET, L1/L2, DIS, wide metrics, TLV extensibility; multi-vendor</td>
+</tr>
+<tr>
+<td>C22</td>
+<td>RT-007</td>
+<td>BGP Fundamentals</td>
+<td>done</td>
+<td>eBGP/iBGP, AS_PATH, attributes, best-path, route reflectors; multi-vendor</td>
+</tr>
+<tr>
+<td>C23</td>
+<td>RT-008</td>
+<td>BGP Advanced</td>
+<td>done</td>
+<td>Communities (RFC 1997/4360/8092), route-maps, prefix-lists, prepending, MED</td>
+</tr>
+<tr>
+<td>C24</td>
+<td>RT-009</td>
+<td>Route Redistribution &amp; Policy</td>
+<td>done</td>
+<td>Mutual redistribution, seed metrics, tagging, loop prevention</td>
+</tr>
+<tr>
+<td>C25</td>
+<td>RT-010</td>
+<td>EIGRP</td>
+<td>pending</td>
+<td>Cisco proprietary (now RFC 7868); seeking-standardisation callout</td>
+</tr>
+<tr>
+<td>C26</td>
+<td>RT-011</td>
+<td>Multicast Routing</td>
+<td>pending</td>
+<td>IGMP, PIM-SM, PIM-DM, SSM, RP</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsswitching">Content Backlog - Fundamentals/Switching<a class="headerlink" href="#content-backlog-fundamentalsswitching" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C27</td>
+<td>SW-001</td>
+<td>Switching Fundamentals</td>
+<td>done</td>
+<td>MAC learning, forwarding, flooding; multi-vendor</td>
+</tr>
+<tr>
+<td>C28</td>
+<td>SW-002</td>
+<td>VLANs &amp; 802.1Q Trunking</td>
+<td>done</td>
+<td>Access/trunk ports, native VLAN, 802.1Q frame structure, VLAN hopping</td>
+</tr>
+<tr>
+<td>C29</td>
+<td>SW-003</td>
+<td>Spanning Tree Protocol (STP/RSTP/MSTP)</td>
+<td>done</td>
+<td>802.1D, 802.1w, 802.1s; PVST+/RPVST+; PortFast/BPDU Guard</td>
+</tr>
+<tr>
+<td>C30</td>
+<td>SW-004</td>
+<td>EtherChannel / LAG (LACP)</td>
+<td>done</td>
+<td>802.3ad LACP vs Cisco PAgP; load-balancing hash; port-channel config</td>
+</tr>
+<tr>
+<td>C31</td>
+<td>SW-005</td>
+<td>Port Security &amp; DAI</td>
+<td>done</td>
+<td>MAC limiting, sticky MAC, violation modes, DHCP Snooping, DAI, ARP ACL</td>
+</tr>
+<tr>
+<td>C32</td>
+<td>SW-006</td>
+<td>Layer 3 Switching &amp; SVIs</td>
+<td>pending</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalscarrier-transport-new">Content Backlog - Fundamentals/Carrier-Transport (NEW)<a class="headerlink" href="#content-backlog-fundamentalscarrier-transport-new" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C33</td>
+<td>CT-001</td>
+<td>MPLS Fundamentals</td>
+<td>done</td>
+<td>Labels, FEC, LDP, LSP, PHP, L3VPN/TE/FRR overview; multi-vendor</td>
+</tr>
+<tr>
+<td>C34</td>
+<td>CT-002</td>
+<td>MPLS VPNs (L3VPN / VRF)</td>
+<td>done</td>
+<td>RFC 4364; PE-CE routing</td>
+</tr>
+<tr>
+<td>C35</td>
+<td>CT-003</td>
+<td>MPLS L2VPN (VPLS, Pseudowire)</td>
+<td>done</td>
+<td>RFC 4761, 4762</td>
+</tr>
+<tr>
+<td>C36</td>
+<td>CT-004</td>
+<td>Segment Routing (SR-MPLS)</td>
+<td>done</td>
+<td>IETF standard; Cisco, Nokia, Juniper implementations</td>
+</tr>
+<tr>
+<td>C37</td>
+<td>CT-005</td>
+<td>SRv6</td>
+<td>done</td>
+<td>SR over IPv6 data plane</td>
+</tr>
+<tr>
+<td>C38</td>
+<td>CT-006</td>
+<td>EVPN Fundamentals</td>
+<td>done</td>
+<td>RFC 7432; MAC/IP advertisement; multi-vendor</td>
+</tr>
+<tr>
+<td>C39</td>
+<td>CT-007</td>
+<td>EVPN-VXLAN</td>
+<td>done</td>
+<td>Overlay + underlay; DC and carrier use</td>
+</tr>
+<tr>
+<td>C40</td>
+<td>CT-008</td>
+<td>Metro Ethernet Forum (MEF) Standards</td>
+<td>done</td>
+<td>E-Line, E-LAN, E-Tree, E-Access; MEF 3.0</td>
+</tr>
+<tr>
+<td>C41</td>
+<td>CT-009</td>
+<td>Carrier Ethernet Services</td>
+<td>done</td>
+<td>CE 2.0 attributes, CoS, bandwidth profiles</td>
+</tr>
+<tr>
+<td>C42</td>
+<td>CT-010</td>
+<td>SDH/SONET &amp; OTN Basics</td>
+<td>done</td>
+<td>Legacy transport; still present in carrier core</td>
+</tr>
+<tr>
+<td>C43</td>
+<td>CT-011</td>
+<td>Optical Transport Network (OTN)</td>
+<td>done</td>
+<td>G.709; ODU multiplexing</td>
+</tr>
+<tr>
+<td>C44</td>
+<td>CT-012</td>
+<td>Traffic Engineering (RSVP-TE &amp; SR-TE)</td>
+<td>done</td>
+<td>Tunnels, path computation, fast-reroute</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsdata-centre-new">Content Backlog - Fundamentals/Data Centre (NEW)<a class="headerlink" href="#content-backlog-fundamentalsdata-centre-new" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C45</td>
+<td>DC-001</td>
+<td>Data Centre Network Design</td>
+<td>pending</td>
+<td>Spine-leaf vs 3-tier; oversubscription</td>
+</tr>
+<tr>
+<td>C46</td>
+<td>DC-002</td>
+<td>VXLAN Fundamentals</td>
+<td>pending</td>
+<td>RFC 7348; VTEP, VNI, BUM traffic</td>
+</tr>
+<tr>
+<td>C47</td>
+<td>DC-003</td>
+<td>BGP in the Data Centre</td>
+<td>pending</td>
+<td>BGP as DC underlay; RFC 7938</td>
+</tr>
+<tr>
+<td>C48</td>
+<td>DC-004</td>
+<td>EVPN in the Data Centre</td>
+<td>pending</td>
+<td>MAC mobility, ARP suppression, multihoming</td>
+</tr>
+<tr>
+<td>C49</td>
+<td>DC-005</td>
+<td>Data Centre Interconnect (DCI)</td>
+<td>pending</td>
+<td>OTV, EVPN DCI, dark fibre</td>
+</tr>
+<tr>
+<td>C50</td>
+<td>DC-006</td>
+<td>Storage Networking Basics</td>
+<td>pending</td>
+<td>iSCSI, FCoE, NVMe-oF; brief overview</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsprotocols-new">Content Backlog - Fundamentals/Protocols (NEW)<a class="headerlink" href="#content-backlog-fundamentalsprotocols-new" title="Permanent link">&para;</a></h2>
+<p>Standard and widely-used protocols - one module per protocol.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C51</td>
+<td>PROTO-001</td>
+<td>DNS - Domain Name System</td>
+<td>pending</td>
+<td>Hierarchy, resolution, record types (A, AAAA, MX, CNAME, PTR, NS, SOA)</td>
+</tr>
+<tr>
+<td>C52</td>
+<td>PROTO-002</td>
+<td>ARP &amp; GARP</td>
+<td>pending</td>
+<td>IPv4 ARP; Gratuitous ARP; proxy ARP; DAI mitigation</td>
+</tr>
+<tr>
+<td>C53</td>
+<td>PROTO-003</td>
+<td>NTP &amp; PTP</td>
+<td>pending</td>
+<td>NTP strata, NTPv4; PTP/IEEE 1588 for precision timing</td>
+</tr>
+<tr>
+<td>C54</td>
+<td>PROTO-004</td>
+<td>Syslog</td>
+<td>pending</td>
+<td>RFC 5424; severity levels; centralised logging</td>
+</tr>
+<tr>
+<td>C55</td>
+<td>PROTO-005</td>
+<td>SNMP</td>
+<td>pending</td>
+<td>v1/v2c/v3; MIB, OID, traps vs polling</td>
+</tr>
+<tr>
+<td>C56</td>
+<td>PROTO-006</td>
+<td>NetFlow &amp; IPFIX</td>
+<td>pending</td>
+<td>RFC 7011; flow records; collector/exporter; Cisco vs standard</td>
+</tr>
+<tr>
+<td>C57</td>
+<td>PROTO-007</td>
+<td>Streaming Telemetry</td>
+<td>pending</td>
+<td>gRPC/gNMI; OpenConfig; vs SNMP/NetFlow</td>
+</tr>
+<tr>
+<td>C58</td>
+<td>PROTO-008</td>
+<td>NETCONF &amp; YANG</td>
+<td>pending</td>
+<td>RFC 6241; data models; vs CLI</td>
+</tr>
+<tr>
+<td>C59</td>
+<td>PROTO-009</td>
+<td>RESTCONF</td>
+<td>pending</td>
+<td>RFC 8040; HTTP-based alternative to NETCONF</td>
+</tr>
+<tr>
+<td>C60</td>
+<td>PROTO-010</td>
+<td>DHCP Deep Dive</td>
+<td>pending</td>
+<td>DORA, options, relay, DHCPv6</td>
+</tr>
+<tr>
+<td>C61</td>
+<td>PROTO-011</td>
+<td>BFD (Bidirectional Forwarding Detection)</td>
+<td>pending</td>
+<td>Sub-second failure detection; used with routing protocols</td>
+</tr>
+<tr>
+<td>C62</td>
+<td>PROTO-012</td>
+<td>LLDP &amp; CDP</td>
+<td>pending</td>
+<td>LLDP (standard 802.1AB) vs CDP (Cisco proprietary); neighbour discovery</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsfunctions-new">Content Backlog - Fundamentals/Functions (NEW)<a class="headerlink" href="#content-backlog-fundamentalsfunctions-new" title="Permanent link">&para;</a></h2>
+<p>Network functions - conceptual and implementation, multi-vendor.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C63</td>
+<td>FN-001</td>
+<td>Switching - How It Works</td>
+<td>pending</td>
+<td>CAM/TCAM; hardware forwarding; cut-through vs store-forward</td>
+</tr>
+<tr>
+<td>C64</td>
+<td>FN-002</td>
+<td>Routing - How It Works</td>
+<td>pending</td>
+<td>Control plane vs data plane; RIB, FIB, CEF</td>
+</tr>
+<tr>
+<td>C65</td>
+<td>FN-003</td>
+<td>NAT &amp; PAT</td>
+<td>pending</td>
+<td>Static, dynamic, overload (PAT); CGNAT; RFC 3022</td>
+</tr>
+<tr>
+<td>C66</td>
+<td>FN-004</td>
+<td>Stateless ACLs</td>
+<td>pending</td>
+<td>Packet filtering; standard vs extended; match criteria</td>
+</tr>
+<tr>
+<td>C67</td>
+<td>FN-005</td>
+<td>Stateful Firewall &amp; ACLs</td>
+<td>pending</td>
+<td>Connection tracking; reflexive ACLs; zone-based FW</td>
+</tr>
+<tr>
+<td>C68</td>
+<td>FN-006</td>
+<td>IDS &amp; IPS</td>
+<td>pending</td>
+<td>Signature vs anomaly; inline vs passive; Snort/Suricata</td>
+</tr>
+<tr>
+<td>C69</td>
+<td>FN-007</td>
+<td>Deep Packet Inspection (DPI)</td>
+<td>pending</td>
+<td>Layer 7 inspection; use cases; vendor tools</td>
+</tr>
+<tr>
+<td>C70</td>
+<td>FN-008</td>
+<td>Application Layer Gateway (ALG)</td>
+<td>pending</td>
+<td>Why NAT breaks protocols (FTP, SIP, H.323); ALG fix</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsservices">Content Backlog - Fundamentals/Services<a class="headerlink" href="#content-backlog-fundamentalsservices" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C71</td>
+<td>SV-001</td>
+<td>DNS</td>
+<td>done</td>
+<td>Hierarchy, resolution, DORA analogy, record types, TTL</td>
+</tr>
+<tr>
+<td>C72</td>
+<td>SV-002</td>
+<td>DHCP</td>
+<td>done</td>
+<td>DORA exchange, leases, relay agents, Option 82, DHCPv6</td>
+</tr>
+<tr>
+<td>C73</td>
+<td>SV-003</td>
+<td>NAT &amp; PAT</td>
+<td>done</td>
+<td>Static/dynamic/PAT, DNAT, translation table, ALG, NAT-T</td>
+</tr>
+<tr>
+<td>C74</td>
+<td>SV-004</td>
+<td>NTP</td>
+<td>done</td>
+<td>Stratum hierarchy, slew vs step, NTP auth, PTP/IEEE 1588</td>
+</tr>
+<tr>
+<td>C75</td>
+<td>SV-005</td>
+<td>SNMP &amp; Syslog</td>
+<td>done</td>
+<td>SNMPv3 authPriv, MIB/OID, Trap/Inform, Syslog severity</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> There is overlap between <code>services/</code> and <code>protocols/</code> + <code>functions/</code>. Decision needed: keep <code>services/</code> as an alias/redirect layer, or merge the content. Flag for human decision.</p>
+</blockquote>
+<hr />
+<h2 id="content-backlog-fundamentalssecurity">Content Backlog - Fundamentals/Security<a class="headerlink" href="#content-backlog-fundamentalssecurity" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C76</td>
+<td>SEC-001</td>
+<td>ACLs</td>
+<td>done</td>
+<td>Standard vs extended, wildcard masks, inbound/outbound, TCP established, IPv6</td>
+</tr>
+<tr>
+<td>C77</td>
+<td>SEC-002</td>
+<td>Firewall Concepts</td>
+<td>done</td>
+<td>Stateful inspection, session table, zone-based policy, DMZ, SYN flood, NGFW</td>
+</tr>
+<tr>
+<td>C78</td>
+<td>SEC-003</td>
+<td>VPN &amp; IPSec</td>
+<td>done</td>
+<td>IKEv1/v2, ESP/AH, tunnel mode, NAT-T, certificate vs PSK</td>
+</tr>
+<tr>
+<td>C79</td>
+<td>SEC-004</td>
+<td>AAA - TACACS+ &amp; RADIUS</td>
+<td>done</td>
+<td>TACACS+ vs RADIUS, 802.1X, command accounting, local fallback</td>
+</tr>
+<tr>
+<td>C80</td>
+<td>SEC-005</td>
+<td>Encryption Standards &amp; PKI</td>
+<td>done</td>
+<td>AES/RSA/ECDSA, X.509, CA hierarchy, CRL/OCSP, TLS 1.3</td>
+</tr>
+<tr>
+<td>C81</td>
+<td>SEC-006</td>
+<td>Network Segmentation &amp; DMZ</td>
+<td>done</td>
+<td>Zone model, DMZ, dual-firewall, OoB management, micro-segmentation, Zero Trust</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsqos">Content Backlog - Fundamentals/QoS<a class="headerlink" href="#content-backlog-fundamentalsqos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C82</td>
+<td>QOS-001</td>
+<td>QoS Fundamentals</td>
+<td>done</td>
+<td>Delay, jitter, loss, bandwidth; DSCP; trust boundary; ITU G.114</td>
+</tr>
+<tr>
+<td>C83</td>
+<td>QOS-002</td>
+<td>Classification &amp; Marking</td>
+<td>done</td>
+<td>MQC class-map/policy-map; DSCP/802.1p; NBAR; trust config</td>
+</tr>
+<tr>
+<td>C84</td>
+<td>QOS-003</td>
+<td>Queuing Mechanisms</td>
+<td>done</td>
+<td>FIFO, WFQ, CBWFQ, LLQ; WRED; priority queue policing</td>
+</tr>
+<tr>
+<td>C85</td>
+<td>QOS-004</td>
+<td>Traffic Policing &amp; Shaping</td>
+<td>done</td>
+<td>Token bucket; CIR/Bc/Be/PIR; two-rate three-colour; HQoS</td>
+</tr>
+<tr>
+<td>C86</td>
+<td>QOS-005</td>
+<td>QoS in MPLS Networks</td>
+<td>pending</td>
+<td>EXP/TC bits; pipe vs uniform mode</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsautomation">Content Backlog - Fundamentals/Automation<a class="headerlink" href="#content-backlog-fundamentalsautomation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C87</td>
+<td>AUTO-001</td>
+<td>Python for Network Engineers</td>
+<td>done</td>
+<td>Netmiko, Paramiko, NAPALM</td>
+</tr>
+<tr>
+<td>C88</td>
+<td>AUTO-002</td>
+<td>REST APIs &amp; Network Automation</td>
+<td>done</td>
+<td>JSON/XML; HTTP methods; RESTCONF; eAPI; NX-API</td>
+</tr>
+<tr>
+<td>C89</td>
+<td>AUTO-003</td>
+<td>NETCONF, YANG &amp; gRPC</td>
+<td>done</td>
+<td>ncclient; gNMI streaming telemetry</td>
+</tr>
+<tr>
+<td>C90</td>
+<td>AUTO-004</td>
+<td>Ansible for Network Automation</td>
+<td>done</td>
+<td>Playbooks, roles, vendor modules; resource modules</td>
+</tr>
+<tr>
+<td>C91</td>
+<td>AUTO-005</td>
+<td>Terraform for Networks</td>
+<td>pending</td>
+<td>Infrastructure as code</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsrf">Content Backlog - Fundamentals/RF<a class="headerlink" href="#content-backlog-fundamentalsrf" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C92</td>
+<td>RF-001</td>
+<td>RF Fundamentals</td>
+<td>pending</td>
+<td></td>
+</tr>
+<tr>
+<td>C93</td>
+<td>RF-002</td>
+<td>Modulation Techniques</td>
+<td>pending</td>
+<td></td>
+</tr>
+<tr>
+<td>C94</td>
+<td>RF-003</td>
+<td>Antenna Theory</td>
+<td>pending</td>
+<td></td>
+</tr>
+<tr>
+<td>C95</td>
+<td>RF-004</td>
+<td>Link Budget Calculations</td>
+<td>pending</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-fundamentalsprofessional-standards-new">Content Backlog - Fundamentals/Professional Standards (NEW)<a class="headerlink" href="#content-backlog-fundamentalsprofessional-standards-new" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C93</td>
+<td>PS-001</td>
+<td>ITIL 4 for Network Engineers</td>
+<td>needed</td>
+<td>Service management; incident/change/problem processes</td>
+</tr>
+<tr>
+<td>C94</td>
+<td>PS-002</td>
+<td>NIST SP 800-53 - Security Controls</td>
+<td>needed</td>
+<td>Control families; relevance to network config</td>
+</tr>
+<tr>
+<td>C95</td>
+<td>PS-003</td>
+<td>BCP38 / BCP84 - Anti-Spoofing</td>
+<td>needed</td>
+<td>Ingress filtering; why it matters for DDoS</td>
+</tr>
+<tr>
+<td>C96</td>
+<td>PS-004</td>
+<td>TIA-942 - Data Centre Tiers</td>
+<td>needed</td>
+<td>Tier I–IV; redundancy levels; common misconceptions</td>
+</tr>
+<tr>
+<td>C97</td>
+<td>PS-005</td>
+<td>ISO/IEC 27001 for Engineers</td>
+<td>needed</td>
+<td>ISMS; risk treatment; network security controls</td>
+</tr>
+<tr>
+<td>C98</td>
+<td>PS-006</td>
+<td>MEF 3.0 - LSO and Carrier Ethernet</td>
+<td>needed</td>
+<td>Service orchestration; MEF service attributes</td>
+</tr>
+<tr>
+<td>C99</td>
+<td>PS-007</td>
+<td>IEEE 802 Standards Overview</td>
+<td>needed</td>
+<td>802.1, 802.3, 802.11, 802.1Q, 802.1X landscape</td>
+</tr>
+<tr>
+<td>C100</td>
+<td>PS-008</td>
+<td>RFC Track Explained</td>
+<td>needed</td>
+<td>Standards-track vs BCP vs Informational vs Experimental</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-applied-rf-coax-cable-engineer">Content Backlog - Applied: RF-Coax / Cable Engineer<a class="headerlink" href="#content-backlog-applied-rf-coax-cable-engineer" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RC1</td>
+<td>RCE-001</td>
+<td>DOCSIS 3.0 - Channel Bonding</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC2</td>
+<td>RCE-002</td>
+<td>DOCSIS 3.1 - OFDM and OFDMA</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC3</td>
+<td>RCE-003</td>
+<td>DOCSIS 4.0 - Full Duplex and Extended Spectrum</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC4</td>
+<td>RCE-004</td>
+<td>CMTS Architecture and Configuration</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC5</td>
+<td>RCE-005</td>
+<td>Subscriber Provisioning (DHCP, TFTP, config files)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC6</td>
+<td>RCE-006</td>
+<td>QoS in DOCSIS (Service Flows, Classifiers)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC7</td>
+<td>RCE-007</td>
+<td>Remote PHY Architecture (RPD, CCAP)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC8</td>
+<td>RCE-008</td>
+<td>Fibre-Deep and Node + 0 Design</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC9</td>
+<td>RCE-009</td>
+<td>Signal Level Management and Upstream Noise</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RC10</td>
+<td>RCE-010</td>
+<td>Node Utilisation and Splitting Decisions</td>
+<td>needed</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-applied-voice-telephony-engineer">Content Backlog - Applied: Voice / Telephony Engineer<a class="headerlink" href="#content-backlog-applied-voice-telephony-engineer" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VT1</td>
+<td>VTE-001</td>
+<td>SIP - Session Initiation Protocol (RFC 3261)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT2</td>
+<td>VTE-002</td>
+<td>RTP/RTCP - Real-time Transport Protocol</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT3</td>
+<td>VTE-003</td>
+<td>Codecs - G.711, G.729, Opus, iLBC</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT4</td>
+<td>VTE-004</td>
+<td>DTMF Handling (RFC 2833 / RFC 4733)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT5</td>
+<td>VTE-005</td>
+<td>H.323 Overview</td>
+<td>needed</td>
+<td>Legacy, still deployed</td>
+</tr>
+<tr>
+<td>VT6</td>
+<td>VTE-006</td>
+<td>PSTN Architecture - Switching Hierarchy</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT7</td>
+<td>VTE-007</td>
+<td>ISDN - BRI and PRI</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT8</td>
+<td>VTE-008</td>
+<td>SS7 - Signalling System 7 Architecture</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT9</td>
+<td>VTE-009</td>
+<td>SIGTRAN - SS7 over IP (RFC 3057)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT10</td>
+<td>VTE-010</td>
+<td>SIP PBX Design and Architecture</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT11</td>
+<td>VTE-011</td>
+<td>Session Border Controllers (SBCs)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT12</td>
+<td>VTE-012</td>
+<td>NAT Traversal for VoIP (STUN, TURN, ICE)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT13</td>
+<td>VTE-013</td>
+<td>SIP Trunking - Enterprise to Carrier</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT14</td>
+<td>VTE-014</td>
+<td>MOS, Jitter, and Call Quality Measurement</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT15</td>
+<td>VTE-015</td>
+<td>Wireshark for VoIP (SIP and RTP capture)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT16</td>
+<td>VTE-016</td>
+<td>VoIP Security - Toll Fraud, SIP Brute Force</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT17</td>
+<td>VTE-017</td>
+<td>WebRTC Fundamentals</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT18</td>
+<td>VTE-018</td>
+<td>Microsoft Teams Direct Routing</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT19</td>
+<td>VTE-019</td>
+<td>Contact Centre Telephony Architecture</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>VT20</td>
+<td>VTE-020</td>
+<td>E911 and Emergency Call Routing</td>
+<td>needed</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-applied-rf-mobile-cellular-engineer">Content Backlog - Applied: RF Mobile / Cellular Engineer<a class="headerlink" href="#content-backlog-applied-rf-mobile-cellular-engineer" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RM1</td>
+<td>RME-001</td>
+<td>LTE RAN Architecture (eNB, S1/X2 interfaces)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM2</td>
+<td>RME-002</td>
+<td>5G NR Architecture (gNB, CU/DU split, F1 interface)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM3</td>
+<td>RME-003</td>
+<td>Cell Planning - Coverage, Capacity, Interference</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM4</td>
+<td>RME-004</td>
+<td>Massive MIMO and Beamforming</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM5</td>
+<td>RME-005</td>
+<td>SON - Self-Organising Networks</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM6</td>
+<td>RME-006</td>
+<td>Microwave Point-to-Point Backhaul</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM7</td>
+<td>RME-007</td>
+<td>4G EPC Architecture (MME, SGW, PGW, HSS, PCRF)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM8</td>
+<td>RME-008</td>
+<td>GTP - GPRS Tunnelling Protocol</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM9</td>
+<td>RME-009</td>
+<td>5G Core SBA Architecture (AMF, SMF, UPF, UDM, PCF)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM10</td>
+<td>RME-010</td>
+<td>DIAMETER Protocol (4G charging, AAA)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM11</td>
+<td>RME-011</td>
+<td>Roaming Architecture (GRX, IPX, SS7/DIAMETER)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM12</td>
+<td>RME-012</td>
+<td>RF KPIs (RSRP, RSRQ, SINR, CQI, MCS)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM13</td>
+<td>RME-013</td>
+<td>RAN Optimisation Techniques</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM14</td>
+<td>RME-014</td>
+<td>Drive Testing and Post-Processing</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM15</td>
+<td>RME-015</td>
+<td>Private 5G - Enterprise Campus Networks</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM16</td>
+<td>RME-016</td>
+<td>Open RAN (O-RAN Alliance)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM17</td>
+<td>RME-017</td>
+<td>Network Slicing for Vertical Industries</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>RM18</td>
+<td>RME-018</td>
+<td>Multi-access Edge Computing (MEC)</td>
+<td>needed</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="content-backlog-applied-storage-network-engineer">Content Backlog - Applied: Storage Network Engineer<a class="headerlink" href="#content-backlog-applied-storage-network-engineer" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SN1</td>
+<td>SNE-001</td>
+<td>Block vs File vs Object Storage</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN2</td>
+<td>SNE-002</td>
+<td>RAID Levels and Storage Resiliency</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN3</td>
+<td>SNE-003</td>
+<td>LUN Design and Multipathing</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN4</td>
+<td>SNE-004</td>
+<td>Fibre Channel Protocol (FC frames, port types)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN5</td>
+<td>SNE-005</td>
+<td>FC Fabric - FLOGI, PLOGI, FDISC, Zoning</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN6</td>
+<td>SNE-006</td>
+<td>FC Switch Topologies and ISL Design</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN7</td>
+<td>SNE-007</td>
+<td>FC Switch Platforms (Cisco MDS, Brocade/Broadcom)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN8</td>
+<td>SNE-008</td>
+<td>iSCSI - IP-based Block Storage (RFC 7143)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN9</td>
+<td>SNE-009</td>
+<td>DCB / Priority Flow Control (IEEE 802.1Qbb)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN10</td>
+<td>SNE-010</td>
+<td>FCoE - Fibre Channel over Ethernet</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN11</td>
+<td>SNE-011</td>
+<td>NAS - NFS (RFC 7530) and SMB/CIFS</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN12</td>
+<td>SNE-012</td>
+<td>NVMe-oF Concepts and Architectures</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN13</td>
+<td>SNE-013</td>
+<td>RDMA - RoCE and iWARP</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN14</td>
+<td>SNE-014</td>
+<td>NVMe/TCP (RFC 8041)</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN15</td>
+<td>SNE-015</td>
+<td>Synchronous vs Asynchronous Replication</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN16</td>
+<td>SNE-016</td>
+<td>RPO, RTO, and Storage SLAs</td>
+<td>needed</td>
+<td></td>
+</tr>
+<tr>
+<td>SN17</td>
+<td>SNE-017</td>
+<td>WAN Optimisation for Storage Traffic</td>
+<td>needed</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="applied-paths-status">Applied Paths - Status<a class="headerlink" href="#applied-paths-status" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Path</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>Carrier/SP Network Engineer (<code>CE</code>)</td>
+<td>done</td>
+<td>Overview + learning-path file created</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>Data Centre Network Engineer (<code>DCE</code>)</td>
+<td>done</td>
+<td>Overview + learning-path file created</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>RF-Coax / Cable Engineer (<code>RCE</code>)</td>
+<td>done</td>
+<td>Overview + learning-path file created; module content needed</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>Voice / Telephony Engineer (<code>VTE</code>)</td>
+<td>done</td>
+<td>Overview + learning-path file created; module content needed</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>RF Mobile / Cellular Engineer (<code>RME</code>)</td>
+<td>done</td>
+<td>Overview + learning-path file created; module content needed</td>
+</tr>
+<tr>
+<td>A6</td>
+<td>Storage Network Engineer (<code>SNE</code>)</td>
+<td>done</td>
+<td>Overview + learning-path file created; module content needed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="decisions-context-log">Decisions &amp; Context Log<a class="headerlink" href="#decisions-context-log" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Decision</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-04-15</td>
+<td>Use <code>AI_GUARDRAILS.md</code> (plural) as canonical filename</td>
+<td>GitHub Actions workflows do literal filesystem check</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>MkDocs Material theme for web output</td>
+<td>Best-in-class for technical docs</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Pandoc for PDF, Marp for PPTX</td>
+<td>Pandoc most powerful; Marp minimal friction</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Handout version format <code>vNNN-YYYY-MM-DD</code></td>
+<td>Running number + date</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Module ID prefix scheme</td>
+<td>Stable cross-references that survive file renames</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Singapore poly/university IS/CS/EE as baseline</td>
+<td>Target audience</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Multi-vendor scope: Cisco, Juniper, Nokia, Arista, Huawei, ZTE, MikroTik</td>
+<td>Fair representation; carrier/DC environments use all of these</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Standard / Proprietary-seeking-standard / Proprietary-specific distinction</td>
+<td>Readers must know what they can rely on in mixed environments</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Carrier-transport domain added (CT)</td>
+<td>MPLS, SR, EVPN, MEF - essential for telco/SP roles</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Data centre domain added (DC)</td>
+<td>Spine-leaf, VXLAN, EVPN-DC - distinct enough to warrant own domain</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Access-media domain added (AM)</td>
+<td>Physical layer evolution from serial to 400G to wireless</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Protocols domain added (PROTO)</td>
+<td>One module per standard protocol for atomic reference</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Functions domain added (FN)</td>
+<td>Switching, routing, NAT, ACL, IDS/IPS, DPI, ALG as distinct concepts</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td><code>private/</code> folder created and gitignored</td>
+<td>Local research, uploads, parsed docs - never public</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Three-bucket content model adopted</td>
+<td>Critical (all outputs), Supplementary (collapsed/notes/speaker), XREF (markdown-only)</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Analogy-first mandatory structure</td>
+<td>Every module opens with layman analogy + mapping table before any technical content</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td><code>preprocess-module.py</code> handles output-specific transformation</td>
+<td>Strips/transforms buckets for pdf and pptx targets; web passes through unchanged</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Certs as benchmarks only - not curriculum anchors</td>
+<td>Curriculum follows standards and skills, not exam objectives</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Target audience is global, not Singapore-specific</td>
+<td>Singapore IS/CS/EE reference is illustrative of typical reader background only</td>
+</tr>
+<tr>
+<td>2026-04-17</td>
+<td>Problem-First pedagogy adopted</td>
+<td>Modules open with progressive build-up (two parties + constraints) instead of static analogy; reader constructs the concept before it is formally named</td>
+</tr>
+<tr>
+<td>2026-04-17</td>
+<td>MikroTik RouterOS added as peer vendor</td>
+<td>No editorial positioning; platform context lives in platform-overview.md; vendor tabs show minimal config snippets + link to official docs</td>
+</tr>
+<tr>
+<td>2026-04-17</td>
+<td>Vendor tabs show minimal config snippet + doc link</td>
+<td>Not full working configs; highlight concept-critical parameters; follow with official documentation link</td>
+</tr>
+<tr>
+<td>2026-04-17</td>
+<td>RT module IDs finalised: RT-003=RIP, RT-004=OSPF, RT-007=BGP</td>
+<td>DNE learning path updated to match; spine production order follows this numbering</td>
+</tr>
+<tr>
+<td>2026-04-17</td>
+<td>Content production order: spine first (IP→Routing), then DNE deep dive, then CE deep dive</td>
+<td>Spine modules used by both paths; write once, reference from both</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Professional Standards domain added (PS)</td>
+<td>ITIL, NIST, BCP38, TIA-942, ISO 27001, MEF, IEEE - what engineers are audited against</td>
+</tr>
+<tr>
+<td>2026-04-15</td>
+<td>Multilingual support via file naming convention</td>
+<td><code>module.md</code> = EN default; <code>module.zh-CN.md</code>, <code>module.ms.md</code>, <code>module.ta.md</code> for translations</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="follow-ups-requiring-human-input">Follow-ups Requiring Human Input<a class="headerlink" href="#follow-ups-requiring-human-input" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question / Decision Needed</th>
+<th>Raised</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>What is the target custom domain for GitHub Pages? (update CNAME and mkdocs.yml)</td>
+<td>2026-04-15</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Should handout PDFs be committed to the repo or only published as GitHub Release artifacts?</td>
+<td>2026-04-15</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Who is the initial maintainer handle to put in module frontmatter?</td>
+<td>2026-04-15</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Should <code>services/</code> domain be kept as a distinct folder or merged into <code>protocols/</code> + <code>functions/</code>?</td>
+<td>2026-04-15</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Are there existing training materials or lesson plans to upload to <code>private/uploads/</code> as source material?</td>
+<td>2026-04-15</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Should ZTE vendor CLI examples be included (limited English documentation available)?</td>
+<td>2026-04-15</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Priority order for content backlog - which domains/modules to tackle first?</td>
+<td>2026-04-15</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 20, 2026 17:15:55 UTC">April 20, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 15, 2026 01:33:01 UTC">April 15, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

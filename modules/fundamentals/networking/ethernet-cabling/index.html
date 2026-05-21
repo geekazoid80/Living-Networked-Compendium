@@ -1,0 +1,3415 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A progressive, community-built guide for network engineers — enterprise, carrier, data centre, RF/satellite, and beyond.">
+      
+      
+        <meta name="author" content="Community Contributors">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Ethernet Standards & Cabling - Living Networked Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-objectives" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Living Networked Compendium" class="md-header__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Living Networked Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ethernet Standards & Cabling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../learning-paths/data-network-engineer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learning Paths
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../osi-model/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../applied/data-network-engineer/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Applied
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../CONTRIBUTING/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Living Networked Compendium" class="md-nav__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Living Networked Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Paths
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learning Paths
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/data-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/carrier-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/datacentre-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-satellite-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-coax-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/voice-telephony-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-mobile-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/storage-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/broadcast-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../osi-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSI Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IP Addressing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/ip-addressing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/subnetting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access Media
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Switching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier & Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocols
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../professional-standards/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Professional Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/data-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/carrier-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/datacentre-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-satellite-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-coax-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/voice-telephony-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-mobile-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/storage-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/broadcast-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/_new-path-template/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start a New Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTION_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../AI_GUARDRAILS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Guardrails
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../MODULE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../INSTRUCTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-twist-the-wires-to-cancel-interference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Twist the wires to cancel interference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-more-twists-tighter-twists-better-shielding-for-longer-or-faster-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: More twists, tighter twists, better shielding for longer or faster links
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-copper-has-limits-distance-and-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Copper has limits - distance and speed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-light-in-a-glass-tube" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Light in a glass tube
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-standardise-the-transceiver-so-equipment-is-interchangeable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Standardise the transceiver so equipment is interchangeable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-just-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Just Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#copper-unshielded-twisted-pair-utp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copper: Unshielded Twisted Pair (UTP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copper-shielded-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copper: Shielded Variants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fibre-optic-cabling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fibre Optic Cabling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fibre Optic Cabling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multimode-fibre-mmf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multimode Fibre (MMF)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-mode-fibre-smf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Mode Fibre (SMF)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transceivers-sfp-qsfp-and-the-pluggable-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transceivers: SFP, QSFP, and the Pluggable Ecosystem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transceivers: SFP, QSFP, and the Pluggable Ecosystem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#direct-attach-cable-dac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direct Attach Cable (DAC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#active-optical-cable-aoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Active Optical Cable (AOC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ethernet-speed-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ethernet Speed Standards
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-1-using-cat6-cable-and-expecting-10g-to-full-100-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 1: Using Cat6 cable and expecting 10G to full 100 m
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-2-mixing-multimode-and-single-mode-fibre-or-transceivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 2: Mixing multimode and single-mode fibre or transceivers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-3-forgetting-bend-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 3: Forgetting bend radius
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-4-vendor-transceiver-lock-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 4: Vendor transceiver lock-in
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practice Problems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-cable-identification-and-transceiver-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab: Cable Identification and Transceiver Inventory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary &amp; Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standards-certifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standards &amp; Certifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution &amp; Licensing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Cross-References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Cross-References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modules-that-reference-this-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules That Reference This Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules-this-module-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules This Module References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">cabling</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">cat5e</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">cat6</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">copper</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">ethernet</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">fibre</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">physical-layer</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">sfp</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">transceiver</span>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium/edit/main/modules/fundamentals/networking/ethernet-cabling.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>Ethernet Standards & Cabling</h1>
+
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ol>
+<li><strong>Identify</strong> the common copper cabling categories (Cat5e, Cat6, Cat6A) and their specifications</li>
+<li><strong>Distinguish</strong> between multimode and single-mode fibre and when each is used</li>
+<li><strong>Select</strong> the appropriate cable or transceiver for a given link distance, speed, and environment</li>
+<li><strong>Recognise</strong> common connector and transceiver types (RJ-45, LC, SC, SFP, QSFP)</li>
+<li><strong>Explain</strong> why direct attach cable (DAC) and active optical cable (AOC) exist as alternatives</li>
+</ol>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../osi-model/">The OSI Model</a> (<code>NW-001</code>) - specifically, understanding that cabling operates at Layer 1 (Physical)</li>
+<li><a href="../network-topologies/">Network Topologies</a> (<code>NW-002</code>) - understanding the physical layouts that cabling must support</li>
+</ul>
+<hr />
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
+<p>You have two computers you want to connect. You run a copper wire between them. It works - at one metre.</p>
+<p>Now stretch that wire across a building. The signal weakens, picks up noise from power cables nearby, and by the time it reaches the other end, bits are corrupted. You need to rebuild the wire.</p>
+<h3 id="step-1-twist-the-wires-to-cancel-interference">Step 1: Twist the wires to cancel interference<a class="headerlink" href="#step-1-twist-the-wires-to-cancel-interference" title="Permanent link">&para;</a></h3>
+<p>Electrical signals in a wire radiate noise, and nearby cables radiate noise back. The fix: twist pairs of wires around each other. The twist causes the noise to cancel itself out - what hits one wire hits the other equally, and the difference signal carries your data cleanly.</p>
+<p>This is <strong>Unshielded Twisted Pair (UTP)</strong> - the foundation of copper Ethernet cabling.</p>
+<h3 id="step-2-more-twists-tighter-twists-better-shielding-for-longer-or-faster-links">Step 2: More twists, tighter twists, better shielding for longer or faster links<a class="headerlink" href="#step-2-more-twists-tighter-twists-better-shielding-for-longer-or-faster-links" title="Permanent link">&para;</a></h3>
+<p>As you push more data faster and over longer distances, the twisted pairs need tighter wists, better insulation between pairs, and sometimes metallic shielding around the bundle. Each generation of the standard sets tighter tolerances.</p>
+<p>That's why there are <strong>cable categories</strong> - Cat5e, Cat6, Cat6A, Cat7. Each is a tighter specification of the same basic concept, tested to carry more bandwidth with less crosstalk over the specified distance.</p>
+<h3 id="step-3-copper-has-limits-distance-and-speed">Step 3: Copper has limits - distance and speed<a class="headerlink" href="#step-3-copper-has-limits-distance-and-speed" title="Permanent link">&para;</a></h3>
+<p>Copper attenuates the signal. Past roughly 100 metres for standard Ethernet, the signal is too weak. You either need a repeater (switch), or a different medium.</p>
+<p>And copper can only carry so much frequency. At 10 Gbps and beyond over long distances, you need something that doesn't have the same physics limitations.</p>
+<h3 id="step-4-light-in-a-glass-tube">Step 4: Light in a glass tube<a class="headerlink" href="#step-4-light-in-a-glass-tube" title="Permanent link">&para;</a></h3>
+<p>Glass fibre carries light instead of electricity. Light doesn't attenuate the way electrical signals do, doesn't pick up electromagnetic interference, and can carry vastly more bandwidth over vastly longer distances.</p>
+<p>The trade-off: fibre requires a transceiver - a device that converts electrical signals from the network interface to light and back. And the glass itself is fragile compared to copper.</p>
+<p>Different use cases call for different fibre: <strong>multimode</strong> for short runs (inside a building), <strong>single-mode</strong> for long runs (between buildings, across cities).</p>
+<h3 id="step-5-standardise-the-transceiver-so-equipment-is-interchangeable">Step 5: Standardise the transceiver so equipment is interchangeable<a class="headerlink" href="#step-5-standardise-the-transceiver-so-equipment-is-interchangeable" title="Permanent link">&para;</a></h3>
+<p>Rather than build the optical transceiver permanently into every piece of equipment, the industry settled on swappable form factors - pluggable modules that clip into a standard port. Different modules for different speeds, distances, and wavelengths, all fitting the same slot.</p>
+<p>That's the <strong>SFP/QSFP family</strong> of transceivers - pluggable optics that let you mix and match media without replacing the switch or router.</p>
+<h3 id="what-you-just-built">What You Just Built<a class="headerlink" href="#what-you-just-built" title="Permanent link">&para;</a></h3>
+<p>Ethernet physical media is the answer to a series of engineering constraints: cancel interference (twisted pair), extend distance (fibre), scale bandwidth (tighter standards), and enable interchangeability (pluggable transceivers). Each generation solves the bottleneck of the previous one.</p>
+<table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Solution</th>
+<th>Technical term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wire interference</td>
+<td>Twist wire pairs together</td>
+<td>UTP (Unshielded Twisted Pair)</td>
+</tr>
+<tr>
+<td>Faster speeds / longer copper runs</td>
+<td>Tighter twists, shielding, stricter tolerances</td>
+<td>Cable categories (Cat5e → Cat6A)</td>
+</tr>
+<tr>
+<td>Distance limit of copper</td>
+<td>Use glass fibre and light</td>
+<td>Fibre optic cabling</td>
+</tr>
+<tr>
+<td>Different distances / wavelengths</td>
+<td>Choose the right fibre type</td>
+<td>Multimode vs. single-mode</td>
+</tr>
+<tr>
+<td>Swappable optics without replacing equipment</td>
+<td>Standard pluggable transceiver module</td>
+<td>SFP / QSFP</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="core-content">Core Content<a class="headerlink" href="#core-content" title="Permanent link">&para;</a></h2>
+<h3 id="copper-unshielded-twisted-pair-utp">Copper: Unshielded Twisted Pair (UTP)<a class="headerlink" href="#copper-unshielded-twisted-pair-utp" title="Permanent link">&para;</a></h3>
+<p>UTP is the dominant copper medium for short-range Ethernet. Eight wires, twisted into four pairs, terminated with an RJ-45 connector.</p>
+<p>The "category" defines the cable's performance specification - how much bandwidth it can carry with acceptable crosstalk (interference between adjacent pairs):</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Max speed (typical)</th>
+<th>Max distance</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cat5e</td>
+<td>1 Gbps</td>
+<td>100 m</td>
+<td>Minimum for new installations; widely deployed</td>
+</tr>
+<tr>
+<td>Cat6</td>
+<td>1 Gbps / 10 Gbps (to 55 m)</td>
+<td>100 m / 55 m</td>
+<td>Better crosstalk rejection; common in new builds</td>
+</tr>
+<tr>
+<td>Cat6A</td>
+<td>10 Gbps</td>
+<td>100 m</td>
+<td>Augmented Cat6; required for 10G to full 100 m</td>
+</tr>
+<tr>
+<td>Cat7</td>
+<td>10 Gbps</td>
+<td>100 m</td>
+<td>Shielded; GG45/TERA connectors; niche use</td>
+</tr>
+<tr>
+<td>Cat8</td>
+<td>25/40 Gbps</td>
+<td>30 m</td>
+<td>Data centre patch cabling; very short runs</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition success">
+<p class="admonition-title">Standard - TIA/EIA-568</p>
+<p>Copper cabling performance specifications (categories, distances, connector pinouts) are defined by TIA/EIA-568 (Telecommunications Industry Association) and ISO/IEC 11801. All compliant cables of the same category must meet the same performance floor.</p>
+</div>
+<details class="supplementary">
+<summary>Straight-through vs. Crossover cables</summary>
+<p>Ethernet cables come in two pinout configurations:</p>
+<ul>
+<li><strong>Straight-through:</strong> Pin 1 connects to Pin 1 at both ends. Used to connect unlike devices (PC to switch, switch to router).</li>
+<li><strong>Crossover:</strong> Transmit pins on one end connect to receive pins on the other. Used to connect like devices (PC to PC, switch to switch) without an intermediate device.</li>
+</ul>
+<p>Modern equipment with <strong>Auto-MDI/MDIX</strong> (almost everything made after 2002) detects the connection type and adjusts automatically - you can use either cable. But in legacy or industrial environments, you may still encounter crossover requirements.</p>
+</details>
+<hr />
+<h3 id="copper-shielded-variants">Copper: Shielded Variants<a class="headerlink" href="#copper-shielded-variants" title="Permanent link">&para;</a></h3>
+<p>Environments with high electromagnetic interference (factory floors, data centres with dense cable runs) may require shielded cable:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Shield coverage</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UTP</td>
+<td>None</td>
+<td>Standard office/campus</td>
+</tr>
+<tr>
+<td>F/UTP (FTP)</td>
+<td>Overall foil wrap</td>
+<td>Moderate interference environments</td>
+</tr>
+<tr>
+<td>S/UTP (ScTP)</td>
+<td>Braided screen around bundle</td>
+<td>Higher-interference environments</td>
+</tr>
+<tr>
+<td>SF/UTP</td>
+<td>Foil + braid</td>
+<td>Severe interference</td>
+</tr>
+<tr>
+<td>S/FTP</td>
+<td>Braid around bundle + foil per pair</td>
+<td>Maximum shielding; data centre, industrial</td>
+</tr>
+</tbody>
+</table>
+<p>Shielded cable requires proper grounding at both ends. An improperly grounded shield can act as an antenna and make interference worse.</p>
+<hr />
+<h3 id="fibre-optic-cabling">Fibre Optic Cabling<a class="headerlink" href="#fibre-optic-cabling" title="Permanent link">&para;</a></h3>
+<p>Fibre carries light through a glass or plastic core. No electrical signal means no electromagnetic interference, no crosstalk, and much longer distances.</p>
+<h4 id="multimode-fibre-mmf">Multimode Fibre (MMF)<a class="headerlink" href="#multimode-fibre-mmf" title="Permanent link">&para;</a></h4>
+<p>Multiple paths (modes) of light travel through a relatively thick core (50 µm or 62.5 µm). Multiple modes cause dispersion - the light pulses spread as they travel, limiting distance.</p>
+<p><strong>Use case:</strong> Short-range, high-speed links - within a data centre, between floors of a building, campus backbone up to ~500 m.</p>
+<p>Common multimode grades:</p>
+<table>
+<thead>
+<tr>
+<th>Grade</th>
+<th>Core</th>
+<th>Max distance (10G)</th>
+<th>Max distance (100G)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OM3</td>
+<td>50 µm</td>
+<td>300 m</td>
+<td>100 m</td>
+</tr>
+<tr>
+<td>OM4</td>
+<td>50 µm</td>
+<td>400 m</td>
+<td>150 m</td>
+</tr>
+<tr>
+<td>OM5</td>
+<td>50 µm</td>
+<td>400 m (SWDM)</td>
+<td>150 m</td>
+</tr>
+</tbody>
+</table>
+<h4 id="single-mode-fibre-smf">Single-Mode Fibre (SMF)<a class="headerlink" href="#single-mode-fibre-smf" title="Permanent link">&para;</a></h4>
+<p>A very thin core (8–10 µm) allows only one path of light. No modal dispersion - light travels in a straight line. Much longer distances.</p>
+<p><strong>Use case:</strong> Long-range links - campus to campus, building interconnects, metropolitan and wide-area links, undersea cables. Distances from 10 km to thousands of km depending on amplification.</p>
+<p>Common single-mode grades:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Standard</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS1</td>
+<td>ITU-T G.652</td>
+<td>Indoor, tighter bend radius</td>
+</tr>
+<tr>
+<td>OS2</td>
+<td>ITU-T G.652D/G.657</td>
+<td>Outdoor, long-haul, low-water-peak</td>
+</tr>
+</tbody>
+</table>
+<h4 id="connectors">Connectors<a class="headerlink" href="#connectors" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Connector</th>
+<th>Form factor</th>
+<th>Common use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LC (Lucent Connector)</td>
+<td>Small form factor, duplex</td>
+<td>SFP modules, patch panels</td>
+</tr>
+<tr>
+<td>SC (Subscriber Connector)</td>
+<td>Larger, push-pull</td>
+<td>Older equipment, some patch panels</td>
+</tr>
+<tr>
+<td>MPO/MTP</td>
+<td>Multi-fibre (8, 12, 24 fibres)</td>
+<td>High-density data centre trunk cabling</td>
+</tr>
+<tr>
+<td>ST (Straight Tip)</td>
+<td>Bayonet-style</td>
+<td>Legacy enterprise, some industrial</td>
+</tr>
+</tbody>
+</table>
+<p>LC is the dominant connector for modern SFP-based links. MPO is used for high-density parallel optic links (QSFP to breakout panels).</p>
+<hr />
+<h3 id="transceivers-sfp-qsfp-and-the-pluggable-ecosystem">Transceivers: SFP, QSFP, and the Pluggable Ecosystem<a class="headerlink" href="#transceivers-sfp-qsfp-and-the-pluggable-ecosystem" title="Permanent link">&para;</a></h3>
+<p>Rather than integrating the optical transceiver permanently into equipment, modern switches and routers use <strong>pluggable transceiver modules</strong> - a standard mechanical form factor with an electrical interface on the equipment side and an optical (or copper) interface on the link side.</p>
+<table>
+<thead>
+<tr>
+<th>Form factor</th>
+<th>Typical speeds</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SFP (Small Form-factor Pluggable)</td>
+<td>100 Mbps – 1 Gbps</td>
+<td>1G links; ubiquitous in enterprise and carrier</td>
+</tr>
+<tr>
+<td>SFP+</td>
+<td>10 Gbps</td>
+<td>10G links; same physical size as SFP</td>
+</tr>
+<tr>
+<td>SFP28</td>
+<td>25 Gbps</td>
+<td>25G; common in data centre server links</td>
+</tr>
+<tr>
+<td>QSFP+</td>
+<td>4×10G = 40 Gbps</td>
+<td>40G links; used in spine/aggregation</td>
+</tr>
+<tr>
+<td>QSFP28</td>
+<td>4×25G = 100 Gbps</td>
+<td>100G links; dominant in modern DC spine</td>
+</tr>
+<tr>
+<td>QSFP-DD</td>
+<td>8×25G / 8×50G = 200/400 Gbps</td>
+<td>400G; emerging in hyperscale data centres</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Proprietary - Seeking Standardisation</p>
+<p>Transceiver form factors (SFP, QSFP) originated as multi-vendor agreements (SFF Committee) and are widely implemented. The electrical interface specifications (SFF-8472, SFF-8636) are published. However, some vendors implement <strong>DOM</strong> (Digital Optical Monitoring) and <strong>vendor lock</strong> differently - some equipment will only accept transceivers with that vendor's coded EEPROM. Check compatibility before purchasing third-party optics.</p>
+</div>
+<h4 id="direct-attach-cable-dac">Direct Attach Cable (DAC)<a class="headerlink" href="#direct-attach-cable-dac" title="Permanent link">&para;</a></h4>
+<p>A short passive copper cable with SFP/QSFP connectors factory-terminated at both ends. No optical transceiver - the cable is the connection.</p>
+<ul>
+<li>Range: 1–7 m (passive); up to ~15 m (active DAC)</li>
+<li>Speed: matches the connector (10G SFP+, 25G SFP28, 100G QSFP28)</li>
+<li>Use case: top-of-rack to spine switch connections in data centres</li>
+</ul>
+<p>Lower cost than optical SFP + fibre. No laser, no glass. The dominant connection for sub-5 m links.</p>
+<h4 id="active-optical-cable-aoc">Active Optical Cable (AOC)<a class="headerlink" href="#active-optical-cable-aoc" title="Permanent link">&para;</a></h4>
+<p>A factory-terminated cable where the transceiver is integrated into the cable connector and uses optical fibre for the run. Lighter and more flexible than DAC at longer lengths (3–100 m).</p>
+<ul>
+<li>Use case: longer rack-to-rack or inter-row connections where DAC is too stiff or heavy</li>
+<li>No field-replaceable transceiver - the cable and transceiver are one unit</li>
+</ul>
+<hr />
+<h3 id="ethernet-speed-standards">Ethernet Speed Standards<a class="headerlink" href="#ethernet-speed-standards" title="Permanent link">&para;</a></h3>
+<p>Ethernet has evolved from 10 Mbps coaxial in 1980 to 400 Gbps and beyond. The key milestones:</p>
+<table>
+<thead>
+<tr>
+<th>Standard</th>
+<th>Speed</th>
+<th>Media</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10BASE-T</td>
+<td>10 Mbps</td>
+<td>Cat3 copper</td>
+<td>1990</td>
+</tr>
+<tr>
+<td>100BASE-TX (Fast Ethernet)</td>
+<td>100 Mbps</td>
+<td>Cat5 copper</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>1000BASE-T (Gigabit Ethernet)</td>
+<td>1 Gbps</td>
+<td>Cat5e/6 copper</td>
+<td>1999</td>
+</tr>
+<tr>
+<td>1000BASE-SX/LX</td>
+<td>1 Gbps</td>
+<td>MMF / SMF</td>
+<td>1998</td>
+</tr>
+<tr>
+<td>10GBASE-T</td>
+<td>10 Gbps</td>
+<td>Cat6A copper</td>
+<td>2006</td>
+</tr>
+<tr>
+<td>10GBASE-SR/LR</td>
+<td>10 Gbps</td>
+<td>MMF / SMF</td>
+<td>2002</td>
+</tr>
+<tr>
+<td>25GBASE-SR</td>
+<td>25 Gbps</td>
+<td>MMF</td>
+<td>2016</td>
+</tr>
+<tr>
+<td>40GBASE-SR4</td>
+<td>40 Gbps</td>
+<td>MMF (×4)</td>
+<td>2010</td>
+</tr>
+<tr>
+<td>100GBASE-SR4/LR4</td>
+<td>100 Gbps</td>
+<td>MMF / SMF</td>
+<td>2010</td>
+</tr>
+<tr>
+<td>400GBASE-SR8/DR4</td>
+<td>400 Gbps</td>
+<td>MMF / SMF</td>
+<td>2018</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition success">
+<p class="admonition-title">Standard - IEEE 802.3</p>
+<p>All Ethernet physical layer specifications are defined in IEEE 802.3. The naming convention is: <code>[speed]BASE-[medium code]</code>. <code>T</code> = twisted pair, <code>S</code> = short-wavelength (MMF), <code>L</code> = long-wavelength (SMF), <code>R</code> = large block coding, numbers = parallel fibre count.</p>
+</div>
+<details class="supplementary">
+<summary>Why does copper top out at 100 m?</summary>
+<p>Copper Ethernet uses echo cancellation and advanced signal processing to deal with crosstalk and attenuation. But the physics still limits how much signal remains after 100 m of copper at high frequencies. </p>
+<p>Higher-speed standards (10GBASE-T, 40GBASE-T) require progressively tighter cabling specifications (Cat6A, Cat8) to work at all, and often run at reduced distances.</p>
+<p>Fibre doesn't have this problem - light attenuation in fibre is much lower, and there's no crosstalk between fibre strands. For anything over 100 m, or anything 25 Gbps and above at any distance beyond a rack, fibre is the standard choice.</p>
+</details>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<h3 id="pitfall-1-using-cat6-cable-and-expecting-10g-to-full-100-m">Pitfall 1: Using Cat6 cable and expecting 10G to full 100 m<a class="headerlink" href="#pitfall-1-using-cat6-cable-and-expecting-10g-to-full-100-m" title="Permanent link">&para;</a></h3>
+<p>Cat6 supports 10 Gbps only to 55 m (under the standard). From 55–100 m, Cat6 is only certified for 1 Gbps. If you need 10 Gbps to the full 100 m standard Ethernet distance, you need Cat6A. Vendors sometimes sell "10G-capable Cat6" - read the fine print.</p>
+<h3 id="pitfall-2-mixing-multimode-and-single-mode-fibre-or-transceivers">Pitfall 2: Mixing multimode and single-mode fibre or transceivers<a class="headerlink" href="#pitfall-2-mixing-multimode-and-single-mode-fibre-or-transceivers" title="Permanent link">&para;</a></h3>
+<p>A multimode transceiver plugged into single-mode fibre (or vice versa) will technically connect - you won't get a link error immediately - but the link will have high bit error rates or simply fail at any distance. The wavelengths and core sizes are designed as a system. SMF uses 1310 nm or 1550 nm; MMF typically uses 850 nm. They are not interchangeable.</p>
+<h3 id="pitfall-3-forgetting-bend-radius">Pitfall 3: Forgetting bend radius<a class="headerlink" href="#pitfall-3-forgetting-bend-radius" title="Permanent link">&para;</a></h3>
+<p>Fibre is glass. Bend it too sharply and you crack the core or cause light to escape, causing signal loss. Every fibre cable has a minimum bend radius specification. Violations won't always be obvious immediately - the link may work at lower quality until the fibre eventually fails. Use proper cable management.</p>
+<h3 id="pitfall-4-vendor-transceiver-lock-in">Pitfall 4: Vendor transceiver lock-in<a class="headerlink" href="#pitfall-4-vendor-transceiver-lock-in" title="Permanent link">&para;</a></h3>
+<p>Some vendors (notably Cisco on certain platforms) will reject third-party transceivers by default. You may need to enable a compatibility override (<code>service unsupported-transceiver</code> on Cisco IOS). Verify compatibility before purchasing, especially in production environments.</p>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>You need to run a 10 Gbps link between two switches 80 metres apart inside a building. What cable category do you specify for copper? What fibre option is available?</p>
+</li>
+<li>
+<p>A data centre row switch needs to connect to the top-of-rack switches 3 metres away at 100 Gbps. What is the most cost-effective physical medium?</p>
+</li>
+<li>
+<p>You have a 300-metre fibre run between two campus buildings at 10 Gbps. Should you use multimode or single-mode? Why?</p>
+</li>
+<li>
+<p>A technician tells you they installed Cat6 cabling rated for 10G. You measure the run at 70 metres. Is this compliant for 10G? What should have been installed?</p>
+</li>
+</ol>
+<details class="supplementary">
+<summary>Answers</summary>
+<p><strong>1.</strong> Copper: <strong>Cat6A</strong> (required for 10G at 80 m - Cat6 only supports 10G to 55 m). Fibre option: 10GBASE-SR (short reach, multimode, good for 80 m with OM3/OM4).</p>
+<p><strong>2.</strong> <strong>Direct Attach Cable (DAC)</strong> - 100G QSFP28 DAC. No optics required at 3 m; lowest cost, lowest power, no glass.</p>
+<p><strong>3.</strong> <strong>Single-mode fibre.</strong> 300 m exceeds the maximum for 10GBASE-SR on OM3 (300 m max, but at margin) or OM4 (400 m max). For reliable headroom, SMF with 10GBASE-LR (up to 10 km) is the correct choice.</p>
+<p><strong>4.</strong> No - not compliant. Cat6 supports 10G only to 55 m under the standard. At 70 m, Cat6 is only certified for 1G. <strong>Cat6A</strong> should have been installed for 10G at that distance.</p>
+</details>
+<hr />
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<h3 id="lab-cable-identification-and-transceiver-inventory">Lab: Cable Identification and Transceiver Inventory<a class="headerlink" href="#lab-cable-identification-and-transceiver-inventory" title="Permanent link">&para;</a></h3>
+<p><strong>Tools needed:</strong> Your own work environment (or a lab with real equipment)
+<strong>Estimated time:</strong> 15 minutes</p>
+<p><strong>Objective:</strong> Identify the physical cabling and transceivers in use in a real network.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>
+<p>Find a patch panel or switch in your lab or workplace. Look at the cable labels - what category is the copper cabling? Is it Cat5e, Cat6, Cat6A?</p>
+</li>
+<li>
+<p>Look at the SFP/QSFP slots in a switch or router. Are any transceivers installed? Read the label on the transceiver - it will tell you the speed (1G/10G/25G/100G), the reach (SR/LR/ZR), and the manufacturer.</p>
+</li>
+<li>
+<p>If you have a switch with a CLI, run the vendor's transceiver show command:</p>
+</li>
+</ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Arista EOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>show interfaces transceiver
+</span></code></pre></div>
+Full configuration reference: <a href="https://www.cisco.com/c/en/us/products/interfaces-modules/transceiver-modules/index.html">Cisco Transceiver Modules</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>show chassis pic fpc-slot 0 pic-slot 0
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>show interfaces diagnostics optics ge-0/0/0
+</span></code></pre></div>
+Full configuration reference: <a href="https://www.juniper.net/documentation/us/en/software/junos/interfaces-ethernet/topics/topic-map/transceivers.html">Juniper Transceivers</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>show interfaces transceiver
+</span></code></pre></div>
+Full configuration reference: <a href="https://www.arista.com/en/support/product-documentation">Arista Transceiver Guide</a></p>
+</div>
+</div>
+</div>
+<ol>
+<li>Note the DOM (Digital Optical Monitoring) values: Tx power, Rx power, temperature. A healthy link typically shows Rx power between −3 dBm and −20 dBm depending on the optic type. Very low Rx power (below −30 dBm) suggests a dirty connector or fibre fault.</li>
+</ol>
+<p><strong>Stretch:</strong> If you have a fibre tester or VFL (Visual Fault Locator), trace a fibre run and look for bends or connectors with high insertion loss.</p>
+<hr />
+<h2 id="summary-key-takeaways">Summary &amp; Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">&para;</a></h2>
+<p>Physical media decisions follow a simple hierarchy: distance first, then bandwidth, then cost. For runs under 100 m inside a building, copper with the correct cable category is almost always the right choice. For anything longer, or any link where future bandwidth growth is expected, fibre is correct. The pluggable transceiver exists precisely so that this decision can be revisited per port at any time, without replacing the switch.</p>
+<p>When a link fails, the physical layer is the first thing to verify. Dirty connectors and mismatched reach or wavelength account for the majority of fibre link problems. Duplex and speed mismatch account for most copper problems. Neither class of failure produces an error message that points directly at the cause, which is why knowing the physical layer well saves more troubleshooting time than almost any other investment.</p>
+<hr />
+<h2 id="where-to-next">Where to Next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Apply to switching:</strong> <a href="../../switching/switching-fundamentals/">Switching Fundamentals</a> (<code>SW-001</code>) - the device at the end of the cable</li>
+<li><strong>Physical media deep dive:</strong> <a href="../access-media/grey-optical.md">Grey Optical - Uncoloured / Direct Fibre</a> (<code>AM-006</code>) - deeper coverage of single-mode and wavelength planning</li>
+<li><strong>Coloured optics:</strong> <a href="../access-media/coloured-optical.md">CWDM &amp; DWDM</a> (<code>AM-007</code>) - multiplexing multiple wavelengths on one fibre</li>
+</ul>
+<hr />
+<h2 id="standards-certifications">Standards &amp; Certifications<a class="headerlink" href="#standards-certifications" title="Permanent link">&para;</a></h2>
+<p><strong>Relevant standards:</strong>
+- IEEE 802.3 - Ethernet (all physical layer specifications)
+- TIA/EIA-568 - Commercial Building Telecommunications Cabling Standard
+- ISO/IEC 11801 - Generic Cabling for Customer Premises
+- ITU-T G.652 - Characteristics of single-mode optical fibre cable</p>
+<p><strong>Where this topic appears in certification syllabi:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cert</th>
+<th>Vendor</th>
+<th>Relevant section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CCNA 200-301</td>
+<td>Cisco</td>
+<td>1.3 - Physical interface and cabling</td>
+</tr>
+<tr>
+<td>CompTIA Network+</td>
+<td>CompTIA</td>
+<td>1.3 - Cables and connectors</td>
+</tr>
+<tr>
+<td>JNCIA-Junos JN0-103</td>
+<td>Juniper</td>
+<td>Networking fundamentals</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>IEEE 802.3-2022 - Ethernet Standard (all BASE-T, BASE-X physical specifications)</li>
+<li>TIA/EIA-568.2-D - Balanced Twisted-Pair Telecommunications Cabling</li>
+<li>ITU-T G.652 - Characteristics of a single-mode optical fibre and cable</li>
+<li>Odom, Wendell - <em>CCNA 200-301 Official Cert Guide, Volume 1</em>, Cisco Press, 2020 - Chapter 2</li>
+<li>Stallings, William - <em>Data and Computer Communications</em>, 10th ed., Pearson, 2013 - Chapter 4</li>
+</ul>
+<hr />
+<h2 id="attribution-licensing">Attribution &amp; Licensing<a class="headerlink" href="#attribution-licensing" title="Permanent link">&para;</a></h2>
+<p><strong>Author:</strong> @geekazoid80
+<strong>License:</strong> <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> - content
+<strong>AI assistance:</strong> Claude used for initial draft structure and prose. Technical specifications verified against IEEE 802.3-2022, TIA-568, and Odom's CCNA Official Cert Guide.</p>
+<hr />
+<!-- XREF-START -->
+<h2 id="internal-cross-references">Internal Cross-References<a class="headerlink" href="#internal-cross-references" title="Permanent link">&para;</a></h2>
+<h3 id="modules-that-reference-this-module">Modules That Reference This Module<a class="headerlink" href="#modules-that-reference-this-module" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SW-001</td>
+<td>Switching Fundamentals</td>
+<td>Prerequisite - switches terminate copper and fibre at Layer 1</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>AM-006</td>
+<td>Grey Optical</td>
+<td>This module introduces single-mode fibre; AM-006 covers it in depth</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>AM-007</td>
+<td>Coloured Optical (CWDM/DWDM)</td>
+<td>This module introduces SFP form factors; AM-007 covers DWDM optics</td>
+<td>2026-04-17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modules-this-module-references">Modules This Module References<a class="headerlink" href="#modules-this-module-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NW-001</td>
+<td>The OSI Model</td>
+<td>Prerequisite - cabling operates at Layer 1</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>NW-002</td>
+<td>Network Topologies</td>
+<td>Prerequisite - topology determines cable layout</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>SW-001</td>
+<td>Switching Fundamentals</td>
+<td>"Where to Next" forward reference</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>AM-006</td>
+<td>Grey Optical</td>
+<td>"Where to Next" forward reference</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>AM-007</td>
+<td>Coloured Optical</td>
+<td>"Where to Next" forward reference</td>
+<td>2026-04-17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vendor-mapping">Vendor Mapping<a class="headerlink" href="#vendor-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Standard</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ethernet physical layer</td>
+<td>IEEE 802.3</td>
+<td>All vendors must comply for interoperability</td>
+</tr>
+<tr>
+<td>Copper cabling categories</td>
+<td>TIA/EIA-568 / ISO 11801</td>
+<td>Cat5e, Cat6, Cat6A specifications</td>
+</tr>
+<tr>
+<td>SMF characteristics</td>
+<td>ITU-T G.652</td>
+<td>OS1/OS2 fibre</td>
+</tr>
+<tr>
+<td>SFP electrical interface</td>
+<td>SFF-8472, SFF-8636</td>
+<td>Multi-vendor standard; EEPROM vendor lock varies</td>
+</tr>
+</tbody>
+</table>
+<h3 id="maintenance-notes">Maintenance Notes<a class="headerlink" href="#maintenance-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>When AM-006 (Grey Optical) is written, add a back-reference pointing here for the physical layer introduction.</li>
+<li>When SW-001 (Switching Fundamentals) is written, add a back-reference pointing here for physical interface context.</li>
+<li>SFP vendor compatibility notes may need updating as new platform releases change compatibility matrices.</li>
+</ul>
+<!-- XREF-END -->
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

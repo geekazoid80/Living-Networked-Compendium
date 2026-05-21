@@ -1,0 +1,3566 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A progressive, community-built guide for network engineers — enterprise, carrier, data centre, RF/satellite, and beyond.">
+      
+      
+        <meta name="author" content="Community Contributors">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>OSPF Fundamentals - Living Networked Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-objectives" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Living Networked Compendium" class="md-header__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Living Networked Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OSPF Fundamentals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../learning-paths/data-network-engineer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learning Paths
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../networking/osi-model/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../applied/data-network-engineer/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Applied
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../CONTRIBUTING/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Living Networked Compendium" class="md-nav__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Living Networked Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Paths
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learning Paths
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/data-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/carrier-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/datacentre-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-satellite-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-coax-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/voice-telephony-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-mobile-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/storage-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/broadcast-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking/osi-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSI Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IP Addressing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/ip-addressing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/subnetting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access Media
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Switching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier & Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocols
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../professional-standards/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Professional Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/data-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/carrier-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/datacentre-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-satellite-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-coax-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/voice-telephony-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-mobile-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/storage-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/broadcast-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/_new-path-template/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start a New Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTION_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../AI_GUARDRAILS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Guardrails
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../MODULE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../INSTRUCTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-share-the-map-not-just-distances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Share the map, not just distances
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-calculate-the-best-path-yourself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Calculate the best path yourself
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-but-the-map-gets-large-use-areas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: But the map gets large - use areas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-not-everyone-needs-a-full-adjacency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Not everyone needs a full adjacency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-just-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Just Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#link-state-vs-distance-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Link State vs Distance Vector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ospf-neighbor-and-adjacency-formation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OSPF Neighbor and Adjacency Formation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ospf-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OSPF Cost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#designated-router-dr-and-backup-designated-router-bdr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Designated Router (DR) and Backup Designated Router (BDR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ospf-areas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OSPF Areas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ospf-router-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OSPF Router ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vendor-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Implementations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-1-hellodead-interval-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 1: Hello/dead interval mismatch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-2-mtu-mismatch-blocking-adjacency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 2: MTU mismatch blocking adjacency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-3-area-0-required-for-inter-area-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 3: Area 0 required for inter-area routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-4-dr-election-locking-out-the-intended-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 4: DR election locking out the intended DR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-5-reference-bandwidth-not-set-consistently" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 5: reference-bandwidth not set consistently
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practice Problems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-configure-a-two-router-ospf-adjacency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab: Configure a Two-Router OSPF Adjacency
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary &amp; Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standards-certifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standards &amp; Certifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution &amp; Licensing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Cross-References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Cross-References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modules-that-reference-this-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules That Reference This Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules-this-module-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules This Module References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">adjacency</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">area</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">cost</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">dijkstra</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">dr-bdr</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">link-state</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">lsa</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">neighbor</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">ospf</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">ospfv3</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">spf</span>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium/edit/main/modules/fundamentals/routing/ospf-fundamentals.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>OSPF Fundamentals</h1>
+
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ol>
+<li><strong>Explain</strong> how link-state routing differs from distance-vector and why it solves the counting-to-infinity problem</li>
+<li><strong>Describe</strong> the OSPF neighbour and adjacency formation process - the steps from "hello received" to "full adjacency"</li>
+<li><strong>Read</strong> an OSPF neighbour table and identify the state of each relationship</li>
+<li><strong>Explain</strong> OSPF cost and how it determines the best path</li>
+<li><strong>Describe</strong> the role of DR and BDR on multi-access segments and how they are elected</li>
+<li><strong>Identify</strong> the purpose of OSPF areas and explain why Area 0 is required</li>
+</ol>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../routing-fundamentals/">Routing Fundamentals</a> (<code>RT-001</code>) - routing table, metric, AD, RIB vs FIB</li>
+<li><a href="../static-routing/">Static Routing</a> (<code>RT-002</code>) - manual routing context; what OSPF automates</li>
+<li><a href="../rip-distance-vector/">RIP &amp; Distance-Vector</a> (<code>RT-003</code>) - the problems OSPF was designed to solve</li>
+<li><a href="../../networking/network-topologies/">Network Topologies</a> (<code>NW-002</code>) - broadcast domains; multi-access vs point-to-point links</li>
+</ul>
+<hr />
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
+<p>Ten routers. Each knows its directly connected links. A link between Router A and Router B fails. With RIP (distance-vector), the routers slowly count to infinity - several minutes of loops and blackholes before the network stabilises. That's unacceptable.</p>
+<p>The problem with distance-vector is fundamental: each router only knows distances reported by neighbours. It has no picture of the actual topology - where the links are, what they connect, which ones are healthy. When something changes, it can only react to what neighbours tell it, and neighbours might be wrong.</p>
+<p>What if every router had a complete, accurate map of the entire network?</p>
+<h3 id="step-1-share-the-map-not-just-distances">Step 1: Share the map, not just distances<a class="headerlink" href="#step-1-share-the-map-not-just-distances" title="Permanent link">&para;</a></h3>
+<p>Instead of broadcasting "I can reach X in N hops," each router broadcasts something different: "Here is what I directly know. I am connected to Router B via a link that costs 10. I am connected to Router C via a link that costs 1."</p>
+<p>This information - a router's identity, its links, and their costs - is called a <strong>Link State Advertisement (LSA)</strong>. Every router generates its own LSA and floods it across the entire network. Every other router stores every LSA it receives in a <strong>Link State Database (LSDB)</strong>.</p>
+<p>When every router has every other router's LSA, every router has an identical, complete picture of the entire network topology.</p>
+<h3 id="step-2-calculate-the-best-path-yourself">Step 2: Calculate the best path yourself<a class="headerlink" href="#step-2-calculate-the-best-path-yourself" title="Permanent link">&para;</a></h3>
+<p>With a complete map, each router can now calculate the best path to every destination independently - it doesn't need to trust neighbours' distance claims. It runs <strong>Dijkstra's Shortest Path First (SPF) algorithm</strong> on its local copy of the LSDB. This is pure mathematics: given the graph of links and costs, find the minimum-cost path from this router to every other router.</p>
+<p>No counting-to-infinity. No dependency on what neighbours claim. Each router derives its own routing table from first principles, using the shared map.</p>
+<h3 id="step-3-but-the-map-gets-large-use-areas">Step 3: But the map gets large - use areas<a class="headerlink" href="#step-3-but-the-map-gets-large-use-areas" title="Permanent link">&para;</a></h3>
+<p>In a network with 500 routers, every router stores 500 LSAs and runs SPF over a 500-node graph. That's expensive - every link change causes every router to rerun SPF. And LSA flooding fills the network with chatter.</p>
+<p>The solution: divide the network into <strong>areas</strong>. Routers within an area share full LSA detail with each other. Routers between areas exchange <strong>summary routes</strong> - compressed information. A router at the boundary of two areas (an <strong>Area Border Router</strong> or ABR) translates between the two.</p>
+<p>All areas must connect to <strong>Area 0</strong> (the backbone area). Area 0 is the spine; all other areas hang off it. This hierarchy reduces SPF complexity to a manageable level per area while still allowing full connectivity.</p>
+<h3 id="step-4-not-everyone-needs-a-full-adjacency">Step 4: Not everyone needs a full adjacency<a class="headerlink" href="#step-4-not-everyone-needs-a-full-adjacency" title="Permanent link">&para;</a></h3>
+<p>On a multi-access network (an Ethernet segment) with 10 routers, each router could form an adjacency with every other, resulting in 45 adjacencies and 45 × 2 = 90 LSA exchanges. That O(n²) growth makes the approach unworkable on any segment with more than a few routers.</p>
+<p>The solution: elect a <strong>Designated Router (DR)</strong> and a <strong>Backup Designated Router (BDR)</strong>. Every other router (called a DROther) forms a full adjacency only with the DR and BDR. The DR collects all link-state information and redistributes to all. LSA flood count drops from O(n²) to O(n). The BDR monitors the DR and takes over instantly if it fails.</p>
+<h3 id="what-you-just-built">What You Just Built<a class="headerlink" href="#what-you-just-built" title="Permanent link">&para;</a></h3>
+<p>OSPF - Open Shortest Path First. A link-state routing protocol where every router floods its LSA to the entire area, stores a complete topology map (LSDB), and independently calculates the best path using Dijkstra's SPF algorithm.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario element</th>
+<th>Technical term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Here is what I am connected to"</td>
+<td>Link State Advertisement (LSA)</td>
+</tr>
+<tr>
+<td>The complete topology map each router maintains</td>
+<td>Link State Database (LSDB)</td>
+</tr>
+<tr>
+<td>The algorithm that calculates best paths from the map</td>
+<td>Dijkstra's SPF (Shortest Path First)</td>
+</tr>
+<tr>
+<td>Dividing the network into manageable regions</td>
+<td>OSPF Areas</td>
+</tr>
+<tr>
+<td>The spine area all others connect to</td>
+<td>Area 0 (backbone)</td>
+</tr>
+<tr>
+<td>The router that translates between areas</td>
+<td>Area Border Router (ABR)</td>
+</tr>
+<tr>
+<td>Elected router that controls LSA flooding on a segment</td>
+<td>Designated Router (DR)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="core-content">Core Content<a class="headerlink" href="#core-content" title="Permanent link">&para;</a></h2>
+<h3 id="link-state-vs-distance-vector">Link State vs Distance Vector<a class="headerlink" href="#link-state-vs-distance-vector" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Distance-Vector (RIP)</th>
+<th>Link-State (OSPF)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What is shared</td>
+<td>Distance table (routing table)</td>
+<td>LSAs - direct topology facts</td>
+</tr>
+<tr>
+<td>Who knows the full topology</td>
+<td>Nobody - only local distances</td>
+<td>Every router - LSDB is complete</td>
+</tr>
+<tr>
+<td>Path calculation</td>
+<td>Neighbour's claim → add 1 → trust it</td>
+<td>SPF on local full map - no trust needed</td>
+</tr>
+<tr>
+<td>Routing loops</td>
+<td>Possible; counting-to-infinity</td>
+<td>Not possible - full map prevents loops</td>
+</tr>
+<tr>
+<td>Convergence time</td>
+<td>Minutes (periodic updates)</td>
+<td>Seconds (event-triggered flooding)</td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>Limited - hop count max 15</td>
+<td>Large networks - areas allow scaling</td>
+</tr>
+<tr>
+<td>CPU/memory cost</td>
+<td>Low</td>
+<td>Higher - SPF computation + LSDB storage</td>
+</tr>
+</tbody>
+</table>
+<p>The key insight: link-state is more complex and heavier, but it <strong>cannot count to infinity</strong> because no router trusts a neighbour's distance claim - it derives paths itself from the shared map.</p>
+<h3 id="ospf-neighbor-and-adjacency-formation">OSPF Neighbor and Adjacency Formation<a class="headerlink" href="#ospf-neighbor-and-adjacency-formation" title="Permanent link">&para;</a></h3>
+<p>Before exchanging LSAs, OSPF routers must become <strong>neighbours</strong> and then form a <strong>full adjacency</strong>. This happens through a state machine - a sequence of states from first contact to full database synchronisation.</p>
+<p><strong>OSPF Hello packets</strong> - the first contact mechanism:
+- Sent every <code>hello-interval</code> seconds (default: 10s on point-to-point, 10s on broadcast, 30s on NBMA)
+- Contains: router ID, area ID, hello/dead intervals, authentication, DR/BDR, neighbour list
+- Received on <code>224.0.0.5</code> (all OSPF routers multicast)
+- If parameters don't match → no neighbour relationship forms</p>
+<p><strong>Parameters that must match to form adjacency:</strong>
+- Area ID
+- Hello interval and dead interval
+- Authentication type and key
+- Stub area flags
+- MTU (on some platforms/IOS versions)</p>
+<p><strong>OSPF State Machine - from zero to full:</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Down</strong></td>
+<td>No hellos received from this neighbour</td>
+</tr>
+<tr>
+<td><strong>Init</strong></td>
+<td>Hello received, but our Router ID is not yet in their neighbour list</td>
+</tr>
+<tr>
+<td><strong>2-Way</strong></td>
+<td>Our Router ID appears in their hello - bidirectional communication confirmed. DROther-DROther stops here</td>
+</tr>
+<tr>
+<td><strong>ExStart</strong></td>
+<td>Negotiate who is Master/Slave for DBD exchange; establish sequence numbers</td>
+</tr>
+<tr>
+<td><strong>Exchange</strong></td>
+<td>Exchange Database Description (DBD) packets - summaries of LSDB contents</td>
+</tr>
+<tr>
+<td><strong>Loading</strong></td>
+<td>Send Link State Requests (LSR) for LSAs the neighbour has that we don't; receive Link State Updates (LSU)</td>
+</tr>
+<tr>
+<td><strong>Full</strong></td>
+<td>LSDB is synchronised; routing table can be computed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>On broadcast/Ethernet segments:</strong>
+- DROther routers reach <strong>Full</strong> only with DR and BDR
+- DROther–DROther pairs stop at <strong>2-Way</strong>
+- This is correct and expected - not a problem</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Neighbour table example (Cisco):
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>R1# show ip ospf neighbor
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Neighbor ID  Pri  State      Dead Time  Address       Interface
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>10.0.0.2     1    FULL/DR    00:00:38   10.1.1.2     Gi0/0
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>10.0.0.3     1    FULL/BDR   00:00:35   10.1.1.3     Gi0/0
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>10.0.0.4     0    2WAY/DROTHER  00:00:37  10.1.1.4  Gi0/0
+</span></code></pre></div>
+<h3 id="ospf-cost">OSPF Cost<a class="headerlink" href="#ospf-cost" title="Permanent link">&para;</a></h3>
+<p>OSPF uses <strong>cost</strong> as its metric. Lower cost = better path. Cost is <strong>additive</strong> - the total cost of a path is the sum of costs of all outgoing interfaces along the path.</p>
+<p><strong>Cost formula (Cisco default):</strong>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Cost = Reference Bandwidth ÷ Interface Bandwidth
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Default Reference Bandwidth = 100 Mbps = 100,000,000 bps
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Interface         Bandwidth    Cost
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>GigabitEthernet   1 Gbps     100M ÷ 1000M = 0.1 → rounded to 1
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>FastEthernet      100 Mbps   100M ÷ 100M  = 1
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>10 Mbps Ethernet  10 Mbps    100M ÷ 10M   = 10
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>T1/E1             1.544 Mbps 100M ÷ 1.544M ≈ 64
+</span></code></pre></div></p>
+<p><strong>Problem:</strong> The default reference bandwidth (100 Mbps) was designed in the 1990s. With the same formula, GigabitEthernet, 10GE, and 100GE all calculate to cost 1 - indistinguishable. OSPF cannot prefer a 100GE path over a 1GE path if both cost 1.</p>
+<p><strong>Fix:</strong> Set the reference bandwidth to something larger than your fastest link:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>auto-cost reference-bandwidth 100000    (Cisco — sets reference to 100 Gbps)
+</span></code></pre></div>
+This must be configured consistently on ALL routers in the OSPF domain, or costs will be asymmetric and routing will be unpredictable.</p>
+<details class="supplementary">
+<summary>OSPF Cost - Manual Override and Policy</summary>
+<p>Cost can also be set manually per interface, overriding the formula:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>interface GigabitEthernet0/0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a> ip ospf cost 50
+</span></code></pre></div>
+Manual cost is useful when:
+- You want to prefer one path over another independent of bandwidth
+- The formula produces equal costs across unequal links (bandwidth ties)
+- You need to influence inbound traffic from remote OSPF neighbours (requires changing cost on the remote side)</p>
+<p>Junos and Nokia set cost via <code>metric</code> under the routing protocol configuration, not the interface, by default - though interface-level settings are also possible.</p>
+</details>
+<h3 id="designated-router-dr-and-backup-designated-router-bdr">Designated Router (DR) and Backup Designated Router (BDR)<a class="headerlink" href="#designated-router-dr-and-backup-designated-router-bdr" title="Permanent link">&para;</a></h3>
+<p>On any <strong>multi-access network</strong> (broadcast Ethernet, Frame Relay), OSPF elects a DR and BDR to reduce the number of adjacencies and LSA flood copies.</p>
+<p><strong>Without DR/BDR:</strong>
+- N routers on a segment → N×(N-1)/2 adjacencies
+- 10 routers → 45 adjacencies; each LSA copied 45 times</p>
+<p><strong>With DR/BDR:</strong>
+- All routers form Full adjacency with DR and BDR only
+- DROthers form 2-Way with each other - no exchange of LSAs between DROthers directly
+- DR redistributes LSAs to all (<code>224.0.0.5</code>) after receiving them
+- 10 routers → 9 adjacencies to DR + 9 to BDR = 18 total (vs 45)</p>
+<p><strong>DR/BDR election:</strong>
+1. Highest OSPF <strong>priority</strong> wins (0–255; default = 1; priority 0 = ineligible)
+2. Tie-break: highest <strong>Router ID</strong> (the OSPF Router ID - typically highest loopback IP or manually set)
+3. Election is <strong>non-preemptive</strong> - once elected, the DR keeps its role until it fails or OSPF restarts; a higher-priority router that comes up later does not displace the current DR</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>R1# show ip ospf interface GigabitEthernet0/0
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>GigabitEthernet0/0 is up, line protocol is up
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  Internet address 10.1.1.1/24, Area 0
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  OSPF Process ID 1, Router ID 1.1.1.1
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  Network Type BROADCAST, Cost: 1
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  Transmit Delay is 1 sec, State DR, Priority 1
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  Designated Router (ID) 1.1.1.1, Interface address 10.1.1.1
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  Backup Designated Router (ID) 2.2.2.2, Interface address 10.1.1.2
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  Timer intervals: Hello 10, Dead 40, Wait 40, Retransmit 5
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  Neighbor Count is 2, Adjacent neighbor count is 2
+</span></code></pre></div>
+<p><strong>On point-to-point links</strong> (serial, PPP, MPLS tunnels): no DR/BDR election - both routers form Full adjacency directly.</p>
+<h3 id="ospf-areas">OSPF Areas<a class="headerlink" href="#ospf-areas" title="Permanent link">&para;</a></h3>
+<p>OSPF uses a <strong>two-level hierarchy</strong> to scale:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>                    ┌──────────────────────────────┐
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>                    │         Area 0 (Backbone)     │
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                    │  ABR ─────────────── ABR      │
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>                    └────┬──────────────────┬───────┘
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>                         │                  │
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>               ┌─────────┴──────┐   ┌───────┴────────┐
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>               │    Area 1      │   │    Area 2       │
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>               │ (non-backbone) │   │ (non-backbone)  │
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>               └────────────────┘   └─────────────────┘
+</span></code></pre></div>
+<ul>
+<li><strong>Area 0</strong> is mandatory - the backbone. All non-backbone areas must connect to Area 0.</li>
+<li><strong>Area Border Routers (ABRs)</strong> sit at the boundary between areas. They have a full LSDB for each area they belong to. They generate <strong>Type 3 LSAs</strong> (summary LSAs) advertising networks from one area into another.</li>
+<li>Routers <strong>within an area</strong> have full LSA detail for all routers in their area.</li>
+<li>Routers in <strong>different areas</strong> only see summary routes (prefix + cost) for other areas - not the full topology detail.</li>
+</ul>
+<p><strong>Why all areas must connect to Area 0:</strong>
+OSPF guarantees loop-free routing because within a single area, every router has the complete topology. Between areas, routing is based on distance-vector-like summary information - which could theoretically loop if areas were connected in a ring. Forcing all areas through Area 0 prevents inter-area loops by ensuring all inter-area traffic passes through a common spine.</p>
+<p><strong>LSA Types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>LSA Type</th>
+<th>Name</th>
+<th>Generated by</th>
+<th>Scope</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type 1</td>
+<td>Router LSA</td>
+<td>Every router</td>
+<td>Within area</td>
+<td>Router's own links and costs</td>
+</tr>
+<tr>
+<td>Type 2</td>
+<td>Network LSA</td>
+<td>DR</td>
+<td>Within area</td>
+<td>Multi-access segment (DR represents the segment)</td>
+</tr>
+<tr>
+<td>Type 3</td>
+<td>Summary LSA</td>
+<td>ABR</td>
+<td>Into adjacent areas</td>
+<td>Advertises networks from one area to another</td>
+</tr>
+<tr>
+<td>Type 4</td>
+<td>ASBR Summary LSA</td>
+<td>ABR</td>
+<td>Backbone to other areas</td>
+<td>Points to an ASBR (external route injector)</td>
+</tr>
+<tr>
+<td>Type 5</td>
+<td>External LSA</td>
+<td>ASBR</td>
+<td>Domain-wide</td>
+<td>External routes redistributed into OSPF</td>
+</tr>
+<tr>
+<td>Type 7</td>
+<td>NSSA External LSA</td>
+<td>ASBR in NSSA</td>
+<td>NSSA area only</td>
+<td>External routes in a Not-So-Stubby Area</td>
+</tr>
+</tbody>
+</table>
+<p>For CCNA/NRS I level: understand Type 1, 2, 3, and 5. Advanced area types (stub, NSSA) are covered in RT-005 (OSPF Advanced).</p>
+<h3 id="ospf-router-id">OSPF Router ID<a class="headerlink" href="#ospf-router-id" title="Permanent link">&para;</a></h3>
+<p>Every OSPF router has a <strong>Router ID (RID)</strong> - a 32-bit value written in dotted-decimal like an IPv4 address, but it is an identifier, not a routable address.</p>
+<p><strong>RID selection order (Cisco):</strong>
+1. Manually configured RID: <code>router-id X.X.X.X</code>
+2. Highest IP address on any <strong>loopback</strong> interface (loopbacks never go down unless OS-shutdown)
+3. Highest IP address on any <strong>non-loopback</strong> interface</p>
+<p><strong>Best practice:</strong> always configure the RID manually using a loopback address:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>interface Loopback0
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> ip address 1.1.1.1 255.255.255.255
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>router ospf 1
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a> router-id 1.1.1.1
+</span></code></pre></div></p>
+<p>A loopback address used as a RID is also useful as a management address - always reachable as long as the router is up.</p>
+<hr />
+<h2 id="vendor-implementations">Vendor Implementations<a class="headerlink" href="#vendor-implementations" title="Permanent link">&para;</a></h2>
+<p>OSPF is standardised in RFC 2328 (OSPFv2 for IPv4) and RFC 5340 (OSPFv3 for IPv6). All compliant implementations share the same protocol behaviour - hello/dead intervals, state machine, LSA types, SPF algorithm. Syntax differences are in configuration only.</p>
+<div class="admonition success">
+<p class="admonition-title">Standard - RFC 2328 (OSPFv2), RFC 5340 (OSPFv3)</p>
+<p>Any RFC-compliant OSPF implementation forms adjacencies with any other. Multi-vendor OSPF adjacencies are routine in real networks. Verify that hello intervals, dead intervals, area IDs, and MTU match across vendors.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Nokia SR-OS</label><label for="__tabbed_1_4">Arista EOS</label><label for="__tabbed_1_5">Huawei VRP</label><label for="__tabbed_1_6">MikroTik RouterOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>! Enable OSPF process 1 — process ID is local only; does not affect interop
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>router ospf 1
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a> router-id 1.1.1.1
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a> auto-cost reference-bandwidth 100000   ! 100 Gbps reference — set on ALL routers
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>! Assign interfaces to an area
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>interface GigabitEthernet0/0
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a> ip ospf 1 area 0      ! preferred — interface-level config
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a> ip ospf priority 100  ! increase to win DR election if needed
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a> ip ospf cost 10       ! manual cost override
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>! Alternatively, use network statements (classic syntax)
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>router ospf 1
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a> network 10.1.1.0 0.0.0.255 area 0
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>! Verify
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>show ip ospf neighbor
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>show ip ospf interface brief
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>show ip ospf database
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>show ip route ospf
+</span></code></pre></div>
+Cisco supports both interface-level (<code>ip ospf &lt;pid&gt; area &lt;area&gt;</code>) and process-level (<code>network</code> statements) OSPF assignment. Interface-level is more explicit and preferred in modern configs. The OSPF process ID (e.g., <code>ospf 1</code>) is local - two routers with different process IDs can still form an adjacency.</p>
+<p>Full configuration reference: <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/xe-16/iro-xe-16-book.html">Cisco OSPF Configuration Guide</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a># Configure OSPF area and interfaces
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>set protocols ospf area 0.0.0.0 interface ge-0/0/0.0
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>set protocols ospf area 0.0.0.0 interface lo0.0 passive
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a># Set reference bandwidth (affects cost calculation)
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>set protocols ospf reference-bandwidth 100g
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a># Adjust interface cost manually
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>set protocols ospf area 0 interface ge-0/0/0.0 metric 10
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a># Set Router ID
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>set routing-options router-id 1.1.1.1
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a># Verify
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>show ospf neighbor
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>show ospf interface
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>show ospf database
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>show route protocol ospf
+</span></code></pre></div>
+In Junos, areas are written as dotted-decimal (Area 0 = <code>0.0.0.0</code>). The loopback interface should be added as <code>passive</code> - it advertises the address into OSPF but doesn't send hellos. The Router ID is set under <code>routing-options</code>, not under the OSPF stanza.</p>
+<p>Full configuration reference: <a href="https://www.juniper.net/documentation/us/en/software/junos/ospf/index.html">Juniper OSPF Configuration</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># Configure OSPF (classic CLI)
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>configure router ospf
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    area 0.0.0.0
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        interface &quot;to-R2&quot;
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>            interface-type point-to-point
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>            no shutdown
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>        exit
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        interface &quot;system&quot;
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>            passive
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>            no shutdown
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>        exit
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    exit
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    no shutdown
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>exit
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a># Set reference bandwidth
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>configure router ospf reference-bandwidth 100000000   ! in kbps = 100 Gbps
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a># Verify
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>show router ospf neighbor
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>show router ospf interface
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>show router ospf database
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>show router route-table protocol ospf
+</span></code></pre></div>
+SR-OS uses "system interface" (loopback equivalent) as the Router ID source. The <code>passive</code> keyword suppresses hello messages on loopback/system interfaces. Interface types (broadcast, point-to-point) must be specified explicitly where needed.</p>
+<p>Full configuration reference: <a href="https://documentation.nokia.com/sr/">Nokia SR-OS OSPF Guide</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>! OSPF configuration (similar to Cisco IOS)
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>router ospf 1
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a> router-id 1.1.1.1
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a> auto-cost reference-bandwidth 100000   ! 100 Gbps
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>interface Ethernet1
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a> ip ospf 1 area 0.0.0.0
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a> ip ospf cost 10
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>! Verify
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>show ip ospf neighbor
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>show ip ospf interface
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>show ip ospf database
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>show ip route ospf
+</span></code></pre></div>
+Arista EOS OSPF syntax is nearly identical to Cisco IOS-XE. The main differences are in show command output format and some advanced feature syntax.</p>
+<p>Full configuration reference: <a href="https://www.arista.com/en/um-eos/eos-ospf-configuration">Arista EOS OSPF Configuration</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a># Enable OSPF process
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ospf 1 router-id 1.1.1.1
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a># Configure area and network
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>area 0
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> network 10.1.1.0 0.0.0.255
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a># Set interface cost
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>interface GigabitEthernet0/0/0
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a> ospf cost 10
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a># Set bandwidth-reference for cost calculation
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>ospf 1
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a> bandwidth-reference 100000   ! 100 Gbps in Mbps
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a># Verify
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>display ospf peer
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>display ospf interface
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>display ospf lsdb
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>display ip routing-table protocol ospf
+</span></code></pre></div>
+Huawei VRP uses <code>display</code> instead of <code>show</code>. The <code>network</code> command under the <code>area</code> stanza uses wildcard masks (same as Cisco). <code>bandwidth-reference</code> is in Mbps.</p>
+<p>Full configuration reference: <a href="https://support.huawei.com/enterprise/en/doc/EDOC1100278578">Huawei VRP OSPF Configuration</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a># Configure OSPF instance and area
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>/routing ospf instance add name=default router-id=1.1.1.1
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>/routing ospf area add name=backbone area-id=0.0.0.0 instance=default
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a># Assign interfaces to area
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>/routing ospf interface-template add area=backbone interfaces=ether1 type=broadcast
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>/routing ospf interface-template add area=backbone interfaces=lo0 passive=yes
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a># Set interface cost
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>/routing ospf interface-template add area=backbone interfaces=ether1 cost=10
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a># Verify
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>/routing ospf neighbor print
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>/routing ospf interface print
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>/routing ospf lsa print
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>/ip route print where protocol=ospf
+</span></code></pre></div>
+RouterOS v7 uses the new routing framework with instances, areas, and interface templates. Earlier RouterOS v6 used a different syntax. The <code>passive=yes</code> flag on loopback suppresses hellos while still advertising the prefix.</p>
+<p>Full configuration reference: <a href="https://help.mikrotik.com/docs/display/ROS/OSPF">MikroTik OSPF Reference</a></p>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<h3 id="pitfall-1-hellodead-interval-mismatch">Pitfall 1: Hello/dead interval mismatch<a class="headerlink" href="#pitfall-1-hellodead-interval-mismatch" title="Permanent link">&para;</a></h3>
+<p>The most common reason two OSPF routers never form an adjacency. If Router A sends hellos every 10 seconds and Router B expects them every 30 seconds, they will not form a neighbour relationship - the routers will see each other's hellos but the parameters won't match. Check <code>show ip ospf interface</code> on both sides and verify the hello and dead intervals are identical.</p>
+<h3 id="pitfall-2-mtu-mismatch-blocking-adjacency">Pitfall 2: MTU mismatch blocking adjacency<a class="headerlink" href="#pitfall-2-mtu-mismatch-blocking-adjacency" title="Permanent link">&para;</a></h3>
+<p>On Cisco IOS, if two routers have different interface MTUs, OSPF may get stuck in the ExStart/Exchange state (trying to exchange DBD packets). The MTU in the DBD packet is checked - if it doesn't match, the exchange fails. Fix: set matching MTUs on both sides, or add <code>ip ospf mtu-ignore</code> on the interface to suppress the check (not recommended for production - it hides a real misconfiguration).</p>
+<h3 id="pitfall-3-area-0-required-for-inter-area-routing">Pitfall 3: Area 0 required for inter-area routing<a class="headerlink" href="#pitfall-3-area-0-required-for-inter-area-routing" title="Permanent link">&para;</a></h3>
+<p>A common design error: connecting two non-backbone areas to each other without going through Area 0. OSPF will not route between them - inter-area routes require Area 0 in the path. All non-backbone areas must have an ABR connected to Area 0. If physical connectivity to Area 0 is not possible, use a <strong>virtual link</strong> through a transit area - but this is a design workaround, not a first choice.</p>
+<h3 id="pitfall-4-dr-election-locking-out-the-intended-dr">Pitfall 4: DR election locking out the intended DR<a class="headerlink" href="#pitfall-4-dr-election-locking-out-the-intended-dr" title="Permanent link">&para;</a></h3>
+<p>OSPF DR election is non-preemptive. If Router B (priority 1) comes up before Router A (priority 255), Router B wins the DR election. When Router A comes up later with higher priority, it does not displace Router B. Fix: either configure priority before bringing up routers, or clear OSPF on the segment to force a new election (<code>clear ip ospf process</code>). In production, plan the priority assignment before deployment.</p>
+<h3 id="pitfall-5-reference-bandwidth-not-set-consistently">Pitfall 5: reference-bandwidth not set consistently<a class="headerlink" href="#pitfall-5-reference-bandwidth-not-set-consistently" title="Permanent link">&para;</a></h3>
+<p>If different routers have different reference-bandwidth values, cost calculations become inconsistent. Router A may see cost 1 to a network; Router B may see cost 10 for the same link - leading to asymmetric routing or suboptimal paths. Always set <code>auto-cost reference-bandwidth</code> to the same value on every router in the OSPF domain.</p>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Two routers are directly connected. R1 has hello interval = 10, dead interval = 40. R2 has hello interval = 30, dead interval = 120. Do they form an OSPF adjacency? What would you change?</p>
+</li>
+<li>
+<p>A Cisco router has reference-bandwidth = 100 Mbps (default). Calculate the OSPF cost for a 10 GigabitEthernet interface and a FastEthernet interface. What problem does this reveal?</p>
+</li>
+<li>
+<p>Five routers are on an Ethernet segment. All have priority 1. Router IDs are 1.1.1.1, 2.2.2.2, 3.3.3.3, 4.4.4.4, 5.5.5.5. All come up simultaneously. Which becomes DR? Which becomes BDR? A sixth router with RID 6.6.6.6 and priority 255 joins later - does it become DR?</p>
+</li>
+<li>
+<p>Draw (in words or ASCII) the OSPF adjacency state machine from Down to Full. At which state do DROther routers stop with other DROthers?</p>
+</li>
+<li>
+<p>A multi-area OSPF network has Area 0, Area 1, and Area 2. Area 1 and Area 2 are both connected only to Area 0. Can a router in Area 1 reach a network in Area 2? What LSA type carries the route from Area 2 into Area 1?</p>
+</li>
+</ol>
+<details>
+<summary>Answers</summary>
+<p><strong>1.</strong> No adjacency - hello intervals must match (10 ≠ 30). Change R2 to hello=10, dead=40 (or change R1 to hello=30, dead=120, if 30s is acceptable). The dead interval should be at least 4× the hello interval.</p>
+<p><strong>2.</strong> 10GE: 100M ÷ 10,000M = 0.01 → rounded to <strong>1</strong>. FastEthernet: 100M ÷ 100M = <strong>1</strong>. Both cost the same - OSPF cannot prefer the 10GE path over the FastEthernet path. Fix: set <code>auto-cost reference-bandwidth 10000</code> (10 Gbps) or higher so 10GE = 1 and FastEthernet = 100.</p>
+<p><strong>3.</strong> Highest RID wins DR election when priority is tied. <strong>DR = 5.5.5.5, BDR = 4.4.4.4</strong>. When the sixth router (RID 6.6.6.6, priority 255) joins later - <strong>it does not become DR</strong>. DR election is non-preemptive; the current DR (5.5.5.5) keeps its role until it fails. The new router forms Full adjacency with the DR and BDR as a DROther.</p>
+<p><strong>4.</strong> Down → Init → 2-Way → ExStart → Exchange → Loading → Full.
+DROther–DROther pairs stop at <strong>2-Way</strong>. This is correct; they exchange only hellos, not LSAs.</p>
+<p><strong>5.</strong> Yes - Area 1 can reach Area 2 via Area 0. An ABR connected to Area 2 generates <strong>Type 3 Summary LSAs</strong> for Area 2 networks and floods them into Area 0. An ABR connected to Area 1 then generates Type 3 LSAs into Area 1 summarising the Area 2 networks. Routers in Area 1 see the prefix + cost but not the full Area 2 topology.</p>
+</details>
+<hr />
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<h3 id="lab-configure-a-two-router-ospf-adjacency">Lab: Configure a Two-Router OSPF Adjacency<a class="headerlink" href="#lab-configure-a-two-router-ospf-adjacency" title="Permanent link">&para;</a></h3>
+<p><strong>Tools:</strong> GNS3 or Cisco Packet Tracer
+<strong>Estimated time:</strong> 25 minutes
+<strong>Objective:</strong> Configure OSPFv2 between two routers, verify neighbour adjacency reaches Full state, and observe cost-based path selection.</p>
+<p><strong>Topology:</strong>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>[R1] Lo0: 1.1.1.1/32               [R2] Lo0: 2.2.2.2/32
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>     Gi0/0: 10.12.0.1/30   ←———→   Gi0/0: 10.12.0.2/30
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>     Gi0/1: 10.1.0.1/24             Gi0/1: 10.2.0.1/24
+</span></code></pre></div></p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>
+<p>Configure loopbacks and all interface IPs. Enable OSPF on both routers:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>! On both R1 and R2:
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>router ospf 1
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a> auto-cost reference-bandwidth 100000
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>! On R1:
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>router ospf 1
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a> router-id 1.1.1.1
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>interface Loopback0
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a> ip ospf 1 area 0
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>interface GigabitEthernet0/0
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a> ip ospf 1 area 0
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>interface GigabitEthernet0/1
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a> ip ospf 1 area 0
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>! On R2:
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>router ospf 1
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a> router-id 2.2.2.2
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>interface Loopback0
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a> ip ospf 1 area 0
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>interface GigabitEthernet0/0
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a> ip ospf 1 area 0
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>interface GigabitEthernet0/1
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a> ip ospf 1 area 0
+</span></code></pre></div>
+</li>
+<li>
+<p>Verify neighbour adjacency reaches Full state (may take up to 40 seconds for dead timer):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>R1# show ip ospf neighbor
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Neighbor ID  Pri  State    Dead Time  Address     Interface
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>2.2.2.2      1    FULL/DR  00:00:38   10.12.0.2  Gi0/0
+</span></code></pre></div>
+</li>
+<li>
+<p>Verify OSPF routes in the routing table:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>R1# show ip route ospf
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>O    2.2.2.2/32 [110/2] via 10.12.0.2, Gi0/0
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>O    10.2.0.0/24 [110/2] via 10.12.0.2, Gi0/0
+</span></code></pre></div>
+</li>
+<li>
+<p>Check the LSDB - both routers should have identical entries:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>R1# show ip ospf database
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>Router Link States (Area 0):
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>  Link ID    ADV Router  Age  Seq#       Checksum
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  1.1.1.1    1.1.1.1     32   0x80000004 0x00xxxx
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>  2.2.2.2    2.2.2.2     30   0x80000003 0x00xxxx
+</span></code></pre></div>
+</li>
+<li>
+<p>Verify connectivity: ping R2's loopback from R1:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>R1# ping 2.2.2.2 source 1.1.1.1
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>!!!!!
+</span></code></pre></div>
+</li>
+</ol>
+<details class="supplementary">
+<summary>Lab extension: Change cost and observe path change</summary>
+<p>Add a second link between R1 and R2 (Gi0/2 on both) with a /30 address. OSPF installs both paths as ECMP (equal cost). Then manually set the cost on one link higher:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>interface GigabitEthernet0/2
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a> ip ospf cost 100
+</span></code></pre></div>
+Check <code>show ip route</code> - R1 now uses only the lower-cost path. OSPF has made a policy-based forwarding decision based purely on cost, without any manual route configuration.</p>
+</details>
+<hr />
+<h2 id="summary-key-takeaways">Summary &amp; Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OSPF is a <strong>link-state</strong> protocol: every router floods its LSA (its direct links and costs) to all routers in the area</li>
+<li>Every router builds an identical <strong>LSDB</strong> (Link State Database) - a full map of the area topology</li>
+<li>Each router independently runs <strong>Dijkstra's SPF</strong> algorithm on its LSDB to calculate the shortest path to every destination</li>
+<li>Because every router has the full map and derives paths independently, <strong>routing loops cannot form</strong> within an OSPF area</li>
+<li>OSPF neighbours must <strong>match</strong>: area ID, hello/dead intervals, authentication, and MTU (on Cisco)</li>
+<li>The neighbour state machine: Down → Init → 2-Way → ExStart → Exchange → Loading → <strong>Full</strong></li>
+<li>On multi-access (Ethernet) segments, <strong>DR and BDR</strong> are elected to reduce adjacency count from O(n²) to O(n)</li>
+<li><strong>DR election</strong> uses priority (higher wins), then Router ID (higher wins); it is <strong>non-preemptive</strong></li>
+<li><strong>OSPF cost</strong> = reference bandwidth ÷ interface bandwidth; set <code>auto-cost reference-bandwidth</code> consistently across all routers</li>
+<li>OSPF <strong>areas</strong> reduce LSDB size and SPF computation; all areas must connect to <strong>Area 0</strong> (backbone)</li>
+<li>ABRs advertise <strong>Type 3 Summary LSAs</strong> between areas; Type 5 External LSAs carry redistributed routes</li>
+<li>OSPFv3 (RFC 5340) is the IPv6 version - same algorithm, different address family</li>
+</ul>
+<hr />
+<h2 id="where-to-next">Where to Next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Continue:</strong> <a href="../bgp-fundamentals/">BGP Fundamentals</a> (<code>RT-007</code>) - the routing protocol between autonomous systems; builds on OSPF understanding of path selection</li>
+<li><strong>Continue:</strong> <a href="../ospf-advanced/">OSPF Advanced</a> (<code>RT-005</code>) - multi-area design, stub areas, NSSA, redistribution, virtual links, route filtering</li>
+<li><strong>Related:</strong> <a href="../isis-fundamentals/">IS-IS Fundamentals</a> (<code>RT-006</code>) - another link-state protocol; widely used in carrier and DC networks; compare with OSPF</li>
+<li><strong>Applied context:</strong> <a href="../../../../learning-paths/data-network-engineer/">Learning Path: Data Network Engineer</a> - Stage 3, position 14 in the DNE path</li>
+</ul>
+<hr />
+<h2 id="standards-certifications">Standards &amp; Certifications<a class="headerlink" href="#standards-certifications" title="Permanent link">&para;</a></h2>
+<p><strong>Relevant standards:</strong>
+- <a href="https://www.rfc-editor.org/rfc/rfc2328">RFC 2328 - OSPF Version 2</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc5340">RFC 5340 - OSPF for IPv6 (OSPFv3)</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc4940">RFC 4940 - IANA Considerations for OSPF</a></p>
+<p><strong>Where this topic appears in certification syllabi:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cert</th>
+<th>Vendor</th>
+<th>Relevant Section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CCNA 200-301</td>
+<td>Cisco</td>
+<td>3.4 - Configure and verify single-area OSPFv2</td>
+</tr>
+<tr>
+<td>JNCIA-Junos JN0-103</td>
+<td>Juniper</td>
+<td>OSPF fundamentals; neighbour states; cost</td>
+</tr>
+<tr>
+<td>Nokia NRS I</td>
+<td>Nokia</td>
+<td>OSPF link-state concepts; DR/BDR; areas</td>
+</tr>
+<tr>
+<td>Huawei HCIA-Datacom</td>
+<td>Huawei</td>
+<td>OSPF neighbour states; DR election; LSA types</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>IETF - <a href="https://www.rfc-editor.org/rfc/rfc2328">RFC 2328: OSPF Version 2</a></li>
+<li>IETF - <a href="https://www.rfc-editor.org/rfc/rfc5340">RFC 5340: OSPF for IPv6</a></li>
+<li>Odom, W. - <em>CCNA 200-301 Official Cert Guide, Volume 2</em>, Cisco Press, 2019 - Ch. 20–22 (OSPF)</li>
+<li>Doyle, J.; Carroll, J. - <em>Routing TCP/IP, Volume I</em>, 2nd ed., Cisco Press, 2005 - Ch. 8–11 (OSPF)</li>
+<li>Dijkstra, E. W. - "A Note on Two Problems in Connexion with Graphs," <em>Numerische Mathematik</em>, vol. 1, 1959 - original SPF algorithm paper</li>
+</ul>
+<hr />
+<h2 id="attribution-licensing">Attribution &amp; Licensing<a class="headerlink" href="#attribution-licensing" title="Permanent link">&para;</a></h2>
+<p><strong>Author:</strong> [@geekazoid80]
+<strong>License:</strong> <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> - content
+<strong>AI assistance:</strong> Draft written by Claude Sonnet 4.6. RFC citations verified against IETF RFC index. Technical accuracy to be verified by human reviewer before <code>human_reviewed</code> is set to true.</p>
+<hr />
+<!-- XREF-START -->
+<h2 id="internal-cross-references">Internal Cross-References<a class="headerlink" href="#internal-cross-references" title="Permanent link">&para;</a></h2>
+<h3 id="modules-that-reference-this-module">Modules That Reference This Module<a class="headerlink" href="#modules-that-reference-this-module" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../ospf-advanced/">RT-005</a></td>
+<td>OSPF Advanced</td>
+<td>Builds directly on this module - multi-area, stub areas, redistribution</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td><a href="../bgp-fundamentals/">RT-007</a></td>
+<td>BGP Fundamentals</td>
+<td>BGP runs alongside OSPF in most enterprise networks; AD comparison</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td><a href="../../carrier-transport/mpls-fundamentals/">CT-001</a></td>
+<td>MPLS Fundamentals</td>
+<td>OSPF is the most common IGP running under MPLS networks</td>
+<td>2026-04-17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modules-this-module-references">Modules This Module References<a class="headerlink" href="#modules-this-module-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../routing-fundamentals/">RT-001</a></td>
+<td>Routing Fundamentals</td>
+<td>Routing table, metric, AD, RIB vs FIB</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td><a href="../static-routing/">RT-002</a></td>
+<td>Static Routing</td>
+<td>Context for what OSPF replaces; floating static still used alongside OSPF</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td><a href="../rip-distance-vector/">RT-003</a></td>
+<td>RIP &amp; Distance-Vector</td>
+<td>Problems OSPF was designed to solve</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td><a href="../../networking/network-topologies/">NW-002</a></td>
+<td>Network Topologies</td>
+<td>Multi-access vs point-to-point; DR/BDR applies to broadcast segments</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td><a href="../../ip/ipv6-addressing/">IP-003</a></td>
+<td>IPv6 Addressing</td>
+<td>OSPFv3 uses IPv6 link-local addresses for neighbour formation</td>
+<td>2026-04-17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vendor-mapping">Vendor Mapping<a class="headerlink" href="#vendor-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Standard</th>
+<th>Cisco IOS-XE</th>
+<th>Juniper Junos</th>
+<th>Nokia SR-OS</th>
+<th>Arista EOS</th>
+<th>Huawei VRP</th>
+<th>MikroTik RouterOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enable OSPF</td>
+<td>RFC 2328</td>
+<td><code>router ospf &lt;pid&gt;</code></td>
+<td><code>set protocols ospf</code></td>
+<td><code>configure router ospf</code></td>
+<td><code>router ospf &lt;pid&gt;</code></td>
+<td><code>ospf &lt;pid&gt;</code></td>
+<td><code>/routing ospf instance add</code></td>
+</tr>
+<tr>
+<td>Set Router ID</td>
+<td>RFC 2328</td>
+<td><code>router-id X.X.X.X</code></td>
+<td><code>set routing-options router-id</code></td>
+<td><code>configure router router-id</code></td>
+<td><code>router-id X.X.X.X</code></td>
+<td>Router ID in ospf stanza</td>
+<td><code>router-id=X.X.X.X</code></td>
+</tr>
+<tr>
+<td>View neighbours</td>
+<td>RFC 2328</td>
+<td><code>show ip ospf neighbor</code></td>
+<td><code>show ospf neighbor</code></td>
+<td><code>show router ospf neighbor</code></td>
+<td><code>show ip ospf neighbor</code></td>
+<td><code>display ospf peer</code></td>
+<td><code>/routing ospf neighbor print</code></td>
+</tr>
+<tr>
+<td>View LSDB</td>
+<td>RFC 2328</td>
+<td><code>show ip ospf database</code></td>
+<td><code>show ospf database</code></td>
+<td><code>show router ospf database</code></td>
+<td><code>show ip ospf database</code></td>
+<td><code>display ospf lsdb</code></td>
+<td><code>/routing ospf lsa print</code></td>
+</tr>
+<tr>
+<td>Interface cost</td>
+<td>RFC 2328</td>
+<td><code>ip ospf cost X</code></td>
+<td><code>metric X</code> (under protocol)</td>
+<td>Interface metric config</td>
+<td><code>ip ospf cost X</code></td>
+<td><code>ospf cost X</code></td>
+<td><code>cost=X</code> in template</td>
+</tr>
+<tr>
+<td>Reference bandwidth</td>
+<td>RFC 2328</td>
+<td><code>auto-cost reference-bandwidth</code></td>
+<td><code>reference-bandwidth</code></td>
+<td><code>reference-bandwidth</code></td>
+<td><code>auto-cost reference-bandwidth</code></td>
+<td><code>bandwidth-reference</code></td>
+<td>Not configurable separately</td>
+</tr>
+</tbody>
+</table>
+<h3 id="maintenance-notes">Maintenance Notes<a class="headerlink" href="#maintenance-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>When RT-005 (OSPF Advanced) is written, add a back-reference there to this module for all foundational concepts</li>
+<li>When RT-006 (IS-IS Fundamentals) is written, add a comparison reference - link-state concept is shared; implementation differs</li>
+<li>When CT-001 (MPLS Fundamentals) is written, add a reference: OSPF is the typical IGP in MPLS networks; LDP/RSVP-TE builds on OSPF adjacency</li>
+</ul>
+<!-- XREF-END -->
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

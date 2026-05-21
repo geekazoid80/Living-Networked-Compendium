@@ -1,0 +1,3522 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A progressive, community-built guide for network engineers — enterprise, carrier, data centre, RF/satellite, and beyond.">
+      
+      
+        <meta name="author" content="Community Contributors">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Network Topologies - Living Networked Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-objectives" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Living Networked Compendium" class="md-header__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Living Networked Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network Topologies
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../learning-paths/data-network-engineer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learning Paths
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../osi-model/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../applied/data-network-engineer/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Applied
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../CONTRIBUTING/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Living Networked Compendium" class="md-nav__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Living Networked Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Paths
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learning Paths
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/data-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/carrier-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/datacentre-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-satellite-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-coax-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/voice-telephony-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-mobile-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/storage-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/broadcast-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../osi-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSI Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IP Addressing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/ip-addressing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/subnetting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access Media
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Switching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier & Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocols
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../professional-standards/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Professional Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/data-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/carrier-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/datacentre-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-satellite-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-coax-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/voice-telephony-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-mobile-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/storage-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/broadcast-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/_new-path-template/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start a New Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTION_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../AI_GUARDRAILS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Guardrails
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../MODULE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../INSTRUCTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-can-you-both-talk-at-the-same-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Can you both talk at the same time?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-how-much-can-you-say-in-one-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: How much can you say in one go?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-what-happens-when-more-people-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: What happens when more people join?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-some-messages-are-meant-for-everyone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Some messages are meant for everyone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-not-all-messages-go-to-everyone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Not all messages go to everyone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-given-all-of-that-how-do-we-wire-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Given all of that - how do we wire everything?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-just-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Just Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#duplex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duplex
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mtu-and-frame-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MTU and Frame Size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collision-domain-vs-broadcast-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collision Domain vs. Broadcast Domain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delivery-modes-unicast-broadcast-and-multicast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delivery Modes: Unicast, Broadcast, and Multicast
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topology-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topology Shapes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Topology Shapes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#physical-vs-logical-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical vs. Logical Topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bus-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bus Topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ring-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ring Topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#star-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Star Topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mesh Topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-topology-and-the-three-tier-enterprise-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hybrid Topology and the Three-Tier Enterprise Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-1-confusing-physical-and-logical-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 1: Confusing physical and logical topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-2-assuming-star-topology-means-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 2: Assuming star topology means resilience
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-3-treating-a-switch-as-eliminating-broadcast-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 3: Treating a switch as eliminating broadcast domains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-4-duplex-mismatch-the-invisible-performance-killer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 4: Duplex mismatch - the invisible performance killer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-5-mtu-mismatch-the-black-hole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 5: MTU mismatch - the black hole
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practice Problems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-collision-domains-and-broadcast-domains-in-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab: Collision Domains and Broadcast Domains in Packet Tracer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary &amp; Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standards-certifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standards &amp; Certifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution &amp; Licensing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Cross-References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Cross-References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modules-that-reference-this-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules That Reference This Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules-this-module-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules This Module References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">broadcast-domain</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">bus</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">collision-domain</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">duplex</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">hybrid</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">mesh</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">mss</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">mtu</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">multicast</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">ring</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">star</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">three-tier</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">topology</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">unicast</span>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium/edit/main/modules/fundamentals/networking/network-topologies.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>Network Topologies</h1>
+
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ol>
+<li><strong>Distinguish</strong> simplex, half-duplex, and full-duplex, and explain why modern switches use full-duplex</li>
+<li><strong>Explain</strong> MTU and MSS, describe how an MTU mismatch causes failures, and identify where jumbo frames are used</li>
+<li><strong>Define</strong> collision domain and broadcast domain and explain how switches and routers create boundaries</li>
+<li><strong>Identify</strong> unicast, broadcast, and multicast traffic and describe how each is delivered</li>
+<li><strong>Identify</strong> the five topology shapes (bus, ring, star, mesh, hybrid) and state the trade-offs of each</li>
+<li><strong>Describe</strong> the three-tier enterprise model (access, distribution, core) and explain what each layer does</li>
+</ol>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../osi-model/">The OSI Model</a> (<code>NW-001</code>) - specifically, understanding that topology decisions affect Layers 1 and 2</li>
+</ul>
+<hr />
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
+<p>Two devices, one cable. You send a message. It arrives. Simple.</p>
+<p>Before we add a third device and start talking about topology, two devices on a single cable already raise five fundamental questions. Answer them first - they explain <em>why</em> every topology decision matters.</p>
+<h3 id="step-1-can-you-both-talk-at-the-same-time">Step 1: Can you both talk at the same time?<a class="headerlink" href="#step-1-can-you-both-talk-at-the-same-time" title="Permanent link">&para;</a></h3>
+<p>You send a message. Alice starts replying before you finish. Both signals travel on the same wire simultaneously - they collide and cancel each other out. Neither message arrives.</p>
+<p>The simplest fix: agree that only one person transmits at a time. Finish, signal "over," then the other replies. This is <strong>half-duplex</strong> - both directions are possible, but not simultaneously. Whoever transmits first wins; the other waits.</p>
+<p>The limitation: while Alice is transmitting, your side of the wire sits idle. You're paying for capacity you can't use.</p>
+<p>The better fix: use two separate wires - one in each direction. Now you can transmit and receive at the same time without interference. This is <strong>full-duplex</strong>. Both sides are always active.</p>
+<p>A third case exists: a fire station loudspeaker. It only broadcasts outward. You hear it; you can't reply through it. That's <strong>simplex</strong> - one direction only, permanently.</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Directions</th>
+<th>Simultaneous?</th>
+<th>Real example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simplex</td>
+<td>One way only</td>
+<td>N/A</td>
+<td>Broadcast radio, TV, alarm siren</td>
+</tr>
+<tr>
+<td>Half-duplex</td>
+<td>Both ways</td>
+<td>No - one at a time</td>
+<td>Walkie-talkie, Wi-Fi, hub-based Ethernet</td>
+</tr>
+<tr>
+<td>Full-duplex</td>
+<td>Both ways</td>
+<td>Yes</td>
+<td>Telephone, switch-based Ethernet</td>
+</tr>
+</tbody>
+</table>
+<p>Modern switched Ethernet runs full-duplex on every port. Older hub-based Ethernet was half-duplex - and that difference shapes the entire history of why we switched from hubs to switches.</p>
+<h3 id="step-2-how-much-can-you-say-in-one-go">Step 2: How much can you say in one go?<a class="headerlink" href="#step-2-how-much-can-you-say-in-one-go" title="Permanent link">&para;</a></h3>
+<p>The wire between you and Alice can only carry a signal of limited length before it degrades. You agree: no message longer than 50 words per transmission. More to say? Break it into numbered pieces and send them in sequence.</p>
+<p>That agreed maximum is the <strong>MTU - Maximum Transmission Unit</strong>. It is a property of the link itself, not of your content. Different media have different MTUs. A thin copper pair has a low MTU. A fibre optic cable has a high one.</p>
+<p>But each message starts with overhead: "To: Alice, From: Bob, Piece 3 of 7." The actual content that fits within the 50-word limit - after subtracting that framing overhead - is the <strong>MSS - Maximum Segment Size</strong>. MSS is the useful payload per transmission.</p>
+<p>A chatty sender on a low-MTU link burns most words on overhead and barely moves data. High MTU: fewer transmissions, more content per go, less overhead per useful byte.</p>
+<p>The trap: your message passes through a relay who only handles 20-word limits, but you're sending 50-word chunks. That relay either fragments your chunks into smaller pieces (expensive, causes ordering problems downstream) or - if you've told it "do not fragment" - it drops the chunk entirely and sends back a tiny error message saying "send smaller." If a firewall blocks that error message, you get a <strong>black hole</strong>: the connection looks established, but large transfers silently die. This is one of the most frustrating problems in networking to diagnose.</p>
+<h3 id="step-3-what-happens-when-more-people-join">Step 3: What happens when more people join?<a class="headerlink" href="#step-3-what-happens-when-more-people-join" title="Permanent link">&para;</a></h3>
+<p>Add a third person to the wire. Now when anyone transmits, everyone on the wire receives it - including people it wasn't meant for. More critically: if two people transmit at the same time, their signals collide and both are destroyed.</p>
+<p>The group of devices that share a medium and must take turns - where a simultaneous transmission causes a collision - is a <strong>collision domain</strong>.</p>
+<p>On a hub (which simply repeats everything to all ports), every connected device is in the same collision domain. 20 devices on a hub = 20 devices competing for the same wire, taking turns, destroying each other's messages if they misjudge the timing.</p>
+<p>On a switch, each port has its own dedicated wire pair. Device A and Device B can transmit simultaneously without ever interfering - each is its own collision domain. This is the fundamental reason switches replaced hubs.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Hub: one collision domain for all              Switch: one collision domain per port
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a> A ─┐                                           A ───[Port 1]┐
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a> B ─┤─ [Hub] ─── (all share)                    B ───[Port 2]│
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a> C ─┘                                           C ───[Port 3]├─ [Switch]
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                                                D ───[Port 4]│
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                                               (each port independent)
+</span></code></pre></div>
+<h3 id="step-4-some-messages-are-meant-for-everyone">Step 4: Some messages are meant for everyone<a class="headerlink" href="#step-4-some-messages-are-meant-for-everyone" title="Permanent link">&para;</a></h3>
+<p>"Who has the key to the supply room?" You shout it. Every person in the room stops what they're doing and processes the question - even though only one person has the key, and 19 didn't need to be interrupted.</p>
+<p>That's a <strong>broadcast</strong> - a message addressed to everyone. In networks, broadcasts are essential: "Who has IP address 192.168.1.1?" (ARP) or "I need an IP address, is there a server here?" (DHCP Discover) cannot be sent to a specific address because you don't know the address yet.</p>
+<p>The group of devices that receives every broadcast - that all stop and process it - is a <strong>broadcast domain</strong>.</p>
+<p>The problem scales badly. 10 devices: manageable. 500 devices on the same flat network: every ARP request, every DHCP discover, every routing protocol hello interrupts all 500. At some density, broadcast traffic alone saturates the network. This is a <strong>broadcast storm</strong>.</p>
+<p>The solution: create boundaries. A <strong>router</strong> or <strong>VLAN boundary</strong> stops broadcasts dead. Traffic crosses the boundary only if it's specifically addressed to something on the other side. This is why we subnet, why we use VLANs, and why the three-tier network model exists - each layer creates and enforces broadcast domain boundaries.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Broadcast domain A          │  Broadcast domain B
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                            │
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> A ─┐                       │        E ─┐
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> B ─┤─ [Switch] ─── [Router]│─── [Switch]├─ F
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> C ─┘                       │        G ─┘
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a> D ─┘                       │
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>                            │
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a> Broadcast from A           │  Does NOT cross the router
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a> reaches B, C, D            │  E, F, G never see it
+</span></code></pre></div>
+<h3 id="step-5-not-all-messages-go-to-everyone">Step 5: Not all messages go to everyone<a class="headerlink" href="#step-5-not-all-messages-go-to-everyone" title="Permanent link">&para;</a></h3>
+<p>Now that you understand broadcast domains, the three ways to address a message make sense:</p>
+<p><strong>Unicast - tell one person.</strong> "Alice, can you come here?" The switch looks up Alice's address and delivers the message to her port only. No one else is interrupted.</p>
+<p><strong>Broadcast - tell everyone in the room.</strong> "Who has the key?" Every device in the broadcast domain receives and processes it. Necessary but expensive. Used sparingly.</p>
+<p><strong>Multicast - tell a specific interested group.</strong> "Everyone on the project team, update in 5 minutes." Only devices that have explicitly joined the "project team" group receive it. Devices outside the group are not interrupted. Efficient for one-to-many delivery - video streams, routing protocol updates, stock tickers - where broadcast would be wasteful and unicast would require sending one copy per receiver.</p>
+<table>
+<thead>
+<tr>
+<th>Delivery mode</th>
+<th>Addressed to</th>
+<th>Who receives it</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unicast</td>
+<td>One specific device</td>
+<td>That device only</td>
+<td>Normal data transfer</td>
+</tr>
+<tr>
+<td>Broadcast</td>
+<td>Everyone in domain</td>
+<td>All devices in broadcast domain</td>
+<td>ARP, DHCP Discover</td>
+</tr>
+<tr>
+<td>Multicast</td>
+<td>A group</td>
+<td>Subscribed devices only</td>
+<td>Video stream, OSPF hellos (224.0.0.5)</td>
+</tr>
+<tr>
+<td>Anycast</td>
+<td>Nearest instance</td>
+<td>One device (closest by routing)</td>
+<td>DNS root servers, CDN</td>
+</tr>
+</tbody>
+</table>
+<h3 id="step-6-given-all-of-that-how-do-we-wire-everything">Step 6: Given all of that - how do we wire everything?<a class="headerlink" href="#step-6-given-all-of-that-how-do-we-wire-everything" title="Permanent link">&para;</a></h3>
+<p>Now we have the vocabulary: duplex (who can transmit when), MTU/MSS (how much per transmission), collision domain (who shares a medium), broadcast domain (who receives broadcasts), and delivery modes (how traffic is addressed).</p>
+<p>Topology is how we physically wire devices to manage all of these constraints. Add a third device - how do you connect it?</p>
+<p><strong>Option 1 - Connect everyone to everyone directly:</strong></p>
+<p>Three devices, three cables. Every device has a direct path to every other. Add a fourth: three more cables. The count grows with the square:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Cables = N × (N−1) / 2
+</span></code></pre></div>
+<p>10 devices = 45 cables. 100 devices = 4,950. Maximum resilience, maximum cost. This is <strong>full mesh</strong>.</p>
+<p><strong>Option 2 - Connect everyone to one central device:</strong></p>
+<p>100 devices → 100 cables. Adding one device costs one cable regardless of how many exist. Scales linearly. Trade-off: the central device failing takes everyone down. This is <strong>star</strong>.</p>
+<p><strong>Option 3 - Run one cable and tap everyone in:</strong></p>
+<p>No central point possible - devices are strung along a floor, a street, a mine shaft. One cable, everyone tapped in. All share the medium: half-duplex, one collision domain, one broadcast domain. This is <strong>bus</strong>.</p>
+<p><strong>Option 4 - Connect each device to its two neighbours:</strong></p>
+<p>Each device connects left and right, forming a loop. Traffic travels around the ring in one direction. One link breaks: traffic reverses on the surviving arc. One device fails: the ring breaks. This is <strong>ring</strong>.</p>
+<p><strong>Real networks:</strong> No production network uses a single topology end-to-end. They combine them by layer. This is <strong>hybrid</strong>.</p>
+<h3 id="what-you-just-built">What You Just Built<a class="headerlink" href="#what-you-just-built" title="Permanent link">&para;</a></h3>
+<p>Before choosing a topology, you must understand the constraints on any link. Topology is the physical shape of how devices are connected to manage those constraints. Every topology decision is a trade-off between cost, resilience, and broadcast/collision domain size.</p>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Technical term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One direction only</td>
+<td>Simplex</td>
+</tr>
+<tr>
+<td>Both directions, one at a time</td>
+<td>Half-duplex</td>
+</tr>
+<tr>
+<td>Both directions simultaneously</td>
+<td>Full-duplex</td>
+</tr>
+<tr>
+<td>Maximum frame size the link carries</td>
+<td>MTU - Maximum Transmission Unit</td>
+</tr>
+<tr>
+<td>Usable payload per frame (MTU minus header overhead)</td>
+<td>MSS - Maximum Segment Size</td>
+</tr>
+<tr>
+<td>Devices that compete for the same medium</td>
+<td>Collision domain</td>
+</tr>
+<tr>
+<td>Devices that receive all broadcasts</td>
+<td>Broadcast domain</td>
+</tr>
+<tr>
+<td>Message to one recipient</td>
+<td>Unicast</td>
+</tr>
+<tr>
+<td>Message to all in domain</td>
+<td>Broadcast</td>
+</tr>
+<tr>
+<td>Message to a subscribed group</td>
+<td>Multicast</td>
+</tr>
+<tr>
+<td>Everyone connected to everyone</td>
+<td>Full mesh topology</td>
+</tr>
+<tr>
+<td>Everyone connected to one central device</td>
+<td>Star topology</td>
+</tr>
+<tr>
+<td>All devices on one shared cable</td>
+<td>Bus topology</td>
+</tr>
+<tr>
+<td>Each device connected to two neighbours</td>
+<td>Ring topology</td>
+</tr>
+<tr>
+<td>Mix of topologies by layer</td>
+<td>Hybrid topology</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="core-content">Core Content<a class="headerlink" href="#core-content" title="Permanent link">&para;</a></h2>
+<h3 id="duplex">Duplex<a class="headerlink" href="#duplex" title="Permanent link">&para;</a></h3>
+<p><strong>Simplex</strong> - one direction only. The transmitter transmits; the receiver receives. No reverse path. Examples: broadcast radio, TV, an alarm siren.</p>
+<p><strong>Half-duplex</strong> - both directions possible, but not simultaneously. Devices must take turns. The protocol for managing turns is <strong>CSMA/CD</strong> (Carrier Sense Multiple Access with Collision Detection) for Ethernet on shared media: listen before transmitting, detect collisions, back off and retry with a random delay.</p>
+<p>Half-duplex creates a shared collision domain. The more devices share the medium, the worse performance gets - not because of bandwidth, but because of wait time. 20 devices on a hub each get roughly 1/20 of the available transmission time in practice.</p>
+<p><strong>Full-duplex</strong> - both directions simultaneously on separate paths (separate wire pairs or wavelengths). No collision possible. No CSMA/CD needed. Each device transmits at the full link rate in both directions independently.</p>
+<p>Modern 100 Mbps and faster Ethernet is always full-duplex when connected to a switch. The "100 Mbps" you see on a port means 100 Mbps transmit AND 100 Mbps receive - effectively 200 Mbps of total throughput on the link.</p>
+<div class="admonition warning">
+<p class="admonition-title">Duplex mismatch</p>
+<p>A duplex mismatch - one side negotiating full-duplex, the other half-duplex - is one of the most common Ethernet performance problems. The half-duplex side uses CSMA/CD and waits; the full-duplex side transmits freely. The result: the half-duplex side sees constant collisions, performance drops to a fraction of nominal speed, and errors accumulate. The link works but badly. Fix: configure both sides explicitly to the same duplex setting, or ensure Auto-MDI/MDIX negotiation completes correctly on both ends.</p>
+</div>
+<hr />
+<h3 id="mtu-and-frame-size">MTU and Frame Size<a class="headerlink" href="#mtu-and-frame-size" title="Permanent link">&para;</a></h3>
+<p>The <strong>MTU (Maximum Transmission Unit)</strong> is the largest payload an Ethernet frame can carry - by default, <strong>1500 bytes</strong>. This limit dates to the original 1980 Ethernet specification. The Ethernet frame itself (header + payload + FCS) is up to 1518 bytes, but the MTU refers to the payload portion only.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Standard Ethernet Frame:
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>┌────────────┬──────────┬──────┬──────────────────────┬─────┐
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>│ Dest MAC   │ Src MAC  │ Type │       Payload        │ FCS │
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>│   6 bytes  │  6 bytes │ 2 B  │    46–1500 bytes     │ 4 B │
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>└────────────┴──────────┴──────┴──────────────────────┴─────┘
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                                         ↑
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                   MTU = 1500 bytes
+</span></code></pre></div>
+<p><strong>MSS (Maximum Segment Size)</strong> is a TCP concept - the maximum data TCP puts in one segment. Derived from MTU:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>MSS = MTU − IP header (20 bytes) − TCP header (20 bytes)
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    = 1500 − 20 − 20 = 1460 bytes
+</span></code></pre></div>
+<p>TCP endpoints negotiate MSS during the three-way handshake. Each side advertises its MSS; the lower value wins. This prevents oversized segments at the endpoints - but doesn't protect against smaller MTUs in the middle of the path.</p>
+<p><strong>MTU across different link types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Link type</th>
+<th>Typical MTU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard Ethernet LAN</td>
+<td>1500 bytes</td>
+</tr>
+<tr>
+<td>Jumbo frames (data centre)</td>
+<td>9000 bytes</td>
+</tr>
+<tr>
+<td>PPPoE (DSL, some broadband)</td>
+<td>1492 bytes</td>
+</tr>
+<tr>
+<td>MPLS (label stack overhead)</td>
+<td>Effective IP MTU reduced by label stack size</td>
+</tr>
+<tr>
+<td>IPsec VPN tunnel</td>
+<td>Lower than underlying link (ESP/AH header overhead)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Jumbo frames</strong> - typically 9000-byte MTU - are used in data centres to reduce CPU overhead on high-throughput servers. Fewer, larger frames means fewer interrupts per megabyte of data. Critical requirement: every device on the path must be configured for jumbo frames. One switch with a standard 1500-byte MTU silently drops oversized frames.</p>
+<p><strong>MTU mismatch</strong> causes one of two symptoms:
+- <strong>Fragmentation</strong> - the router breaks oversized packets into smaller pieces. Expensive (CPU overhead) and causes ordering delays.
+- <strong>Black hole</strong> - if the IP packet has the <strong>Don't Fragment (DF)</strong> bit set, the router drops the packet and sends an ICMP "Fragmentation Needed" message back. If a firewall blocks that ICMP, the sender never learns to use smaller packets. TCP connections complete the handshake (small SYN/ACK packets fit), but data transfers silently fail because full-size data packets are dropped.</p>
+<details class="supplementary">
+<summary>Path MTU Discovery and MSS Clamping</summary>
+<p><strong>Path MTU Discovery (PMTUD, RFC 1191)</strong> is the mechanism TCP uses to find the effective MTU across all links in the path. The sender sets the DF bit and sends full-size packets. Any router with a smaller MTU drops the packet and returns ICMP Type 3 (Fragmentation Needed). The sender reduces its packet size and retries.</p>
+<p>PMTUD works - when ICMP is not filtered. Overzealous firewalls that block all ICMP break PMTUD and cause black holes.</p>
+<p><strong>MSS clamping</strong> (<code>ip tcp adjust-mss</code> on Cisco IOS) is the standard fix for VPN and PPPoE environments. The router rewrites the MSS field in TCP SYN packets to a safe value that accounts for tunnel overhead, preventing oversized segments from ever being sent. It is the correct solution when PMTUD cannot be relied upon.</p>
+</details>
+<hr />
+<h3 id="collision-domain-vs-broadcast-domain">Collision Domain vs. Broadcast Domain<a class="headerlink" href="#collision-domain-vs-broadcast-domain" title="Permanent link">&para;</a></h3>
+<p>These two concepts define the two key "containers" that topology creates. Getting them confused is one of the most common misunderstandings in networking.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Collision Domain</th>
+<th>Broadcast Domain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td>All devices that share a medium and must take turns</td>
+<td>All devices that receive a Layer 2 broadcast</td>
+</tr>
+<tr>
+<td><strong>Created by</strong></td>
+<td>Shared medium (hub, coaxial bus, Wi-Fi radio)</td>
+<td>Switch (contains broadcasts within a VLAN)</td>
+</tr>
+<tr>
+<td><strong>Bounded by</strong></td>
+<td>Switch (each port is its own collision domain)</td>
+<td>Router or VLAN boundary</td>
+</tr>
+<tr>
+<td><strong>Effect when too large</strong></td>
+<td>Excessive collisions, poor throughput</td>
+<td>Broadcast storms, high CPU on all devices</td>
+</tr>
+<tr>
+<td><strong>Protocol for managing</strong></td>
+<td>CSMA/CD (half-duplex)</td>
+<td>IGMP snooping (limits multicast), VLANs, subnetting</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A switch:</strong>
+- Breaks collision domains (each port = one collision domain, full-duplex)
+- Does <strong>not</strong> break broadcast domains (a broadcast floods to all ports in the same VLAN)</p>
+<p><strong>A router:</strong>
+- Does not reduce collision domains directly
+- Breaks broadcast domains (does not forward Layer 2 broadcasts between interfaces)</p>
+<p><strong>A VLAN:</strong>
+- Does not change the physical topology
+- Logically segments a switch into multiple broadcast domains
+- Requires a router or Layer 3 switch to route between VLANs</p>
+<p>This is why the three-tier model uses switches at the access layer (collapse collision domains) and routers/Layer 3 switches at the distribution layer (collapse broadcast domains).</p>
+<hr />
+<h3 id="delivery-modes-unicast-broadcast-and-multicast">Delivery Modes: Unicast, Broadcast, and Multicast<a class="headerlink" href="#delivery-modes-unicast-broadcast-and-multicast" title="Permanent link">&para;</a></h3>
+<p><strong>Unicast</strong> is the default. A frame or packet addressed to one specific MAC or IP address. The switch looks up the destination MAC in its forwarding table and delivers the frame to exactly that port. All other ports are silent.</p>
+<p><strong>Broadcast</strong> reaches every device in the broadcast domain. Layer 2 broadcast: destination MAC <code>FF:FF:FF:FF:FF:FF</code>. Layer 3 broadcast: destination IP <code>x.x.x.255</code> (directed) or <code>255.255.255.255</code> (limited). The switch forwards a broadcast out every port in the VLAN. Every device processes it.</p>
+<p>Broadcasts are essential but expensive. Required uses:
+- <strong>ARP</strong> - "Who has IP 192.168.1.1? Tell 192.168.1.50" - because you need the MAC before you can unicast
+- <strong>DHCP Discover</strong> - "Is there a DHCP server? I need an address" - before you have an IP
+- <strong>Some routing protocol hellos</strong> (e.g., RIPv1) - finding neighbours before adjacency is formed</p>
+<p><strong>Multicast</strong> delivers to a subscribed group only. Addressed to a Class D IP (224.0.0.0/4). Devices join a multicast group using <strong>IGMP (Internet Group Management Protocol)</strong>. A Layer 2 switch running <strong>IGMP snooping</strong> listens for IGMP join/leave messages and only forwards multicast frames to ports with subscribed receivers - not everywhere.</p>
+<p>Without IGMP snooping, a switch treats multicast frames like broadcasts and floods them to all ports. With IGMP snooping, multicast is contained to interested ports only.</p>
+<p>Multicast routing across subnets is a separate topic - covered in <a href="../routing/multicast-routing.md">Multicast Routing</a> (<code>RT-011</code>).</p>
+<p><strong>Anycast</strong> is a Layer 3 concept: one IP address, multiple physical servers, traffic delivered to the nearest one by routing. Used in DNS (root servers), CDNs, and IPv6 router solicitation. Not a Layer 2 delivery mode.</p>
+<hr />
+<h3 id="topology-shapes">Topology Shapes<a class="headerlink" href="#topology-shapes" title="Permanent link">&para;</a></h3>
+<p>With the foundational concepts established, topology is the answer to: <em>how do we physically wire devices to manage collision domains, broadcast domains, and delivery modes at the required scale and resilience?</em></p>
+<h4 id="physical-vs-logical-topology">Physical vs. Logical Topology<a class="headerlink" href="#physical-vs-logical-topology" title="Permanent link">&para;</a></h4>
+<p><strong>Physical topology</strong> - the actual cables and device connections.</p>
+<p><strong>Logical topology</strong> - how data flows, regardless of physical layout.</p>
+<p>These often differ. Wi-Fi is physically a star (all devices to the AP) but logically a bus (all share the radio spectrum, half-duplex). Token Ring used a physical star (cables to a central MAU) but a logical ring (data passed device-to-device sequentially). Understand both when troubleshooting.</p>
+<h4 id="bus-topology">Bus Topology<a class="headerlink" href="#bus-topology" title="Permanent link">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Device A ──┬── Device B ──┬── Device C ──┬── Device D
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>           │              │              │
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        (tap)          (tap)          (tap)
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>              (shared coaxial cable, terminators at ends)
+</span></code></pre></div>
+<p>All devices share one cable. One collision domain. One broadcast domain. Half-duplex - CSMA/CD manages access. A break anywhere on the cable isolates everything downstream.</p>
+<p><strong>Where it survives today:</strong>
+- Industrial control systems (Modbus, older RS-485 installations)
+- CAN bus in automotive networks
+- Logically: Wi-Fi (all clients share the same radio channel - conceptually a bus)
+- Historically: 10BASE-2 coaxial Ethernet (obsolete in LAN)</p>
+<h4 id="ring-topology">Ring Topology<a class="headerlink" href="#ring-topology" title="Permanent link">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>    Device A
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>   /         \
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Device D   Device B
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>   \         /
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    Device C
+</span></code></pre></div>
+<p>Each device connects to exactly two neighbours. One collision domain per segment (in older Token Ring - tokens managed access). Resilient if the ring supports counter-rotation.</p>
+<p><strong>Single ring:</strong> one link or device failure can isolate downstream devices.</p>
+<p><strong>Dual counter-rotating ring:</strong> two rings, opposite directions. A break heals automatically - traffic wraps back on the surviving arc.</p>
+<p><strong>Where it exists today:</strong>
+- Carrier metropolitan ring protection (ITU-T G.8032 / ERPS)
+- SONET/SDH rings in telco core
+- Historically: Token Ring (802.5), FDDI - now obsolete in LAN</p>
+<details class="supplementary">
+<summary>Token Ring and FDDI - Brief History</summary>
+<p>Token Ring (IEEE 802.5) was IBM's LAN technology of the 1980s–90s. A token - a special control frame - circulated the ring. Only the device holding the token could transmit, eliminating collisions entirely. FDDI extended the concept to 100 Mbps over dual fibre rings.</p>
+<p>Both were overtaken by switched Ethernet, which achieved collision-free operation (per port) without the complexity and single-token bottleneck. Ring protection, however, survived in carrier networks as a resilience mechanism.</p>
+</details>
+<h4 id="star-topology">Star Topology<a class="headerlink" href="#star-topology" title="Permanent link">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>    Device A
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>        │
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Device D ─ [Switch] ─ Device B
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        │
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    Device C
+</span></code></pre></div>
+<p>All devices connect to a central device (switch, hub, or access point). The central device forwards traffic. One cable per device - linear scaling. One collision domain per switch port (full-duplex). Broadcast domain = the VLAN configured on those ports.</p>
+<p><strong>Trade-off:</strong> central device failure isolates all connected devices. Mitigated by redundant central devices and uplinks.</p>
+<p><strong>Modern reality:</strong> switched star with full-duplex on every port is the universal LAN topology. Each port is its own collision domain. Broadcasts are bounded by VLAN.</p>
+<details class="supplementary">
+<summary>Hub vs. Switch - The Collision Domain Difference</summary>
+<p>A <strong>hub</strong> is a physical star but logical bus. Every frame received on any port is repeated to all other ports. One collision domain for all connected devices. Half-duplex. Every device sees every frame and decides whether to keep it.</p>
+<p>A <strong>switch</strong> learns which MAC addresses live on which ports and delivers frames only to the correct destination port (or floods only on first contact with an unknown MAC). Each port is its own collision domain. Full-duplex per port. Devices see only frames addressed to them (plus broadcasts).</p>
+<p>The performance difference is dramatic: a 24-port hub has 24 devices competing for one collision domain. A 24-port switch has 24 independent full-duplex paths operating simultaneously.</p>
+</details>
+<h4 id="mesh-topology">Mesh Topology<a class="headerlink" href="#mesh-topology" title="Permanent link">&para;</a></h4>
+<p><strong>Full mesh</strong> - every device directly connected to every other.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>A ──── B
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>│ ╲  ╱ │
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>│  ╳  │
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>│ ╱  ╲ │
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>C ──── D
+</span></code></pre></div>
+<p>Cables = N×(N−1)/2. 4 nodes = 6 cables. 10 nodes = 45. Maximum resilience - any single link or device failure is survived. Practical only for small N or where virtual paths (MPLS LSPs, VPNs) substitute for physical cables.</p>
+<p><strong>Partial mesh</strong> - selective direct connections between some pairs. Used everywhere in WAN design and data centre interconnect. Provides resilience on critical paths without the full cable count.</p>
+<p><strong>Where mesh exists today:</strong>
+- WAN backbone topologies (core routers, BGP peering fabrics)
+- Data centre interconnect (DCI) between sites
+- Spine-leaf data centres (every leaf to every spine = partial mesh between layers)</p>
+<h4 id="hybrid-topology-and-the-three-tier-enterprise-model">Hybrid Topology and the Three-Tier Enterprise Model<a class="headerlink" href="#hybrid-topology-and-the-three-tier-enterprise-model" title="Permanent link">&para;</a></h4>
+<p>No real network uses one topology end-to-end. The dominant campus model combines star at every layer with redundant uplinks creating partial mesh between layers.</p>
+<p><strong>The three-tier model:</strong></p>
+<p>The three layers form a hierarchy: access feeds into distribution, which feeds into core. Each tier serves a distinct purpose, and traffic only escalates upward when it needs to travel beyond the current layer's scope.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>                        [Internet / WAN]
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>                               │
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>                   ┌───────────┴───────────┐
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>                [Core-A]             [Core-B]
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>               ╱       ╲             ╱       ╲
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>        [Dist-1]       [Dist-2] [Dist-3]    [Dist-4]
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>         ╱    ╲         ╱    ╲   ╱    ╲      ╱    ╲
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>      [Acc1][Acc2]  [Acc3][Acc4][Acc5][Acc6][Acc7][Acc8]
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>       |||   |||    |||   |||   |||   |||   |||   |||
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>      PCs   PCs    PCs   PCs   PCs   PCs   PCs   PCs
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>      ← ACCESS →   ←────── DISTRIBUTION ──────→   ← CORE →
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>         L2              L2/L3 boundary              L3
+</span></code></pre></div>
+<p><strong>Access layer - "the street"</strong></p>
+<p>Where end devices connect: workstations, IP phones, printers, wireless APs. This layer operates primarily at Layer 2: Ethernet switching, MAC learning, and VLAN assignment. No routing happens here. A device in VLAN 10 wanting to reach VLAN 20 sends traffic upward to the distribution layer. Port-level features (PoE, authentication, security policies) and uplink redundancy are covered in <a href="../../switching/switching-fundamentals/">Switching Fundamentals</a> (<code>SW-001</code>).</p>
+<p>One access switch is one physical star. Multiple access switches feeding a distribution pair create a layer of stars aggregated upward.</p>
+<p><strong>Distribution layer - "the main road"</strong></p>
+<p>Aggregates multiple access switches. This is the <strong>Layer 2 / Layer 3 boundary</strong>: traffic between VLANs is routed here, crossing broadcast domain boundaries for the first time. Policy enforcement (ACLs, QoS marking, route summarisation) is applied at this layer rather than at the core, so the core can stay simple and fast.</p>
+<p><strong>Core layer - "the motorway"</strong></p>
+<p>The high-speed backbone. One job: move packets fast. Policy was applied at distribution; the core only forwards. It runs pure Layer 3 routing with no access lists or complex processing, using high-bandwidth links (10G, 40G, 100G) between core and distribution switches.</p>
+<p><strong>Why this hierarchy?</strong></p>
+<p>A flat network with 2,000 devices on one switch segment:
+- Every ARP request, every DHCP discover, every routing hello interrupts all 2,000 devices - broadcast storm risk
+- One switch failure takes down all 2,000
+- No clear point to apply security policy</p>
+<p>The three-tier model:
+- Access layer: collapses collision domains (full-duplex per port), defines VLAN broadcast domain boundaries
+- Distribution layer: collapses broadcast domains (routes between VLANs), enforces policy
+- Core layer: fast, policy-free backbone</p>
+<p><strong>Collapsed core (two-tier)</strong></p>
+<p>Small sites - a single building with fewer than 10–15 access switches - often combine distribution and core into one pair of switches:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>              [Internet / WAN]
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>                     │
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>         ┌───────────┴───────────┐
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    [Collapsed-A]         [Collapsed-B]   ← Core + Distribution combined
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>      ╱    │    ╲             ╱    │    ╲
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>   [Acc] [Acc] [Acc]       [Acc] [Acc] [Acc]
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    |||   |||   |||         |||   |||   |||
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>   PCs   PCs   PCs        PCs   PCs   PCs
+</span></code></pre></div>
+<p>Same principles, fewer devices. When the site grows, the combined layer splits back into two tiers.</p>
+<p><strong>Spine-leaf (data centre)</strong></p>
+<p>In data centres, a structured partial mesh emerged: every leaf switch connects to every spine switch. No leaf-to-leaf connections. No STP required. Every server-to-server path is exactly two hops: leaf → spine → leaf. Predictable, equal-cost, fast. Covered in <a href="../datacentre/dc-network-design.md">Data Centre Network Design</a> (<code>DC-001</code>).</p>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<h3 id="pitfall-1-confusing-physical-and-logical-topology">Pitfall 1: Confusing physical and logical topology<a class="headerlink" href="#pitfall-1-confusing-physical-and-logical-topology" title="Permanent link">&para;</a></h3>
+<p>Wi-Fi is physically a star (all devices connect to the AP) but logically a bus (all share the same radio channel, half-duplex). Troubleshooting RF interference means understanding the logical bus: collisions (in 802.11 terms: RTS/CTS, hidden node, co-channel interference) - not the physical star layout.</p>
+<h3 id="pitfall-2-assuming-star-topology-means-resilience">Pitfall 2: Assuming star topology means resilience<a class="headerlink" href="#pitfall-2-assuming-star-topology-means-resilience" title="Permanent link">&para;</a></h3>
+<p>A single switch is one device failure away from a total access outage. Resilience in a star requires redundant central devices - which means redundant uplinks to a second switch, which creates a partial mesh at the distribution layer. "We use a star topology" is not an answer to "how do you survive a switch failure."</p>
+<h3 id="pitfall-3-treating-a-switch-as-eliminating-broadcast-domains">Pitfall 3: Treating a switch as eliminating broadcast domains<a class="headerlink" href="#pitfall-3-treating-a-switch-as-eliminating-broadcast-domains" title="Permanent link">&para;</a></h3>
+<p>A switch breaks collision domains but does <strong>not</strong> break broadcast domains. A broadcast from Device A on VLAN 10 still reaches every port in VLAN 10. Only a router or Layer 3 switch (with a VLAN interface configured) stops a broadcast at a VLAN boundary. Forgetting this leads to oversized flat networks and broadcast storms.</p>
+<h3 id="pitfall-4-duplex-mismatch-the-invisible-performance-killer">Pitfall 4: Duplex mismatch - the invisible performance killer<a class="headerlink" href="#pitfall-4-duplex-mismatch-the-invisible-performance-killer" title="Permanent link">&para;</a></h3>
+<p>A link showing as "up/up" with terrible throughput and incrementing CRC errors is the classic duplex mismatch signature. One side is full-duplex (transmits freely), the other is half-duplex (using CSMA/CD, seeing the full-duplex side's continuous transmissions as collisions). The link functions but at a fraction of its rated speed. Always confirm duplex and speed settings match on both ends of a link.</p>
+<h3 id="pitfall-5-mtu-mismatch-the-black-hole">Pitfall 5: MTU mismatch - the black hole<a class="headerlink" href="#pitfall-5-mtu-mismatch-the-black-hole" title="Permanent link">&para;</a></h3>
+<p>A TCP session that completes the handshake but cannot transfer bulk data is the classic MTU black hole signature. The SYN, SYN-ACK, and ACK (small packets, ~60–80 bytes) fit through a bottleneck link. The first full-size data packet (1500 bytes) gets dropped silently because a firewall is blocking the ICMP "Fragmentation Needed" response. Diagnose with a ping of increasing sizes with the DF bit set: <code>ping -M do -s 1472 &lt;destination&gt;</code> (Linux) tests the 1500-byte MTU path.</p>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>A network has 48 workstations connected to a single hub. How many collision domains exist? How many broadcast domains? What happens if you replace the hub with a switch?</p>
+</li>
+<li>
+<p>You are designing a network for a three-storey office building with 80 users per floor. Describe which topology you would use at each tier and why. How many broadcast domains should there be at minimum?</p>
+</li>
+<li>
+<p>A junior engineer reports that a newly installed 1 Gbps link between two switches has terrible throughput (roughly 10–15 Mbps) but no link errors visible at Layer 1. What is the most likely cause, and how do you diagnose it?</p>
+</li>
+<li>
+<p>A VPN tunnel between two sites is established (pings work, SSH connects), but SCP file transfers fail silently after the connection is established. What is the likely cause, and what are two ways to fix it?</p>
+</li>
+<li>
+<p>You have 200 devices on a flat /24 network. A new security policy requires that Finance (30 hosts), Engineering (80 hosts), and Guest Wi-Fi (90 hosts) cannot communicate with each other. What network changes are needed?</p>
+</li>
+</ol>
+<details class="supplementary">
+<summary>Answers</summary>
+<p><strong>1.</strong> Hub: <strong>1 collision domain</strong> (all 48 devices compete for the same medium) and <strong>1 broadcast domain</strong> (all 48 receive every broadcast).
+Replace with a switch: <strong>48 collision domains</strong> (one per port, full-duplex) and still <strong>1 broadcast domain</strong> (unless VLANs are configured - a switch alone does not segment broadcast domains).</p>
+<p><strong>2.</strong> Access layer: star (switch per floor, each workstation connected to its floor switch). Distribution layer: redundant pair of switches connecting all three floor switches; inter-VLAN routing here. Core: redundant pair connecting to WAN/internet. Minimum broadcast domains: at least 3 (one per floor / department) - ideally more, depending on security policy. Each VLAN = one broadcast domain.</p>
+<p><strong>3.</strong> Most likely cause: <strong>duplex mismatch</strong>. One switch negotiated full-duplex; the other negotiated half-duplex (or was manually configured). Diagnose: <code>show interfaces</code> on both ends - look for incrementing CRC errors and late collisions on the half-duplex side. Fix: set both ends to the same duplex and speed explicitly, or ensure auto-negotiation is enabled on both (not forced on one side only).</p>
+<p><strong>4.</strong> Most likely cause: <strong>MTU black hole</strong>. The tunnel adds header overhead (IPsec ESP = 50–60 bytes), reducing effective MTU. Full-size data packets hit the path with DF bit set, get dropped at the tunnel interface, but the ICMP "Fragmentation Needed" message is blocked by a firewall. The TCP handshake works (small packets); bulk data fails. Two fixes: (1) allow ICMP Type 3 Code 4 through the firewalls (enable PMTUD); (2) configure MSS clamping on the tunnel interface to reduce TCP segment size to a safe value (e.g., <code>ip tcp adjust-mss 1360</code> on Cisco).</p>
+<p><strong>5.</strong> Create three VLANs (Finance, Engineering, Guest). Assign ports/SSIDs to the appropriate VLAN. Configure inter-VLAN routing on a Layer 3 switch or router at the distribution layer - then apply ACLs on the routed interfaces to block traffic between the three VLANs. Each VLAN is its own broadcast domain; the ACLs enforce the security policy at the point where the domains meet.</p>
+</details>
+<hr />
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<h3 id="lab-collision-domains-and-broadcast-domains-in-packet-tracer">Lab: Collision Domains and Broadcast Domains in Packet Tracer<a class="headerlink" href="#lab-collision-domains-and-broadcast-domains-in-packet-tracer" title="Permanent link">&para;</a></h3>
+<p><strong>Tools needed:</strong> Cisco Packet Tracer
+<strong>Estimated time:</strong> 25 minutes</p>
+<p><strong>Objective:</strong> Observe the difference between a hub (one collision domain, one broadcast domain) and a switch (per-port collision domains, configurable broadcast domains via VLANs) using simulation mode.</p>
+<p><strong>Part 1 - Hub:</strong>
+1. Place a hub and connect four PCs (PC1–PC4) to it. Assign addresses <code>192.168.1.1–.4/24</code>.
+2. In Packet Tracer simulation mode, send a ping from PC1 to PC3.
+3. Observe: the frame is replicated to <strong>all</strong> ports - PC2 and PC4 receive it even though it's not for them. This is one collision domain and one broadcast domain in action.</p>
+<p><strong>Part 2 - Switch:</strong>
+1. Replace the hub with a switch. Same four PCs, same addresses.
+2. Repeat the ping. In simulation mode: the frame goes PC1 → Switch → PC3 only. PC2 and PC4 are silent.
+3. Now send a broadcast ping (<code>ping 192.168.1.255</code> from PC1). Observe: the switch floods the broadcast to all ports - all four PCs receive it. The switch broke the collision domain but not the broadcast domain.</p>
+<p><strong>Part 3 - VLANs (broadcast domain segmentation):</strong>
+1. Configure VLAN 10 on ports connected to PC1 and PC2. Configure VLAN 20 on ports connected to PC3 and PC4.
+2. Send a broadcast from PC1. In simulation: it reaches PC2 (same VLAN) but not PC3 or PC4 (different VLAN). The switch now has two broadcast domains.
+3. Attempt a ping from PC1 to PC3. It fails - no router to route between VLANs. This is expected.</p>
+<p><strong>Stretch:</strong> Add a router-on-a-stick (one trunk port to the switch, two sub-interfaces for VLAN 10 and 20). Now PC1 can reach PC3 via the router. The router is the broadcast domain boundary and the routing point between VLANs.</p>
+<hr />
+<h2 id="summary-key-takeaways">Summary &amp; Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">&para;</a></h2>
+<p>Every topology is a tradeoff between cost, resilience, and scale. No single topology wins on all three, which is why every real network is a hybrid. The pattern that emerged as the industry standard is not arbitrary: star topologies at the access layer because they are cheap and easy to manage; partial mesh in the middle because critical paths need redundancy; a routed boundary between segments because routing is what keeps broadcast domains manageable as networks grow.</p>
+<p>When something stops working, topology tells you where to look. A collision domain problem shows up as retransmissions and errors on a shared segment. A broadcast domain problem shows up as excessive background traffic or ARP flooding. A routing problem shows up as reachability failing at a subnet boundary. Knowing which layer owns each domain tells you immediately which device to inspect and which counter to check.</p>
+<hr />
+<h2 id="where-to-next">Where to Next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Continue the sequence:</strong> <a href="../ethernet-cabling/">Ethernet Standards &amp; Cabling</a> (<code>NW-003</code>) - the physical media that carries the signal</li>
+<li><strong>Apply to switching:</strong> <a href="../../switching/switching-fundamentals/">Switching Fundamentals</a> (<code>SW-001</code>) - how switches learn, forward, and create collision domain boundaries</li>
+<li><strong>Broadcast domain segmentation:</strong> <a href="../switching/vlans-trunking.md">VLANs &amp; 802.1Q Trunking</a> (<code>SW-002</code>) - how VLANs create multiple broadcast domains on one switch</li>
+<li><strong>Topology at scale:</strong> <a href="../datacentre/dc-network-design.md">Data Centre Network Design</a> (<code>DC-001</code>) - spine-leaf as structured partial mesh</li>
+</ul>
+<hr />
+<h2 id="standards-certifications">Standards &amp; Certifications<a class="headerlink" href="#standards-certifications" title="Permanent link">&para;</a></h2>
+<p><strong>Relevant standards:</strong>
+- IEEE 802.3 - Ethernet (star/bus physical and logical topology, duplex, frame size)
+- IEEE 802.5 - Token Ring (ring topology, historical)
+- ITU-T G.8032 - Ethernet Ring Protection Switching (carrier ring topology)
+- IETF RFC 1191 - Path MTU Discovery
+- IETF RFC 3021 - Using 31-Bit Prefixes on IPv4 Point-to-Point Links</p>
+<p><strong>Where this topic appears in certification syllabi:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cert</th>
+<th>Vendor</th>
+<th>Relevant section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CCNA 200-301</td>
+<td>Cisco</td>
+<td>1.2 - Network topology architectures</td>
+</tr>
+<tr>
+<td>CompTIA Network+</td>
+<td>CompTIA</td>
+<td>1.2 - Topology concepts</td>
+</tr>
+<tr>
+<td>JNCIA-Junos JN0-103</td>
+<td>Juniper</td>
+<td>Networking fundamentals</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>IEEE 802.3-2022 - Ethernet Standard</li>
+<li>IEEE 802.5 - Token Ring (historical)</li>
+<li>ITU-T G.8032/Y.1344 - Ethernet Ring Protection Switching</li>
+<li>IETF RFC 1191 - Path MTU Discovery</li>
+<li>Forouzan, Behrouz A. - <em>Data Communications and Networking</em>, 5th ed., McGraw-Hill, 2013 - Chapters 13–14</li>
+<li>Odom, Wendell - <em>CCNA 200-301 Official Cert Guide, Volume 1</em>, Cisco Press, 2020 - Chapters 2, 8</li>
+</ul>
+<hr />
+<h2 id="attribution-licensing">Attribution &amp; Licensing<a class="headerlink" href="#attribution-licensing" title="Permanent link">&para;</a></h2>
+<p><strong>Author:</strong> @geekazoid80
+<strong>License:</strong> <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> - content
+<strong>AI assistance:</strong> Claude used for initial draft structure and prose. Technical claims verified against IEEE 802.3-2022, Forouzan's textbook, and Odom's CCNA Official Cert Guide.</p>
+<hr />
+<!-- XREF-START -->
+<h2 id="internal-cross-references">Internal Cross-References<a class="headerlink" href="#internal-cross-references" title="Permanent link">&para;</a></h2>
+<h3 id="modules-that-reference-this-module">Modules That Reference This Module<a class="headerlink" href="#modules-that-reference-this-module" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SW-001</td>
+<td>Switching Fundamentals</td>
+<td>Prerequisite - star topology, collision domains, broadcast domains</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>SW-002</td>
+<td>VLANs &amp; 802.1Q Trunking</td>
+<td>Prerequisite - broadcast domain segmentation via VLANs</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>SW-003</td>
+<td>Spanning Tree Protocol</td>
+<td>Prerequisite - redundant uplinks in hierarchical star create loops STP must manage</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>DC-001</td>
+<td>Data Centre Network Design</td>
+<td>Prerequisite - spine-leaf as structured partial mesh topology</td>
+<td>2026-04-17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modules-this-module-references">Modules This Module References<a class="headerlink" href="#modules-this-module-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NW-001</td>
+<td>The OSI Model</td>
+<td>Prerequisite - topology decisions affect Layers 1 and 2</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>NW-003</td>
+<td>Ethernet Standards &amp; Cabling</td>
+<td>"Where to Next" forward reference</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>SW-001</td>
+<td>Switching Fundamentals</td>
+<td>"Where to Next" forward reference</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>SW-002</td>
+<td>VLANs &amp; 802.1Q Trunking</td>
+<td>"Where to Next" forward reference</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>DC-001</td>
+<td>Data Centre Network Design</td>
+<td>"Where to Next" forward reference - spine-leaf</td>
+<td>2026-04-17</td>
+</tr>
+<tr>
+<td>RT-011</td>
+<td>Multicast Routing</td>
+<td>Forward reference - multicast delivery across subnets</td>
+<td>2026-04-17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vendor-mapping">Vendor Mapping<a class="headerlink" href="#vendor-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Standard</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ethernet duplex and frame size</td>
+<td>IEEE 802.3</td>
+<td>All vendors comply; duplex mismatch fix is vendor-agnostic</td>
+</tr>
+<tr>
+<td>Path MTU Discovery</td>
+<td>RFC 1191</td>
+<td>Supported on all IP stacks</td>
+</tr>
+<tr>
+<td>Ethernet Ring Protection</td>
+<td>ITU-T G.8032</td>
+<td>Carrier-grade ring resilience; Cisco/Juniper/Nokia all support</td>
+</tr>
+</tbody>
+</table>
+<h3 id="maintenance-notes">Maintenance Notes<a class="headerlink" href="#maintenance-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>When SW-001 (Switching) is written, add a back-reference in that XREF section pointing here for collision domain and star topology context.</li>
+<li>When SW-002 (VLANs) is written, add a back-reference pointing here for broadcast domain context.</li>
+<li>When DC-001 (Data Centre) is written, update the "Modules That Reference This Module" table with spine-leaf context.</li>
+</ul>
+<!-- XREF-END -->
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

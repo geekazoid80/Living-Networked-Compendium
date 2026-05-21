@@ -1,0 +1,3647 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A progressive, community-built guide for network engineers — enterprise, carrier, data centre, RF/satellite, and beyond.">
+      
+      
+        <meta name="author" content="Community Contributors">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>BGP Fundamentals - Living Networked Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-objectives" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Living Networked Compendium" class="md-header__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Living Networked Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BGP Fundamentals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../learning-paths/data-network-engineer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learning Paths
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../networking/osi-model/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../applied/data-network-engineer/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Applied
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../CONTRIBUTING/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Living Networked Compendium" class="md-nav__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Living Networked Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Paths
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learning Paths
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/data-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/carrier-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/datacentre-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-satellite-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-coax-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/voice-telephony-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-mobile-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/storage-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/broadcast-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking/osi-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSI Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IP Addressing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/ip-addressing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/subnetting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access Media
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Switching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier & Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocols
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../professional-standards/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Professional Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/data-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/carrier-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/datacentre-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-satellite-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-coax-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/voice-telephony-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-mobile-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/storage-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/broadcast-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/_new-path-template/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start a New Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTION_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../AI_GUARDRAILS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Guardrails
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../MODULE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../INSTRUCTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-internal-routing-doesnt-cross-trust-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Internal routing doesn't cross trust boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-an-explicit-session-between-trusted-peers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: An explicit session between trusted peers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-path-vector-carry-the-full-route-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Path-vector - carry the full route history
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-not-all-paths-are-equal-attributes-control-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Not all paths are equal - attributes control policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-distributing-bgp-inside-one-as" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Distributing BGP inside one AS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-just-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Just Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autonomous-systems-and-as-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autonomous Systems and AS Numbers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgp-vs-igp-fundamental-differences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BGP vs IGP - Fundamental Differences
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgp-session-states" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BGP Session States
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#as_path-and-loop-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AS_PATH and Loop Prevention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgp-path-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BGP Path Attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgp-best-path-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BGP Best-Path Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ibgp-full-mesh-and-route-reflectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iBGP, Full Mesh, and Route Reflectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ebgp-configuration-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        eBGP Configuration Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vendor-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Implementations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-1-session-stuck-in-active-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 1: Session stuck in Active state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-2-routes-in-bgp-table-but-not-in-routing-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 2: Routes in BGP table but not in routing table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-3-advertising-a-prefix-that-isnt-in-the-routing-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 3: Advertising a prefix that isn't in the routing table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-4-as_path-loop-prevention-blocking-a-valid-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 4: AS_PATH loop prevention blocking a valid path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-5-ibgp-full-mesh-incomplete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 5: iBGP full mesh incomplete
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practice Problems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary &amp; Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standards-certifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standards &amp; Certifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution &amp; Licensing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Cross-References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Cross-References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modules-that-reference-this-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules That Reference This Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules-this-module-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules This Module References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">as-path</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">autonomous-system</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">bgp</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">bgp-attributes</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">ebgp</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">ibgp</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">internet-routing</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">local-pref</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">med</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">path-vector</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">route-reflector</span>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium/edit/main/modules/fundamentals/routing/bgp-fundamentals.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>BGP Fundamentals</h1>
+
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ol>
+<li><strong>Explain</strong> what BGP is, why it exists, and how it differs from IGPs (OSPF, IS-IS)</li>
+<li><strong>Distinguish</strong> between eBGP and iBGP sessions and explain when each is used</li>
+<li><strong>Describe</strong> how AS_PATH works as both a routing attribute and a loop-prevention mechanism</li>
+<li><strong>List</strong> the key BGP attributes (AS_PATH, NEXT_HOP, LOCAL_PREF, MED, COMMUNITIES) and explain what each controls</li>
+<li><strong>Explain</strong> the BGP best-path selection algorithm at a high level and apply it to a simple scenario</li>
+<li><strong>Describe</strong> the iBGP full-mesh requirement and how Route Reflectors address the scaling problem</li>
+</ol>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../routing-fundamentals/">Routing Fundamentals</a> (<code>RT-001</code>) - routing table, AD, metric concepts</li>
+<li><a href="../ospf-fundamentals/">OSPF Fundamentals</a> (<code>RT-004</code>) - IGP context; contrast with BGP's role</li>
+<li><a href="../../ip/ip-addressing/">IP Addressing Fundamentals</a> (<code>IP-001</code>) - CIDR notation; prefix aggregation</li>
+<li><a href="../../ip/subnetting/">IP Subnetting &amp; VLSM</a> (<code>IP-002</code>) - prefix lengths; understanding BGP table entries</li>
+</ul>
+<hr />
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
+<p>Two separate companies - ISP-A in Asia and ISP-B in Europe. Each runs its own internal network, its own IGP (OSPF or IS-IS), and its own addressing. Their customers want to reach each other. The two ISPs need to exchange routing information.</p>
+<p>Can they just use OSPF?</p>
+<h3 id="step-1-internal-routing-doesnt-cross-trust-boundaries">Step 1: Internal routing doesn't cross trust boundaries<a class="headerlink" href="#step-1-internal-routing-doesnt-cross-trust-boundaries" title="Permanent link">&para;</a></h3>
+<p>OSPF floods its entire topology to every router in the domain. If ISP-A ran OSPF with ISP-B, ISP-A would see the complete internal topology of ISP-B's network - every router, every link, every address. ISP-B would see ISP-A's. Neither is willing to share this.</p>
+<p>More fundamentally: routing policy. ISP-A wants to control which of ISP-B's customers it carries traffic for, how much, and via which paths. ISP-B wants the same control. An IGP has no mechanism for policy - it just finds the shortest path and uses it.</p>
+<p>What's needed is a protocol where each party <strong>explicitly decides</strong> what routes to accept, what to advertise, and what policy to apply. The peering relationship itself must be intentional - not auto-discovered.</p>
+<h3 id="step-2-an-explicit-session-between-trusted-peers">Step 2: An explicit session between trusted peers<a class="headerlink" href="#step-2-an-explicit-session-between-trusted-peers" title="Permanent link">&para;</a></h3>
+<p>BGP establishes a <strong>TCP session</strong> between two routers that are explicitly configured to peer with each other (TCP port 179). Nothing happens automatically - you must configure the neighbour's address and the relationship before any routes are exchanged.</p>
+<p>The session is between <strong>Autonomous Systems (AS)</strong> - each organisation's independently managed network is identified by an AS number. ISP-A is AS 65001. ISP-B is AS 65002. The BGP session between them is <strong>eBGP (external BGP)</strong> - a session crossing AS boundaries.</p>
+<h3 id="step-3-path-vector-carry-the-full-route-history">Step 3: Path-vector - carry the full route history<a class="headerlink" href="#step-3-path-vector-carry-the-full-route-history" title="Permanent link">&para;</a></h3>
+<p>BGP is not distance-vector (doesn't share hop counts) and not link-state (doesn't share topology). BGP is <strong>path-vector</strong>: every route advertisement carries the full list of AS numbers the route has traversed.</p>
+<p>When ISP-A advertises its customer prefix <code>203.0.113.0/24</code> to ISP-B, the advertisement says:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Network: 203.0.113.0/24
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>AS_PATH: 65001    (originated in AS 65001)
+</span></code></pre></div></p>
+<p>ISP-B re-advertises this to ISP-C with:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Network: 203.0.113.0/24
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>AS_PATH: 65002 65001    (entered via 65002, originated in 65001)
+</span></code></pre></div></p>
+<p>If ISP-C tries to advertise this back to ISP-A: ISP-A sees its own AS number (65001) in the AS_PATH and <strong>rejects the route</strong> - loop detected. This is BGP's loop prevention mechanism: the AS_PATH attribute.</p>
+<h3 id="step-4-not-all-paths-are-equal-attributes-control-policy">Step 4: Not all paths are equal - attributes control policy<a class="headerlink" href="#step-4-not-all-paths-are-equal-attributes-control-policy" title="Permanent link">&para;</a></h3>
+<p>ISP-B has two paths to <code>203.0.113.0/24</code>: one via ISP-A (shorter), one via ISP-C (longer AS_PATH). ISP-B prefers the shorter path - but ISP-B has a business reason to prefer the path via ISP-C (cheaper transit).</p>
+<p>BGP provides attributes that let operators express policy:
+- <strong>AS_PATH</strong> - the list of ASes; shorter is generally preferred
+- <strong>LOCAL_PREF</strong> - a local preference value; higher is better; used internally to prefer one exit point
+- <strong>MED (Multi-Exit Discriminator)</strong> - a hint to the adjacent AS about preferred entry point; lower is better
+- <strong>COMMUNITIES</strong> - arbitrary tags that carry policy information across AS boundaries</p>
+<p>An operator can set LOCAL_PREF=200 on the ISP-C path, overriding the default preference for shorter AS_PATH. BGP does what the operator decides - not what the shortest path is.</p>
+<h3 id="step-5-distributing-bgp-inside-one-as">Step 5: Distributing BGP inside one AS<a class="headerlink" href="#step-5-distributing-bgp-inside-one-as" title="Permanent link">&para;</a></h3>
+<p>ISP-A has 20 routers. Only 2 of them peer with external ASes (the border routers). But packets arriving at any of the 20 routers might need to reach external destinations. The internal routers need to know BGP routes.</p>
+<p>BGP also runs inside one AS - called <strong>iBGP (internal BGP)</strong>. The border routers distribute externally learned routes to all internal routers via iBGP sessions. iBGP does not add AS numbers to the AS_PATH (same AS - no loop risk), but it has a critical rule: <strong>iBGP-learned routes cannot be re-advertised to other iBGP peers</strong> - preventing internal loops.</p>
+<p>This means all iBGP speakers in an AS must be fully connected to each other - a <strong>full mesh</strong> of iBGP sessions. With 20 routers, that's 190 sessions. At 100 routers: 4,950 sessions. This doesn't scale.</p>
+<p>The solution: <strong>Route Reflectors (RR)</strong>. A Route Reflector re-advertises iBGP-learned routes to other iBGP peers, breaking the full-mesh requirement. Client routers peer only with the RR; the RR distributes routes to all clients. Loop prevention is handled by the RR via the ORIGINATOR_ID and CLUSTER_LIST attributes.</p>
+<h3 id="what-you-just-built">What You Just Built<a class="headerlink" href="#what-you-just-built" title="Permanent link">&para;</a></h3>
+<p>BGP - Border Gateway Protocol. A path-vector protocol that establishes explicit TCP peer relationships, carries full AS-path history to prevent loops, uses rich attributes to implement inter-domain routing policy, and scales inside an AS using route reflectors.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario element</th>
+<th>Technical term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Independently managed network with its own routing</td>
+<td>Autonomous System (AS)</td>
+</tr>
+<tr>
+<td>BGP session between two different ASes</td>
+<td>eBGP (external BGP)</td>
+</tr>
+<tr>
+<td>BGP session within one AS</td>
+<td>iBGP (internal BGP)</td>
+</tr>
+<tr>
+<td>Full list of AS numbers a route has traversed</td>
+<td>AS_PATH attribute</td>
+</tr>
+<tr>
+<td>Loop detection: own AS in path → reject</td>
+<td>AS_PATH loop prevention</td>
+</tr>
+<tr>
+<td>Local preference for selecting outbound path</td>
+<td>LOCAL_PREF attribute</td>
+</tr>
+<tr>
+<td>Hint to neighbours about preferred inbound path</td>
+<td>MED attribute</td>
+</tr>
+<tr>
+<td>Policy tags carried in BGP advertisements</td>
+<td>COMMUNITIES attribute</td>
+</tr>
+<tr>
+<td>iBGP router that re-advertises routes to other iBGP peers</td>
+<td>Route Reflector</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="core-content">Core Content<a class="headerlink" href="#core-content" title="Permanent link">&para;</a></h2>
+<h3 id="autonomous-systems-and-as-numbers">Autonomous Systems and AS Numbers<a class="headerlink" href="#autonomous-systems-and-as-numbers" title="Permanent link">&para;</a></h3>
+<p>An <strong>Autonomous System (AS)</strong> is a collection of IP networks and routers under a single technical administration, with a consistent routing policy visible to the internet.</p>
+<p>AS numbers are 32-bit values (since RFC 6793), written as plain integers (<code>65001</code>) or in dotted notation (<code>0.65001</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Range</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 – 64511</td>
+<td>Public ASNs - assigned by Regional Internet Registries (ARIN, RIPE, APNIC, etc.)</td>
+</tr>
+<tr>
+<td>64512 – 65534</td>
+<td>Private ASNs - for internal use (like RFC 1918 addresses); not advertised on internet</td>
+</tr>
+<tr>
+<td>65535</td>
+<td>Reserved</td>
+</tr>
+<tr>
+<td>65536 – 4199999999</td>
+<td>32-bit public ASNs</td>
+</tr>
+<tr>
+<td>4200000000 – 4294967294</td>
+<td>32-bit private ASNs</td>
+</tr>
+</tbody>
+</table>
+<p>Every BGP speaker has an AS number. In eBGP, you always know which AS your peer belongs to. In iBGP, both ends are in the same AS.</p>
+<h3 id="bgp-vs-igp-fundamental-differences">BGP vs IGP - Fundamental Differences<a class="headerlink" href="#bgp-vs-igp-fundamental-differences" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>IGP (OSPF / IS-IS)</th>
+<th>BGP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scope</td>
+<td>Within one AS</td>
+<td>Between ASes (and within large ASes)</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>Find the shortest path</td>
+<td>Apply routing policy; exchange reachability</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>Automatic (hellos)</td>
+<td>Manual - explicitly configured neighbours</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>IP (OSPF) or L2 (IS-IS)</td>
+<td>TCP port 179</td>
+</tr>
+<tr>
+<td>Metric</td>
+<td>Cost / hop count</td>
+<td>Policy attributes (no single metric)</td>
+</tr>
+<tr>
+<td>Convergence</td>
+<td>Seconds</td>
+<td>Minutes (large internet tables)</td>
+</tr>
+<tr>
+<td>Table size</td>
+<td>Hundreds to thousands of routes</td>
+<td>~1 million+ prefixes (full internet BGP table)</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Fast convergence inside one org</td>
+<td>Policy-driven inter-org routing</td>
+</tr>
+</tbody>
+</table>
+<p>BGP is not a replacement for an IGP - every AS still runs an IGP internally. BGP sits on top, exchanging external reachability between ASes.</p>
+<h3 id="bgp-session-states">BGP Session States<a class="headerlink" href="#bgp-session-states" title="Permanent link">&para;</a></h3>
+<p>BGP sessions progress through a state machine before routes are exchanged:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Idle</strong></td>
+<td>BGP is not trying to connect</td>
+</tr>
+<tr>
+<td><strong>Connect</strong></td>
+<td>TCP connection attempt in progress</td>
+</tr>
+<tr>
+<td><strong>Active</strong></td>
+<td>TCP connection failed; retrying</td>
+</tr>
+<tr>
+<td><strong>OpenSent</strong></td>
+<td>TCP connected; OPEN message sent; waiting for peer's OPEN</td>
+</tr>
+<tr>
+<td><strong>OpenConfirm</strong></td>
+<td>OPEN received; waiting for KEEPALIVE</td>
+</tr>
+<tr>
+<td><strong>Established</strong></td>
+<td>Session up; UPDATE messages (routes) can now be exchanged</td>
+</tr>
+</tbody>
+</table>
+<p>A session stuck in <strong>Active</strong> state means the TCP connection is failing - check IP reachability, ACLs, and whether the far-end is configured.</p>
+<p><strong>BGP message types:</strong>
+- <strong>OPEN</strong> - establishes session; negotiates AS number, BGP version, hold timer, Router ID
+- <strong>UPDATE</strong> - advertises or withdraws routes; carries path attributes
+- <strong>KEEPALIVE</strong> - keeps session alive when no UPDATE to send (default interval: 60s; hold time: 180s)
+- <strong>NOTIFICATION</strong> - reports an error; closes the session</p>
+<h3 id="as_path-and-loop-prevention">AS_PATH and Loop Prevention<a class="headerlink" href="#as_path-and-loop-prevention" title="Permanent link">&para;</a></h3>
+<p>The AS_PATH attribute is a sequence of AS numbers representing the path a route has taken from its origin to the current router.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Origin AS 65001 originates 203.0.113.0/24:
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  Advertised to 65002 with AS_PATH: 65001
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>AS 65002 re-advertises to 65003:
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  Prepends own AS: AS_PATH: 65002 65001
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>AS 65003 re-advertises to 65001 (original AS):
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  65001 sees 65001 in AS_PATH → REJECTS — loop detected
+</span></code></pre></div>
+<p><strong>AS_PATH manipulation:</strong>
+- <strong>AS_PATH prepending</strong> - artificially lengthening the AS_PATH by repeating your own ASN, making a path appear less attractive:
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Normal:    AS_PATH: 65001
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Prepended: AS_PATH: 65001 65001 65001
+</span></code></pre></div>
+  Used to make one path less preferred by other ASes - influences inbound traffic from peers.</p>
+<h3 id="bgp-path-attributes">BGP Path Attributes<a class="headerlink" href="#bgp-path-attributes" title="Permanent link">&para;</a></h3>
+<p>BGP carries rich attributes with every route. These attributes encode policy and preference - they are what distinguish BGP from simple distance-based protocols.</p>
+<p><strong>Mandatory attributes (in every UPDATE):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ORIGIN</td>
+<td>1</td>
+<td>How the route entered BGP: <code>i</code> (IGP), <code>e</code> (EGP, obsolete), <code>?</code> (incomplete/redistributed)</td>
+</tr>
+<tr>
+<td>AS_PATH</td>
+<td>2</td>
+<td>Ordered list of ASes the route traversed</td>
+</tr>
+<tr>
+<td>NEXT_HOP</td>
+<td>3</td>
+<td>IP address of the next-hop router for this route</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Well-known discretionary attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Code</th>
+<th>Scope</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LOCAL_PREF</td>
+<td>5</td>
+<td>Within one AS</td>
+<td>Preference for outbound path; <strong>higher = preferred</strong>; not carried to eBGP peers</td>
+</tr>
+<tr>
+<td>ATOMIC_AGGREGATE</td>
+<td>6</td>
+<td>Domain</td>
+<td>Indicates a more-specific route was suppressed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional transitive attributes (carried across AS boundaries):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMMUNITY</td>
+<td>8</td>
+<td>Policy tags - 32-bit values; used to signal routing policy between ASes</td>
+</tr>
+<tr>
+<td>AS4_PATH</td>
+<td>17</td>
+<td>AS_PATH in 4-byte AS format</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional non-transitive attributes (not carried to other ASes):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Code</th>
+<th>Scope</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MED</td>
+<td>4</td>
+<td>Between two ASes</td>
+<td>Multi-Exit Discriminator - <strong>lower = preferred</strong>; hint to neighbour AS about preferred entry</td>
+</tr>
+<tr>
+<td>ORIGINATOR_ID</td>
+<td>9</td>
+<td>Within AS</td>
+<td>Set by Route Reflector - prevents loops in RR clusters</td>
+</tr>
+<tr>
+<td>CLUSTER_LIST</td>
+<td>10</td>
+<td>Within AS</td>
+<td>RR cluster path - prevents RR loops</td>
+</tr>
+</tbody>
+</table>
+<p><strong>NEXT_HOP behaviour - a critical detail:</strong>
+- In <strong>eBGP</strong>: NEXT_HOP is set to the advertising router's IP (the directly connected eBGP peer address)
+- In <strong>iBGP</strong>: NEXT_HOP is <strong>not changed</strong> - iBGP passes the eBGP NEXT_HOP through unchanged
+- This means internal routers must be able to reach the eBGP next-hop address, usually via the IGP
+- If the iBGP next-hop is unreachable in the IGP, the BGP route exists but is not installed in the routing table</p>
+<p>This is the common <code>next-hop-self</code> configuration on iBGP sessions from border routers:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>neighbor 10.0.0.2 next-hop-self
+</span></code></pre></div>
+This rewrites NEXT_HOP to the border router's own address before advertising to iBGP peers - ensuring internal routers have a reachable next-hop.</p>
+<h3 id="bgp-best-path-selection">BGP Best-Path Selection<a class="headerlink" href="#bgp-best-path-selection" title="Permanent link">&para;</a></h3>
+<p>When BGP has multiple paths to the same prefix from different peers, it selects the <strong>best path</strong> using a sequential decision process. The first criterion to produce a winner ends the comparison.</p>
+<p><strong>Cisco IOS BGP best-path algorithm (simplified - memorise the order):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Attribute</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Weight (Cisco-only)</td>
+<td>Higher</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LOCAL_PREF</td>
+<td>Higher</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Locally originated (network/aggregate)</td>
+<td>Prefer locally originated</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AS_PATH length</td>
+<td>Shorter</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ORIGIN code</td>
+<td>IGP &gt; EGP &gt; incomplete</td>
+</tr>
+<tr>
+<td>6</td>
+<td>MED</td>
+<td>Lower</td>
+</tr>
+<tr>
+<td>7</td>
+<td>eBGP over iBGP</td>
+<td>Prefer eBGP</td>
+</tr>
+<tr>
+<td>8</td>
+<td>IGP metric to NEXT_HOP</td>
+<td>Lower</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Oldest eBGP path (stability)</td>
+<td>Older</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Router ID of advertising peer</td>
+<td>Lower</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Cluster list length</td>
+<td>Shorter</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Peer IP address</td>
+<td>Lower</td>
+</tr>
+</tbody>
+</table>
+<p>In practice: <strong>LOCAL_PREF controls outbound exit selection</strong> (which path this AS uses to leave). <strong>MED influences inbound path selection</strong> (which path the neighbouring AS uses to enter). AS_PATH length is the primary inter-AS tiebreaker.</p>
+<details class="supplementary">
+<summary>BGP Communities in Detail</summary>
+<p>BGP Communities (RFC 1997) are 32-bit values attached to routes, formatted as <code>AS:value</code> (e.g., <code>65001:100</code>). They are used to pass policy signals between networks.</p>
+<p>Well-known communities:
+- <code>INTERNET</code> (0x00000000) - advertise to all BGP peers
+- <code>NO_EXPORT</code> (0xFFFFFF01) - do not advertise outside the AS
+- <code>NO_ADVERTISE</code> (0xFFFFFF02) - do not advertise to any BGP peer
+- <code>LOCAL_AS</code> (0xFFFFFF03) - do not send outside the sub-AS (confederation)</p>
+<p>Large communities (RFC 8092) extend this to 96-bit values (<code>AS:administrator:value</code>) for richer policy signalling in large networks.</p>
+<p>Example use: a customer tags their route with <code>65001:100</code> meaning "deprioritise this route." ISP-A has a route-map that reads this community and sets LOCAL_PREF=50 on the route. Policy is conveyed in the BGP attribute - no out-of-band configuration needed.</p>
+</details>
+<h3 id="ibgp-full-mesh-and-route-reflectors">iBGP, Full Mesh, and Route Reflectors<a class="headerlink" href="#ibgp-full-mesh-and-route-reflectors" title="Permanent link">&para;</a></h3>
+<p><strong>The iBGP full-mesh requirement:</strong>
+The rule "do not re-advertise iBGP-learned routes to other iBGP peers" prevents internal routing loops. But it means every router in the AS must have a direct iBGP session to every other router - a full mesh.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>N routers → N×(N-1)/2 sessions
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>5 routers  → 10 sessions
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>20 routers → 190 sessions
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>100 routers → 4,950 sessions
+</span></code></pre></div>
+<p><strong>Route Reflectors (RFC 4456):</strong>
+A Route Reflector (RR) relaxes the no-readvertise rule: it may re-advertise iBGP-learned routes to its <strong>clients</strong> (other iBGP speakers configured to peer only with the RR).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Without RR (full mesh — 6 sessions for 4 routers):
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  R1 ←→ R2, R1 ←→ R3, R1 ←→ R4
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  R2 ←→ R3, R2 ←→ R4, R3 ←→ R4
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>With RR (RR-A is the reflector — 3 sessions):
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  R1, R2, R3 all peer only with RR-A
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>  RR-A reflects routes from R1 to R2 and R3; from R2 to R1 and R3; etc.
+</span></code></pre></div>
+<p><strong>RR loop prevention:</strong>
+- <strong>ORIGINATOR_ID</strong> - the RR sets this to the Route ID of the originating client. If a reflected route arrives back at the originating router, it recognises its own ORIGINATOR_ID and ignores the route.
+- <strong>CLUSTER_LIST</strong> - a list of RR cluster IDs. If an RR receives a route with its own Cluster ID in the CLUSTER_LIST, it discards it.</p>
+<p>Best practice: deploy <strong>two RRs</strong> per cluster for redundancy. Clients peer with both RRs; both RRs peer with each other (non-client iBGP session). Single RR failure doesn't break BGP.</p>
+<h3 id="ebgp-configuration-basics">eBGP Configuration Basics<a class="headerlink" href="#ebgp-configuration-basics" title="Permanent link">&para;</a></h3>
+<p>eBGP peers are directly connected in most deployments (though multi-hop eBGP is supported). The key parameters:
+- Neighbour IP address
+- Remote AS number
+- Local AS number (defined globally)
+- Prefixes to advertise (via <code>network</code> statements or redistribution)</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>eBGP session: AS 65001 (R1: 10.0.0.1) ↔ AS 65002 (R2: 10.0.0.2)
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>              directly connected on 10.0.0.0/30
+</span></code></pre></div>
+<hr />
+<h2 id="vendor-implementations">Vendor Implementations<a class="headerlink" href="#vendor-implementations" title="Permanent link">&para;</a></h2>
+<p>BGP is standardised in RFC 4271 (BGP-4). All compliant implementations form sessions with any other. The path attributes and best-path algorithm are standardised, though Cisco adds a local "Weight" attribute (not in the RFC) as step 1 in its decision process.</p>
+<div class="admonition success">
+<p class="admonition-title">Standard - RFC 4271 (BGP-4)</p>
+<p>BGP-4 is universally implemented. Multi-vendor eBGP sessions are routine at every internet exchange point on earth. Verify AS numbers, neighbour addresses, and hold timers match across vendors.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Proprietary - Cisco Weight</p>
+<p>Cisco IOS/IOS-XE/IOS-XR adds a <strong>Weight</strong> attribute (local to the router, not carried in UPDATE messages). Weight overrides all other BGP selection criteria on Cisco routers (step 1, higher = preferred). It is not in RFC 4271 and does not exist on Juniper, Nokia, Arista, or Huawei. Weight-based policy configured on a Cisco router has no effect on path selection at any other vendor.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Nokia SR-OS</label><label for="__tabbed_1_4">Arista EOS</label><label for="__tabbed_1_5">Huawei VRP</label><label for="__tabbed_1_6">MikroTik RouterOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>! Basic eBGP configuration
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>router bgp 65001
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a> bgp router-id 1.1.1.1
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a> neighbor 10.0.0.2 remote-as 65002        ! eBGP peer
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a> neighbor 10.0.0.2 description ISP-B
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a> ! Advertise a prefix
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a> address-family ipv4
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>  neighbor 10.0.0.2 activate
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>  network 203.0.113.0 mask 255.255.255.0  ! must exist in routing table
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>! iBGP peer with next-hop-self
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>router bgp 65001
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a> neighbor 10.1.1.2 remote-as 65001        ! iBGP (same AS)
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a> neighbor 10.1.1.2 update-source Loopback0
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a> neighbor 10.1.1.2 next-hop-self
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>! Verify
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>show bgp summary
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>show bgp ipv4 unicast
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>show bgp ipv4 unicast 203.0.113.0/24
+</span></code></pre></div>
+<code>update-source Loopback0</code> sets the source IP of iBGP sessions to the loopback - ensures the session survives individual interface failures. Always use loopbacks for iBGP.</p>
+<p>Full configuration reference: <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-16/irg-xe-16-book.html">Cisco BGP Configuration Guide</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># eBGP peer
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>set protocols bgp group EBGP type external
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>set protocols bgp group EBGP peer-as 65002
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>set protocols bgp group EBGP neighbor 10.0.0.2
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a># iBGP peer (route reflector client example)
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>set protocols bgp group IBGP type internal
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>set protocols bgp group IBGP local-address 1.1.1.1
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>set protocols bgp group IBGP cluster 1.1.1.1           ! RR cluster ID
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>set protocols bgp group IBGP neighbor 10.1.1.2
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a># Advertise a prefix
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>set policy-options policy-statement ADVERTISE term 1 from route-filter 203.0.113.0/24 exact
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>set policy-options policy-statement ADVERTISE term 1 then accept
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>set protocols bgp group EBGP export ADVERTISE
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a># Verify
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>show bgp summary
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>show bgp neighbor 10.0.0.2
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>show route protocol bgp
+</span></code></pre></div>
+Junos uses groups to organise BGP peers - all peers in a group share the same type (internal/external) and policy. Policy is applied as an export/import policy to the group, not per-neighbour. <code>cluster</code> configures this router as a Route Reflector for that group.</p>
+<p>Full configuration reference: <a href="https://www.juniper.net/documentation/us/en/software/junos/bgp/index.html">Juniper BGP Configuration Guide</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a># eBGP peer (classic CLI)
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>configure router bgp
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    group &quot;EBGP&quot;
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        type external
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        peer-as 65002
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        neighbor 10.0.0.2
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>            no shutdown
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        exit
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    exit
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    no shutdown
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>exit
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a># iBGP with route reflector
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>configure router bgp
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>    group &quot;IBGP&quot;
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        type internal
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>        local-address 1.1.1.1
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        cluster 1.1.1.1
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>        neighbor 10.1.1.2
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>            no shutdown
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>        exit
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>    exit
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>exit
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a># Verify
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>show router bgp summary
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>show router bgp neighbor 10.0.0.2
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>show router bgp routes
+</span></code></pre></div>
+SR-OS group-based BGP model similar to Junos. Route Reflector is configured with <code>cluster &lt;id&gt;</code> under the group. <code>no shutdown</code> is required at both the group and neighbour level, and under <code>bgp</code> globally.</p>
+<p>Full configuration reference: <a href="https://documentation.nokia.com/sr/">Nokia SR-OS BGP Guide</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>! eBGP peer
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>router bgp 65001
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>   router-id 1.1.1.1
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>   neighbor 10.0.0.2 remote-as 65002
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>   neighbor 10.0.0.2 description ISP-B
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>   ! iBGP with route reflector
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>   neighbor 10.1.1.2 remote-as 65001
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>   neighbor 10.1.1.2 update-source Loopback0
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>   neighbor 10.1.1.2 route-reflector-client
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>   address-family ipv4
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>      neighbor 10.0.0.2 activate
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>      neighbor 10.1.1.2 activate
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>      network 203.0.113.0/24
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>! Verify
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>show bgp summary
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>show bgp ipv4 unicast
+</span></code></pre></div>
+Arista EOS BGP syntax is close to Cisco IOS-XE. <code>route-reflector-client</code> is configured per-neighbour on the RR, marking that neighbour as a client.</p>
+<p>Full configuration reference: <a href="https://www.arista.com/en/um-eos/eos-bgp">Arista EOS BGP Configuration</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a># eBGP peer
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>bgp 65001
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a> router-id 1.1.1.1
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a> peer 10.0.0.2 as-number 65002
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a> peer 10.0.0.2 description ISP-B
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a> address-family ipv4 unicast
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>  peer 10.0.0.2 enable
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>  network 203.0.113.0 255.255.255.0
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a># iBGP with route reflector
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>bgp 65001
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a> peer 10.1.1.2 as-number 65001
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a> peer 10.1.1.2 connect-interface LoopBack0
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a> address-family ipv4 unicast
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>  peer 10.1.1.2 enable
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>  peer 10.1.1.2 reflect-client
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a># Verify
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>display bgp peer
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>display bgp routing-table
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>display bgp routing-table 203.0.113.0
+</span></code></pre></div>
+Huawei VRP uses <code>peer</code> (not <code>neighbor</code>) for BGP configuration. <code>reflect-client</code> marks the peer as an RR client. <code>connect-interface</code> sets the source interface for iBGP sessions (equivalent to <code>update-source</code>).</p>
+<p>Full configuration reference: <a href="https://support.huawei.com/enterprise/en/doc/EDOC1100278578">Huawei VRP BGP Configuration</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a># eBGP peer
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>/routing bgp connection add name=ISP-B remote.as=65002 remote.address=10.0.0.2 \
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    local.role=ebgp
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a># iBGP peer
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>/routing bgp connection add name=RR remote.as=65001 remote.address=10.1.1.2 \
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    local.role=ibgp local.address=1.1.1.1
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a># Advertise a prefix via an output filter
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>/routing filter rule add chain=bgp-out rule=&quot;if (dst==203.0.113.0/24) {accept}&quot;
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a># Verify
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>/routing bgp session print
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>/ip route print where bgp
+</span></code></pre></div>
+RouterOS v7 uses a connection-based BGP model with <code>local.role</code> (ebgp/ibgp/rr-client). Policy is applied via routing filter chains. This is a significant redesign from RouterOS v6's <code>/routing bgp peer</code> syntax.</p>
+<p>Full configuration reference: <a href="https://help.mikrotik.com/docs/display/ROS/BGP">MikroTik BGP Reference</a></p>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<h3 id="pitfall-1-session-stuck-in-active-state">Pitfall 1: Session stuck in Active state<a class="headerlink" href="#pitfall-1-session-stuck-in-active-state" title="Permanent link">&para;</a></h3>
+<p>BGP Active state means TCP connections are failing. Check: is the neighbour IP reachable (ping)? Is TCP port 179 permitted by any firewall or ACL? Is the <code>remote-as</code> number correct on both sides? Are both routers using the correct source address (especially for iBGP using loopbacks - verify <code>update-source</code> is set)?</p>
+<h3 id="pitfall-2-routes-in-bgp-table-but-not-in-routing-table">Pitfall 2: Routes in BGP table but not in routing table<a class="headerlink" href="#pitfall-2-routes-in-bgp-table-but-not-in-routing-table" title="Permanent link">&para;</a></h3>
+<p>A BGP route exists in <code>show bgp</code> but is absent from <code>show ip route</code>. Most common cause: the NEXT_HOP is unreachable. The IGP must have a route to the BGP next-hop address. On iBGP, if <code>next-hop-self</code> is not configured on the border router, internal routers receive the eBGP NEXT_HOP (an address only the border router can reach). Fix: configure <code>next-hop-self</code> on iBGP sessions from border routers.</p>
+<h3 id="pitfall-3-advertising-a-prefix-that-isnt-in-the-routing-table">Pitfall 3: Advertising a prefix that isn't in the routing table<a class="headerlink" href="#pitfall-3-advertising-a-prefix-that-isnt-in-the-routing-table" title="Permanent link">&para;</a></h3>
+<p>Cisco BGP <code>network</code> statements only advertise a prefix if an <strong>exact match</strong> exists in the routing table. If you configure <code>network 203.0.113.0 mask 255.255.255.0</code> but the routing table only has <code>203.0.113.0/25</code> and <code>203.0.113.128/25</code>, the /24 is not advertised. Create a static summary route to Null0 to ensure the aggregate prefix exists, then advertise it.</p>
+<h3 id="pitfall-4-as_path-loop-prevention-blocking-a-valid-path">Pitfall 4: AS_PATH loop prevention blocking a valid path<a class="headerlink" href="#pitfall-4-as_path-loop-prevention-blocking-a-valid-path" title="Permanent link">&para;</a></h3>
+<p>In some designs (BGP confederations, private ASNs stripped before advertisement), the AS_PATH may legitimately contain your own AS number. The default loop-prevention check will reject these routes. Fix: <code>allowas-in</code> permits receiving routes with your own AS in the path (use with care - only when you understand why the loop check is triggering).</p>
+<h3 id="pitfall-5-ibgp-full-mesh-incomplete">Pitfall 5: iBGP full mesh incomplete<a class="headerlink" href="#pitfall-5-ibgp-full-mesh-incomplete" title="Permanent link">&para;</a></h3>
+<p>If any iBGP session is missing in a full-mesh design (or any client is not peering with the Route Reflector), routes don't propagate to that router. Symptom: some internal routers can reach external destinations; others cannot. Audit iBGP session topology with <code>show bgp summary</code> on every router - every expected session should show <code>Established</code>.</p>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Router R1 (AS 65001) has three BGP paths to <code>198.51.100.0/24</code>:</li>
+<li>Path A: LOCAL_PREF=200, AS_PATH: 65002 65010</li>
+<li>Path B: LOCAL_PREF=100, AS_PATH: 65003</li>
+<li>
+<p>Path C: LOCAL_PREF=200, AS_PATH: 65004
+   Which path does R1 select as best? Explain step by step.</p>
+</li>
+<li>
+<p>An iBGP border router learns the prefix <code>203.0.113.0/24</code> from its eBGP peer at <code>10.0.0.2</code>. The border router advertises this to all iBGP peers but does NOT configure <code>next-hop-self</code>. Internal routers can see the prefix in <code>show bgp</code> but cannot reach it. Why?</p>
+</li>
+<li>
+<p>An AS has 8 iBGP speakers. How many sessions are needed for a full mesh? How many sessions does each router need in a Route Reflector design with 1 RR and 7 clients?</p>
+</li>
+<li>
+<p>What is the purpose of AS_PATH prepending? Give a scenario where an operator would use it.</p>
+</li>
+<li>
+<p>Two BGP paths to the same prefix: Path A has LOCAL_PREF=100, AS_PATH: 65002 65003 (2 ASes). Path B has LOCAL_PREF=100, AS_PATH: 65004 (1 AS). Which does BGP prefer after LOCAL_PREF is compared? Can an operator make Path A preferred? If so, how?</p>
+</li>
+</ol>
+<details>
+<summary>Answers</summary>
+<p><strong>1.</strong> Step 1 - LOCAL_PREF: Path A and Path C both have LP=200; Path B has LP=100 → Path B is eliminated. Step 2 - AS_PATH length: Path A has 2 ASes (65002 65010); Path C has 1 AS (65004) → <strong>Path C wins</strong> (shorter AS_PATH). Answer: Path C is best.</p>
+<p><strong>2.</strong> The eBGP NEXT_HOP (<code>10.0.0.2</code>) is the border router's external peer address - it is reachable from the border router but not from internal routers (not in the IGP). Internal routers receive the route with NEXT_HOP=10.0.0.2; when they try to resolve this for forwarding, the IGP has no route to 10.0.0.2 → BGP route is not installed in their routing table. Fix: configure <code>next-hop-self</code> on the border router's iBGP sessions so internal routers see the border router's loopback as the NEXT_HOP (which is in the IGP).</p>
+<p><strong>3.</strong> Full mesh: 8×7/2 = <strong>28 sessions</strong> total. With 1 RR and 7 clients: each client peers only with the RR → <strong>7 sessions</strong> total. Each client has 1 session; the RR has 7 sessions.</p>
+<p><strong>4.</strong> AS_PATH prepending makes a BGP path appear longer (less attractive) by repeating your own AS number. Use case: you have two upstream providers. You want most traffic to use Provider A (lower cost) but keep Provider B as backup. You prepend your AS twice on advertisements to Provider B: <code>AS_PATH: 65001 65001 65001</code>. Provider B's other customers see a 3-hop path via you; Provider A's customers see a 1-hop path. Traffic flows primarily via Provider A.</p>
+<p><strong>5.</strong> After LOCAL_PREF tie (both 100), step 4 is AS_PATH length: Path B (1 AS) is shorter → <strong>Path B wins</strong>. To make Path A preferred: raise LOCAL_PREF on Path A above 100 (e.g., LP=200) - LOCAL_PREF is evaluated before AS_PATH length and overrides it. Alternatively, use AS_PATH prepending on Path B to artificially lengthen it to 2+ ASes.</p>
+</details>
+<hr />
+<h2 id="summary-key-takeaways">Summary &amp; Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>BGP (Border Gateway Protocol)</strong> is the routing protocol of the internet - it exchanges reachability between Autonomous Systems</li>
+<li>Each organisation managing its own network is an <strong>Autonomous System (AS)</strong>, identified by an AS number</li>
+<li><strong>eBGP</strong> (external BGP) runs between different ASes; <strong>iBGP</strong> (internal BGP) distributes routes within one AS</li>
+<li>BGP establishes <strong>TCP sessions (port 179)</strong> to explicitly configured peers - nothing is auto-discovered</li>
+<li>BGP is <strong>path-vector</strong>: every route advertisement carries the full AS_PATH - the ordered list of ASes traversed</li>
+<li><strong>Loop prevention</strong>: if a router sees its own AS in the AS_PATH, it rejects the route</li>
+<li>Key attributes: <strong>LOCAL_PREF</strong> (outbound exit selection - higher wins), <strong>MED</strong> (inbound hint - lower wins), <strong>AS_PATH</strong> (loop prevention and path length), <strong>COMMUNITIES</strong> (policy tags)</li>
+<li>BGP best-path selection is sequential: LOCAL_PREF → AS_PATH length → ORIGIN → MED → eBGP&gt;iBGP → IGP metric → Router ID</li>
+<li><strong>iBGP full mesh</strong> is required when no Route Reflectors are used: N routers need N×(N-1)/2 sessions</li>
+<li><strong>Route Reflectors</strong> (RFC 4456) break the full-mesh requirement; clients peer only with the RR; the RR reflects routes between clients using ORIGINATOR_ID and CLUSTER_LIST for loop prevention</li>
+<li>BGP NEXT_HOP is not changed on iBGP sessions - internal routers must reach the eBGP next-hop via the IGP; use <code>next-hop-self</code> on border routers to fix this</li>
+</ul>
+<hr />
+<h2 id="where-to-next">Where to Next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Continue:</strong> <a href="../../carrier-transport/mpls-fundamentals/">MPLS Fundamentals</a> (<code>CT-001</code>) - MPLS builds on BGP and IGP foundations; BGP VPNs (L3VPN) use MP-BGP</li>
+<li><strong>Advanced:</strong> <a href="../bgp-advanced/">BGP Advanced - Attributes, Policies, Communities</a> (<code>RT-008</code>) - route-maps, prefix-lists, community policy, confederations</li>
+<li><strong>Related:</strong> <a href="../ospf-fundamentals/">OSPF Fundamentals</a> (<code>RT-004</code>) / <a href="../isis-fundamentals/">IS-IS Fundamentals</a> (<code>RT-006</code>) - the IGP that runs under BGP in every AS</li>
+<li><strong>Applied context:</strong> <a href="../../../../learning-paths/data-network-engineer/">Learning Path: Data Network Engineer</a> - Stage 3, position 15 in the DNE path</li>
+</ul>
+<hr />
+<h2 id="standards-certifications">Standards &amp; Certifications<a class="headerlink" href="#standards-certifications" title="Permanent link">&para;</a></h2>
+<p><strong>Relevant standards:</strong>
+- <a href="https://www.rfc-editor.org/rfc/rfc4271">RFC 4271 - BGP-4</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc4456">RFC 4456 - BGP Route Reflection</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc1997">RFC 1997 - BGP Communities Attribute</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc8092">RFC 8092 - BGP Large Communities</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc6793">RFC 6793 - BGP Support for Four-Octet AS Numbers</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc4760">RFC 4760 - Multiprotocol Extensions for BGP-4 (MP-BGP)</a></p>
+<p><strong>Where this topic appears in certification syllabi:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cert</th>
+<th>Vendor</th>
+<th>Relevant Section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CCNA 200-301</td>
+<td>Cisco</td>
+<td>3.5 - BGP awareness; eBGP/iBGP concepts</td>
+</tr>
+<tr>
+<td>CCNP ENCOR 350-401</td>
+<td>Cisco</td>
+<td>BGP attributes; path selection; route reflectors</td>
+</tr>
+<tr>
+<td>JNCIS-SP JN0-362</td>
+<td>Juniper</td>
+<td>BGP fundamentals; eBGP/iBGP; attributes</td>
+</tr>
+<tr>
+<td>Nokia NRS II</td>
+<td>Nokia</td>
+<td>BGP in SP context; attributes; RR design</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>IETF - <a href="https://www.rfc-editor.org/rfc/rfc4271">RFC 4271: A Border Gateway Protocol 4 (BGP-4)</a></li>
+<li>IETF - <a href="https://www.rfc-editor.org/rfc/rfc4456">RFC 4456: BGP Route Reflection</a></li>
+<li>IETF - <a href="https://www.rfc-editor.org/rfc/rfc4760">RFC 4760: Multiprotocol Extensions for BGP-4</a></li>
+<li>Odom, W. - <em>CCNA 200-301 Official Cert Guide, Volume 2</em>, Cisco Press, 2019 - Ch. 14 (BGP awareness)</li>
+<li>Doyle, J.; Carroll, J. - <em>Routing TCP/IP, Volume II</em>, Cisco Press, 2001 - Ch. 9–13 (BGP)</li>
+<li>Halabi, S. - <em>Internet Routing Architectures</em>, 2nd ed., Cisco Press, 2000</li>
+</ul>
+<hr />
+<h2 id="attribution-licensing">Attribution &amp; Licensing<a class="headerlink" href="#attribution-licensing" title="Permanent link">&para;</a></h2>
+<p><strong>Author:</strong> [@geekazoid80]
+<strong>License:</strong> <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> - content
+<strong>AI assistance:</strong> Draft written by Claude Sonnet 4.6. RFC citations verified against IETF RFC index. Technical accuracy to be verified by human reviewer before <code>human_reviewed</code> is set to true.</p>
+<hr />
+<!-- XREF-START -->
+<h2 id="internal-cross-references">Internal Cross-References<a class="headerlink" href="#internal-cross-references" title="Permanent link">&para;</a></h2>
+<h3 id="modules-that-reference-this-module">Modules That Reference This Module<a class="headerlink" href="#modules-that-reference-this-module" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../carrier-transport/mpls-fundamentals/">CT-001</a></td>
+<td>MPLS Fundamentals</td>
+<td>MP-BGP used for MPLS VPN signalling</td>
+<td>2026-04-19</td>
+</tr>
+<tr>
+<td><a href="../bgp-advanced/">RT-008</a></td>
+<td>BGP Advanced</td>
+<td>Builds on all concepts introduced here</td>
+<td>2026-04-19</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modules-this-module-references">Modules This Module References<a class="headerlink" href="#modules-this-module-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../routing-fundamentals/">RT-001</a></td>
+<td>Routing Fundamentals</td>
+<td>Routing table, AD (eBGP=20, iBGP=200)</td>
+<td>2026-04-19</td>
+</tr>
+<tr>
+<td><a href="../ospf-fundamentals/">RT-004</a></td>
+<td>OSPF Fundamentals</td>
+<td>OSPF as the IGP under BGP in enterprise networks</td>
+<td>2026-04-19</td>
+</tr>
+<tr>
+<td><a href="../isis-fundamentals/">RT-006</a></td>
+<td>IS-IS Fundamentals</td>
+<td>IS-IS as the IGP under BGP in carrier networks</td>
+<td>2026-04-19</td>
+</tr>
+<tr>
+<td><a href="../../ip/ip-addressing/">IP-001</a></td>
+<td>IP Addressing Fundamentals</td>
+<td>CIDR notation for BGP prefix advertisement</td>
+<td>2026-04-19</td>
+</tr>
+<tr>
+<td><a href="../../ip/subnetting/">IP-002</a></td>
+<td>IP Subnetting &amp; VLSM</td>
+<td>Prefix aggregation and summarisation in BGP</td>
+<td>2026-04-19</td>
+</tr>
+<tr>
+<td><a href="../../ip/ipv6-addressing/">IP-003</a></td>
+<td>IPv6 Addressing</td>
+<td>MP-BGP carries IPv6 prefixes (address-family ipv6)</td>
+<td>2026-04-19</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vendor-mapping">Vendor Mapping<a class="headerlink" href="#vendor-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Standard</th>
+<th>Cisco IOS-XE</th>
+<th>Juniper Junos</th>
+<th>Nokia SR-OS</th>
+<th>Arista EOS</th>
+<th>Huawei VRP</th>
+<th>MikroTik RouterOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configure eBGP peer</td>
+<td>RFC 4271</td>
+<td><code>neighbor X remote-as Y</code></td>
+<td><code>group type external; peer-as Y; neighbor X</code></td>
+<td><code>group type external; peer-as Y; neighbor X</code></td>
+<td><code>neighbor X remote-as Y</code></td>
+<td><code>peer X as-number Y</code></td>
+<td><code>/routing bgp connection local.role=ebgp</code></td>
+</tr>
+<tr>
+<td>Configure iBGP peer</td>
+<td>RFC 4271</td>
+<td><code>neighbor X remote-as &lt;own-AS&gt;</code></td>
+<td><code>group type internal; neighbor X</code></td>
+<td><code>group type internal; neighbor X</code></td>
+<td><code>neighbor X remote-as &lt;own-AS&gt;</code></td>
+<td><code>peer X as-number &lt;own-AS&gt;</code></td>
+<td><code>local.role=ibgp</code></td>
+</tr>
+<tr>
+<td>Route Reflector client</td>
+<td>RFC 4456</td>
+<td><code>neighbor X route-reflector-client</code></td>
+<td><code>cluster &lt;id&gt;</code> on group</td>
+<td><code>cluster &lt;id&gt;</code> on group</td>
+<td><code>neighbor X route-reflector-client</code></td>
+<td><code>peer X reflect-client</code></td>
+<td><code>local.role=rr-client</code></td>
+</tr>
+<tr>
+<td>View BGP session summary</td>
+<td>RFC 4271</td>
+<td><code>show bgp summary</code></td>
+<td><code>show bgp summary</code></td>
+<td><code>show router bgp summary</code></td>
+<td><code>show bgp summary</code></td>
+<td><code>display bgp peer</code></td>
+<td><code>/routing bgp session print</code></td>
+</tr>
+<tr>
+<td>View BGP routes</td>
+<td>RFC 4271</td>
+<td><code>show bgp ipv4 unicast</code></td>
+<td><code>show route protocol bgp</code></td>
+<td><code>show router bgp routes</code></td>
+<td><code>show bgp ipv4 unicast</code></td>
+<td><code>display bgp routing-table</code></td>
+<td><code>/ip route print where bgp</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="maintenance-notes">Maintenance Notes<a class="headerlink" href="#maintenance-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>When CT-001 (MPLS Fundamentals) is written, update the RT-007 XREF to note which MPLS features use MP-BGP (L3VPN, EVPN)</li>
+<li>When RT-008 (BGP Advanced) is written, this module should be its primary prerequisite</li>
+</ul>
+<!-- XREF-END -->
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

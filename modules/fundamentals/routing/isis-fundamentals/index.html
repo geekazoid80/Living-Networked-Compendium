@@ -1,0 +1,3387 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A progressive, community-built guide for network engineers — enterprise, carrier, data centre, RF/satellite, and beyond.">
+      
+      
+        <meta name="author" content="Community Contributors">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>IS-IS Fundamentals - Living Networked Compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-objectives" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Living Networked Compendium" class="md-header__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Living Networked Compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IS-IS Fundamentals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../learning-paths/data-network-engineer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learning Paths
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../networking/osi-model/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../applied/data-network-engineer/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Applied
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../CONTRIBUTING/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Living Networked Compendium" class="md-nav__button md-logo" aria-label="Living Networked Compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Living Networked Compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/geekazoid80/Living-Networked-Compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Living-Networked-Compendium
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Paths
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learning Paths
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/data-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/carrier-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/datacentre-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-satellite-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--active"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-coax-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/voice-telephony-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/rf-mobile-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/storage-network-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../learning-paths/broadcast-engineer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--seeking-contributors"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking/osi-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSI Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IP Addressing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/ip-addressing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Addressing Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ip/subnetting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Subnetting & VLSM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access Media
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Switching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier & Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocols
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../professional-standards/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Professional Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applied
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/data-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/carrier-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Carrier / SP Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/datacentre-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Centre Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-satellite-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Satellite Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-coax-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF-Coax / Cable Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/voice-telephony-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voice / Telephony Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/rf-mobile-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF Mobile / Cellular Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/storage-network-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Network Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/broadcast-engineer/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Broadcast Engineer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../applied/_new-path-template/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start a New Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../CONTRIBUTION_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../AI_GUARDRAILS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Guardrails
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../MODULE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../INSTRUCTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-the-igp-should-be-independent-of-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: The IGP should be independent of IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-the-area-topology-is-too-constrained" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: The area topology is too constrained
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-the-protocol-needs-to-carry-new-things-as-the-network-evolves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: The protocol needs to carry new things as the network evolves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-addressing-is-different" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Addressing is different
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-just-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Just Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#is-is-vs-ospf-key-differences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IS-IS vs OSPF - Key Differences
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#net-network-entity-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NET (Network Entity Title)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-is-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IS-IS Levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-is-adjacency-formation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IS-IS Adjacency Formation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dis-designated-intermediate-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DIS - Designated Intermediate System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-is-metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IS-IS Metric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlv-extensibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLV Extensibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-is-in-modern-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IS-IS in Modern Networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vendor-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Implementations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-1-mixing-l1-and-l2-adjacencies-incorrectly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 1: Mixing L1 and L2 adjacencies incorrectly
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-2-narrow-metric-left-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 2: Narrow metric left enabled
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-3-missing-point-to-point-on-p2p-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 3: Missing point-to-point on p2p links
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-4-l1-routers-cannot-reach-across-areas-without-route-leaking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 4: L1 routers cannot reach across areas without route leaking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfall-5-net-system-id-collision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfall 5: NET System ID collision
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practice Problems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary &amp; Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standards-certifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standards &amp; Certifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution &amp; Licensing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal-cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Cross-References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Cross-References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modules-that-reference-this-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules That Reference This Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules-this-module-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules This Module References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">carrier</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">clnp</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">dis</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">is-is</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">level-1</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">level-2</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">link-state</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">lsp</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">net</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">nsap</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">spf</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">tlv</span>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium/edit/main/modules/fundamentals/routing/isis-fundamentals.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>IS-IS Fundamentals</h1>
+
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ol>
+<li><strong>Explain</strong> how IS-IS differs from OSPF in terms of transport layer, area hierarchy, and extensibility</li>
+<li><strong>Describe</strong> the NET address format and derive a NET from a given area ID and system ID</li>
+<li><strong>Distinguish</strong> between Level 1, Level 2, and L1/L2 routers and explain how they interact</li>
+<li><strong>Describe</strong> IS-IS adjacency formation and the role of the DIS</li>
+<li><strong>Compare</strong> IS-IS and OSPF as IGP choices for enterprise and carrier environments</li>
+<li><strong>Explain</strong> why IS-IS is the dominant IGP in modern service provider and data-centre networks</li>
+</ol>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../routing-fundamentals/">Routing Fundamentals</a> (<code>RT-001</code>) - routing table, metric, SPF context</li>
+<li><a href="../ospf-fundamentals/">OSPF Fundamentals</a> (<code>RT-004</code>) - link-state concepts; this module builds directly on OSPF understanding</li>
+</ul>
+<hr />
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
+<p>Two carrier engineers are designing the IGP for a 300-router backbone network. They know OSPF well. But as they sketch the design, constraints emerge that OSPF doesn't handle cleanly.</p>
+<h3 id="step-1-the-igp-should-be-independent-of-ip">Step 1: The IGP should be independent of IP<a class="headerlink" href="#step-1-the-igp-should-be-independent-of-ip" title="Permanent link">&para;</a></h3>
+<p>OSPF runs inside IP packets (protocol number 89). This creates a subtle dependency: if IP routing is broken, OSPF can't help you diagnose it - the protocol that should fix routing needs routing to work first.</p>
+<p>At carrier scale, engineers want the IGP to run <strong>below</strong> IP - at the data-link layer - so it operates even when IP is partially misconfigured, and can carry routing information for multiple protocols (IPv4, IPv6, MPLS labels) without being tied to any one of them.</p>
+<p>IS-IS does this. It runs directly in IEEE 802 frames, addressed using OSI network addresses. It is not encapsulated in IP. The routing protocol is more fundamental than the traffic it routes.</p>
+<h3 id="step-2-the-area-topology-is-too-constrained">Step 2: The area topology is too constrained<a class="headerlink" href="#step-2-the-area-topology-is-too-constrained" title="Permanent link">&para;</a></h3>
+<p>In OSPF, all non-backbone areas must connect to Area 0. This forces a specific topology: if Area 0 becomes partitioned, you need virtual links - workarounds. In large carrier networks, this rigidity is a design burden.</p>
+<p>IS-IS uses a simpler model: <strong>Level 1</strong> routers handle routing within an area. <strong>Level 2</strong> routers handle routing between areas. The backbone is not a special topology or area ID - it is simply the set of all Level 2 routers. Any router running Level 2 IS-IS is part of the backbone. No specific connectivity pattern is required; the backbone forms wherever L2 routers are.</p>
+<h3 id="step-3-the-protocol-needs-to-carry-new-things-as-the-network-evolves">Step 3: The protocol needs to carry new things as the network evolves<a class="headerlink" href="#step-3-the-protocol-needs-to-carry-new-things-as-the-network-evolves" title="Permanent link">&para;</a></h3>
+<p>Networks change. MPLS was invented after IS-IS and OSPF. Then Traffic Engineering. Then Segment Routing. Then IPv6. Each time, OSPF needed new LSA types (opaque LSAs). IS-IS needed only new <strong>TLVs (Type-Length-Value)</strong> fields added to the same LSP structure.</p>
+<p>Because IS-IS uses TLV encoding, older routers that receive a TLV they don't recognise simply skip it - the protocol continues to work. New capabilities are additive, not breaking. This extensibility is why IS-IS is the IGP of choice for carrier and data-centre networks deploying Segment Routing, TE, and multi-topology IPv6.</p>
+<h3 id="step-4-addressing-is-different">Step 4: Addressing is different<a class="headerlink" href="#step-4-addressing-is-different" title="Permanent link">&para;</a></h3>
+<p>OSPF uses a Router ID (a 32-bit dotted-decimal value). IS-IS uses a <strong>NET (Network Entity Title)</strong> - an OSI address that includes the area, the system ID (the router's unique identifier), and a selector byte.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>NET format:
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  49.0001.0000.0000.0001.00
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  ↑  ↑    ↑               ↑
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  AFI  Area  System ID     N-SEL (always 00 for routers)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>AFI 49 = locally administered (private)
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Area: 0001
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>System ID: 0000.0000.0001 (often derived from loopback IP: 1.1.1.1 → 0100.0100.0001... 
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>           more commonly set directly as 6 hex bytes)
+</span></code></pre></div>
+<h3 id="what-you-just-built">What You Just Built<a class="headerlink" href="#what-you-just-built" title="Permanent link">&para;</a></h3>
+<p>IS-IS - Intermediate System to Intermediate System. A link-state protocol that runs below IP, uses OSI NET addressing, organises routers into Level 1 (intra-area) and Level 2 (inter-area backbone), floods LSPs with TLV-encoded information, and calculates best paths using Dijkstra's SPF algorithm.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario element</th>
+<th>Technical term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protocol runs at Layer 2, not inside IP</td>
+<td>IS-IS on data-link (ISO 10589)</td>
+</tr>
+<tr>
+<td>Router's OSI address - area + system ID</td>
+<td>NET (Network Entity Title)</td>
+</tr>
+<tr>
+<td>IS-IS equivalent of an LSA</td>
+<td>LSP (Link State PDU)</td>
+</tr>
+<tr>
+<td>Within-area routing</td>
+<td>Level 1 (L1)</td>
+</tr>
+<tr>
+<td>Between-area routing (backbone)</td>
+<td>Level 2 (L2)</td>
+</tr>
+<tr>
+<td>Router participating in both levels</td>
+<td>L1/L2 router</td>
+</tr>
+<tr>
+<td>Extensible data fields in IS-IS PDUs</td>
+<td>TLV (Type-Length-Value)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="core-content">Core Content<a class="headerlink" href="#core-content" title="Permanent link">&para;</a></h2>
+<h3 id="is-is-vs-ospf-key-differences">IS-IS vs OSPF - Key Differences<a class="headerlink" href="#is-is-vs-ospf-key-differences" title="Permanent link">&para;</a></h3>
+<p>Before going deeper, a direct comparison clarifies where IS-IS differs from OSPF and why those differences matter.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>OSPF</th>
+<th>IS-IS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transport</td>
+<td>IP (protocol 89)</td>
+<td>Data-link directly (ISO 10589 / IEEE 802)</td>
+</tr>
+<tr>
+<td>Router identifier</td>
+<td>Router ID (32-bit dotted-decimal)</td>
+<td>NET - OSI NSAP address</td>
+</tr>
+<tr>
+<td>Area backbone</td>
+<td>Area 0 (mandatory; specific topology)</td>
+<td>Level 2 (any set of L2 routers)</td>
+</tr>
+<tr>
+<td>Area boundary router</td>
+<td>ABR (Area Border Router)</td>
+<td>L1/L2 router</td>
+</tr>
+<tr>
+<td>Link state record</td>
+<td>LSA (Link State Advertisement)</td>
+<td>LSP (Link State PDU)</td>
+</tr>
+<tr>
+<td>Elected segment router</td>
+<td>DR / BDR (non-preemptible)</td>
+<td>DIS (preemptible; no backup)</td>
+</tr>
+<tr>
+<td>Protocol data unit flooding</td>
+<td>IP multicast (<code>224.0.0.5</code>, <code>224.0.0.6</code>)</td>
+<td>L2 multicast (AllISs: <code>09:00:2B:00:00:05</code>)</td>
+</tr>
+<tr>
+<td>Metric range (wide)</td>
+<td>1–65535 per interface</td>
+<td>1–16777214 per interface</td>
+</tr>
+<tr>
+<td>Extension mechanism</td>
+<td>Opaque LSAs (RFC 5250)</td>
+<td>TLVs - add new type, backward compatible</td>
+</tr>
+<tr>
+<td>IPv6 support</td>
+<td>OSPFv3 (separate process)</td>
+<td>Multi-Topology IS-IS (same process, new TLVs)</td>
+</tr>
+<tr>
+<td>Primary deployment</td>
+<td>Enterprise</td>
+<td>Carrier / service provider / data centre</td>
+</tr>
+</tbody>
+</table>
+<h3 id="net-network-entity-title">NET (Network Entity Title)<a class="headerlink" href="#net-network-entity-title" title="Permanent link">&para;</a></h3>
+<p>The NET is IS-IS's equivalent of the OSPF Router ID - it identifies the router in the IS-IS domain. Unlike a Router ID, the NET encodes both the area and the system identifier.</p>
+<p><strong>NET structure:</strong>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Format:  &lt;AFI&gt;.&lt;Area ID&gt;.&lt;System ID&gt;.&lt;N-SEL&gt;
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>49.0001.0000.0000.0001.00
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>↑   ↑    ↑─────────────↑  ↑
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   │    System ID (6B)   N-SEL = 00 (always for routers)
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│   Area ID (variable length, 1–13 bytes)
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>AFI: 49 = locally administered
+</span></code></pre></div></p>
+<p><strong>AFI 49</strong> is the conventional choice for IS-IS in private networks (equivalent to using RFC 1918 addresses for IP). The area ID and system ID are local policy - you choose them.</p>
+<p><strong>Common practice:</strong> Derive the System ID from the router's loopback IP address:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Loopback: 10.0.0.1
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Pad to 12 digits: 010.000.000.001
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Remove dots:      010000000001
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Group in 4s:      0100.0000.0001
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>NET: 49.0001.0100.0000.0001.00
+</span></code></pre></div>
+<p>A router can have multiple NETs (for area mergers), but should have only one System ID across all NETs.</p>
+<h3 id="is-is-levels">IS-IS Levels<a class="headerlink" href="#is-is-levels" title="Permanent link">&para;</a></h3>
+<p>IS-IS uses a two-level hierarchy to scale:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>                ┌──────────────────────────────────────┐
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                │          Level 2 (Backbone)           │
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                │   L2 ─────── L1/L2 ─────── L1/L2    │
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>                │          (any L2 routers)             │
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                └──────┬────────────────────┬──────────┘
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                       │                    │
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>              ┌────────┴────┐         ┌─────┴───────┐
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>              │   Area 1    │         │   Area 2    │
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>              │ (L1 routers)│         │ (L1 routers)│
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>              └─────────────┘         └─────────────┘
+</span></code></pre></div>
+<p><strong>Level 1 (L1) routers:</strong>
+- Route within their area only
+- Know full topology of their area (run SPF on area LSPs)
+- Send all inter-area traffic to the nearest L1/L2 router (default route toward the backbone)
+- Only hold L1 LSPs in their LSDB</p>
+<p><strong>Level 2 (L2) routers:</strong>
+- Route between areas - the backbone
+- Know full topology of the entire Level 2 domain
+- Do not know intra-area detail of L1 areas (summary information only)
+- Only hold L2 LSPs in their LSDB</p>
+<p><strong>L1/L2 routers:</strong>
+- Participate in both levels - the equivalent of OSPF ABRs
+- Maintain two separate LSDBs: one L1, one L2
+- Leak inter-area reachability from L2 into L1 (the default route, or specific prefixes via route leaking)
+- By default, L1 routers in an area see only a default route toward L1/L2 routers - not the full L2 topology</p>
+<p><strong>Key difference from OSPF:</strong> There is no "Area 0" requirement. Level 2 connectivity forms wherever L2 routers exist. If all backbone routers are L2 or L1/L2, they automatically form the backbone without any special configuration.</p>
+<h3 id="is-is-adjacency-formation">IS-IS Adjacency Formation<a class="headerlink" href="#is-is-adjacency-formation" title="Permanent link">&para;</a></h3>
+<p>IS-IS adjacencies form when two routers exchange <strong>IIH (IS-IS Hello)</strong> PDUs and agree on parameters.</p>
+<p><strong>Hello PDU types:</strong>
+- <strong>LAN Hello (L1/L2):</strong> sent on multi-access (broadcast) segments
+- <strong>P2P Hello:</strong> sent on point-to-point links</p>
+<p><strong>Parameters that must match to form adjacency:</strong>
+- Area ID (for L1 adjacencies; L2 adjacencies span areas - area ID need not match)
+- Authentication (if configured)
+- Circuit type (L1, L2, or L1/L2)
+- MTU (implicit - PDU must fit in a frame)</p>
+<p>IS-IS hello intervals and hold times do NOT need to match between neighbours (unlike OSPF). The hold timer in the hello specifies how long the receiver should wait before declaring the neighbour down - it is per-sender.</p>
+<p><strong>Adjacency states (simpler than OSPF):</strong>
+- <strong>Down</strong> - no valid hello received
+- <strong>Initialising</strong> - hello received, processing
+- <strong>Up</strong> - hello acknowledged, adjacency active</p>
+<p>After adjacency is Up, routers exchange CSNP (Complete Sequence Number PDU) to compare LSP inventory, then request missing LSPs via PSNP (Partial Sequence Number PDU).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>IS-IS show command (Cisco IOS-XR):
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>RP/0/0/CPU0:R1# show isis neighbors
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>IS-IS core neighbors:
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>System Id    Interface  SNPA              Level  State  Hold
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>R2           Gi0/0/0/0  *PtoP*            L2     Up     28
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>R3           Gi0/0/0/1  *PtoP*            L1L2   Up     24
+</span></code></pre></div>
+<h3 id="dis-designated-intermediate-system">DIS - Designated Intermediate System<a class="headerlink" href="#dis-designated-intermediate-system" title="Permanent link">&para;</a></h3>
+<p>On multi-access (broadcast) segments, IS-IS elects a <strong>DIS (Designated IS)</strong> - the equivalent of OSPF's DR. But there are important differences:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>OSPF DR</th>
+<th>IS-IS DIS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backup</td>
+<td>BDR elected as backup</td>
+<td>No backup DIS</td>
+</tr>
+<tr>
+<td>Preemption</td>
+<td>Non-preemptive (once elected, stays)</td>
+<td>Preemptive - higher priority takes over</td>
+</tr>
+<tr>
+<td>Adjacency with non-DR</td>
+<td>2-Way only</td>
+<td>All routers form Full adjacency with each other</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>Reduce adjacency count; control LSA flooding</td>
+<td>Generate pseudo-node LSP; synchronise LSPs</td>
+</tr>
+<tr>
+<td>Election</td>
+<td>Priority → Router ID</td>
+<td>Priority → MAC address (higher wins)</td>
+</tr>
+</tbody>
+</table>
+<p>The DIS generates a <strong>pseudo-node LSP</strong> - a virtual LSP that represents the multi-access segment itself. All routers on the segment announce adjacency to the pseudo-node, and the pseudo-node LSP lists all attached routers. This elegantly represents the broadcast segment as a single topology node without the complexity of OSPF's DR/BDR model.</p>
+<p>Because there is no backup DIS, DIS failure causes a brief re-election. Since election is preemptive, a higher-priority router that joins the segment will immediately become DIS.</p>
+<h3 id="is-is-metric">IS-IS Metric<a class="headerlink" href="#is-is-metric" title="Permanent link">&para;</a></h3>
+<p>IS-IS uses a link metric - cost assigned to each interface. The total path cost is the sum of outgoing interface metrics along the path (same additive model as OSPF).</p>
+<p><strong>Two metric styles:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Style</th>
+<th>Range</th>
+<th>TLV used</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Narrow (original)</td>
+<td>1–63 per interface; max path = 1023</td>
+<td>TLV 2, 128, 130</td>
+<td>Legacy - should not be used in new deployments</td>
+</tr>
+<tr>
+<td>Wide</td>
+<td>1–16,777,214 per interface; max path = 0xFE000000</td>
+<td>TLV 22, 135, 236</td>
+<td>Standard - required for TE and modern deployments</td>
+</tr>
+</tbody>
+</table>
+<p>Wide metrics are required for Traffic Engineering extensions (RSVP-TE, SR-TE) because TE uses the metric space for TE metric, link delay, and other attributes. Always configure <code>metric-style wide</code> in new deployments.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Default metric on most platforms: 10 per interface
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>To prefer a high-bandwidth path: set lower metric
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>To avoid a link: set higher metric
+</span></code></pre></div>
+<p>Unlike OSPF, IS-IS does not auto-calculate cost from bandwidth by default - metrics are manually set (or all default to 10). This gives operators explicit control but requires manual tuning.</p>
+<h3 id="tlv-extensibility">TLV Extensibility<a class="headerlink" href="#tlv-extensibility" title="Permanent link">&para;</a></h3>
+<p>IS-IS's primary architectural advantage over OSPF is its TLV (Type-Length-Value) encoding. Every piece of information in an IS-IS PDU is a TLV: IP prefixes, adjacencies, TE attributes, Segment Routing labels, IPv6 prefixes.</p>
+<p>When a new capability is needed, a new TLV type is defined and added. Routers that understand the new TLV process it. Routers that don't recognise the TLV skip it - no protocol version bump, no backward-incompatibility.</p>
+<p>This is why IS-IS has become the IGP of choice for Segment Routing deployments:
+- <strong>SR Node SID</strong> - TLV 135 sub-TLV
+- <strong>SR Adjacency SID</strong> - TLV 22 sub-TLV
+- <strong>SR Capabilities</strong> - new TLV 242
+- <strong>IPv6 reachability</strong> - TLV 236 (MT-IS-IS)</p>
+<p>All of these are additive. An IS-IS network can carry SR information without any change to the base protocol.</p>
+<details class="supplementary">
+<summary>Multi-Topology IS-IS (MT-IS-IS) for IPv6</summary>
+<p>Classic IS-IS carries IPv4 reachability via TLV 128 and TLV 130 (narrow) or TLV 135 (wide, extended IP reachability). IPv6 is carried via TLV 236.</p>
+<p>The challenge: if a link supports IPv4 but not IPv6 (or vice versa), a single SPF tree may produce incorrect results - the IPv6 path might route through a link that doesn't carry IPv6.</p>
+<p><strong>Multi-Topology IS-IS (RFC 5120)</strong> runs separate topology instances within the same IS-IS process - one for IPv4, one for IPv6. Each topology runs its own SPF, allowing the IPv4 and IPv6 topologies to be different. A single IS-IS process, two independent forwarding trees.</p>
+<p>Simpler alternative for single-topology networks: run a single topology and ensure all IS-IS links support both IPv4 and IPv6.</p>
+</details>
+<h3 id="is-is-in-modern-networks">IS-IS in Modern Networks<a class="headerlink" href="#is-is-in-modern-networks" title="Permanent link">&para;</a></h3>
+<p>IS-IS is the dominant IGP in:
+- <strong>Service Provider cores</strong> - Cisco IOS-XR on ASR9000/NCS, Juniper MX/PTX, Nokia 7750/7950
+- <strong>Data centre underlays</strong> - IS-IS or BGP-unnumbered underlay for spine-leaf fabrics
+- <strong>Segment Routing deployments</strong> - IS-IS-SR is the reference implementation for SR-MPLS and SRv6</p>
+<p>Enterprise networks use OSPF almost exclusively. The decision is largely historical and based on existing skill sets - both protocols provide equivalent functionality at enterprise scale.</p>
+<hr />
+<h2 id="vendor-implementations">Vendor Implementations<a class="headerlink" href="#vendor-implementations" title="Permanent link">&para;</a></h2>
+<p>IS-IS is standardised in ISO 10589 (base) and RFC 1195 (IP extensions). Multi-vendor IS-IS adjacencies are routine in carrier networks. The key interoperability requirements: matching authentication, correct TLV support for wide metrics, and consistent area/level design.</p>
+<div class="admonition success">
+<p class="admonition-title">Standard - ISO 10589 / RFC 1195 / RFC 5308 (IS-IS for IPv6)</p>
+<p>IS-IS is fully standardised. Any RFC-compliant implementation forms adjacencies with any other. Wide metrics, multi-topology, and SR extensions are defined in additional RFCs.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XR</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Nokia SR-OS</label><label for="__tabbed_1_4">Arista EOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>! IOS-XR IS-IS configuration (SP-class syntax)
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>router isis core
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> net 49.0001.0100.0000.0001.00
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a> address-family ipv4 unicast
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  metric-style wide
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  advertise passive-only       ! only advertise loopback/passive interfaces
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a> !
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a> interface GigabitEthernet0/0/0/0
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>  circuit-type level-2-only    ! this is a backbone interface
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>  point-to-point
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>  address-family ipv4 unicast
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>   metric 10
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>  !
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a> !
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a> interface Loopback0
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>  passive
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>  address-family ipv4 unicast
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>  !
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>! Verify
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>show isis neighbors
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>show isis database
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>show isis topology
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>show route isis
+</span></code></pre></div>
+IOS-XR uses a hierarchical configuration model. <code>circuit-type level-2-only</code> is critical - if omitted, the router defaults to L1L2 and generates both L1 and L2 LSPs unnecessarily. Always configure <code>metric-style wide</code>. <code>passive</code> on loopbacks prevents hello flooding while still advertising the prefix.</p>
+<p>Full configuration reference: <a href="https://www.cisco.com/c/en/us/td/docs/routers/xr12000/software/xr12k_r4-0/routing/configuration/guide/rc_xr12k40.html">Cisco IOS-XR IS-IS Configuration Guide</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a># Junos IS-IS configuration
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>set protocols isis interface ge-0/0/0.0 level 2 metric 10
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>set protocols isis interface ge-0/0/0.0 point-to-point
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>set protocols isis interface lo0.0 passive
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a># Set NET
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>set interfaces lo0 unit 0 family iso address 49.0001.0100.0000.0001.00
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a># Wide metrics
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>set protocols isis level 2 wide-metrics-only
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a># Verify
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>show isis adjacency
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>show isis database
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>show isis spf log
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>show route protocol isis
+</span></code></pre></div>
+In Junos, the NET is configured on the loopback interface under <code>family iso</code>, not in the routing protocol stanza. <code>wide-metrics-only</code> should be enabled; Junos supports it per-level. <code>point-to-point</code> must be configured explicitly on p2p links to avoid DIS election.</p>
+<p>Full configuration reference: <a href="https://www.juniper.net/documentation/us/en/software/junos/is-is/index.html">Juniper IS-IS Configuration</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a># SR-OS IS-IS configuration (classic CLI)
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>configure router isis 0
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    level-capability level-2
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    area-id 49.0001
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    system-id 0100.0000.0001
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    interface &quot;to-R2&quot;
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        circuit-type point-to-point
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        level 2
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>            metric 10
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        exit
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        no shutdown
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    exit
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    interface &quot;system&quot;
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        passive
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        no shutdown
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    exit
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    no shutdown
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>exit
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a># Verify
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>show router isis adjacency
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>show router isis database
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>show router isis topology
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>show router route-table protocol isis
+</span></code></pre></div>
+SR-OS configures area and system ID separately (not as a full NET string). <code>level-capability level-2</code> confines this router to L2 operations - appropriate for backbone routers. IS-IS process 0 is the default.</p>
+<p>Full configuration reference: <a href="https://documentation.nokia.com/sr/">Nokia SR-OS IS-IS Guide</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>! Arista EOS IS-IS configuration
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>router isis core
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>   net 49.0001.0100.0000.0001.00
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>   is-type level-2
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>   address-family ipv4 unicast
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>      bfd all-interfaces
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>interface Ethernet1
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>   isis enable core
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>   isis circuit-type level-2
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>   isis metric 10
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>   isis network point-to-point
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>interface Loopback0
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>   isis enable core
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>   isis passive
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>! Verify
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>show isis neighbors
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>show isis database
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>show isis topology
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>show ip route isis
+</span></code></pre></div>
+Arista EOS IS-IS syntax combines elements from IOS-XE and IOS-XR styles. IS-IS is enabled per-interface with <code>isis enable &lt;process&gt;</code>. BFD integration is straightforward.</p>
+<p>Full configuration reference: <a href="https://www.arista.com/en/um-eos/eos-is-is">Arista EOS IS-IS Configuration</a></p>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<h3 id="pitfall-1-mixing-l1-and-l2-adjacencies-incorrectly">Pitfall 1: Mixing L1 and L2 adjacencies incorrectly<a class="headerlink" href="#pitfall-1-mixing-l1-and-l2-adjacencies-incorrectly" title="Permanent link">&para;</a></h3>
+<p>A common mistake: configuring some routers as L1-only and others as L2-only on the same link. IS-IS forms L1 adjacencies only between routers in the same area; L2 adjacencies span areas. If a link should be a backbone link, both ends must run L2 (or L1/L2). If routers on the same link are in different areas and both run L1-only, no adjacency forms. Check <code>show isis neighbors</code> - "Adj" count 0 means no adjacency.</p>
+<h3 id="pitfall-2-narrow-metric-left-enabled">Pitfall 2: Narrow metric left enabled<a class="headerlink" href="#pitfall-2-narrow-metric-left-enabled" title="Permanent link">&para;</a></h3>
+<p>Narrow metrics silently cap at 63 per interface and 1023 total path cost. If any TE extensions (SR, RSVP-TE) are planned, narrow metric must be migrated to wide before enabling TE - otherwise TE TLVs cannot carry correct metric values. Always deploy with <code>metric-style wide</code> from day one.</p>
+<h3 id="pitfall-3-missing-point-to-point-on-p2p-links">Pitfall 3: Missing <code>point-to-point</code> on p2p links<a class="headerlink" href="#pitfall-3-missing-point-to-point-on-p2p-links" title="Permanent link">&para;</a></h3>
+<p>On a point-to-point link between two routers, if <code>point-to-point</code> is not configured, IS-IS runs broadcast mode - elects a DIS and generates a pseudo-node LSP for a two-router "segment." The extra LSP is harmless but wastes LSDB space and slightly slows SPF. More importantly, hello PDUs differ between p2p and broadcast mode: if one side is p2p and the other is broadcast, no adjacency forms. Confirm both sides match.</p>
+<h3 id="pitfall-4-l1-routers-cannot-reach-across-areas-without-route-leaking">Pitfall 4: L1 routers cannot reach across areas without route leaking<a class="headerlink" href="#pitfall-4-l1-routers-cannot-reach-across-areas-without-route-leaking" title="Permanent link">&para;</a></h3>
+<p>L1 routers only know routes within their own area plus a default route toward L1/L2 routers. If you need L1 routers to reach specific inter-area prefixes (not just a default), configure explicit route leaking from L2 into L1 on the L1/L2 routers. Without this, all inter-area traffic from L1 routers uses the default - suboptimal if multiple L1/L2 routers exist with different inter-area path lengths.</p>
+<h3 id="pitfall-5-net-system-id-collision">Pitfall 5: NET System ID collision<a class="headerlink" href="#pitfall-5-net-system-id-collision" title="Permanent link">&para;</a></h3>
+<p>Two routers with the same System ID in the same IS-IS domain cause a duplicate System ID condition - IS-IS flooding stops working correctly and the network destabilises. The System ID must be unique across the entire IS-IS domain (not just within an area). Derive from loopback IP or assign from a managed pool.</p>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>A router has loopback address <code>10.0.0.3/32</code>. Using the derivation method described, what is its IS-IS System ID? What would the full NET be if the area is <code>49.0002</code>?</p>
+</li>
+<li>
+<p>Two IS-IS routers are connected. Router A is configured as Level 1 only (area 49.0001). Router B is configured as Level 2 only (area 49.0002). Do they form an IS-IS adjacency? Explain why or why not.</p>
+</li>
+<li>
+<p>An IS-IS domain has narrow metrics configured. The maximum path metric is 1023. A new path is added with 15 × 10 = 150 total metric - within range. What problem occurs when SR-MPLS is later enabled on this domain?</p>
+</li>
+<li>
+<p>On a broadcast Ethernet segment with 5 IS-IS routers, all running Level 2, what is a DIS? How many full adjacencies exist? How does this differ from OSPF?</p>
+</li>
+<li>
+<p>Compare IS-IS and OSPF area boundary handling. In OSPF, what happens if Area 0 becomes partitioned? How does IS-IS handle the equivalent failure?</p>
+</li>
+</ol>
+<details>
+<summary>Answers</summary>
+<p><strong>1.</strong> Loopback <code>10.0.0.3</code> → pad to 12 digits: <code>010.000.000.003</code> → remove dots: <code>010000000003</code> → group in 4s: <code>0100.0000.0003</code>. System ID: <code>0100.0000.0003</code>. Full NET: <code>49.0002.0100.0000.0003.00</code>.</p>
+<p><strong>2.</strong> No adjacency. IS-IS Level 1 adjacencies require the same area ID. Router A (L1, area 49.0001) and Router B (L2, area 49.0002) have different areas and different levels - no common level with matching area exists. For an adjacency to form, both routers would need to run Level 2 (area IDs need not match at L2), or be in the same area running Level 1.</p>
+<p><strong>3.</strong> Narrow metric maximum = 63 per interface, 1023 total. SR-MPLS Segment Routing SIDs are encoded in TE TLVs that require wide metric format. Enabling SR with narrow metrics causes TLVs to be mishandled or not advertised - adjacency SIDs and node SIDs may not propagate correctly. Solution: migrate to <code>metric-style wide</code> before enabling SR.</p>
+<p><strong>4.</strong> The DIS is elected for the segment (highest priority → highest MAC). The DIS generates a pseudo-node LSP. Unlike OSPF, <strong>all 5 routers form full IS-IS adjacencies with each other</strong> on the broadcast segment - IS-IS does not restrict adjacencies to only DIS and non-DIS. The pseudo-node approach reduces LSDB complexity (one node represents the segment) without reducing actual adjacency count. OSPF DROthers only reach Full with DR/BDR; IS-IS has no equivalent restriction.</p>
+<p><strong>5.</strong> OSPF Area 0 partition: routers in split partitions of Area 0 cannot exchange inter-area routes; non-backbone areas become isolated or must use virtual links as workarounds - a design problem. IS-IS: if the Level 2 domain becomes partitioned (no L2 path between two groups of L2 routers), inter-area routing between those halves fails. But there is no special "backbone area" constraint - any restoration of L2 connectivity (new link, new router) heals the partition automatically. IS-IS is generally considered more resilient in partition scenarios.</p>
+</details>
+<hr />
+<h2 id="summary-key-takeaways">Summary &amp; Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">&para;</a></h2>
+<ul>
+<li>IS-IS is a <strong>link-state</strong> protocol that runs <strong>below IP</strong> (directly on data-link), making it transport-independent and more fundamental than IP routing itself</li>
+<li>Router identity is the <strong>NET (Network Entity Title)</strong> - an OSI address encoding area ID + system ID</li>
+<li><strong>Level 1</strong> routers handle intra-area routing; <strong>Level 2</strong> routers form the backbone; <strong>L1/L2</strong> routers are the boundary</li>
+<li>The IS-IS backbone is the set of L2 routers - no special Area 0 topology required</li>
+<li>LSPs are flooded throughout the level domain; each router runs <strong>Dijkstra SPF</strong> on its local LSDB</li>
+<li><strong>DIS</strong> (Designated IS) is elected on broadcast segments - it is <strong>preemptible</strong> (unlike OSPF DR) and has no backup</li>
+<li>All routers on a broadcast segment form full IS-IS adjacencies with each other (no DR/BDR adjacency restriction)</li>
+<li>IS-IS uses <strong>wide metrics</strong> (up to 16 million) - always deploy with <code>metric-style wide</code>; narrow metrics (max 63/1023) are legacy</li>
+<li><strong>TLV encoding</strong> makes IS-IS easily extensible: SR, TE, IPv6, delay metrics are all new TLVs with backward compatibility</li>
+<li>IS-IS is the IGP of choice in <strong>carrier cores and data-centre spine-leaf</strong> networks, particularly for Segment Routing deployments</li>
+<li>IS-IS hello intervals need not match between neighbours (unlike OSPF); area ID must match for L1 adjacencies</li>
+</ul>
+<hr />
+<h2 id="where-to-next">Where to Next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Continue:</strong> <a href="../bgp-fundamentals/">BGP Fundamentals</a> (<code>RT-007</code>) - inter-AS routing; where IS-IS (the IGP) hands off to BGP (the EGP)</li>
+<li><strong>Related:</strong> <a href="../ospf-fundamentals/">OSPF Fundamentals</a> (<code>RT-004</code>) - compare the two link-state protocols side by side</li>
+<li><strong>Advanced:</strong> <a href="../../carrier-transport/mpls-fundamentals/">MPLS Fundamentals</a> (<code>CT-001</code>) - MPLS runs over IS-IS as the IGP; SR-MPLS builds directly on IS-IS TLV extensions</li>
+<li><strong>Applied context:</strong> <a href="../../../../learning-paths/data-network-engineer/">Learning Path: Data Network Engineer</a> - CCNP-level module; deepens the IGP picture started in RT-004</li>
+</ul>
+<hr />
+<h2 id="standards-certifications">Standards &amp; Certifications<a class="headerlink" href="#standards-certifications" title="Permanent link">&para;</a></h2>
+<p><strong>Relevant standards:</strong>
+- <a href="https://www.iso.org/standard/30932.html">ISO 10589 - IS-IS for IP (base standard)</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc1195">RFC 1195 - Use of OSI IS-IS for Routing in TCP/IP and Dual Environments</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc5308">RFC 5308 - Routing IPv6 with IS-IS</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc5120">RFC 5120 - Multi-Topology IS-IS</a>
+- <a href="https://www.rfc-editor.org/rfc/rfc8667">RFC 8667 - IS-IS Extensions for Segment Routing</a></p>
+<p><strong>Where this topic appears in certification syllabi:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cert</th>
+<th>Vendor</th>
+<th>Relevant Section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CCNP ENCOR 350-401</td>
+<td>Cisco</td>
+<td>IS-IS fundamentals; neighbour adjacency; levels</td>
+</tr>
+<tr>
+<td>JNCIS-SP JN0-362</td>
+<td>Juniper</td>
+<td>IS-IS levels; NET; DIS; metric</td>
+</tr>
+<tr>
+<td>Nokia NRS II</td>
+<td>Nokia</td>
+<td>IS-IS in SP context; levels; TLV extensions</td>
+</tr>
+<tr>
+<td>Huawei HCIP-Datacom</td>
+<td>Huawei</td>
+<td>IS-IS fundamentals</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>ISO - ISO/IEC 10589:2002: Information technology - IS-IS Routing Protocol</li>
+<li>IETF - <a href="https://www.rfc-editor.org/rfc/rfc1195">RFC 1195: Use of OSI IS-IS for Routing in TCP/IP</a></li>
+<li>IETF - <a href="https://www.rfc-editor.org/rfc/rfc5308">RFC 5308: Routing IPv6 with IS-IS</a></li>
+<li>Doyle, J.; Carroll, J. - <em>Routing TCP/IP, Volume II</em>, Cisco Press, 2001 - Ch. 3 (IS-IS)</li>
+<li>Savage, P.; Browne, G. - <em>IS-IS Network Design Solutions</em>, Cisco Press, 2003</li>
+</ul>
+<hr />
+<h2 id="attribution-licensing">Attribution &amp; Licensing<a class="headerlink" href="#attribution-licensing" title="Permanent link">&para;</a></h2>
+<p><strong>Author:</strong> [@geekazoid80]
+<strong>License:</strong> <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> - content
+<strong>AI assistance:</strong> Draft written by Claude Sonnet 4.6. RFC and ISO citations verified. Technical accuracy to be verified by human reviewer before <code>human_reviewed</code> is set to true.</p>
+<hr />
+<!-- XREF-START -->
+<h2 id="internal-cross-references">Internal Cross-References<a class="headerlink" href="#internal-cross-references" title="Permanent link">&para;</a></h2>
+<h3 id="modules-that-reference-this-module">Modules That Reference This Module<a class="headerlink" href="#modules-that-reference-this-module" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../carrier-transport/mpls-fundamentals/">CT-001</a></td>
+<td>MPLS Fundamentals</td>
+<td>IS-IS is the most common IGP in MPLS/SR networks</td>
+<td>2026-04-19</td>
+</tr>
+<tr>
+<td><a href="../bgp-fundamentals/">RT-007</a></td>
+<td>BGP Fundamentals</td>
+<td>IS-IS as the IGP that runs underneath BGP in carrier networks</td>
+<td>2026-04-19</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modules-this-module-references">Modules This Module References<a class="headerlink" href="#modules-this-module-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module ID</th>
+<th>Title</th>
+<th>Context</th>
+<th>Last Checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../routing-fundamentals/">RT-001</a></td>
+<td>Routing Fundamentals</td>
+<td>Routing table, SPF, metric</td>
+<td>2026-04-19</td>
+</tr>
+<tr>
+<td><a href="../ospf-fundamentals/">RT-004</a></td>
+<td>OSPF Fundamentals</td>
+<td>Link-state foundation; comparison basis</td>
+<td>2026-04-19</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vendor-mapping">Vendor Mapping<a class="headerlink" href="#vendor-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Standard</th>
+<th>Cisco IOS-XR</th>
+<th>Juniper Junos</th>
+<th>Nokia SR-OS</th>
+<th>Arista EOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configure NET</td>
+<td>ISO 10589</td>
+<td><code>net &lt;NET&gt;</code> in router isis</td>
+<td><code>family iso address &lt;NET&gt;</code> on lo0</td>
+<td><code>area-id</code> + <code>system-id</code> separate</td>
+<td><code>net &lt;NET&gt;</code> in router isis</td>
+</tr>
+<tr>
+<td>View adjacencies</td>
+<td>ISO 10589</td>
+<td><code>show isis neighbors</code></td>
+<td><code>show isis adjacency</code></td>
+<td><code>show router isis adjacency</code></td>
+<td><code>show isis neighbors</code></td>
+</tr>
+<tr>
+<td>View LSDB</td>
+<td>ISO 10589</td>
+<td><code>show isis database</code></td>
+<td><code>show isis database</code></td>
+<td><code>show router isis database</code></td>
+<td><code>show isis database</code></td>
+</tr>
+<tr>
+<td>Wide metrics</td>
+<td>RFC 3784</td>
+<td><code>metric-style wide</code></td>
+<td><code>wide-metrics-only</code> per level</td>
+<td>Configured per interface</td>
+<td><code>isis metric-style wide</code></td>
+</tr>
+<tr>
+<td>Point-to-point link</td>
+<td>ISO 10589</td>
+<td><code>point-to-point</code> under interface</td>
+<td><code>point-to-point</code> under interface</td>
+<td><code>circuit-type point-to-point</code></td>
+<td><code>isis network point-to-point</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="maintenance-notes">Maintenance Notes<a class="headerlink" href="#maintenance-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>When CT-001 (MPLS Fundamentals) is written, add a back-reference here for IS-IS as IGP in MPLS networks</li>
+<li>When SR modules are written, add references here to the TLV extensibility section for SR SID allocation</li>
+</ul>
+<!-- XREF-END -->
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 21, 2026 15:12:31 UTC">May 21, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Content: CC BY-SA 4.0 | Code: Apache 2.0 | Living Networked Compendium Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/geekazoid80/Living-Networked-Compendium" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
