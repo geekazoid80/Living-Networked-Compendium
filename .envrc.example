@@ -24,4 +24,13 @@
 # secret-store CLI (gnome-keyring, KWallet, pass, etc.) so the token is never
 # written to disk in plaintext.
 
-export GH_TOKEN="$(security find-generic-password -s 'gh_personal_pat' -a "$USER" -w 2>/dev/null)"
+# Defensive: only export if the keychain lookup returned a non-empty value.
+# A missing or wrong keychain entry would otherwise export GH_TOKEN="" which
+# `gh` treats identically to unset but other tools may not. Failing to
+# export at all leaves any pre-existing GH_TOKEN in the parent shell.
+_gh_tok="$(security find-generic-password -s 'gh_personal_pat' -a "$USER" -w 2>/dev/null)"
+if [ -n "$_gh_tok" ]; then
+  export GH_TOKEN="$_gh_tok"
+  export GITHUB_TOKEN="$_gh_tok"
+fi
+unset _gh_tok
