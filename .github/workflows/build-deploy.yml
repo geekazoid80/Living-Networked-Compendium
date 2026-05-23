@@ -158,6 +158,44 @@ jobs:
           ./tools/scripts/build-pptx.sh "$VER_NUM"
         continue-on-error: true   # marp can fail per-module legitimately; tolerate
 
+      - name: Generate change sheet vs previous release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          NEW_TAG="${{ steps.version.outputs.version }}"
+
+          # Previous release tag = second entry in the most-recent two.
+          # Empty if this is the first release ever.
+          PREV_TAG=$(gh release list --limit 2 --json tagName --jq '.[1].tagName // empty')
+          if [[ -z "$PREV_TAG" ]]; then
+            echo "No previous release found; skipping change sheet (first release)."
+            exit 0
+          fi
+          echo "Generating change sheet: $NEW_TAG vs $PREV_TAG"
+
+          # generate-changelog.sh expects to find a directory matching
+          # handouts/versions/<prev-tag>-* with that release's MANIFEST.md
+          # inside. handouts/versions/ is gitignored, so the prior version's
+          # MANIFEST is not on disk; pull it from the previous GitHub Release
+          # asset into a placeholder directory.
+          PLACEHOLDER_DIR="handouts/versions/${PREV_TAG}-prev-release"
+          mkdir -p "$PLACEHOLDER_DIR"
+          if ! gh release download "$PREV_TAG" --pattern 'MANIFEST.md' \
+                                                --dir "$PLACEHOLDER_DIR"; then
+            echo "Could not fetch MANIFEST.md from release $PREV_TAG; skipping changelog."
+            rm -rf "$PLACEHOLDER_DIR"
+            exit 0
+          fi
+
+          chmod +x tools/scripts/generate-changelog.sh
+          ./tools/scripts/generate-changelog.sh "$PREV_TAG" "$NEW_TAG"
+
+          # Drop the placeholder so the upload step only picks up the new
+          # version's directory (which now contains the generated CHANGES file).
+          rm -rf "$PLACEHOLDER_DIR"
+        continue-on-error: true   # changelog is nice-to-have; never block release
+
       - name: Upload handout artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -201,12 +239,12 @@ jobs:
             - **PDF**: Combined handout (all modules)
             - **PPTX**: Per-module slide decks
             - **MANIFEST.md**: List of all included modules
-            - **CHANGES-*.md**: Change sheet vs previous version
+            - **CHANGES-vNNN-vs-vMMM.md**: Change sheet vs previous version (present from the second release onward)
 
             ### How to Use
             - **For self-study**: Download the PDF handout
             - **For training delivery**: Download individual PPTX slide decks
-            - See the [change sheet](CHANGES-*.md) for what's new in this version
+            - For what changed since the previous release, see the `CHANGES-*` asset attached to this release
 
             ---
             Content: CC BY-SA 4.0 | Code: Apache 2.0
