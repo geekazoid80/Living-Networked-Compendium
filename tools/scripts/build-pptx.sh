@@ -32,6 +32,14 @@ else
     VERSION_NUM="${LAST:-1}"
 fi
 
+# Force base-10 interpretation. The caller passes the version number as
+# a zero-padded string like "039" (extracted from "v039" by the workflow).
+# bash's `printf %d` reads leading-zero strings as octal, so "039" throws
+# "invalid octal number" and "030" silently becomes decimal 24. Either
+# way the `printf "v%03d"` below produces the wrong label and OUTDIR
+# stops matching the directory the workflow created in its earlier step.
+VERSION_NUM=$((10#$VERSION_NUM))
+
 VERSION=$(printf "v%03d" "$VERSION_NUM")
 DATE=$(date +%Y-%m-%d)
 OUTDIR="handouts/versions/${VERSION}-${DATE}/slides"
