@@ -40,8 +40,8 @@ Cross-session progress tracker for the Living Networked Compendium.
 | 16 | Create learning-path files for all roles | Architecture | done | CE and DCE files added; all 9 paths now have learning-path files |
 | 17 | Update `mkdocs.yml` nav for new paths and domains | Tooling | done | Added RF-Coax, Voice, RF Mobile, Storage, Carrier, DC paths; Professional Standards |
 | 18 | Create professional-standards domain stub | Architecture | done | modules/fundamentals/professional-standards/overview.md; PS-000 |
-| 19 | Create `preprocess-module.py` | Tooling | done | Three-bucket transformation for pdf/pptx output targets |
-| 20 | Integrate preprocessor into `build-pdf.sh` and `build-pptx.sh` | Tooling | done | Both scripts now call preprocess-module.py before Pandoc/Marp |
+| 19 | Create `preprocess_module.py` | Tooling | done | Three-bucket transformation for pdf/pptx output targets |
+| 20 | Integrate preprocessor into `build-pdf.sh` and `build-pptx.sh` | Tooling | done | Both scripts now call preprocess_module.py before Pandoc/Marp |
 | 21 | Retrofit seed modules (NW-001, IP-001, IP-002) to new template | Content | done | Rewrote openings to Problem-First pattern; fixed XREF block scope; added Standards & Certs section; added XREF tables |
 | 22 | Update `README.md` for expanded scope | Architecture | pending | Multi-vendor, new paths, three-bucket model |
 | 23 | Resolve `services/` domain overlap with `protocols/` + `functions/` | Architecture | blocked | See follow-up D |
@@ -403,7 +403,7 @@ Network functions - conceptual and implementation, multi-vendor.
 | 2026-04-15 | `private/` folder created and gitignored | Local research, uploads, parsed docs - never public |
 | 2026-04-15 | Three-bucket content model adopted | Critical (all outputs), Supplementary (collapsed/notes/speaker), XREF (markdown-only) |
 | 2026-04-15 | Analogy-first mandatory structure | Every module opens with layman analogy + mapping table before any technical content |
-| 2026-04-15 | `preprocess-module.py` handles output-specific transformation | Strips/transforms buckets for pdf and pptx targets; web passes through unchanged |
+| 2026-04-15 | `preprocess_module.py` handles output-specific transformation | Strips/transforms buckets for pdf and pptx targets; web passes through unchanged |
 | 2026-04-15 | Certs as benchmarks only - not curriculum anchors | Curriculum follows standards and skills, not exam objectives |
 | 2026-04-15 | Target audience is global, not Singapore-specific | Singapore IS/CS/EE reference is illustrative of typical reader background only |
 | 2026-04-17 | Problem-First pedagogy adopted | Modules open with progressive build-up (two parties + constraints) instead of static analogy; reader constructs the concept before it is formally named |

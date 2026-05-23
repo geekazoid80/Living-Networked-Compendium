@@ -77,7 +77,7 @@ process_module() {
     MARP_TMP=$(mktemp /tmp/marp-XXXXXX.md)
     trap 'rm -f "$MARP_TMP" "$PREPROCESSED_TMP"' RETURN
 
-    python3 tools/scripts/preprocess-module.py "$MD_FILE" "$PREPROCESSED_TMP" pptx
+    python3 tools/scripts/preprocess_module.py "$MD_FILE" "$PREPROCESSED_TMP" pptx
 
     local TITLE
     TITLE=$(grep -m1 '^title:' "$MD_FILE" 2>/dev/null | sed 's/title: *//;s/"//g' || echo "$BASENAME")
@@ -110,7 +110,7 @@ ${VERSION_LABEL}
 MARP_HEADER
 
     # Append preprocessed module content, converting ## headings to slide breaks.
-    # HTML comment stripping is handled by preprocess-module.py (pptx target);
+    # HTML comment stripping is handled by preprocess_module.py (pptx target);
     # speaker note comments (<!-- Notes — ... -->) are preserved intentionally.
     python3 - "$PREPROCESSED_TMP" >> "$MARP_TMP" << 'PYEOF'
 import sys, re
