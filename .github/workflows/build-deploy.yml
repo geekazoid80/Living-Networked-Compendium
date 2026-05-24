@@ -156,7 +156,11 @@ jobs:
           chmod +x tools/scripts/build-pptx.sh
           VER_NUM=$(echo "${{ steps.version.outputs.version }}" | grep -oP '[0-9]+')
           ./tools/scripts/build-pptx.sh "$VER_NUM"
-        continue-on-error: true   # marp can fail per-module legitimately; tolerate
+        # Previously `continue-on-error: true` while marp's per-module
+        # behaviour was untested. v041 and v043 each produced all 66 PPTX
+        # cleanly, so marp is empirically reliable on this content. Tightened
+        # to fail-fast so a future marp regression on any one module blocks
+        # the release rather than silently dropping that module's slides.
 
       - name: Generate change sheet vs previous release
         env:
