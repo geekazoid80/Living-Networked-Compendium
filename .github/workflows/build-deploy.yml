@@ -31,7 +31,15 @@ jobs:
           ERRORS=0
           REQUIRED_FIELDS=("title" "module_id" "domain" "difficulty" "prerequisites" "estimated_time" "version" "last_updated" "maintainer" "human_reviewed" "ai_assisted")
 
-          find modules/ -name "*.md" ! -name ".gitkeep" | while read -r FILE; do
+          # Use process substitution rather than `find | while read` so the
+          # loop body runs in the parent shell. Previous form piped find into
+          # while-read, which forks the loop into a subshell; ERRORS=$((...))
+          # mutations there never propagate back, so the `if [[ $ERRORS -gt 0 ]]`
+          # gate at the end always saw 0 and the job silently passed even when
+          # ::error:: lines were emitted (caught in v044 / v045 post-merge runs
+          # against modules/fundamentals/routing/{route-redistribution,
+          # ospf-advanced,bgp-advanced}.md).
+          while IFS= read -r FILE; do
             # Extract frontmatter block (between first pair of ---)
             FRONTMATTER=$(awk '/^---/{if(p==1){exit}; p=1; next} p' "$FILE")
 
@@ -50,7 +58,7 @@ jobs:
                 echo "::warning file=${FILE}::Prerequisite '${PREREQ}' not found as a module"
               fi
             done
-          done
+          done < <(find modules/ -name "*.md" ! -name ".gitkeep")
 
           if [[ $ERRORS -gt 0 ]]; then
             echo "::error::${ERRORS} frontmatter validation error(s) found"
