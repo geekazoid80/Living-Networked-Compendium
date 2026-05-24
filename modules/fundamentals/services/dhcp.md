@@ -1,6 +1,7 @@
 ---
 module_id: SV-002
 title: "DHCP - Dynamic Host Configuration Protocol"
+domain: "fundamentals/services"
 description: "How DHCP automatically assigns IP addresses and network configuration to hosts using the DORA exchange."
 version: "1.0.0"
 status: draft
@@ -20,7 +21,8 @@ tags:
   - ip-addressing
   - layer7
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SV-002 - DHCP - Dynamic Host Configuration Protocol

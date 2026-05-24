@@ -1,6 +1,7 @@
 ---
 module_id: SV-004
 title: "NTP - Network Time Protocol"
+domain: "fundamentals/services"
 description: "How NTP synchronises clocks across network devices using a stratum hierarchy, and why accurate time is critical for network operations."
 version: "1.0.0"
 status: draft
@@ -20,7 +21,8 @@ tags:
   - services
   - layer7
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SV-004 - NTP - Network Time Protocol

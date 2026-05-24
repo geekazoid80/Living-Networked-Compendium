@@ -1,6 +1,7 @@
 ---
 module_id: AUTO-002
 title: "REST APIs & Network Automation"
+domain: "fundamentals/automation"
 description: "How to use HTTP-based APIs (RESTCONF, eAPI, NX-API, Meraki API) to retrieve structured data and automate network device configuration without SSH."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - python
   - network-automation
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # AUTO-002 - REST APIs & Network Automation

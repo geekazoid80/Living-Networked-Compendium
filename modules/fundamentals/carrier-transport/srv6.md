@@ -1,6 +1,7 @@
 ---
 module_id: CT-005
 title: "SRv6 - Segment Routing over IPv6"
+domain: "fundamentals/carrier-transport"
 description: "How SRv6 uses IPv6 addresses as Segment Identifiers, embeds the segment list in the IPv6 Segment Routing Header, and eliminates the MPLS label plane entirely."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - carrier
   - traffic-engineering
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # CT-005 - SRv6 - Segment Routing over IPv6

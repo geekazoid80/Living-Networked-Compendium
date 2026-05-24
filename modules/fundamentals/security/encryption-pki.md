@@ -1,6 +1,7 @@
 ---
 module_id: SEC-005
 title: "Encryption Standards & PKI"
+domain: "fundamentals/security"
 description: "Symmetric and asymmetric encryption, certificate authorities, X.509 certificates, and how PKI enables trust in IPSec, TLS, and 802.1X deployments."
 version: "1.0.0"
 status: draft
@@ -24,7 +25,8 @@ tags:
   - ca
   - security
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SEC-005 - Encryption Standards & PKI

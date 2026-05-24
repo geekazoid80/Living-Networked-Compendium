@@ -1,6 +1,7 @@
 ---
 module_id: QOS-001
 title: "QoS Fundamentals - Delay, Jitter, Loss & Bandwidth"
+domain: "fundamentals/qos"
 description: "The four metrics that define network quality for different traffic types, and the QoS framework for managing them."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - bandwidth
   - network-quality
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # QOS-001 - QoS Fundamentals - Delay, Jitter, Loss & Bandwidth

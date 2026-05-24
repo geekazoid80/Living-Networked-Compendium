@@ -1,6 +1,7 @@
 ---
 module_id: AUTO-001
 title: "Python for Network Engineers"
+domain: "fundamentals/automation"
 description: "How to use Python with Netmiko, NAPALM, and Paramiko to automate network device configuration, data retrieval, and change management."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - paramiko
   - network-automation
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # AUTO-001 - Python for Network Engineers

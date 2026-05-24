@@ -1,6 +1,7 @@
 ---
 module_id: SEC-003
 title: "VPN & IPSec"
+domain: "fundamentals/security"
 description: "How VPNs create encrypted tunnels across untrusted networks, and how IPSec provides authentication and encryption through IKE, ESP, and AH."
 version: "1.0.0"
 status: draft
@@ -24,7 +25,8 @@ tags:
   - tunneling
   - encryption
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SEC-003 - VPN & IPSec

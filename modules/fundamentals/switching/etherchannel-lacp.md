@@ -1,6 +1,7 @@
 ---
 module_id: SW-004
 title: "EtherChannel / LAG (LACP)"
+domain: "fundamentals/switching"
 description: "How multiple physical links between switches can be bonded into a single logical channel for increased bandwidth and redundancy."
 version: "1.0.0"
 status: draft
@@ -23,7 +24,8 @@ tags:
   - link-aggregation
   - layer2
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SW-004 - EtherChannel / LAG (LACP)

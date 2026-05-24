@@ -1,6 +1,7 @@
 ---
 module_id: SV-001
 title: "DNS - Domain Name System"
+domain: "fundamentals/services"
 description: "How DNS translates human-readable names into IP addresses through a distributed hierarchical database."
 version: "1.0.0"
 status: draft
@@ -20,7 +21,8 @@ tags:
   - name-resolution
   - layer7
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SV-001 - DNS - Domain Name System

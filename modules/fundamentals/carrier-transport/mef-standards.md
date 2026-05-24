@@ -1,6 +1,7 @@
 ---
 module_id: CT-008
 title: "MEF Standards & Carrier Ethernet Framework"
+domain: "fundamentals/carrier-transport"
 description: "How MEF defines Carrier Ethernet service types, attributes, and performance metrics - E-Line, E-LAN, E-Tree, E-Access - standardising the commercial and technical vocabulary for Ethernet services."
 version: "1.0.0"
 status: draft
@@ -24,7 +25,8 @@ tags:
   - cen
   - service-attributes
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # CT-008 - MEF Standards & Carrier Ethernet Framework

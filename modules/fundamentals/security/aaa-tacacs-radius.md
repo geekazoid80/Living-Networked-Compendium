@@ -1,6 +1,7 @@
 ---
 module_id: SEC-004
 title: "AAA - Authentication, Authorisation & Accounting"
+domain: "fundamentals/security"
 description: "How AAA frameworks (TACACS+ and RADIUS) centralise network device access control, command authorisation, and session accounting."
 version: "1.0.0"
 status: draft
@@ -24,7 +25,8 @@ tags:
   - accounting
   - security
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SEC-004 - AAA - Authentication, Authorisation & Accounting

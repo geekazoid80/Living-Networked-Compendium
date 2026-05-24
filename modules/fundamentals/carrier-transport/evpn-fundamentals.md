@@ -1,6 +1,7 @@
 ---
 module_id: CT-006
 title: "EVPN Fundamentals"
+domain: "fundamentals/carrier-transport"
 description: "How Ethernet VPN (EVPN) uses MP-BGP to distribute MAC and IP reachability information, replacing flood-and-learn VPLS with a control-plane-driven Ethernet forwarding model."
 version: "1.0.0"
 status: draft
@@ -25,7 +26,8 @@ tags:
   - carrier
   - datacenter
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # CT-006 - EVPN Fundamentals

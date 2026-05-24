@@ -1,6 +1,7 @@
 ---
 module_id: CT-007
 title: "EVPN-VXLAN"
+domain: "fundamentals/carrier-transport"
 description: "How EVPN control plane combined with VXLAN data plane creates a scalable, multitenant data centre overlay network with distributed gateway, ARP suppression, and multivendor interoperability."
 version: "1.0.0"
 status: draft
@@ -25,7 +26,8 @@ tags:
   - irb
   - multitenant
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # CT-007 - EVPN-VXLAN

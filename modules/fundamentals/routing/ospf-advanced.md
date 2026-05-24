@@ -1,6 +1,7 @@
 ---
 module_id: RT-005
 title: "OSPF Advanced - Multi-Area, Redistribution & Filtering"
+domain: "fundamentals/routing"
 description: "Multi-area OSPF design, LSA filtering, summarisation, virtual links, stub/NSSA areas, and route redistribution into and out of OSPF."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - lsa-filtering
   - stub-area
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # RT-005 - OSPF Advanced - Multi-Area, Redistribution & Filtering

@@ -1,6 +1,7 @@
 ---
 module_id: QOS-003
 title: "Queuing Mechanisms"
+domain: "fundamentals/qos"
 description: "How routers schedule packets for transmission - from FIFO to LLQ - and how each mechanism affects delay, jitter, and fairness."
 version: "1.0.0"
 status: draft
@@ -23,7 +24,8 @@ tags:
   - fifo
   - scheduling
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # QOS-003 - Queuing Mechanisms

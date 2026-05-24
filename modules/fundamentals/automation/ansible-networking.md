@@ -1,6 +1,7 @@
 ---
 module_id: AUTO-004
 title: "Ansible for Network Automation"
+domain: "fundamentals/automation"
 description: "How to use Ansible playbooks, network modules, and roles to declaratively manage network device configuration at scale."
 version: "1.0.0"
 status: draft
@@ -21,7 +22,8 @@ tags:
   - declarative
   - idempotent
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # AUTO-004 - Ansible for Network Automation
