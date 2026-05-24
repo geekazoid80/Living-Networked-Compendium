@@ -1,5 +1,31 @@
 # Claude Context – Network Living Compendium
 
+## Project North Star
+
+Before scoping any work in this repository (content, validation, tooling, or governance) measure every priority decision against the project's stated purpose:
+
+> A living, community-curated network-engineering compendium of atomic, linked, multi-vendor lessons sequenced by role, designed to compound in usefulness over time under human stewardship.
+
+Derived from: README.md opening, CONTRIBUTING.md § 2 Philosophy, AI_GUARDRAILS.md § 7 Final Principle, CONTRIBUTION_SPEC.md § 1 Scope.
+
+### Qualities to defend (priority order when work items conflict)
+
+1. **Coherence / no entropy.** Stewardship infrastructure (validators, checks, gates) takes precedence. Bad data is hard to fix later; a closed gate prevents new noise.
+2. **Interconnectedness / no orphans.** Every lesson links into a learning path; orphan modules silently break the map the README promises. Cross-link health and nav coverage are north-star concerns.
+3. **Atomic, readable lessons.** Each module is intelligible to a reader without private context (CONTRIBUTING.md § 2: "Assume future readers do not share your context").
+4. **Multi-vendor parity + multi-format outputs.** No vendor is the default; one source produces web + PDF + PPTX. Build chains that bias one platform are entropy.
+5. **Catalogue indexability.** Frontmatter drives navigation, search, prerequisite resolution, and learning-path sequencing. Catalogue cosmetics are TIER 2 unless a field actually drives surface behaviour (e.g. `learning_path_tags`), in which case it promotes.
+
+### Tiering rule for work selection
+
+- **TIER 1**: directly defends a north-star quality. Land first.
+- **TIER 2**: improves a north-star quality but not on the critical path. Land after TIER 1.
+- **TIER 3**: tooling hygiene; does not directly serve the north star unless visibly blocking contributors. Land last.
+
+Apply the tier first; only then weigh scope size, mechanical convenience, and reviewer load. A TIER 3 item never jumps a TIER 1 item just because it is smaller or easier.
+
+---
+
 This repository is governed by strict contribution, licensing, and AI‑use rules.
 
 Claude, before generating, editing, synthesizing, or reviewing any content in this repository, you MUST do the following:
