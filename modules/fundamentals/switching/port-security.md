@@ -1,6 +1,7 @@
 ---
 module_id: SW-005
 title: "Port Security & DAI (Dynamic ARP Inspection)"
+domain: "fundamentals/switching"
 description: "How to restrict which devices can connect to switch ports and how to prevent ARP spoofing attacks using DHCP Snooping and Dynamic ARP Inspection."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - arp-inspection
   - layer2-security
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SW-005 - Port Security & DAI (Dynamic ARP Inspection)

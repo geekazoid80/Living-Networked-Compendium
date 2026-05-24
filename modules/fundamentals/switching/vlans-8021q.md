@@ -1,6 +1,7 @@
 ---
 module_id: SW-002
 title: "VLANs & 802.1Q Trunking"
+domain: "fundamentals/switching"
 description: "How switches segment broadcast domains with VLANs and carry multiple VLANs across shared links using 802.1Q tagging."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - trunking
   - layer2
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SW-002 - VLANs & 802.1Q Trunking

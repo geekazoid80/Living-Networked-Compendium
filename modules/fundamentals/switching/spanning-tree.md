@@ -1,6 +1,7 @@
 ---
 module_id: SW-003
 title: "Spanning Tree Protocol (STP / RSTP / MSTP)"
+domain: "fundamentals/switching"
 description: "How STP, RSTP, and MSTP prevent Layer 2 loops in switched networks while maintaining redundant paths."
 version: "1.0.0"
 status: draft
@@ -23,7 +24,8 @@ tags:
   - layer2
   - loop-prevention
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SW-003 - Spanning Tree Protocol (STP / RSTP / MSTP)

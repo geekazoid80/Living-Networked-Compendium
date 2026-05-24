@@ -1,6 +1,7 @@
 ---
 module_id: SV-003
 title: "NAT & PAT - Network Address Translation"
+domain: "fundamentals/services"
 description: "How NAT and PAT translate private IP addresses to public IPs, enabling many devices to share a single internet-routable address."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - ipv4
   - services
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SV-003 - NAT & PAT - Network Address Translation

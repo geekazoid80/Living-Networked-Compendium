@@ -1,6 +1,7 @@
 ---
 module_id: AUTO-003
 title: "NETCONF, YANG & gRPC"
+domain: "fundamentals/automation"
 description: "How NETCONF, YANG data models, and gRPC/gNMI provide structured, transactional, and streaming-capable network management protocols."
 version: "1.0.0"
 status: draft
@@ -23,7 +24,8 @@ tags:
   - network-automation
   - programmability
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # AUTO-003 - NETCONF, YANG & gRPC

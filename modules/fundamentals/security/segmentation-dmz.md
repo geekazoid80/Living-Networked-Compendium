@@ -1,6 +1,7 @@
 ---
 module_id: SEC-006
 title: "Network Segmentation & DMZ"
+domain: "fundamentals/security"
 description: "How to design multi-zone network architectures - DMZ, management plane, micro-segmentation - to contain breaches and enforce least privilege."
 version: "1.0.0"
 status: draft
@@ -24,7 +25,8 @@ tags:
   - management-plane
   - zero-trust
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SEC-006 - Network Segmentation & DMZ

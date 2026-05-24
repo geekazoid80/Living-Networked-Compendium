@@ -60,6 +60,8 @@ Out of scope:
 
 ## 3. Required Metadata (Knowledge Content)
 
+### 3.1 Editorial intent
+
 Each substantive knowledge contribution must clearly include:
 - **Title**
 - **Purpose** (what this helps a reader understand or do)
@@ -68,6 +70,30 @@ Each substantive knowledge contribution must clearly include:
 - **References / Sources** (if applicable)
 - **Attribution** (original author or adapted sources)
 Exact formatting is flexible, but intent must be clear.
+
+### 3.2 Knowledge‑module frontmatter (operational catalogue)
+
+Modules under `modules/` additionally carry a YAML frontmatter block that the CI validator enforces. This catalogue layer exists for indexability, prerequisite resolution, and navigation; it sits alongside the editorial intent in §3.1, not in place of it.
+
+Required keys:
+
+| Key | Value shape | Notes |
+|---|---|---|
+| `title` | quoted string | Human‑readable module title. |
+| `module_id` | quoted string `<PREFIX>-<NNN>` | Globally unique within the corpus. Established prefixes include `NW`, `IP`, `RT`, `SEC`, `SW`, `QOS`, `SV`, `CT`, `AUTO`, `AM`, `BRD`, `CE`, `DC`, `DCE`, `DNE`, `PS`, `RCE`, `RME`, `RSE`, `SNE`, `VTE`. |
+| `domain` | quoted string, path under `modules/` | The directory the file lives in, e.g. `"fundamentals/routing"`, `"applied/data-network-engineer"`. Mechanically derivable from file location. |
+| `difficulty` | `novice` / `intermediate` / `advanced` | Reader skill threshold. |
+| `prerequisites` | YAML list of `module_id` strings | Inline (`["RT-001", "NW-002"]`) or block‑list shape both accepted. Empty list (`[]`) is valid for foundational modules. |
+| `estimated_time` | integer (minutes) | Realistic study time, not minimum reading time. |
+| `version` | quoted SemVer | `"1.0"` and `"1.0.0"` shapes both accepted. |
+| `last_updated` | ISO date `"YYYY-MM-DD"` | Quoted. Authoritative for "is this stale" checks. |
+| `maintainer` | quoted GitHub handle `"@<handle>"` | The accountable steward, not necessarily the original author. |
+| `human_reviewed` | boolean | `false` is permitted on drafts. Per `AI_GUARDRAILS.md`, `true` is required before a module is treated as authoritative. The CI validator checks presence, not truth. |
+| `ai_assisted` | quoted string or `false` | E.g. `"drafting"`, `"editing"`, `"synthesis"`, or `false` if no AI assistance was used. |
+
+Optional supplementary keys (`tags`, `vendors`, `language`, `cert_alignment`, `description`, `module_type`, `status`, `learning_path_tags`) may appear and are not validator‑gated. They are documented per author convention rather than spec‑mandated.
+
+The validator job in `.github/workflows/build-deploy.yml` is the executable definition; this table is its prose mirror. If the two ever diverge, the spec is authoritative and the validator must catch up (per §9).
 
 ---
 

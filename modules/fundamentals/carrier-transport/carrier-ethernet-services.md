@@ -1,6 +1,7 @@
 ---
 module_id: CT-009
 title: "Carrier Ethernet Services - Design & Operations"
+domain: "fundamentals/carrier-transport"
 description: "How to design, provision, and operate Carrier Ethernet services using MPLS and EVPN infrastructure - including CoS, OAM, resiliency, and multi-carrier interconnect."
 version: "1.0.0"
 status: draft
@@ -25,7 +26,8 @@ tags:
   - resiliency
   - operations
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # CT-009 - Carrier Ethernet Services - Design & Operations

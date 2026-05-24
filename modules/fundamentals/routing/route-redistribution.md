@@ -1,6 +1,7 @@
 ---
 module_id: RT-009
 title: "Route Redistribution & Policy"
+domain: "fundamentals/routing"
 description: "How routes are moved between different routing protocols, the risks of mutual redistribution, and how route-maps and prefix-lists control what gets redistributed."
 version: "1.0.0"
 status: draft
@@ -26,7 +27,8 @@ tags:
   - bgp
   - eigrp
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # RT-009 - Route Redistribution & Policy

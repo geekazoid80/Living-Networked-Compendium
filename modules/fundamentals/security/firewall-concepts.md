@@ -1,6 +1,7 @@
 ---
 module_id: SEC-002
 title: "Firewall Concepts"
+domain: "fundamentals/security"
 description: "How stateful firewalls track connection state to make per-packet decisions, and how zone-based policy models organise security policy at scale."
 version: "1.0.0"
 status: draft
@@ -22,7 +23,8 @@ tags:
   - zone-based
   - packet-filtering
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # SEC-002 - Firewall Concepts

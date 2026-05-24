@@ -1,6 +1,7 @@
 ---
 module_id: CT-003
 title: "MPLS L2VPN - VPLS & Pseudowire"
+domain: "fundamentals/carrier-transport"
 description: "How MPLS Layer 2 VPN services (pseudowires and VPLS) deliver point-to-point and multipoint Ethernet connectivity over an MPLS backbone."
 version: "1.0.0"
 status: draft
@@ -23,7 +24,8 @@ tags:
   - carrier
   - vfi
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # CT-003 - MPLS L2VPN - VPLS & Pseudowire

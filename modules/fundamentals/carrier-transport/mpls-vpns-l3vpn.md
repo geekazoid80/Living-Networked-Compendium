@@ -1,6 +1,7 @@
 ---
 module_id: CT-002
 title: "MPLS VPNs - L3VPN & VRF"
+domain: "fundamentals/carrier-transport"
 description: "How MPLS L3VPN uses VRFs, route distinguishers, route targets, and the BGP VPNv4 address family to deliver isolated Layer 3 VPN services across a shared MPLS backbone."
 version: "1.0.0"
 status: draft
@@ -24,7 +25,8 @@ tags:
   - route-target
   - carrier
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # CT-002 - MPLS VPNs - L3VPN & VRF

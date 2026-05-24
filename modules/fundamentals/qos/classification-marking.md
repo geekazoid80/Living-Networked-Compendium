@@ -1,6 +1,7 @@
 ---
 module_id: QOS-002
 title: "QoS Classification & Marking"
+domain: "fundamentals/qos"
 description: "How routers identify traffic types using classification (ACL, DSCP, NBAR) and mark them with DSCP and 802.1p values for consistent QoS treatment downstream."
 version: "1.0.0"
 status: draft
@@ -23,7 +24,8 @@ tags:
   - nbar
   - mls-qos
 created: 2026-04-19
-updated: 2026-04-19
+last_updated: "2026-04-19"
+maintainer: "@geekazoid80"
 ---
 
 # QOS-002 - QoS Classification & Marking
