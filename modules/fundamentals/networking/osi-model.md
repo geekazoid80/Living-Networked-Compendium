@@ -2,7 +2,7 @@
 title: "The OSI Model"
 module_id: "NW-001"
 domain: "fundamentals/networking"
-difficulty: "novice"
+difficulty: "beginner"
 prerequisites: []
 estimated_time: 40
 version: "1.1"

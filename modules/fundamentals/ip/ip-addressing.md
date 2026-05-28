@@ -2,7 +2,7 @@
 title: "IP Addressing Fundamentals"
 module_id: "IP-001"
 domain: "fundamentals/ip"
-difficulty: "novice"
+difficulty: "beginner"
 prerequisites: ["NW-001"]
 estimated_time: 45
 version: "1.1"

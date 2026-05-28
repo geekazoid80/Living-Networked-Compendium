@@ -50,6 +50,34 @@ jobs:
               fi
             done
 
+            # Value-level checks (CONTRIBUTION_SPEC.md § 3.2). Each check skips
+            # silently when the field is absent because the presence loop above
+            # has already emitted ::error:: for that case; we don't want to
+            # double-count or chain-error on already-missing fields.
+            MODULE_ID_VAL=$(echo "$FRONTMATTER" | grep "^module_id:" | head -1 | sed -E 's/^module_id:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            if [[ -n "$MODULE_ID_VAL" && ! "$MODULE_ID_VAL" =~ ^[A-Z]+-[0-9]+$ ]]; then
+              echo "::error file=${FILE}::Invalid module_id '${MODULE_ID_VAL}': expected uppercase letters, hyphen, digits (e.g. NW-001)"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            DIFFICULTY_VAL=$(echo "$FRONTMATTER" | grep "^difficulty:" | head -1 | sed -E 's/^difficulty:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            if [[ -n "$DIFFICULTY_VAL" && ! "$DIFFICULTY_VAL" =~ ^(beginner|intermediate|advanced)$ ]]; then
+              echo "::error file=${FILE}::Invalid difficulty '${DIFFICULTY_VAL}': must be one of beginner / intermediate / advanced"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            LAST_UPDATED_VAL=$(echo "$FRONTMATTER" | grep "^last_updated:" | head -1 | sed -E 's/^last_updated:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            if [[ -n "$LAST_UPDATED_VAL" && ! "$LAST_UPDATED_VAL" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+              echo "::error file=${FILE}::Invalid last_updated '${LAST_UPDATED_VAL}': expected ISO date YYYY-MM-DD"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            VERSION_VAL=$(echo "$FRONTMATTER" | grep "^version:" | head -1 | sed -E 's/^version:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            if [[ -n "$VERSION_VAL" && ! "$VERSION_VAL" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+              echo "::error file=${FILE}::Invalid version '${VERSION_VAL}': expected SemVer or MAJOR.MINOR (e.g. 1.0 or 1.0.0)"
+              ERRORS=$((ERRORS + 1))
+            fi
+
             # Check for prerequisite module IDs that don't exist
             PREREQS=$(echo "$FRONTMATTER" | grep "^prerequisites:" | \
                       grep -oP '"[A-Z]+-[0-9]+"' | tr -d '"' || true)
@@ -58,7 +86,7 @@ jobs:
                 echo "::warning file=${FILE}::Prerequisite '${PREREQ}' not found as a module"
               fi
             done
-          done < <(find modules/ -name "*.md" ! -name ".gitkeep")
+          done < <(find modules/ -name "*.md" ! -name ".gitkeep" ! -path '*/_*')
 
           if [[ $ERRORS -gt 0 ]]; then
             echo "::error::${ERRORS} frontmatter validation error(s) found"

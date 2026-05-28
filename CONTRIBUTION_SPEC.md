@@ -82,7 +82,7 @@ Required keys:
 | `title` | quoted string | Human‑readable module title. |
 | `module_id` | quoted string `<PREFIX>-<NNN>` | Globally unique within the corpus. Established prefixes include `NW`, `IP`, `RT`, `SEC`, `SW`, `QOS`, `SV`, `CT`, `AUTO`, `AM`, `BRD`, `CE`, `DC`, `DCE`, `DNE`, `PS`, `RCE`, `RME`, `RSE`, `SNE`, `VTE`. |
 | `domain` | quoted string, path under `modules/` | The directory the file lives in, e.g. `"fundamentals/routing"`, `"applied/data-network-engineer"`. Mechanically derivable from file location. |
-| `difficulty` | `novice` / `intermediate` / `advanced` | Reader skill threshold. |
+| `difficulty` | `beginner` / `intermediate` / `advanced` | Reader skill threshold. |
 | `prerequisites` | YAML list of `module_id` strings | Inline (`["RT-001", "NW-002"]`) or block‑list shape both accepted. Empty list (`[]`) is valid for foundational modules. |
 | `estimated_time` | integer (minutes) | Realistic study time, not minimum reading time. |
 | `version` | quoted SemVer | `"1.0"` and `"1.0.0"` shapes both accepted. |
