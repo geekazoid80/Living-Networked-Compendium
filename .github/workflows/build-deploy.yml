@@ -94,6 +94,50 @@ jobs:
           fi
           echo "All module frontmatter validated successfully."
 
+      - name: Check mkdocs.yml nav coverage
+        run: |
+          ERRORS=0
+
+          # Extract all modules/ paths listed in the mkdocs.yml nav block.
+          # Nav entries take the form "  - Label: modules/path/file.md".
+          # Uses GNU grep -P (available on ubuntu-latest; not macOS BSD grep).
+          # || true: grep returns exit 1 on zero matches; we handle that case
+          # via the ERRORS gate rather than letting the shell exit early.
+          NAV_MODULE_PATHS=$(grep -oP '(?<=: )(modules/[^\s"#]+\.md)' mkdocs.yml | sort -u || true)
+
+          # ── Direction 1: Orphan check ─────────────────────────────────────
+          # Every modules/ file must appear in the nav.
+          # Same find pattern as the frontmatter check above; excludes
+          # .gitkeep and _* template directories.
+          while IFS= read -r FILE; do
+            if ! echo "$NAV_MODULE_PATHS" | grep -qxF "$FILE"; then
+              echo "::error file=${FILE}::Module not listed in mkdocs.yml nav — add it to the nav before merging"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done < <(find modules/ -name "*.md" ! -name ".gitkeep" ! -path '*/_*')
+
+          # ── Direction 2: Dangling-reference check ────────────────────────
+          # Every nav path must point to a file that actually exists.
+          # Uses -f not find, so _* template files referenced intentionally
+          # (e.g. "_new-path-template/overview.md") pass correctly.
+          # Guard against empty NAV_PATH: a here-string always appends a
+          # trailing newline, which produces one empty read if the variable
+          # is empty; skip those to avoid a spurious "non-existent file: "
+          # error.
+          while IFS= read -r NAV_PATH; do
+            [[ -z "$NAV_PATH" ]] && continue
+            if [[ ! -f "$NAV_PATH" ]]; then
+              echo "::error::mkdocs.yml nav references non-existent file: ${NAV_PATH}"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done <<< "$NAV_MODULE_PATHS"
+
+          if [[ $ERRORS -gt 0 ]]; then
+            echo "::error::${ERRORS} nav coverage error(s) found"
+            exit 1
+          fi
+          echo "mkdocs.yml nav coverage check passed."
+
   # ─────────────────────────────────────────────────────────────────────────────
   # Job 2: Build MkDocs site and deploy to GitHub Pages
   # ─────────────────────────────────────────────────────────────────────────────
