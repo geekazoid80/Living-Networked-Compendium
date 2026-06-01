@@ -118,6 +118,7 @@ nav:
       - The OSI Model (NW-001): modules/fundamentals/networking/osi-model.md
       - Network Topologies (NW-002): modules/fundamentals/networking/network-topologies.md
       - Ethernet Standards & Cabling (NW-003): modules/fundamentals/networking/ethernet-cabling.md
+      - Ghost Module (NW-999): modules/fundamentals/networking/does-not-exist.md
     - IP Addressing:
       - IP Addressing Fundamentals (IP-001): modules/fundamentals/ip/ip-addressing.md
       - IP Subnetting & VLSM (IP-002): modules/fundamentals/ip/subnetting.md
