@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, datacentre, spine-leaf, vxlan, evpn, bgp, fabric]
 ---
 
+# DCE-000 - Applied: Data Centre Network Engineer - Overview
 ## What Is a Data Centre Network Engineer?
 
 A data centre (DC) network engineer designs and operates the network infrastructure inside data centres - the switching fabric, server connectivity, storage networking, and the links that connect DCs to each other and to the outside world.

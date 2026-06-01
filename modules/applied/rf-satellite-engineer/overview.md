@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, rf-satellite-engineer, learning-path, overview]
 ---
 
+# RSE-000 - Applied: RF & Satellite Network Engineer - Overview
 ## What Is an RF & Satellite Network Engineer?
 
 An RF and satellite network engineer designs, operates, and maintains communication systems that use radio frequency (RF) links - particularly satellite links - to carry voice, data, and video traffic.

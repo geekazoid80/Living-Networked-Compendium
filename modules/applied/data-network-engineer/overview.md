@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, data-network-engineer, learning-path, overview]
 ---
 
+# DNE-000 - Applied: Data Network Engineer - Overview
 ## What Is a Data Network Engineer?
 
 A data network engineer designs, builds, configures, and maintains the IP networks that carry data traffic for organisations - from a small office LAN through to a carrier's national backbone.

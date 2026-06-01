@@ -15,6 +15,8 @@ vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.2; CompTIA Network+ - 1.2; JNCIA-Junos - Networking Fundamentals"
 ---
+
+# NW-002 - Network Topologies
 ## Learning Objectives
 
 By the end of this module, you will be able to:

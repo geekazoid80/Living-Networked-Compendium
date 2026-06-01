@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, storage, san, nas, iscsi, fibre-channel, nvme-of, storage-networking]
 ---
 
+# SNE-000 - Applied: Storage Network Engineer - Overview
 ## The Analogy
 
 Think of storage networking like the filing system for a large office building. Every desk (server) can have its own filing cabinet under the desk (direct-attached storage) - simple, but not shared. Or you can have a central filing room (storage array) that all desks access over the internal mail system (the storage network).

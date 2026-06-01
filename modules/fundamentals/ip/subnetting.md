@@ -15,6 +15,8 @@ vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.6; CompTIA Network+ - 1.4; JNCIA-Junos - IP Addressing"
 ---
+
+# IP-002 - IP Subnetting & VLSM
 ## Learning Objectives
 
 By the end of this module, you will be able to:

@@ -15,6 +15,8 @@ vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.3; CompTIA Network+ - 1.3; JNCIA-Junos - Networking Fundamentals"
 ---
+
+# NW-003 - Ethernet Standards & Cabling
 ## Learning Objectives
 
 By the end of this module, you will be able to:

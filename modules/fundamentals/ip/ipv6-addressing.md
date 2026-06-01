@@ -15,6 +15,8 @@ cert_alignment: "CCNA 200-301 - 1.8 | JNCIA-Junos JN0-103 | Nokia NRS I"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "Huawei VRP", "MikroTik RouterOS"]
 language: "en"
 ---
+
+# IP-003 - IPv6 Addressing
 ## Learning Objectives
 
 By the end of this module, you will be able to:

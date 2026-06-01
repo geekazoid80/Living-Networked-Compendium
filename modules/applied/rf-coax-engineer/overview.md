@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, cable, hfc, docsis, coax, rf-coax, access-network]
 ---
 
+# RCE-000 - Applied: RF-Coax / Cable Network Engineer - Overview
 ## The Analogy
 
 Think of a cable TV network like the plumbing in a large apartment building. One main water main (the fibre trunk from the headend) runs down the street. At each block, a smaller pipe branches off (the coax distribution). Every apartment taps off that smaller pipe. Everyone in the building shares the same water pressure - and the same pipe.

@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, mobile, cellular, 4g, lte, 5g, ran, backhaul, core-network]
 ---
 
+# RME-000 - Applied: RF Mobile / Cellular Network Engineer - Overview
 ## The Analogy
 
 Think of a cellular network like a city of hexagonal neighbourhoods, each with a town hall in the middle. Your phone constantly listens for the loudest town hall nearby and stays connected to it. When you walk from one neighbourhood into the next, your call seamlessly hands off from one town hall to the next - so smoothly you don't notice.

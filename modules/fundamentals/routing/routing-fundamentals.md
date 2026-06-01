@@ -15,6 +15,8 @@ cert_alignment: "CCNA 200-301 - 3.1–3.3 | JNCIA-Junos JN0-103 | Nokia NRS I"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "MikroTik RouterOS"]
 language: "en"
 ---
+
+# RT-001 - Routing Fundamentals
 ## Learning Objectives
 
 By the end of this module, you will be able to:

@@ -138,6 +138,47 @@ jobs:
           fi
           echo "mkdocs.yml nav coverage check passed."
 
+      - name: Check module body H1 title
+        run: |
+          ERRORS=0
+
+          # Every module body must open with a level-1 H1 of the form
+          # "# <module_id> - <title>" matching its frontmatter (CONTRIBUTION_SPEC
+          # § 3.1). This drives the rendered page heading and the document outline.
+          # Same find pattern as the checks above; excludes .gitkeep and _* templates.
+          # Deliberately no `set -euo pipefail`: grep returns exit 1 on zero matches,
+          # which would kill the step early; the ERRORS gate handles failures instead.
+          while IFS= read -r FILE; do
+            MID=$(grep -m1 '^module_id:' "$FILE" | sed -E 's/^module_id:[[:space:]]*"?([^"]*)"?[[:space:]]*$/\1/')
+            TITLE=$(grep -m1 '^title:' "$FILE" | sed -E 's/^title:[[:space:]]*"?(.*)"?[[:space:]]*$/\1/; s/"$//')
+            EXPECT="# ${MID} - ${TITLE}"
+
+            # First H1 OUTSIDE any code fence, after the frontmatter block.
+            # Fence-aware: a "# comment" inside a ``` block is not a title.
+            H1=$(awk '
+              BEGIN { fm = 0; infence = 0 }
+              /^---$/ { if (fm < 2) { fm++; next } }
+              fm < 2 { next }
+              /^```/ || /^~~~/ { infence = !infence; next }
+              infence { next }
+              /^# / { print; exit }
+            ' "$FILE")
+
+            if [[ -z "$H1" ]]; then
+              echo "::error file=${FILE}::Module body is missing its opening H1 title — add '${EXPECT}' as the first heading"
+              ERRORS=$((ERRORS + 1))
+            elif [[ "$H1" != "$EXPECT" ]]; then
+              echo "::error file=${FILE}::Module body H1 must be '${EXPECT}' but found '${H1}'"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done < <(find modules/ -name "*.md" ! -name ".gitkeep" ! -path '*/_*')
+
+          if [[ $ERRORS -gt 0 ]]; then
+            echo "::error::${ERRORS} module H1 title error(s) found"
+            exit 1
+          fi
+          echo "Module body H1 title check passed."
+
   # ─────────────────────────────────────────────────────────────────────────────
   # Job 2: Build MkDocs site and deploy to GitHub Pages
   # ─────────────────────────────────────────────────────────────────────────────

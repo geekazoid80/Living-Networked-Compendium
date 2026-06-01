@@ -15,6 +15,8 @@ cert_alignment: "CCNA 200-301 - 3.5 (awareness) | CCNP ENCOR 350-401 | JNCIS-SP 
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "Huawei VRP", "MikroTik RouterOS"]
 language: "en"
 ---
+
+# RT-007 - BGP Fundamentals
 ## Learning Objectives
 
 By the end of this module, you will be able to:

@@ -16,6 +16,7 @@ vendors: []
 language: en
 ---
 
+# AM-007 - Coloured Optics - CWDM & DWDM
 ## Planned Module
 
 This module is a planned stub. It is referenced as a forward-link from [Ethernet Standards & Cabling](../networking/ethernet-cabling.md) (`NW-003`) but the substantive content has not yet been written.
