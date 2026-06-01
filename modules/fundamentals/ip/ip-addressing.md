@@ -15,6 +15,8 @@ vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.6; CompTIA Network+ - 1.4; JNCIA-Junos - Networking Fundamentals"
 ---
+
+# IP-001 - IP Addressing Fundamentals
 ## Learning Objectives
 
 By the end of this module, you will be able to:

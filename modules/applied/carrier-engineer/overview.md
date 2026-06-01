@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, carrier, service-provider, telco, mpls, sr, evpn, bgp]
 ---
 
+# CE-000 - Applied: Carrier / Service Provider Network Engineer - Overview
 ## What Is a Carrier / Service Provider Network Engineer?
 
 A carrier or service provider (SP) network engineer designs, builds, and operates the networks that connect cities, countries, and continents - the infrastructure that other networks ride on top of. This includes:

@@ -15,6 +15,8 @@ cert_alignment: "CCNA 200-301 - 2.1–2.3 | JNCIA-Junos JN0-103 | Nokia NRS I"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS", "MikroTik RouterOS"]
 language: "en"
 ---
+
+# SW-001 - Switching Fundamentals
 ## Learning Objectives
 
 By the end of this module, you will be able to:

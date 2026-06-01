@@ -15,6 +15,8 @@ cert_alignment: "CCNP ENCOR 350-401 | JNCIS-SP JN0-362 | Nokia NRS II | Huawei H
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS"]
 language: "en"
 ---
+
+# CT-001 - MPLS Fundamentals
 ## Learning Objectives
 
 By the end of this module, you will be able to:

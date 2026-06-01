@@ -16,6 +16,7 @@ vendors: []
 language: en
 ---
 
+# DC-001 - Data Centre Network Design
 ## Planned Module
 
 This module is a planned stub. It is referenced as a forward-link from [Network Topologies](../networking/network-topologies.md) but the substantive content has not yet been written.

@@ -63,13 +63,13 @@ Out of scope:
 ### 3.1 Editorial intent
 
 Each substantive knowledge contribution must clearly include:
-- **Title**
+- **Title** — the module body's opening level-1 heading, in the form `# <module_id> - <title>`, matching the frontmatter `module_id` and `title` fields (see § 3.2). Enforced by CI.
 - **Purpose** (what this helps a reader understand or do)
 - **Context** (assumptions, prerequisites, scope)
 - **Core Content**
 - **References / Sources** (if applicable)
 - **Attribution** (original author or adapted sources)
-Exact formatting is flexible, but intent must be clear.
+Exact formatting of the remaining elements is flexible, but intent must be clear. The Title form above is fixed because it drives the rendered page heading and the document outline.
 
 ### 3.2 Knowledge‑module frontmatter (operational catalogue)
 

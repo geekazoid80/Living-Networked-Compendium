@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, voice, telephony, voip, sip, pstn, ss7, pbx, uc]
 ---
 
+# VTE-000 - Applied: Voice / Telephony Network Engineer - Overview
 ## The Analogy
 
 Think of telephony like postal mail that got upgraded to phone calls. In the old days (PSTN), every call had its own dedicated delivery tube - a physical circuit was switched into place just for your conversation and held for the duration. Nobody else could use that tube while you were talking.

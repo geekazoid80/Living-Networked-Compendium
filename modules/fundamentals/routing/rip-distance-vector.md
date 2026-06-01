@@ -15,6 +15,8 @@ cert_alignment: "CCNA 200-301 - 3.4 (context) | JNCIA-Junos JN0-103"
 vendors: ["Cisco IOS-XE", "MikroTik RouterOS"]
 language: "en"
 ---
+
+# RT-003 - RIP & Distance-Vector Routing
 ## Learning Objectives
 
 By the end of this module, you will be able to:

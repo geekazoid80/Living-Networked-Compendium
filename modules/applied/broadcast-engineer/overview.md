@@ -13,6 +13,7 @@ ai_assisted: "drafting"
 tags: [applied, broadcast-engineer, learning-path, overview, seeking-contributors]
 ---
 
+# BRD-000 - Applied: Broadcast Network Engineer - Overview
 ## What Is a Broadcast Network Engineer?
 
 A broadcast network engineer builds and operates the networks that carry live and recorded audio/video content - from production studios through to viewers' screens.

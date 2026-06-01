@@ -15,6 +15,8 @@ vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.1; CompTIA Network+ - 1.1; JNCIA-Junos - Networking Fundamentals"
 ---
+
+# NW-001 - The OSI Model
 ## Learning Objectives
 
 By the end of this module, you will be able to:
