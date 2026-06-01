@@ -115,27 +115,75 @@ nav:
     - Broadcast Engineer: learning-paths/broadcast-engineer.md
   - Fundamentals:
     - Networking Basics:
-      - OSI Model: modules/fundamentals/networking/osi-model.md
+      - The OSI Model (NW-001): modules/fundamentals/networking/osi-model.md
+      - Network Topologies (NW-002): modules/fundamentals/networking/network-topologies.md
+      - Ethernet Standards & Cabling (NW-003): modules/fundamentals/networking/ethernet-cabling.md
     - IP Addressing:
-      - IP Addressing Fundamentals: modules/fundamentals/ip/ip-addressing.md
-      - IP Subnetting & VLSM: modules/fundamentals/ip/subnetting.md
+      - IP Addressing Fundamentals (IP-001): modules/fundamentals/ip/ip-addressing.md
+      - IP Subnetting & VLSM (IP-002): modules/fundamentals/ip/subnetting.md
+      - IPv6 Addressing (IP-003): modules/fundamentals/ip/ipv6-addressing.md
     - Access Media:
       - Grey Optical (AM-006): modules/fundamentals/access-media/grey-optical.md
       - Coloured Optics CWDM/DWDM (AM-007): modules/fundamentals/access-media/coloured-optical.md
     - Routing:
+      - Routing Fundamentals (RT-001): modules/fundamentals/routing/routing-fundamentals.md
+      - Static Routing (RT-002): modules/fundamentals/routing/static-routing.md
+      - RIP & Distance-Vector Routing (RT-003): modules/fundamentals/routing/rip-distance-vector.md
+      - OSPF Fundamentals (RT-004): modules/fundamentals/routing/ospf-fundamentals.md
+      - OSPF Advanced (RT-005): modules/fundamentals/routing/ospf-advanced.md
+      - IS-IS Fundamentals (RT-006): modules/fundamentals/routing/isis-fundamentals.md
+      - BGP Fundamentals (RT-007): modules/fundamentals/routing/bgp-fundamentals.md
+      - BGP Advanced (RT-008): modules/fundamentals/routing/bgp-advanced.md
+      - Route Redistribution & Policy (RT-009): modules/fundamentals/routing/route-redistribution.md
       - Multicast Routing (RT-011): modules/fundamentals/routing/multicast-routing.md
-    - Switching: []
-    - Carrier & Transport: []
+    - Switching:
+      - Switching Fundamentals (SW-001): modules/fundamentals/switching/switching-fundamentals.md
+      - VLANs & 802.1Q Trunking (SW-002): modules/fundamentals/switching/vlans-8021q.md
+      - Spanning Tree Protocol (SW-003): modules/fundamentals/switching/spanning-tree.md
+      - EtherChannel / LAG (LACP) (SW-004): modules/fundamentals/switching/etherchannel-lacp.md
+      - Port Security & DAI (SW-005): modules/fundamentals/switching/port-security.md
+    - Carrier & Transport:
+      - MPLS Fundamentals (CT-001): modules/fundamentals/carrier-transport/mpls-fundamentals.md
+      - MPLS VPNs - L3VPN & VRF (CT-002): modules/fundamentals/carrier-transport/mpls-vpns-l3vpn.md
+      - MPLS L2VPN - VPLS & Pseudowire (CT-003): modules/fundamentals/carrier-transport/mpls-l2vpn-vpls.md
+      - Segment Routing - SR-MPLS (CT-004): modules/fundamentals/carrier-transport/segment-routing-mpls.md
+      - SRv6 (CT-005): modules/fundamentals/carrier-transport/srv6.md
+      - EVPN Fundamentals (CT-006): modules/fundamentals/carrier-transport/evpn-fundamentals.md
+      - EVPN-VXLAN (CT-007): modules/fundamentals/carrier-transport/evpn-vxlan.md
+      - MEF Standards (CT-008): modules/fundamentals/carrier-transport/mef-standards.md
+      - Carrier Ethernet Services (CT-009): modules/fundamentals/carrier-transport/carrier-ethernet-services.md
+      - SDH/SONET & OTN Basics (CT-010): modules/fundamentals/carrier-transport/sdh-sonet-otn-basics.md
+      - Optical Transport Network (CT-011): modules/fundamentals/carrier-transport/otn.md
+      - Traffic Engineering (CT-012): modules/fundamentals/carrier-transport/traffic-engineering.md
     - Data Centre:
       - DC Network Design (DC-001): modules/fundamentals/datacentre/dc-network-design.md
     - Protocols: []
     - Network Functions: []
-    - Services: []
-    - Security: []
-    - QoS: []
+    - Services:
+      - DNS (SV-001): modules/fundamentals/services/dns.md
+      - DHCP (SV-002): modules/fundamentals/services/dhcp.md
+      - NAT & PAT (SV-003): modules/fundamentals/services/nat-pat.md
+      - NTP (SV-004): modules/fundamentals/services/ntp.md
+      - SNMP & Syslog (SV-005): modules/fundamentals/services/snmp-syslog.md
+    - Security:
+      - Access Control Lists (SEC-001): modules/fundamentals/security/acls.md
+      - Firewall Concepts (SEC-002): modules/fundamentals/security/firewall-concepts.md
+      - VPN & IPSec (SEC-003): modules/fundamentals/security/vpn-ipsec.md
+      - AAA - Authentication, Authorisation & Accounting (SEC-004): modules/fundamentals/security/aaa-tacacs-radius.md
+      - Encryption Standards & PKI (SEC-005): modules/fundamentals/security/encryption-pki.md
+      - Network Segmentation & DMZ (SEC-006): modules/fundamentals/security/segmentation-dmz.md
+    - QoS:
+      - QoS Fundamentals (QOS-001): modules/fundamentals/qos/qos-fundamentals.md
+      - QoS Classification & Marking (QOS-002): modules/fundamentals/qos/classification-marking.md
+      - Queuing Mechanisms (QOS-003): modules/fundamentals/qos/queuing-mechanisms.md
+      - Traffic Policing & Shaping (QOS-004): modules/fundamentals/qos/policing-shaping.md
     - RF: []
-    - Automation: []
-    - Professional Standards: modules/fundamentals/professional-standards/overview.md
+    - Automation:
+      - Python for Network Engineers (AUTO-001): modules/fundamentals/automation/python-networking.md
+      - REST APIs & Network Automation (AUTO-002): modules/fundamentals/automation/rest-api-automation.md
+      - NETCONF, YANG & gRPC (AUTO-003): modules/fundamentals/automation/netconf-yang-grpc.md
+      - Ansible for Network Automation (AUTO-004): modules/fundamentals/automation/ansible-networking.md
+    - Professional Standards & Frameworks (PS-000): modules/fundamentals/professional-standards/overview.md
   - Applied:
     - Data Network Engineer: modules/applied/data-network-engineer/overview.md
     - Carrier / SP Engineer: modules/applied/carrier-engineer/overview.md
