@@ -2,7 +2,7 @@
 title: "Ethernet Standards & Cabling"
 module_id: "NW-003"
 domain: "fundamentals/networking"
-difficulty: "novice"
+difficulty: "beginner"
 prerequisites: ["NW-001", "NW-002"]
 estimated_time: 35
 version: "1.0"

@@ -2,7 +2,7 @@
 title: "Network Topologies"
 module_id: "NW-002"
 domain: "fundamentals/networking"
-difficulty: "novice"
+difficulty: "beginner"
 prerequisites: ["NW-001"]
 estimated_time: 45
 version: "1.1"
