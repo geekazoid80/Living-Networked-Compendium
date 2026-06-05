@@ -13,8 +13,6 @@ prerequisites:
   - SW-001
   - SW-002
   - SW-003
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - switching

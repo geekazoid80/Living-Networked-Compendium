@@ -12,8 +12,6 @@ estimated_time: 55
 prerequisites:
   - SV-005
   - RT-001
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - automation

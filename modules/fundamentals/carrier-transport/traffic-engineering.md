@@ -14,8 +14,6 @@ prerequisites:
   - CT-004
   - RT-004
   - RT-006
-learning_path_tags:
-  - CE
 difficulty: advanced
 tags:
   - traffic-engineering

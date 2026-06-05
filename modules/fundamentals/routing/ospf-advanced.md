@@ -12,8 +12,6 @@ estimated_time: 60
 prerequisites:
   - RT-004
   - IP-002
-learning_path_tags:
-  - DNE
 difficulty: advanced
 tags:
   - ospf

@@ -13,8 +13,6 @@ prerequisites:
   - IP-001
   - IP-002
   - RT-001
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - acl

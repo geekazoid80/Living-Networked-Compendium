@@ -13,8 +13,6 @@ prerequisites:
   - IP-001
   - RT-001
   - SV-004
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - snmp

@@ -13,8 +13,6 @@ prerequisites:
   - SEC-001
   - SEC-002
   - IP-001
-learning_path_tags:
-  - DNE
 difficulty: advanced
 tags:
   - vpn

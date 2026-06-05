@@ -11,8 +11,6 @@ module_type: concept
 estimated_time: 45
 prerequisites:
   - CT-001
-learning_path_tags:
-  - CE
 difficulty: advanced
 tags:
   - sdh

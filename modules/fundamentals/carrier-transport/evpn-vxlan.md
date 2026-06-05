@@ -12,9 +12,6 @@ estimated_time: 60
 prerequisites:
   - CT-006
   - SW-002
-learning_path_tags:
-  - CE
-  - DCE
 difficulty: advanced
 tags:
   - evpn

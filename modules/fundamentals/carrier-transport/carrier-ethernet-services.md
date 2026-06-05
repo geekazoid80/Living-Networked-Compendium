@@ -13,8 +13,6 @@ prerequisites:
   - CT-008
   - CT-003
   - CT-006
-learning_path_tags:
-  - CE
 difficulty: advanced
 tags:
   - carrier-ethernet

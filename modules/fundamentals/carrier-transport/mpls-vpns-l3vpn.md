@@ -12,8 +12,6 @@ estimated_time: 60
 prerequisites:
   - CT-001
   - RT-007
-learning_path_tags:
-  - CE
 difficulty: advanced
 tags:
   - mpls

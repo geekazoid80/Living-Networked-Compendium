@@ -55,8 +55,8 @@ Builds on the DNE foundation and covers the transport technologies that underpin
 
 ---
 
-## Module Tags
+## Learning-path navigation
 
-Each module's frontmatter contains a `learning_path_tags` list showing which paths include that module. When reading the compendium as a reference rather than following a path, this tells you which role contexts a given topic is most relevant to.
+Each module page shows a "Part of these learning paths" block linking up to every role path that includes it. Membership is derived from the stage tables in each learning-path page, so a module that appears in both the data network engineer and carrier engineer paths links to both.
 
-Example: a module tagged `[DNE, CE]` is covered in both the data network engineer and carrier engineer paths. A module tagged `[CE]` only appears in the carrier track and assumes familiarity with the DNE foundation modules.
+When reading the compendium as a reference rather than following a path, this tells you at a glance which role contexts a given topic is most relevant to.

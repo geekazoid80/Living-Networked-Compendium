@@ -12,8 +12,6 @@ estimated_time: 45
 prerequisites:
   - SEC-003
   - SEC-004
-learning_path_tags:
-  - DNE
 difficulty: advanced
 tags:
   - encryption

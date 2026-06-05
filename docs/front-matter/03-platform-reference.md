@@ -9,10 +9,6 @@ ai_assisted: "drafting"
 module_type: reference
 estimated_time: 10
 prerequisites: []
-learning_path_tags:
-  - DNE
-  - CE
-  - DCE
 difficulty: beginner
 tags:
   - platforms

@@ -13,8 +13,6 @@ prerequisites:
   - CT-003
   - CT-002
   - RT-007
-learning_path_tags:
-  - CE
 difficulty: advanced
 tags:
   - evpn

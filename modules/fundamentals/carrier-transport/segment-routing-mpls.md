@@ -13,8 +13,6 @@ prerequisites:
   - CT-001
   - RT-004
   - RT-006
-learning_path_tags:
-  - CE
 difficulty: advanced
 tags:
   - segment-routing

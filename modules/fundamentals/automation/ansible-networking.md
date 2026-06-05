@@ -11,8 +11,6 @@ module_type: concept
 estimated_time: 55
 prerequisites:
   - AUTO-001
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - automation

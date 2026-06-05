@@ -12,8 +12,6 @@ estimated_time: 40
 prerequisites:
   - QOS-001
   - QOS-002
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - qos

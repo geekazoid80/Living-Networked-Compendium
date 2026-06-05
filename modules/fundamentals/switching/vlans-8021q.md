@@ -12,9 +12,6 @@ estimated_time: 45
 prerequisites:
   - SW-001
   - NW-002
-learning_path_tags:
-  - DNE
-  - CE
 difficulty: intermediate
 tags:
   - switching
