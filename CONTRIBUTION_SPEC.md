@@ -85,7 +85,7 @@ Required keys:
 | `difficulty` | `beginner` / `intermediate` / `advanced` | Reader skill threshold. |
 | `prerequisites` | YAML list of `module_id` strings | Inline (`["RT-001", "NW-002"]`) or block‑list shape both accepted. Empty list (`[]`) is valid for foundational modules. |
 | `estimated_time` | integer (minutes) | Realistic study time, not minimum reading time. |
-| `version` | quoted SemVer | `"1.0"` and `"1.0.0"` shapes both accepted. |
+| `version` | quoted SemVer `MAJOR.MINOR.PATCH` | Three-component form required, e.g. `"1.0.0"`. Two-component values (`"1.0"`) are rejected by CI. |
 | `last_updated` | ISO date `"YYYY-MM-DD"` | Quoted. Authoritative for "is this stale" checks. |
 | `maintainer` | quoted GitHub handle `"@<handle>"` | The accountable steward, not necessarily the original author. |
 | `human_reviewed` | boolean | `false` is permitted on drafts. Per `AI_GUARDRAILS.md`, `true` is required before a module is treated as authoritative. The CI validator checks presence, not truth. |

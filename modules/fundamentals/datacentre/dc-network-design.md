@@ -5,7 +5,7 @@ domain: "fundamentals/datacentre"
 difficulty: "advanced"
 prerequisites: ["NW-002", "SW-001", "RT-007"]
 estimated_time: 75
-version: "0.1"
+version: "0.1.0"
 last_updated: "2026-05-18"
 maintainer: "@geekazoid80"
 human_reviewed: false

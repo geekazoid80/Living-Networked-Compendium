@@ -5,7 +5,7 @@ domain: "applied/_new-path-template"
 difficulty: "intermediate"
 prerequisites: []
 estimated_time: 10
-version: "1.0"
+version: "1.0.0"
 last_updated: "YYYY-MM-DD"
 maintainer: "@your-github-handle"
 human_reviewed: false

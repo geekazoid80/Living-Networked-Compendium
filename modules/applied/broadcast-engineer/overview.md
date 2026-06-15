@@ -5,7 +5,7 @@ domain: "applied/broadcast-engineer"
 difficulty: "intermediate"
 prerequisites: ["NW-001", "IP-001", "IP-002", "SW-001", "SW-002"]
 estimated_time: 10
-version: "1.0"
+version: "1.0.0"
 last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
