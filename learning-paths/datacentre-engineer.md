@@ -24,45 +24,47 @@ See [modules/applied/datacentre-engineer/overview.md](../modules/applied/datacen
 | 4 | SW-001 | Switching Fundamentals | pending |  |
 | 5 | SW-002 | VLANs & 802.1Q Trunking | pending |  |
 | 6 | RT-007 | BGP Fundamentals | pending |  |
+| 7 | PS-000 | Professional Standards & Frameworks | pending |  |
 
 ## Stage 2 — Data Centre Design
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 7 | DC-001 | Data Centre Network Design | pending |  |
-| 8 | FN-001 | How Switching Works Internally (MAC tables, CAM, TCAM) | needed |  |
-| 9 | FN-002 | How Routing Works Internally (FIB, CEF, ASIC forwarding) | needed |  |
+| 8 | DC-001 | Data Centre Network Design | pending |  |
+| 9 | FN-001 | How Switching Works Internally (MAC tables, CAM, TCAM) | needed |  |
+| 10 | FN-002 | How Routing Works Internally (FIB, CEF, ASIC forwarding) | needed |  |
 
 ## Stage 3 — VXLAN Overlay
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 10 | DC-002 | VXLAN Fundamentals (RFC 7348) | needed |  |
-| 11 | CT-006 | EVPN Fundamentals | needed |  |
-| 12 | DC-004 | EVPN-VXLAN in the Data Centre | needed |  |
+| 11 | DC-002 | VXLAN Fundamentals (RFC 7348) | needed |  |
+| 12 | CT-006 | EVPN Fundamentals | pending |  |
+| 13 | CT-007 | EVPN-VXLAN | pending |  |
+| 14 | DC-004 | EVPN-VXLAN in the Data Centre | needed |  |
 
 ## Stage 4 — BGP Underlay
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 13 | DC-003 | BGP in the Data Centre (RFC 7938) | pending |  |
-| 14 | RT-008 | BGP Advanced - Communities, Policy & Filtering | needed |  |
+| 15 | DC-003 | BGP in the Data Centre (RFC 7938) | pending |  |
+| 16 | RT-008 | BGP Advanced - Communities, Policy & Filtering | needed |  |
 
 ## Stage 5 — DCI & Storage Networking
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 15 | DC-005 | Data Centre Interconnect (DCI) | needed |  |
-| 16 | DC-006 | Storage Networking Basics for DC Engineers | needed |  |
+| 17 | DC-005 | Data Centre Interconnect (DCI) | needed |  |
+| 18 | DC-006 | Storage Networking Basics for DC Engineers | needed |  |
 
 ## Stage 6 — Automation & Operations
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 17 | AUTO-001 | Python for Network Engineers | pending |  |
-| 18 | AUTO-002 | REST APIs & Network Automation | pending |  |
-| 19 | AUTO-004 | Ansible for Network Automation | pending |  |
-| 20 | AUTO-005 | Terraform for Network Infrastructure | needed |  |
+| 19 | AUTO-001 | Python for Network Engineers | pending |  |
+| 20 | AUTO-002 | REST APIs & Network Automation | pending |  |
+| 21 | AUTO-004 | Ansible for Network Automation | pending |  |
+| 22 | AUTO-005 | Terraform for Network Infrastructure | needed |  |
 
 ---
 

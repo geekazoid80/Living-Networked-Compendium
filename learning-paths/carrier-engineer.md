@@ -24,54 +24,57 @@ See [modules/applied/carrier-engineer/overview.md](../modules/applied/carrier-en
 | 4 | SW-001 | Switching Fundamentals | pending |  |
 | 5 | RT-004 | OSPF Fundamentals | pending |  |
 | 6 | RT-007 | BGP Fundamentals | pending |  |
+| 7 | PS-000 | Professional Standards & Frameworks | pending |  |
 
 ## Stage 2 — Optical Transport
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 7 | CT-010 | SDH/SONET & OTN Basics | pending |  |
-| 8 | CT-011 | Optical Transport Network (OTN) - Deep Dive | pending |  |
+| 8 | CT-010 | SDH/SONET & OTN Basics | pending |  |
+| 9 | CT-011 | Optical Transport Network (OTN) - Deep Dive | pending |  |
 
 ## Stage 3 — Carrier Routing
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 9 | RT-006 | IS-IS Fundamentals | pending |  |
-| 10 | RT-008 | BGP Advanced - Communities, Policy & Filtering | pending |  |
-| 11 | RT-009 | Route Redistribution & Policy | pending |  |
+| 10 | RT-006 | IS-IS Fundamentals | pending |  |
+| 11 | RT-008 | BGP Advanced - Communities, Policy & Filtering | pending |  |
+| 12 | RT-009 | Route Redistribution & Policy | pending |  |
+| 13 | RT-011 | Multicast Routing | pending |  |
 
 ## Stage 4 — MPLS
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 12 | CT-001 | MPLS Fundamentals | pending |  |
-| 13 | CT-002 | MPLS VPNs - L3VPN & VRF | needed |  |
-| 14 | CT-003 | MPLS L2VPN - VPLS & Pseudowire | needed |  |
+| 14 | CT-001 | MPLS Fundamentals | pending |  |
+| 15 | CT-002 | MPLS VPNs - L3VPN & VRF | needed |  |
+| 16 | CT-003 | MPLS L2VPN - VPLS & Pseudowire | needed |  |
 
 ## Stage 5 — Segment Routing
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 15 | CT-004 | Segment Routing - SR-MPLS | needed |  |
-| 16 | CT-005 | SRv6 — Segment Routing over IPv6 | needed |  |
-| 17 | CT-012 | Traffic Engineering - RSVP-TE & SR-TE | needed |  |
+| 17 | CT-004 | Segment Routing - SR-MPLS | needed |  |
+| 18 | CT-005 | SRv6 — Segment Routing over IPv6 | needed |  |
+| 19 | CT-012 | Traffic Engineering - RSVP-TE & SR-TE | needed |  |
 
 ## Stage 6 — EVPN & Carrier Ethernet
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 18 | CT-006 | EVPN Fundamentals | needed |  |
-| 19 | CT-008 | MEF Standards & Carrier Ethernet Framework | needed |  |
-| 20 | CT-009 | Carrier Ethernet Services - Design & Operations | needed |  |
+| 20 | CT-006 | EVPN Fundamentals | pending |  |
+| 21 | CT-007 | EVPN-VXLAN | pending |  |
+| 22 | CT-008 | MEF Standards & Carrier Ethernet Framework | needed |  |
+| 23 | CT-009 | Carrier Ethernet Services - Design & Operations | needed |  |
 
 ## Stage 7 — Operations & Automation
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 21 | QOS-005 | QoS in MPLS Networks | needed |  |
-| 22 | PROTO-007 | Streaming Telemetry (gNMI / gRPC) | pending |  |
-| 23 | PROTO-008 | NETCONF / YANG for Carrier Networks | pending |  |
-| 24 | AUTO-004 | Ansible for Network Automation | pending |  |
+| 24 | QOS-005 | QoS in MPLS Networks | needed |  |
+| 25 | PROTO-007 | Streaming Telemetry (gNMI / gRPC) | pending |  |
+| 26 | PROTO-008 | NETCONF / YANG for Carrier Networks | pending |  |
+| 27 | AUTO-004 | Ansible for Network Automation | pending |  |
 
 ---
 
