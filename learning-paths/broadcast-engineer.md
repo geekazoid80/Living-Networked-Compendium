@@ -35,7 +35,15 @@ Broadcast network engineering sits at the intersection of traditional IP network
 
 *Same as the Data Network Engineer path, Stages 1–4. Complete those first.*
 
-Required prerequisites: NW-001, IP-001, IP-002, RT-001, SW-001, SW-002
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 1 | NW-001 | The OSI Model | done |  |
+| 2 | IP-001 | IP Addressing Fundamentals | done |  |
+| 3 | IP-002 | IP Subnetting & VLSM | done |  |
+| 4 | RT-001 | Routing Fundamentals | pending |  |
+| 5 | SW-001 | Switching Fundamentals | pending |  |
+| 6 | SW-002 | VLANs & 802.1Q Trunking | pending |  |
+| 7 | PS-000 | Professional Standards & Frameworks | pending |  |
 
 ---
 
@@ -43,9 +51,9 @@ Required prerequisites: NW-001, IP-001, IP-002, RT-001, SW-001, SW-002
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 5 | BRD-001 | Video Fundamentals (resolution, frame rate, colour spaces) | needed |  |
-| 6 | BRD-002 | Video Compression (MPEG-2, H.264, H.265/HEVC, AV1) | needed |  |
-| 7 | BRD-003 | Audio in Broadcast Networks | needed |  |
+| 8 | BRD-001 | Video Fundamentals (resolution, frame rate, colour spaces) | needed |  |
+| 9 | BRD-002 | Video Compression (MPEG-2, H.264, H.265/HEVC, AV1) | needed |  |
+| 10 | BRD-003 | Audio in Broadcast Networks | needed |  |
 
 ---
 
@@ -53,10 +61,10 @@ Required prerequisites: NW-001, IP-001, IP-002, RT-001, SW-001, SW-002
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 8 | BRD-004 | MPEG-TS: The Workhorse of Broadcast | needed |  |
-| 9 | BRD-005 | Streaming Protocols (RTMP, HLS, DASH, SRT, RIST) | needed |  |
-| 10 | BRD-006 | Multicast Fundamentals (IGMP, PIM, SSM) | needed |  |
-| 11 | BRD-007 | Jitter, Latency & Lip-Sync Management | needed |  |
+| 11 | BRD-004 | MPEG-TS: The Workhorse of Broadcast | needed |  |
+| 12 | BRD-005 | Streaming Protocols (RTMP, HLS, DASH, SRT, RIST) | needed |  |
+| 13 | BRD-006 | Multicast Fundamentals (IGMP, PIM, SSM) | needed |  |
+| 14 | BRD-007 | Jitter, Latency & Lip-Sync Management | needed |  |
 
 ---
 
@@ -64,8 +72,8 @@ Required prerequisites: NW-001, IP-001, IP-002, RT-001, SW-001, SW-002
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 12 | BRD-008 | Clock & Sync in Broadcast (PTP/IEEE 1588, SMPTE ST 2059) | needed |  |
-| 13 | BRD-009 | NTP vs PTP — When Each Applies | needed |  |
+| 15 | BRD-008 | Clock & Sync in Broadcast (PTP/IEEE 1588, SMPTE ST 2059) | needed |  |
+| 16 | BRD-009 | NTP vs PTP — When Each Applies | needed |  |
 
 ---
 
@@ -73,9 +81,9 @@ Required prerequisites: NW-001, IP-001, IP-002, RT-001, SW-001, SW-002
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 14 | BRD-010 | SMPTE ST 2110 — IP in the Production Studio | needed |  |
-| 15 | BRD-011 | SDI vs IP Production Networks | needed |  |
-| 16 | BRD-012 | Redundancy & Failover in Production Networks | needed |  |
+| 17 | BRD-010 | SMPTE ST 2110 — IP in the Production Studio | needed |  |
+| 18 | BRD-011 | SDI vs IP Production Networks | needed |  |
+| 19 | BRD-012 | Redundancy & Failover in Production Networks | needed |  |
 
 ---
 
@@ -83,9 +91,9 @@ Required prerequisites: NW-001, IP-001, IP-002, RT-001, SW-001, SW-002
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 17 | BRD-013 | CDN Architecture & Edge Caching | needed |  |
-| 18 | BRD-014 | OTT Platform Design | needed |  |
-| 19 | BRD-015 | Live Event Networking | needed |  |
+| 20 | BRD-013 | CDN Architecture & Edge Caching | needed |  |
+| 21 | BRD-014 | OTT Platform Design | needed |  |
+| 22 | BRD-015 | Live Event Networking | needed |  |
 
 ---
 

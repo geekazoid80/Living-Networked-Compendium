@@ -26,6 +26,7 @@ This path takes you from network fundamentals through to professional-level ente
 | 3 | NW-003 | Ethernet & Cabling | pending | 35 min |
 | 4 | [IP-001](../modules/fundamentals/ip/ip-addressing.md) | IP Addressing Fundamentals | done | 45 min |
 | 5 | [IP-002](../modules/fundamentals/ip/subnetting.md) | IP Subnetting & VLSM | done | 60 min |
+| 6 | PS-000 | Professional Standards & Frameworks | pending |  |
 
 **Stage 1 milestone:** You can describe the OSI model, calculate subnets, and identify what type of cable or connector is needed for a given link.
 
@@ -37,11 +38,11 @@ This path takes you from network fundamentals through to professional-level ente
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 6 | SW-001 | Switching Fundamentals | pending | 40 min |
-| 7 | SW-002 | VLANs & Trunking (802.1Q) | pending | 50 min |
-| 8 | SW-003 | Spanning Tree Protocol (STP/RSTP) | pending | 50 min |
-| 9 | SW-004 | EtherChannel & Link Aggregation | pending | 35 min |
-| 10 | SW-005 | Port Security & DHCP Snooping | pending | 30 min |
+| 7 | SW-001 | Switching Fundamentals | pending | 40 min |
+| 8 | SW-002 | VLANs & Trunking (802.1Q) | pending | 50 min |
+| 9 | SW-003 | Spanning Tree Protocol (STP/RSTP) | pending | 50 min |
+| 10 | SW-004 | EtherChannel & Link Aggregation | pending | 35 min |
+| 11 | SW-005 | Port Security & DHCP Snooping | pending | 30 min |
 
 **Stage 2 milestone:** You can build a switched network with VLANs, trunks, and loop prevention. You understand what STP is doing and why.
 
@@ -53,12 +54,12 @@ This path takes you from network fundamentals through to professional-level ente
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 11 | RT-001 | Routing Fundamentals | pending | 45 min |
-| 12 | RT-002 | Static Routing | pending | 40 min |
-| 13 | RT-003 | RIP & Distance-Vector Concepts | pending | 30 min |
-| 14 | RT-004 | OSPF Fundamentals | pending | 60 min |
-| 15 | RT-007 | BGP Fundamentals | pending | 60 min |
-| 16 | IP-003 | IPv6 Addressing | pending | 45 min |
+| 12 | RT-001 | Routing Fundamentals | pending | 45 min |
+| 13 | RT-002 | Static Routing | pending | 40 min |
+| 14 | RT-003 | RIP & Distance-Vector Concepts | pending | 30 min |
+| 15 | RT-004 | OSPF Fundamentals | pending | 60 min |
+| 16 | RT-007 | BGP Fundamentals | pending | 60 min |
+| 17 | IP-003 | IPv6 Addressing | pending | 45 min |
 
 **Stage 3 milestone:** You can configure and verify static routes and OSPF. You understand what BGP is and can describe its role in the internet.
 
@@ -70,13 +71,13 @@ This path takes you from network fundamentals through to professional-level ente
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 17 | SV-001 | DNS | pending | 35 min |
-| 18 | SV-002 | DHCP | pending | 40 min |
-| 19 | SV-003 | NAT & PAT | pending | 45 min |
-| 20 | SV-004 | NTP & Time Synchronisation | pending | 25 min |
-| 21 | SV-005 | SNMP & Syslog | pending | 35 min |
-| 22 | SEC-001 | Access Control Lists (ACLs) | pending | 55 min |
-| 23 | SEC-002 | Firewall Concepts | pending | 45 min |
+| 18 | SV-001 | DNS | pending | 35 min |
+| 19 | SV-002 | DHCP | pending | 40 min |
+| 20 | SV-003 | NAT & PAT | pending | 45 min |
+| 21 | SV-004 | NTP & Time Synchronisation | pending | 25 min |
+| 22 | SV-005 | SNMP & Syslog | pending | 35 min |
+| 23 | SEC-001 | Access Control Lists (ACLs) | pending | 55 min |
+| 24 | SEC-002 | Firewall Concepts | pending | 45 min |
 
 **Stage 4 milestone:** CCNA-level readiness. You can design, configure, and troubleshoot a small-to-medium enterprise network.
 
@@ -99,10 +100,11 @@ At this point you have covered the core of the CCNA curriculum.
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 24 | RT-005 | OSPF Advanced - Multi-Area, Redistribution & Filtering | pending | 75 min |
-| 25 | RT-008 | BGP Advanced - Communities, Policy & Filtering | pending | 90 min |
-| 26 | RT-009 | Route Redistribution & Policy | pending | 60 min |
-| 27 | CT-001 | MPLS Fundamentals | pending | 60 min |
+| 25 | RT-005 | OSPF Advanced - Multi-Area, Redistribution & Filtering | pending | 75 min |
+| 26 | RT-008 | BGP Advanced - Communities, Policy & Filtering | pending | 90 min |
+| 27 | RT-009 | Route Redistribution & Policy | pending | 60 min |
+| 28 | RT-011 | Multicast Routing | pending |  |
+| 29 | CT-001 | MPLS Fundamentals | pending | 60 min |
 
 ---
 
@@ -112,10 +114,10 @@ At this point you have covered the core of the CCNA curriculum.
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 28 | QOS-001 | QoS Fundamentals | pending | 45 min |
-| 29 | QOS-002 | Traffic Classification & Marking (DSCP, CoS) | pending | 40 min |
-| 30 | QOS-003 | Queuing Mechanisms | pending | 45 min |
-| 31 | QOS-004 | Traffic Policing vs. Shaping | pending | 40 min |
+| 30 | QOS-001 | QoS Fundamentals | pending | 45 min |
+| 31 | QOS-002 | Traffic Classification & Marking (DSCP, CoS) | pending | 40 min |
+| 32 | QOS-003 | Queuing Mechanisms | pending | 45 min |
+| 33 | QOS-004 | Traffic Policing vs. Shaping | pending | 40 min |
 
 ---
 
@@ -125,10 +127,10 @@ At this point you have covered the core of the CCNA curriculum.
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 32 | SEC-003 | VPN & IPSec | pending | 60 min |
-| 33 | SEC-004 | AAA: TACACS+ & RADIUS | pending | 45 min |
-| 34 | SEC-005 | Encryption Standards & PKI | pending | 50 min |
-| 35 | SEC-006 | Network Segmentation & DMZ Design | pending | 50 min |
+| 34 | SEC-003 | VPN & IPSec | pending | 60 min |
+| 35 | SEC-004 | AAA: TACACS+ & RADIUS | pending | 45 min |
+| 36 | SEC-005 | Encryption Standards & PKI | pending | 50 min |
+| 37 | SEC-006 | Network Segmentation & DMZ Design | pending | 50 min |
 
 ---
 
@@ -138,10 +140,10 @@ At this point you have covered the core of the CCNA curriculum.
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 36 | AUTO-001 | Python for Network Engineers | pending | 75 min |
-| 37 | AUTO-002 | REST APIs & Network Automation | pending | 60 min |
-| 38 | AUTO-003 | NETCONF, YANG & gRPC | pending | 60 min |
-| 39 | AUTO-004 | Ansible for Network Automation | pending | 60 min |
+| 38 | AUTO-001 | Python for Network Engineers | pending | 75 min |
+| 39 | AUTO-002 | REST APIs & Network Automation | pending | 60 min |
+| 40 | AUTO-003 | NETCONF, YANG & gRPC | pending | 60 min |
+| 41 | AUTO-004 | Ansible for Network Automation | pending | 60 min |
 
 ---
 

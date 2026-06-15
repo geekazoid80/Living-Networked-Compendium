@@ -24,45 +24,46 @@ See [modules/applied/rf-coax-engineer/overview.md](../modules/applied/rf-coax-en
 | 3 | IP-002 | IP Subnetting & VLSM | done |  |
 | 4 | RF-001 | RF Fundamentals | pending |  |
 | 5 | AM-005 | Coaxial Cable & Cable Broadband | pending |  |
+| 6 | PS-000 | Professional Standards & Frameworks | pending |  |
 
 ## Stage 2 — HFC Plant
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 6 | AM-006 | Grey Optical - Uncoloured / Direct Fibre | pending |  |
-| 7 | AM-007 | Coloured Optics - CWDM & DWDM | pending |  |
-| 8 | AM-008 | RF over Optical / HFC | pending |  |
+| 7 | AM-006 | Grey Optical - Uncoloured / Direct Fibre | pending |  |
+| 8 | AM-007 | Coloured Optics - CWDM & DWDM | pending |  |
+| 9 | AM-008 | RF over Optical / HFC | pending |  |
 
 ## Stage 3 — DOCSIS
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 9 | RCE-001 | DOCSIS 3.0 — Channel Bonding | needed |  |
-| 10 | RCE-002 | DOCSIS 3.1 — OFDM and OFDMA | needed |  |
-| 11 | RCE-003 | DOCSIS 4.0 — Full Duplex and Extended Spectrum | needed |  |
+| 10 | RCE-001 | DOCSIS 3.0 — Channel Bonding | needed |  |
+| 11 | RCE-002 | DOCSIS 3.1 — OFDM and OFDMA | needed |  |
+| 12 | RCE-003 | DOCSIS 4.0 — Full Duplex and Extended Spectrum | needed |  |
 
 ## Stage 4 — CMTS & IP Integration
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 12 | RCE-004 | CMTS Architecture and Configuration | needed |  |
-| 13 | RCE-005 | Subscriber Provisioning (DHCP, TFTP, config files) | needed |  |
-| 14 | QOS-001 | QoS Fundamentals - Delay, Jitter, Loss & Bandwidth | pending |  |
-| 15 | RCE-006 | QoS in DOCSIS (Service Flows, Classifiers) | needed |  |
+| 13 | RCE-004 | CMTS Architecture and Configuration | needed |  |
+| 14 | RCE-005 | Subscriber Provisioning (DHCP, TFTP, config files) | needed |  |
+| 15 | QOS-001 | QoS Fundamentals - Delay, Jitter, Loss & Bandwidth | pending |  |
+| 16 | RCE-006 | QoS in DOCSIS (Service Flows, Classifiers) | needed |  |
 
 ## Stage 5 — Remote PHY / DAA
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 16 | RCE-007 | Remote PHY Architecture (RPD, CCAP) | needed |  |
-| 17 | RCE-008 | Fibre-Deep and Node + 0 Design | needed |  |
+| 17 | RCE-007 | Remote PHY Architecture (RPD, CCAP) | needed |  |
+| 18 | RCE-008 | Fibre-Deep and Node + 0 Design | needed |  |
 
 ## Stage 6 — Operations
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 18 | RCE-009 | Signal Level Management and Upstream Noise | needed |  |
-| 19 | RCE-010 | Node Utilisation and Splitting Decisions | needed |  |
+| 19 | RCE-009 | Signal Level Management and Upstream Noise | needed |  |
+| 20 | RCE-010 | Node Utilisation and Splitting Decisions | needed |  |
 
 ---
 
