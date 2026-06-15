@@ -38,24 +38,24 @@ See [modules/applied/carrier-engineer/overview.md](../modules/applied/carrier-en
 | Order | Module ID | Title | Status |
 |---|---|---|---|
 | 10 | CT-001 | MPLS Fundamentals | pending |
-| 11 | CT-002 | MPLS L3VPN (RFC 4364) | needed |
-| 12 | CT-003 | MPLS L2VPN — VPLS and VPWS | needed |
+| 11 | CT-002 | MPLS VPNs - L3VPN & VRF | needed |
+| 12 | CT-003 | MPLS L2VPN - VPLS & Pseudowire | needed |
 
 ## Stage 4 — Segment Routing
 
 | Order | Module ID | Title | Status |
 |---|---|---|---|
-| 13 | CT-004 | Segment Routing MPLS (SR-MPLS) | needed |
+| 13 | CT-004 | Segment Routing - SR-MPLS | needed |
 | 14 | CT-005 | SRv6 — Segment Routing over IPv6 | needed |
-| 15 | CT-012 | Traffic Engineering — RSVP-TE and SR-TE | needed |
+| 15 | CT-012 | Traffic Engineering - RSVP-TE & SR-TE | needed |
 
 ## Stage 5 — EVPN & Carrier Ethernet
 
 | Order | Module ID | Title | Status |
 |---|---|---|---|
-| 16 | CT-006 | EVPN Fundamentals (RFC 7432) | needed |
-| 17 | CT-008 | MEF Standards — Carrier Ethernet Services (E-Line, E-LAN, E-Tree) | needed |
-| 18 | CT-009 | Metro Ethernet Design and Operations | needed |
+| 16 | CT-006 | EVPN Fundamentals | needed |
+| 17 | CT-008 | MEF Standards & Carrier Ethernet Framework | needed |
+| 18 | CT-009 | Carrier Ethernet Services - Design & Operations | needed |
 
 ## Stage 6 — Operations & Automation
 

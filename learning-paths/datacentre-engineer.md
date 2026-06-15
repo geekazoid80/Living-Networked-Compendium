@@ -29,7 +29,7 @@ See [modules/applied/datacentre-engineer/overview.md](../modules/applied/datacen
 
 | Order | Module ID | Title | Status |
 |---|---|---|---|
-| 7 | DC-001 | Data Centre Network Design — Spine-Leaf Topology | pending |
+| 7 | DC-001 | Data Centre Network Design | pending |
 | 8 | FN-001 | How Switching Works Internally (MAC tables, CAM, TCAM) | needed |
 | 9 | FN-002 | How Routing Works Internally (FIB, CEF, ASIC forwarding) | needed |
 
@@ -38,7 +38,7 @@ See [modules/applied/datacentre-engineer/overview.md](../modules/applied/datacen
 | Order | Module ID | Title | Status |
 |---|---|---|---|
 | 10 | DC-002 | VXLAN Fundamentals (RFC 7348) | needed |
-| 11 | CT-006 | EVPN Fundamentals (RFC 7432) | needed |
+| 11 | CT-006 | EVPN Fundamentals | needed |
 | 12 | DC-004 | EVPN-VXLAN in the Data Centre | needed |
 
 ## Stage 4 — BGP Underlay
@@ -46,7 +46,7 @@ See [modules/applied/datacentre-engineer/overview.md](../modules/applied/datacen
 | Order | Module ID | Title | Status |
 |---|---|---|---|
 | 13 | DC-003 | BGP in the Data Centre (RFC 7938) | pending |
-| 14 | RT-008 | BGP Advanced — Route Reflection, Communities, Policy | needed |
+| 14 | RT-008 | BGP Advanced - Communities, Policy & Filtering | needed |
 
 ## Stage 5 — DCI & Storage Networking
 
@@ -60,7 +60,7 @@ See [modules/applied/datacentre-engineer/overview.md](../modules/applied/datacen
 | Order | Module ID | Title | Status |
 |---|---|---|---|
 | 17 | AUTO-001 | Python for Network Engineers | pending |
-| 18 | AUTO-002 | REST APIs and Network Automation | pending |
+| 18 | AUTO-002 | REST APIs & Network Automation | pending |
 | 19 | AUTO-004 | Ansible for Network Automation | pending |
 | 20 | AUTO-005 | Terraform for Network Infrastructure | needed |
 
