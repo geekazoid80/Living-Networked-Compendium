@@ -14,8 +14,6 @@ prerequisites:
   - SEC-002
   - SW-002
   - RT-001
-learning_path_tags:
-  - DNE
 difficulty: advanced
 tags:
   - segmentation

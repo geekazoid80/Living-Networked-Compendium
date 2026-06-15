@@ -11,8 +11,6 @@ module_type: concept
 estimated_time: 50
 prerequisites:
   - CT-010
-learning_path_tags:
-  - CE
 difficulty: advanced
 tags:
   - otn

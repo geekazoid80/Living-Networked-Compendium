@@ -14,9 +14,6 @@ prerequisites:
   - RT-007
   - RT-008
   - SEC-001
-learning_path_tags:
-  - DNE
-  - CE
 difficulty: advanced
 tags:
   - redistribution

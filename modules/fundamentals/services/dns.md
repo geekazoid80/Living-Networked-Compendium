@@ -12,8 +12,6 @@ estimated_time: 45
 prerequisites:
   - IP-001
   - RT-001
-learning_path_tags:
-  - DNE
 difficulty: beginner
 tags:
   - dns

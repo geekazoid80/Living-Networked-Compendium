@@ -12,8 +12,6 @@ estimated_time: 50
 prerequisites:
   - CT-004
   - IP-003
-learning_path_tags:
-  - CE
 difficulty: advanced
 tags:
   - srv6

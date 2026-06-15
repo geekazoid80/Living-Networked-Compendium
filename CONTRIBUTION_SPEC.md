@@ -91,7 +91,9 @@ Required keys:
 | `human_reviewed` | boolean | `false` is permitted on drafts. Per `AI_GUARDRAILS.md`, `true` is required before a module is treated as authoritative. The CI validator checks presence, not truth. |
 | `ai_assisted` | quoted string or `false` | E.g. `"drafting"`, `"editing"`, `"synthesis"`, or `false` if no AI assistance was used. |
 
-Optional supplementary keys (`tags`, `vendors`, `language`, `cert_alignment`, `description`, `module_type`, `status`, `learning_path_tags`) may appear and are not validator‑gated. They are documented per author convention rather than spec‑mandated.
+Optional supplementary keys (`tags`, `vendors`, `language`, `cert_alignment`, `description`, `module_type`, `status`) may appear and are not validator‑gated. They are documented per author convention rather than spec‑mandated.
+
+`learning_path_tags` was retired in favour of build-time reverse navigation: each module page now links up to its learning paths, derived from the hand-curated stage tables in `learning-paths/` (see `tools/scripts/inject_learning_paths.py`).
 
 The validator job in `.github/workflows/build-deploy.yml` is the executable definition; this table is its prose mirror. If the two ever diverge, the spec is authoritative and the validator must catch up (per §9).
 

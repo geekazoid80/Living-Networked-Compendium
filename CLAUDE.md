@@ -14,7 +14,7 @@ Derived from: README.md opening, CONTRIBUTING.md § 2 Philosophy, AI_GUARDRAILS.
 2. **Interconnectedness / no orphans.** Every lesson links into a learning path; orphan modules silently break the map the README promises. Cross-link health and nav coverage are north-star concerns.
 3. **Atomic, readable lessons.** Each module is intelligible to a reader without private context (CONTRIBUTING.md § 2: "Assume future readers do not share your context").
 4. **Multi-vendor parity + multi-format outputs.** No vendor is the default; one source produces web + PDF + PPTX. Build chains that bias one platform are entropy.
-5. **Catalogue indexability.** Frontmatter drives navigation, search, prerequisite resolution, and learning-path sequencing. Catalogue cosmetics are TIER 2 unless a field actually drives surface behaviour (e.g. `learning_path_tags`), in which case it promotes.
+5. **Catalogue indexability.** Frontmatter drives navigation, search, prerequisite resolution, and learning-path sequencing. Catalogue cosmetics are TIER 2 unless a field actually drives surface behaviour (e.g. `tags`, which feeds the rendered tag index), in which case it promotes.
 
 ### Tiering rule for work selection
 

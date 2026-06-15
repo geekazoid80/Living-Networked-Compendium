@@ -12,8 +12,6 @@ estimated_time: 35
 prerequisites:
   - QOS-001
   - SEC-001
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - qos

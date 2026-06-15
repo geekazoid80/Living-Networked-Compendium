@@ -11,9 +11,6 @@ module_type: concept
 estimated_time: 60
 prerequisites:
   - RT-007
-learning_path_tags:
-  - DNE
-  - CE
 difficulty: advanced
 tags:
   - bgp

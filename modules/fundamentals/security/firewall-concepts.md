@@ -13,8 +13,6 @@ prerequisites:
   - SEC-001
   - IP-001
   - RT-001
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - firewall

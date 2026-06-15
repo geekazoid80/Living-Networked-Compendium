@@ -11,9 +11,6 @@ module_type: concept
 estimated_time: 50
 prerequisites:
   - AUTO-002
-learning_path_tags:
-  - DNE
-  - CE
 difficulty: advanced
 tags:
   - netconf

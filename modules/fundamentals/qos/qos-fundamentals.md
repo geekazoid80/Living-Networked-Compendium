@@ -12,8 +12,6 @@ estimated_time: 35
 prerequisites:
   - IP-001
   - RT-001
-learning_path_tags:
-  - DNE
 difficulty: intermediate
 tags:
   - qos

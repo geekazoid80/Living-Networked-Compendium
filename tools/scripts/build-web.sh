@@ -62,6 +62,11 @@ stage() {
   done
 }
 
+inject_reverse_nav() {
+  echo "==> Injecting reverse learning-path navigation into staged modules..."
+  python3 tools/scripts/inject_learning_paths.py docs
+}
+
 # Always clean up staged content on exit (success or failure)
 trap clean_staged EXIT
 
@@ -73,6 +78,7 @@ case "${1:-build}" in
     ;;
   --serve)
     stage
+    inject_reverse_nav
     trap - EXIT  # Keep staged content while mkdocs serve is running
     echo "==> Starting mkdocs serve (Ctrl-C to stop)..."
     echo "    Note: staged docs/ content will remain on disk after exit."
@@ -81,6 +87,7 @@ case "${1:-build}" in
     ;;
   build|"")
     stage
+    inject_reverse_nav
     echo "==> Building MkDocs site..."
     mkdocs build --strict
     echo ""

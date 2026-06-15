@@ -12,8 +12,6 @@ estimated_time: 45
 prerequisites:
   - CT-003
   - SW-002
-learning_path_tags:
-  - CE
 difficulty: intermediate
 tags:
   - mef
