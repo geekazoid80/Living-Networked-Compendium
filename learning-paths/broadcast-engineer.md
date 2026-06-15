@@ -41,51 +41,51 @@ Required prerequisites: NW-001, IP-001, IP-002, RT-001, SW-001, SW-002
 
 ### Stage 2 — Video & Compression Fundamentals
 
-| Order | Module ID | Title | Status |
-|---|---|---|---|
-| 5 | BRD-001 | Video Fundamentals (resolution, frame rate, colour spaces) | Needed |
-| 6 | BRD-002 | Video Compression (MPEG-2, H.264, H.265/HEVC, AV1) | Needed |
-| 7 | BRD-003 | Audio in Broadcast Networks | Needed |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 5 | BRD-001 | Video Fundamentals (resolution, frame rate, colour spaces) | needed |  |
+| 6 | BRD-002 | Video Compression (MPEG-2, H.264, H.265/HEVC, AV1) | needed |  |
+| 7 | BRD-003 | Audio in Broadcast Networks | needed |  |
 
 ---
 
 ### Stage 3 — Streaming & Transport
 
-| Order | Module ID | Title | Status |
-|---|---|---|---|
-| 8 | BRD-004 | MPEG-TS: The Workhorse of Broadcast | Needed |
-| 9 | BRD-005 | Streaming Protocols (RTMP, HLS, DASH, SRT, RIST) | Needed |
-| 10 | BRD-006 | Multicast Fundamentals (IGMP, PIM, SSM) | Needed |
-| 11 | BRD-007 | Jitter, Latency & Lip-Sync Management | Needed |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 8 | BRD-004 | MPEG-TS: The Workhorse of Broadcast | needed |  |
+| 9 | BRD-005 | Streaming Protocols (RTMP, HLS, DASH, SRT, RIST) | needed |  |
+| 10 | BRD-006 | Multicast Fundamentals (IGMP, PIM, SSM) | needed |  |
+| 11 | BRD-007 | Jitter, Latency & Lip-Sync Management | needed |  |
 
 ---
 
 ### Stage 4 — Timing & Synchronisation
 
-| Order | Module ID | Title | Status |
-|---|---|---|---|
-| 12 | BRD-008 | Clock & Sync in Broadcast (PTP/IEEE 1588, SMPTE ST 2059) | Needed |
-| 13 | BRD-009 | NTP vs PTP — When Each Applies | Needed |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 12 | BRD-008 | Clock & Sync in Broadcast (PTP/IEEE 1588, SMPTE ST 2059) | needed |  |
+| 13 | BRD-009 | NTP vs PTP — When Each Applies | needed |  |
 
 ---
 
 ### Stage 5 — IP Production Standards
 
-| Order | Module ID | Title | Status |
-|---|---|---|---|
-| 14 | BRD-010 | SMPTE ST 2110 — IP in the Production Studio | Needed |
-| 15 | BRD-011 | SDI vs IP Production Networks | Needed |
-| 16 | BRD-012 | Redundancy & Failover in Production Networks | Needed |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 14 | BRD-010 | SMPTE ST 2110 — IP in the Production Studio | needed |  |
+| 15 | BRD-011 | SDI vs IP Production Networks | needed |  |
+| 16 | BRD-012 | Redundancy & Failover in Production Networks | needed |  |
 
 ---
 
 ### Stage 6 — Content Delivery
 
-| Order | Module ID | Title | Status |
-|---|---|---|---|
-| 17 | BRD-013 | CDN Architecture & Edge Caching | Needed |
-| 18 | BRD-014 | OTT Platform Design | Needed |
-| 19 | BRD-015 | Live Event Networking | Needed |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 17 | BRD-013 | CDN Architecture & Edge Caching | needed |  |
+| 18 | BRD-014 | OTT Platform Design | needed |  |
+| 19 | BRD-015 | Live Event Networking | needed |  |
 
 ---
 

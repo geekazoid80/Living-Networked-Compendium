@@ -95,6 +95,22 @@ Optional supplementary keys (`tags`, `vendors`, `language`, `cert_alignment`, `d
 
 `learning_path_tags` was retired in favour of build-time reverse navigation: each module page now links up to its learning paths, derived from the hand-curated stage tables in `learning-paths/` (see `tools/scripts/inject_learning_paths.py`).
 
+### 3.3 Learning-path stage-table schema
+
+Each file in `learning-paths/` sequences modules through stages. Every stage table uses one canonical five-column schema:
+
+```
+| Order | Module ID | Title | Status | Est. Time |
+```
+
+- `Order` is the module's position in the path's overall sequence. Some paths begin numbering above 1 because their earliest stage references a prerequisite block rather than a table.
+- `Module ID` holds the `<PREFIX>-<NNN>` token, optionally as a markdown link to the module page. Reverse navigation keys on this token alone (`inject_learning_paths.py` reads only this column); the remaining columns are presentation.
+- `Title` is the learner-facing label. It need not match the module's frontmatter `title` verbatim, since a path may add context for its audience (for example a protocol number or a scope note).
+- `Status` is build-readiness: `done` (module written and build-ready), `pending` (the module file exists but is not yet marked build-ready), or `needed` (no module file exists yet).
+- `Est. Time` is the learner study budget. Leave the cell blank when the module is not yet written and no realistic estimate exists; do not invent a time.
+
+`Status` and `Est. Time` are orthogonal and both columns are retained: one signals curation state to stewards, the other signals study effort to learners. Resource and certification tables elsewhere in a path use their own column shapes and are not stage tables.
+
 The validator job in `.github/workflows/build-deploy.yml` is the executable definition; this table is its prose mirror. If the two ever diverge, the spec is authoritative and the validator must catch up (per §9).
 
 ---
