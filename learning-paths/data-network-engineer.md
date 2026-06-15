@@ -70,13 +70,13 @@ This path takes you from network fundamentals through to professional-level ente
 
 | Order | Module ID | Title | Est. Time |
 |---|---|---|---|
-| 16 | SV-001 | DNS | 35 min |
-| 17 | SV-002 | DHCP | 40 min |
-| 18 | SV-003 | NAT & PAT | 45 min |
-| 19 | SV-004 | NTP & Time Synchronisation | 25 min |
-| 20 | SV-005 | SNMP & Syslog | 35 min |
-| 21 | SEC-001 | Access Control Lists (ACLs) | 55 min |
-| 22 | SEC-002 | Firewall Concepts | 45 min |
+| 17 | SV-001 | DNS | 35 min |
+| 18 | SV-002 | DHCP | 40 min |
+| 19 | SV-003 | NAT & PAT | 45 min |
+| 20 | SV-004 | NTP & Time Synchronisation | 25 min |
+| 21 | SV-005 | SNMP & Syslog | 35 min |
+| 22 | SEC-001 | Access Control Lists (ACLs) | 55 min |
+| 23 | SEC-002 | Firewall Concepts | 45 min |
 
 **Stage 4 milestone:** CCNA-level readiness. You can design, configure, and troubleshoot a small-to-medium enterprise network.
 
@@ -99,10 +99,10 @@ At this point you have covered the core of the CCNA curriculum.
 
 | Order | Module ID | Title | Est. Time |
 |---|---|---|---|
-| 23 | RT-005 | OSPF Advanced (multi-area, LSA types, redistribution) | 75 min |
-| 24 | RT-006 | BGP Advanced (attributes, policies, communities) | 90 min |
-| 25 | RT-007 | Route Redistribution & Policy | 60 min |
-| 26 | RT-008 | MPLS Fundamentals | 60 min |
+| 24 | RT-005 | OSPF Advanced - Multi-Area, Redistribution & Filtering | 75 min |
+| 25 | RT-008 | BGP Advanced - Communities, Policy & Filtering | 90 min |
+| 26 | RT-009 | Route Redistribution & Policy | 60 min |
+| 27 | CT-001 | MPLS Fundamentals | 60 min |
 
 ---
 
@@ -112,10 +112,10 @@ At this point you have covered the core of the CCNA curriculum.
 
 | Order | Module ID | Title | Est. Time |
 |---|---|---|---|
-| 27 | QOS-001 | QoS Fundamentals | 45 min |
-| 28 | QOS-002 | Traffic Classification & Marking (DSCP, CoS) | 40 min |
-| 29 | QOS-003 | Queuing Mechanisms | 45 min |
-| 30 | QOS-004 | Traffic Policing vs. Shaping | 40 min |
+| 28 | QOS-001 | QoS Fundamentals | 45 min |
+| 29 | QOS-002 | Traffic Classification & Marking (DSCP, CoS) | 40 min |
+| 30 | QOS-003 | Queuing Mechanisms | 45 min |
+| 31 | QOS-004 | Traffic Policing vs. Shaping | 40 min |
 
 ---
 
@@ -125,10 +125,10 @@ At this point you have covered the core of the CCNA curriculum.
 
 | Order | Module ID | Title | Est. Time |
 |---|---|---|---|
-| 31 | SEC-003 | VPN & IPSec | 60 min |
-| 32 | SEC-004 | AAA: TACACS+ & RADIUS | 45 min |
-| 33 | SEC-005 | Encryption Standards & PKI | 50 min |
-| 34 | SEC-006 | Network Segmentation & DMZ Design | 50 min |
+| 32 | SEC-003 | VPN & IPSec | 60 min |
+| 33 | SEC-004 | AAA: TACACS+ & RADIUS | 45 min |
+| 34 | SEC-005 | Encryption Standards & PKI | 50 min |
+| 35 | SEC-006 | Network Segmentation & DMZ Design | 50 min |
 
 ---
 
@@ -138,10 +138,10 @@ At this point you have covered the core of the CCNA curriculum.
 
 | Order | Module ID | Title | Est. Time |
 |---|---|---|---|
-| 35 | AUTO-001 | Python for Network Engineers | 75 min |
-| 36 | AUTO-002 | REST APIs & Network Automation | 60 min |
-| 37 | AUTO-003 | NETCONF, YANG & gRPC | 60 min |
-| 38 | AUTO-004 | Ansible for Network Automation | 60 min |
+| 36 | AUTO-001 | Python for Network Engineers | 75 min |
+| 37 | AUTO-002 | REST APIs & Network Automation | 60 min |
+| 38 | AUTO-003 | NETCONF, YANG & gRPC | 60 min |
+| 39 | AUTO-004 | Ansible for Network Automation | 60 min |
 
 ---
 
