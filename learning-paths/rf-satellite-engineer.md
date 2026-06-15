@@ -22,12 +22,12 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 *RF and satellite engineers still need solid IP networking. Start here if you haven't already.*
 
-| Order | Module ID | Title | Est. Time |
-|---|---|---|---|
-| 1 | [NW-001](../modules/fundamentals/networking/osi-model.md) | The OSI Model | 40 min |
-| 2 | [IP-001](../modules/fundamentals/ip/ip-addressing.md) | IP Addressing Fundamentals | 45 min |
-| 3 | [IP-002](../modules/fundamentals/ip/subnetting.md) | IP Subnetting & VLSM | 60 min |
-| 4 | RT-001 | Routing Fundamentals | 45 min |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 1 | [NW-001](../modules/fundamentals/networking/osi-model.md) | The OSI Model | done | 40 min |
+| 2 | [IP-001](../modules/fundamentals/ip/ip-addressing.md) | IP Addressing Fundamentals | done | 45 min |
+| 3 | [IP-002](../modules/fundamentals/ip/subnetting.md) | IP Subnetting & VLSM | done | 60 min |
+| 4 | RT-001 | Routing Fundamentals | pending | 45 min |
 
 **Stage 1 milestone:** You can build and troubleshoot a basic IP network. You understand how data moves from application to wire.
 
@@ -37,12 +37,12 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 *The physics doesn't care if you're a network engineer or an RF engineer. You need both.*
 
-| Order | Module ID | Title | Est. Time |
-|---|---|---|---|
-| 5 | RF-001 | RF Fundamentals (frequency, wavelength, power, dB) | 55 min |
-| 6 | RF-002 | Modulation Techniques (AM, FM, PSK, QAM, OFDM) | 60 min |
-| 7 | RF-003 | Antenna Theory (gain, directivity, polarisation, patterns) | 55 min |
-| 8 | RF-004 | RF Propagation & Path Loss | 50 min |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 5 | RF-001 | RF Fundamentals (frequency, wavelength, power, dB) | needed | 55 min |
+| 6 | RF-002 | Modulation Techniques (AM, FM, PSK, QAM, OFDM) | needed | 60 min |
+| 7 | RF-003 | Antenna Theory (gain, directivity, polarisation, patterns) | needed | 55 min |
+| 8 | RF-004 | RF Propagation & Path Loss | needed | 50 min |
 
 **Stage 2 milestone:** You understand the decibel system, can describe common modulation schemes, and know what antenna gain and beamwidth mean.
 
@@ -52,14 +52,14 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 *Orbital mechanics, link budgets, and how a satellite actually works.*
 
-| Order | Module ID | Title | Est. Time |
-|---|---|---|---|
-| 9 | RF-005 | Satellite Orbits (GEO, MEO, LEO — trade-offs and characteristics) | 50 min |
-| 10 | RF-006 | Satellite Payload Architecture | 55 min |
-| 11 | RF-007 | Frequency Bands (C, Ku, Ka, Q/V — characteristics and use cases) | 45 min |
-| 12 | RF-008 | Link Budget Calculations | 75 min |
-| 13 | RF-009 | Rain Fade & Atmospheric Attenuation | 45 min |
-| 14 | RF-010 | Uplink & Downlink Design | 60 min |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 9 | RF-005 | Satellite Orbits (GEO, MEO, LEO — trade-offs and characteristics) | needed | 50 min |
+| 10 | RF-006 | Satellite Payload Architecture | needed | 55 min |
+| 11 | RF-007 | Frequency Bands (C, Ku, Ka, Q/V — characteristics and use cases) | needed | 45 min |
+| 12 | RF-008 | Link Budget Calculations | needed | 75 min |
+| 13 | RF-009 | Rain Fade & Atmospheric Attenuation | needed | 45 min |
+| 14 | RF-010 | Uplink & Downlink Design | needed | 60 min |
 
 **Stage 3 milestone:** You can read and sanity-check a link budget. You understand why Ka-band rains off and why GEO has latency.
 
@@ -69,12 +69,12 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 *How satellite systems actually encode and transmit data.*
 
-| Order | Module ID | Title | Est. Time |
-|---|---|---|---|
-| 15 | RF-011 | Digital Modulation for Satellite (DVB-S2, DVB-S2X) | 60 min |
-| 16 | RF-012 | Forward Error Correction (FEC) & Coding Gain | 50 min |
-| 17 | RF-013 | Spectral Efficiency & MODCOD | 45 min |
-| 18 | RF-014 | Multiple Access Schemes (TDMA, FDMA, CDMA, MF-TDMA) | 55 min |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 15 | RF-011 | Digital Modulation for Satellite (DVB-S2, DVB-S2X) | needed | 60 min |
+| 16 | RF-012 | Forward Error Correction (FEC) & Coding Gain | needed | 50 min |
+| 17 | RF-013 | Spectral Efficiency & MODCOD | needed | 45 min |
+| 18 | RF-014 | Multiple Access Schemes (TDMA, FDMA, CDMA, MF-TDMA) | needed | 55 min |
 
 ---
 
@@ -82,12 +82,12 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 *Where RF meets IP — and why it's not just the same as running IP on fibre.*
 
-| Order | Module ID | Title | Est. Time |
-|---|---|---|---|
-| 19 | RF-015 | Latency in Satellite Networks — causes and mitigations | 50 min |
-| 20 | RF-016 | TCP Performance over Satellite (PEP, ACM) | 55 min |
-| 21 | RF-017 | QoS in Satellite Networks | 50 min |
-| 22 | RF-018 | Satellite Network Architectures (hub-and-spoke, mesh, hybrid) | 55 min |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 19 | RF-015 | Latency in Satellite Networks — causes and mitigations | needed | 50 min |
+| 20 | RF-016 | TCP Performance over Satellite (PEP, ACM) | needed | 55 min |
+| 21 | RF-017 | QoS in Satellite Networks | needed | 50 min |
+| 22 | RF-018 | Satellite Network Architectures (hub-and-spoke, mesh, hybrid) | needed | 55 min |
 
 ---
 
@@ -95,12 +95,12 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 *Putting it all together: designing, operating, and troubleshooting.*
 
-| Order | Module ID | Title | Est. Time |
-|---|---|---|---|
-| 23 | RF-019 | Satellite Network Operations — monitoring, alarms, escalation | 50 min |
-| 24 | RF-020 | Frequency Planning & Interference Management | 60 min |
-| 25 | RF-021 | Capacity Planning for Satellite Networks | 55 min |
-| 26 | RF-022 | Troubleshooting RF & Satellite Links — systematic approach | 60 min |
+| Order | Module ID | Title | Status | Est. Time |
+|---|---|---|---|---|
+| 23 | RF-019 | Satellite Network Operations — monitoring, alarms, escalation | needed | 50 min |
+| 24 | RF-020 | Frequency Planning & Interference Management | needed | 60 min |
+| 25 | RF-021 | Capacity Planning for Satellite Networks | needed | 55 min |
+| 26 | RF-022 | Troubleshooting RF & Satellite Links — systematic approach | needed | 60 min |
 
 ---
 
