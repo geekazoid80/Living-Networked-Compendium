@@ -23,7 +23,7 @@ jobs:
             exit 0
           fi
 
-          if ! grep -q "Machine‑Readable Prompt Blocks" AI_GUARDRAILS.md; then
+          if ! grep -q "Readable Prompt Blocks" AI_GUARDRAILS.md; then
             echo "::warning title=AI Guardrails Incomplete::AI_GUARDRAILS.md found but machine-readable prompt blocks are missing."
             echo "::warning::If using Claude, Cursor, or other agents, ensure prompts are loaded manually."
             exit 0
