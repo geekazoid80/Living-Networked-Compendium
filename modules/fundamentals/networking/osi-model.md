@@ -5,7 +5,7 @@ domain: "fundamentals/networking"
 difficulty: "beginner"
 prerequisites: []
 estimated_time: 40
-version: "1.1"
+version: "1.1.0"
 last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false

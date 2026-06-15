@@ -5,7 +5,7 @@ domain: "fundamentals/professional-standards"
 difficulty: "intermediate"
 prerequisites: []
 estimated_time: 10
-version: "1.0"
+version: "1.0.0"
 last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false

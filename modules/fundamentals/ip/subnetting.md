@@ -5,7 +5,7 @@ domain: "fundamentals/ip"
 difficulty: "intermediate"
 prerequisites: ["NW-001", "IP-001"]
 estimated_time: 60
-version: "1.1"
+version: "1.1.0"
 last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false

@@ -5,7 +5,7 @@ domain: "fundamentals/access-media"
 difficulty: "intermediate"
 prerequisites: ["NW-003"]
 estimated_time: 30
-version: "0.1"
+version: "0.1.0"
 last_updated: "2026-05-18"
 maintainer: "@geekazoid80"
 human_reviewed: false

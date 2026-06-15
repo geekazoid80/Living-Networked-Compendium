@@ -5,7 +5,7 @@ domain: "fundamentals/switching"
 difficulty: "intermediate"
 prerequisites: ["NW-001", "NW-002", "IP-001"]
 estimated_time: 40
-version: "1.0"
+version: "1.0.0"
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"
 human_reviewed: false

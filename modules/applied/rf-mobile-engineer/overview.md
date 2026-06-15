@@ -5,7 +5,7 @@ domain: "applied/rf-mobile-engineer"
 difficulty: "advanced"
 prerequisites: ["NW-001", "IP-001", "IP-002", "RF-001", "RF-002", "RF-003", "AM-010"]
 estimated_time: 15
-version: "1.0"
+version: "1.0.0"
 last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false

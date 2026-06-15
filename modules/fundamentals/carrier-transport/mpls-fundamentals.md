@@ -5,7 +5,7 @@ domain: "fundamentals/carrier-transport"
 difficulty: "advanced"
 prerequisites: ["RT-001", "RT-004", "RT-007"]
 estimated_time: 60
-version: "1.0"
+version: "1.0.0"
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"
 human_reviewed: false
