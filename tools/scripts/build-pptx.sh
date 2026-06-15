@@ -28,7 +28,7 @@ if [[ $# -ge 1 ]]; then
     VERSION_NUM="$1"
 else
     LAST=$(ls -d handouts/versions/v[0-9][0-9][0-9]-* 2>/dev/null | \
-           grep -oP 'v\K[0-9]+' | sort -n | tail -1)
+           sed -E 's#.*/v([0-9]+)-.*#\1#' | sort -n | tail -1)
     VERSION_NUM="${LAST:-1}"
 fi
 
