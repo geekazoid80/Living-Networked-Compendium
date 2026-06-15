@@ -29,8 +29,8 @@ See [modules/applied/rf-coax-engineer/overview.md](../modules/applied/rf-coax-en
 
 | Order | Module ID | Title | Status |
 |---|---|---|---|
-| 6 | AM-006 | Grey Optical | pending |
-| 7 | AM-007 | Coloured Optical (CWDM/DWDM) | pending |
+| 6 | AM-006 | Grey Optical - Uncoloured / Direct Fibre | pending |
+| 7 | AM-007 | Coloured Optics - CWDM & DWDM | pending |
 | 8 | AM-008 | RF over Optical / HFC | pending |
 
 ## Stage 3 — DOCSIS
@@ -47,7 +47,7 @@ See [modules/applied/rf-coax-engineer/overview.md](../modules/applied/rf-coax-en
 |---|---|---|---|
 | 12 | RCE-004 | CMTS Architecture and Configuration | needed |
 | 13 | RCE-005 | Subscriber Provisioning (DHCP, TFTP, config files) | needed |
-| 14 | QOS-001 | QoS Fundamentals | pending |
+| 14 | QOS-001 | QoS Fundamentals - Delay, Jitter, Loss & Bandwidth | pending |
 | 15 | RCE-006 | QoS in DOCSIS (Service Flows, Classifiers) | needed |
 
 ## Stage 5 — Remote PHY / DAA

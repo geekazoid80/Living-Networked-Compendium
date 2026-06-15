@@ -22,9 +22,9 @@ See [modules/applied/voice-telephony-engineer/overview.md](../modules/applied/vo
 | 2 | IP-001 | IP Addressing Fundamentals | done |
 | 3 | IP-002 | IP Subnetting & VLSM | done |
 | 4 | RT-001 | Routing Fundamentals | pending |
-| 5 | SV-002 | DHCP | pending |
+| 5 | SV-002 | DHCP - Dynamic Host Configuration Protocol | pending |
 | 6 | PROTO-003 | NTP & PTP (critical for CDRs and sync) | pending |
-| 7 | QOS-001 | QoS Fundamentals | pending |
+| 7 | QOS-001 | QoS Fundamentals - Delay, Jitter, Loss & Bandwidth | pending |
 
 ## Stage 2 — Voice Protocols
 
@@ -53,7 +53,7 @@ See [modules/applied/voice-telephony-engineer/overview.md](../modules/applied/vo
 | 18 | VTE-011 | Session Border Controllers (SBCs) | needed |
 | 19 | VTE-012 | NAT Traversal for VoIP (STUN, TURN, ICE) | needed |
 | 20 | VTE-013 | SIP Trunking — Enterprise to Carrier | needed |
-| 21 | QOS-003 | Queuing Mechanisms (for voice prioritisation) | pending |
+| 21 | QOS-003 | Queuing Mechanisms | pending |
 
 ## Stage 5 — Quality & Troubleshooting
 

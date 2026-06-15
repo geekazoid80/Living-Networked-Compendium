@@ -43,7 +43,7 @@ See [modules/applied/rf-mobile-engineer/overview.md](../modules/applied/rf-mobil
 |---|---|---|---|
 | 14 | RME-006 | Microwave Point-to-Point Backhaul | needed |
 | 15 | PROTO-003 | NTP & PTP (IEEE 1588 — critical for LTE/5G sync) | pending |
-| 16 | CT-001 | MPLS Fundamentals (for transport backhaul) | pending |
+| 16 | CT-001 | MPLS Fundamentals | pending |
 | 17 | RF-015 | Satellite Backhaul for Remote Sites (link to RSE path) | pending |
 
 ## Stage 4 — Packet Core
