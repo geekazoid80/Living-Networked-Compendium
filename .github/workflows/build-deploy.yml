@@ -133,6 +133,35 @@ jobs:
               ERRORS=$((ERRORS + 1))
             fi
 
+            # tags (when present) must be drawn from the controlled vocabulary
+            # (CONTRIBUTION_SPEC § 3.2). Closed set: adding a tag means updating BOTH
+            # the spec list and this array in the same PR (§ 9 — the spec leads, the
+            # validator mirrors), exactly like the module_id prefix whitelist above.
+            # tags is OPTIONAL, so an absent tags line is fine; only present-but-unknown
+            # tags fail. The awk extracts tokens from both the inline form
+            # (tags: [a, b]) and the block-list form (tags: then "  - a" lines), so
+            # neither style can bypass the gate. Surrounding spaces let us substring-
+            # match a whole token without a partial hit. Kept in the same alphabetical
+            # order as the spec § 3.2 list so the two diff cleanly.
+            ALLOWED_TAGS=" aaa access-media acl ansible applied automation bgp broadcast cable carrier-ethernet carrier-transport cidr classification convergence datacentre dhcp dns ecmp eigrp encryption-pki ethernet evpn firewall forwarding ip-addressing ipv4 ipv6 isis layer-2 layer-3 layer-4 layer-7 learning-path link-aggregation link-state mef mobile monitoring mpls mpls-vpn multicast nat netconf networking ntp optical osi ospf otn overlay overview packet-filtering policing-shaping port-security professional-standards python qos queuing rest-api rip route-policy routing satellite sdh-sonet security seeking-contributors segment-routing segmentation services snmp spanning-tree spine-leaf srv6 static-routing storage subnetting switching template topology traffic-engineering vlan voice vpn-ipsec vxlan zero-trust "
+            TAG_TOKENS=$(echo "$FRONTMATTER" | awk '
+              /^tags:[[:space:]]*\[/ {
+                s=$0; sub(/^tags:[[:space:]]*\[/,"",s); sub(/\].*/,"",s)
+                n=split(s, arr, ","); for(i=1;i<=n;i++){ t=arr[i]; gsub(/[[:space:]"]/,"",t); if(t!="") print t }
+                intags=0; next
+              }
+              /^tags:[[:space:]]*$/ { intags=1; next }
+              intags==1 && /^[[:space:]]*-/ { t=$0; sub(/^[[:space:]]*-[[:space:]]*/,"",t); gsub(/[[:space:]"]/,"",t); if(t!="") print t; next }
+              /^[A-Za-z_]+:/ { intags=0 }
+            ')
+            while IFS= read -r TAG; do
+              [[ -z "$TAG" ]] && continue
+              if [[ "$ALLOWED_TAGS" != *" ${TAG} "* ]]; then
+                echo "::error file=${FILE}::Unknown tag '${TAG}': not in the controlled vocabulary (see CONTRIBUTION_SPEC.md § 3.2). To add a tag, update the spec list and this validator set in the same PR."
+                ERRORS=$((ERRORS + 1))
+              fi
+            done <<< "$TAG_TOKENS"
+
             # Check for prerequisite module IDs that don't exist
             PREREQS=$(echo "$FRONTMATTER" | grep "^prerequisites:" | \
                       grep -oP '"[A-Z]+-[0-9]+"' | tr -d '"' || true)
