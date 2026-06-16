@@ -80,16 +80,16 @@ Required keys:
 | Key | Value shape | Notes |
 |---|---|---|
 | `title` | quoted string | Human‑readable module title. |
-| `module_id` | quoted string `<PREFIX>-<NNN>` | Globally unique within the corpus. Established prefixes include `NW`, `IP`, `RT`, `SEC`, `SW`, `QOS`, `SV`, `CT`, `AUTO`, `AM`, `BRD`, `CE`, `DC`, `DCE`, `DNE`, `PS`, `RCE`, `RME`, `RSE`, `SNE`, `VTE`. |
-| `domain` | quoted string, path under `modules/` | The directory the file lives in, e.g. `"fundamentals/routing"`, `"applied/data-network-engineer"`. Mechanically derivable from file location. |
+| `module_id` | quoted string `<PREFIX>-<NNN>` | Globally unique within the corpus. The prefix must be one of this CI-enforced closed set: `NW`, `IP`, `RT`, `SEC`, `SW`, `QOS`, `SV`, `CT`, `AUTO`, `AM`, `BRD`, `CE`, `DC`, `DCE`, `DNE`, `PS`, `RCE`, `RME`, `RSE`, `SNE`, `VTE`. Adding a prefix is a deliberate act: update this list and the validator whitelist in the same PR. |
+| `domain` | quoted string, path under `modules/` | The directory the file lives in, e.g. `"fundamentals/routing"`, `"applied/data-network-engineer"`. Mechanically derivable from file location; CI enforces that the value matches the directory. |
 | `difficulty` | `beginner` / `intermediate` / `advanced` | Reader skill threshold. |
 | `prerequisites` | YAML list of `module_id` strings | Inline (`["RT-001", "NW-002"]`) or block‑list shape both accepted. Empty list (`[]`) is valid for foundational modules. |
-| `estimated_time` | integer (minutes) | Realistic study time, not minimum reading time. |
+| `estimated_time` | positive integer (minutes) | Realistic study time, not minimum reading time. CI rejects zero, negatives, and unit suffixes (e.g. `"45 min"`). |
 | `version` | quoted SemVer `MAJOR.MINOR.PATCH` | Three-component form required, e.g. `"1.0.0"`. Two-component values (`"1.0"`) are rejected by CI. |
 | `last_updated` | ISO date `"YYYY-MM-DD"` | Quoted. Authoritative for "is this stale" checks. |
-| `maintainer` | quoted GitHub handle `"@<handle>"` | The accountable steward, not necessarily the original author. |
-| `human_reviewed` | boolean | `false` is permitted on drafts. Per `AI_GUARDRAILS.md`, `true` is required before a module is treated as authoritative. The CI validator checks presence, not truth. |
-| `ai_assisted` | quoted string or `false` | E.g. `"drafting"`, `"editing"`, `"synthesis"`, or `false` if no AI assistance was used. |
+| `maintainer` | quoted GitHub handle `"@<handle>"` | The accountable steward, not necessarily the original author. CI enforces the `@<handle>` shape. |
+| `human_reviewed` | boolean | `false` is permitted on drafts. Per `AI_GUARDRAILS.md`, `true` is required before a module is treated as authoritative. The CI validator checks that the value is a boolean literal (`true`/`false`), not whether it is `true`. |
+| `ai_assisted` | quoted string or `false` | One of `"drafting"`, `"editing"`, `"synthesis"`, or `false` if no AI assistance was used. CI-enforced closed set; extend it via a spec-and-validator PR (as for `module_id` prefixes). |
 
 Optional supplementary keys (`tags`, `vendors`, `language`, `cert_alignment`, `description`, `module_type`, `status`) may appear and are not validator‑gated. They are documented per author convention rather than spec‑mandated.
 
