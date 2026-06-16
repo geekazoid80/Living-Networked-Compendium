@@ -4884,7 +4884,10 @@ Exact formatting of the remaining elements is flexible, but intent must be clear
 </tr>
 </tbody>
 </table>
-<p>Optional supplementary keys (<code>tags</code>, <code>vendors</code>, <code>language</code>, <code>cert_alignment</code>, <code>description</code>, <code>module_type</code>, <code>status</code>) may appear and are not validator‑gated. They are documented per author convention rather than spec‑mandated.</p>
+<p>Optional supplementary keys (<code>vendors</code>, <code>language</code>, <code>cert_alignment</code>, <code>description</code>, <code>module_type</code>, <code>status</code>) may appear and are not validator‑gated. They are documented per author convention rather than spec‑mandated.</p>
+<p><code>tags</code> is optional, but <strong>when present it is validator‑gated against a controlled vocabulary</strong>. Free‑form tagging produced keyword soup (357 distinct tags across 66 modules, mostly singletons); a fixed set keeps the rendered tag index (the top‑level Tags tab) coherent and navigable rather than a list of one‑off labels. Each tag a module carries must be drawn from the canonical set below; CI rejects any tag outside it. The field stays optional (a module with no <code>tags</code> line is valid), and both the inline form (<code>tags: [routing, ospf]</code>) and the block‑list form are accepted. Adding a tag is a deliberate act: update this list and the validator set in the same PR (per § 9, the spec leads and the validator mirrors).</p>
+<p>Canonical tag vocabulary (85 tags, alphabetical):</p>
+<p><code>aaa</code>, <code>access-media</code>, <code>acl</code>, <code>ansible</code>, <code>applied</code>, <code>automation</code>, <code>bgp</code>, <code>broadcast</code>, <code>cable</code>, <code>carrier-ethernet</code>, <code>carrier-transport</code>, <code>cidr</code>, <code>classification</code>, <code>convergence</code>, <code>datacentre</code>, <code>dhcp</code>, <code>dns</code>, <code>ecmp</code>, <code>eigrp</code>, <code>encryption-pki</code>, <code>ethernet</code>, <code>evpn</code>, <code>firewall</code>, <code>forwarding</code>, <code>ip-addressing</code>, <code>ipv4</code>, <code>ipv6</code>, <code>isis</code>, <code>layer-2</code>, <code>layer-3</code>, <code>layer-4</code>, <code>layer-7</code>, <code>learning-path</code>, <code>link-aggregation</code>, <code>link-state</code>, <code>mef</code>, <code>mobile</code>, <code>monitoring</code>, <code>mpls</code>, <code>mpls-vpn</code>, <code>multicast</code>, <code>nat</code>, <code>netconf</code>, <code>networking</code>, <code>ntp</code>, <code>optical</code>, <code>osi</code>, <code>ospf</code>, <code>otn</code>, <code>overlay</code>, <code>overview</code>, <code>packet-filtering</code>, <code>policing-shaping</code>, <code>port-security</code>, <code>professional-standards</code>, <code>python</code>, <code>qos</code>, <code>queuing</code>, <code>rest-api</code>, <code>rip</code>, <code>route-policy</code>, <code>routing</code>, <code>satellite</code>, <code>sdh-sonet</code>, <code>security</code>, <code>seeking-contributors</code>, <code>segment-routing</code>, <code>segmentation</code>, <code>services</code>, <code>snmp</code>, <code>spanning-tree</code>, <code>spine-leaf</code>, <code>srv6</code>, <code>static-routing</code>, <code>storage</code>, <code>subnetting</code>, <code>switching</code>, <code>template</code>, <code>topology</code>, <code>traffic-engineering</code>, <code>vlan</code>, <code>voice</code>, <code>vpn-ipsec</code>, <code>vxlan</code>, <code>zero-trust</code></p>
 <p><code>learning_path_tags</code> was retired in favour of build-time reverse navigation: each module page now links up to its learning paths, derived from the hand-curated stage tables in <code>learning-paths/</code> (see <code>tools/scripts/inject_learning_paths.py</code>).</p>
 <h3 id="33-learning-path-stage-table-schema">3.3 Learning-path stage-table schema<a class="headerlink" href="#33-learning-path-stage-table-schema" title="Permanent link">&para;</a></h3>
 <p>Each file in <code>learning-paths/</code> sequences modules through stages. Every stage table uses one canonical five-column schema:</p>
@@ -4971,7 +4974,7 @@ When conflicts arise, maintainers interpret and apply this document in service o
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 06:03:44 UTC">June 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 09:59:41 UTC">June 16, 2026</span>
   </span>
 
     
@@ -4981,7 +4984,7 @@ When conflicts arise, maintainers interpret and apply this document in service o
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 06:03:44 UTC">June 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 09:59:41 UTC">June 16, 2026</span>
   </span>
 
     
