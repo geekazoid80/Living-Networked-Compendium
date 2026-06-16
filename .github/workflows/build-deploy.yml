@@ -58,6 +58,19 @@ jobs:
             if [[ -n "$MODULE_ID_VAL" && ! "$MODULE_ID_VAL" =~ ^[A-Z]+-[0-9]+$ ]]; then
               echo "::error file=${FILE}::Invalid module_id '${MODULE_ID_VAL}': expected uppercase letters, hyphen, digits (e.g. NW-001)"
               ERRORS=$((ERRORS + 1))
+            elif [[ -n "$MODULE_ID_VAL" ]]; then
+              # Prefix must be one of the established prefixes (CONTRIBUTION_SPEC § 3.2).
+              # This is a closed set: adding a new prefix means updating BOTH the spec
+              # table and this array in the same PR (§ 9 — the spec leads, the validator
+              # mirrors). Surrounding spaces let us substring-match a whole token without
+              # a partial hit (e.g. "DC" inside "DCE"). Only reached when the shape above
+              # passed, so the prefix extraction is meaningful.
+              ALLOWED_PREFIXES=" NW IP RT SEC SW QOS SV CT AUTO AM BRD CE DC DCE DNE PS RCE RME RSE SNE VTE "
+              MODULE_ID_PREFIX="${MODULE_ID_VAL%%-*}"
+              if [[ "$ALLOWED_PREFIXES" != *" ${MODULE_ID_PREFIX} "* ]]; then
+                echo "::error file=${FILE}::Unknown module_id prefix '${MODULE_ID_PREFIX}' in '${MODULE_ID_VAL}': not an established prefix (see CONTRIBUTION_SPEC.md § 3.2). To add a prefix, update the spec table and this validator whitelist in the same PR."
+                ERRORS=$((ERRORS + 1))
+              fi
             fi
 
             DIFFICULTY_VAL=$(echo "$FRONTMATTER" | grep "^difficulty:" | head -1 | sed -E 's/^difficulty:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
@@ -75,6 +88,48 @@ jobs:
             VERSION_VAL=$(echo "$FRONTMATTER" | grep "^version:" | head -1 | sed -E 's/^version:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
             if [[ -n "$VERSION_VAL" && ! "$VERSION_VAL" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
               echo "::error file=${FILE}::Invalid version '${VERSION_VAL}': expected three-component SemVer MAJOR.MINOR.PATCH (e.g. 1.0.0)"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # domain must equal the directory the file lives in, relative to modules/
+            # (CONTRIBUTION_SPEC § 3.2: "mechanically derivable from file location").
+            DOMAIN_VAL=$(echo "$FRONTMATTER" | grep "^domain:" | head -1 | sed -E 's/^domain:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            EXPECTED_DOMAIN=$(dirname "${FILE#modules/}")
+            if [[ -n "$DOMAIN_VAL" && "$DOMAIN_VAL" != "$EXPECTED_DOMAIN" ]]; then
+              echo "::error file=${FILE}::Invalid domain '${DOMAIN_VAL}': must match the file's directory under modules/ ('${EXPECTED_DOMAIN}')"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # estimated_time must be a positive integer number of minutes (CONTRIBUTION_SPEC § 3.2).
+            # ^[1-9][0-9]*$ rejects 0, negatives, and unit suffixes like "45 min".
+            EST_TIME_VAL=$(echo "$FRONTMATTER" | grep "^estimated_time:" | head -1 | sed -E 's/^estimated_time:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            if [[ -n "$EST_TIME_VAL" && ! "$EST_TIME_VAL" =~ ^[1-9][0-9]*$ ]]; then
+              echo "::error file=${FILE}::Invalid estimated_time '${EST_TIME_VAL}': expected a positive integer number of minutes (e.g. 45)"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # maintainer must be a GitHub handle of the form @<handle> (CONTRIBUTION_SPEC § 3.2).
+            MAINTAINER_VAL=$(echo "$FRONTMATTER" | grep "^maintainer:" | head -1 | sed -E 's/^maintainer:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            if [[ -n "$MAINTAINER_VAL" && ! "$MAINTAINER_VAL" =~ ^@[A-Za-z0-9][A-Za-z0-9-]*$ ]]; then
+              echo "::error file=${FILE}::Invalid maintainer '${MAINTAINER_VAL}': expected a GitHub handle of the form @handle"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # human_reviewed must be a boolean literal (CONTRIBUTION_SPEC § 3.2). CI checks the
+            # value is a valid boolean, not whether it is true — AI_GUARDRAILS governs the
+            # truth requirement before a module is treated as authoritative.
+            HUMAN_REVIEWED_VAL=$(echo "$FRONTMATTER" | grep "^human_reviewed:" | head -1 | sed -E 's/^human_reviewed:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            if [[ -n "$HUMAN_REVIEWED_VAL" && ! "$HUMAN_REVIEWED_VAL" =~ ^(true|false)$ ]]; then
+              echo "::error file=${FILE}::Invalid human_reviewed '${HUMAN_REVIEWED_VAL}': expected boolean true or false"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # ai_assisted must be one of the closed enum drafting/editing/synthesis, or false
+            # if no AI assistance was used (CONTRIBUTION_SPEC § 3.2). The quote-strip in the sed
+            # leaves an unquoted false as-is.
+            AI_ASSISTED_VAL=$(echo "$FRONTMATTER" | grep "^ai_assisted:" | head -1 | sed -E 's/^ai_assisted:[[:space:]]*//;s/[[:space:]]+$//;s/^"//;s/"$//')
+            if [[ -n "$AI_ASSISTED_VAL" && ! "$AI_ASSISTED_VAL" =~ ^(drafting|editing|synthesis|false)$ ]]; then
+              echo "::error file=${FILE}::Invalid ai_assisted '${AI_ASSISTED_VAL}': must be one of drafting, editing, synthesis, or false"
               ERRORS=$((ERRORS + 1))
             fi
 
