@@ -113,6 +113,7 @@ nav:
     - RF Mobile / Cellular Engineer: learning-paths/rf-mobile-engineer.md
     - Storage Network Engineer: learning-paths/storage-network-engineer.md
     - Broadcast Engineer: learning-paths/broadcast-engineer.md
+  - Tags: tags.md
   - Fundamentals:
     - Networking Basics:
       - The OSI Model (NW-001): modules/fundamentals/networking/osi-model.md
