@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, voice, telephony, voip, sip, pstn, ss7, pbx, uc]
+tags: [applied, voice]
 ---
 
 # VTE-000 - Applied: Voice / Telephony Network Engineer - Overview

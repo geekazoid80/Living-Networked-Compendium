@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [subnetting, vlsm, cidr, ip, network-design, addressing]
+tags: [ip-addressing, subnetting, cidr]
 vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.6; CompTIA Network+ - 1.4; JNCIA-Junos - IP Addressing"

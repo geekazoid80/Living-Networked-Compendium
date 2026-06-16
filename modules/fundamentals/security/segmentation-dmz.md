@@ -15,13 +15,7 @@ prerequisites:
   - SW-002
   - RT-001
 difficulty: advanced
-tags:
-  - segmentation
-  - dmz
-  - microsegmentation
-  - security-zones
-  - management-plane
-  - zero-trust
+tags: [security, segmentation, zero-trust]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

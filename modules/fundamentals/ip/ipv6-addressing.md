@@ -10,7 +10,7 @@ last_updated: "2026-04-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: ["ipv6", "addressing", "slaac", "ndp", "icmpv6", "dual-stack", "global-unicast", "link-local", "eui-64", "prefix"]
+tags: [ip-addressing, ipv6]
 cert_alignment: "CCNA 200-301 - 1.8 | JNCIA-Junos JN0-103 | Nokia NRS I"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "Huawei VRP", "MikroTik RouterOS"]
 language: "en"

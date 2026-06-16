@@ -10,7 +10,7 @@ last_updated: "2026-04-19"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: ["mpls", "label", "lsp", "fec", "ldp", "rsvp-te", "ler", "lsr", "label-stack", "php", "vpn", "traffic-engineering"]
+tags: [carrier-transport, mpls, traffic-engineering]
 cert_alignment: "CCNP ENCOR 350-401 | JNCIS-SP JN0-362 | Nokia NRS II | Huawei HCIP-Datacom"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS"]
 language: "en"

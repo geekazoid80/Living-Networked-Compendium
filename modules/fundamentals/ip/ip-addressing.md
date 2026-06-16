@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [ip, addressing, ipv4, cidr, binary, classes, public, private]
+tags: [ip-addressing, ipv4, cidr]
 vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.6; CompTIA Network+ - 1.4; JNCIA-Junos - Networking Fundamentals"

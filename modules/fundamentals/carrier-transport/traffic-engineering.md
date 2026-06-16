@@ -15,15 +15,7 @@ prerequisites:
   - RT-004
   - RT-006
 difficulty: advanced
-tags:
-  - traffic-engineering
-  - rsvp-te
-  - sr-te
-  - mpls
-  - path-computation
-  - fast-reroute
-  - te-tunnel
-  - carrier
+tags: [carrier-transport, traffic-engineering, segment-routing, mpls]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

@@ -13,13 +13,7 @@ prerequisites:
   - SV-005
   - RT-001
 difficulty: intermediate
-tags:
-  - automation
-  - python
-  - netmiko
-  - napalm
-  - paramiko
-  - network-automation
+tags: [automation, python]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

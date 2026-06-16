@@ -14,12 +14,7 @@ prerequisites:
   - IP-002
   - RT-001
 difficulty: intermediate
-tags:
-  - nat
-  - pat
-  - network-address-translation
-  - ipv4
-  - services
+tags: [services, nat, ipv4]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

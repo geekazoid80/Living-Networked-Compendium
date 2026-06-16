@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, mobile, cellular, 4g, lte, 5g, ran, backhaul, core-network]
+tags: [applied, mobile]
 ---
 
 # RME-000 - Applied: RF Mobile / Cellular Network Engineer - Overview

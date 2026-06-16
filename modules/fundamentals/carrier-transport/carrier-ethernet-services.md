@@ -14,15 +14,7 @@ prerequisites:
   - CT-003
   - CT-006
 difficulty: advanced
-tags:
-  - carrier-ethernet
-  - mef
-  - cos
-  - oam
-  - y1731
-  - cfm
-  - resiliency
-  - operations
+tags: [carrier-transport, carrier-ethernet, mef]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

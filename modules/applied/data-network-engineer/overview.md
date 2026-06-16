@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, data-network-engineer, learning-path, overview]
+tags: [applied, learning-path, overview]
 ---
 
 # DNE-000 - Applied: Data Network Engineer - Overview

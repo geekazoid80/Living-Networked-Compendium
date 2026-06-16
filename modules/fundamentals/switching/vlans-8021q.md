@@ -13,12 +13,7 @@ prerequisites:
   - SW-001
   - NW-002
 difficulty: intermediate
-tags:
-  - switching
-  - vlan
-  - 802.1q
-  - trunking
-  - layer2
+tags: [switching, vlan, layer-2]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

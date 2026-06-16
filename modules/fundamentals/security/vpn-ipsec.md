@@ -14,14 +14,7 @@ prerequisites:
   - SEC-002
   - IP-001
 difficulty: advanced
-tags:
-  - vpn
-  - ipsec
-  - ike
-  - esp
-  - security
-  - tunneling
-  - encryption
+tags: [security, vpn-ipsec, encryption-pki]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

@@ -10,7 +10,7 @@ last_updated: "2026-04-19"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: ["bgp", "ebgp", "ibgp", "as-path", "local-pref", "med", "path-vector", "autonomous-system", "route-reflector", "bgp-attributes", "internet-routing"]
+tags: [routing, bgp]
 cert_alignment: "CCNA 200-301 - 3.5 (awareness) | CCNP ENCOR 350-401 | JNCIS-SP JN0-362 | Nokia NRS II"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "Huawei VRP", "MikroTik RouterOS"]
 language: "en"

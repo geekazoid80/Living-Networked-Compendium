@@ -12,13 +12,7 @@ estimated_time: 55
 prerequisites:
   - AUTO-001
 difficulty: intermediate
-tags:
-  - automation
-  - ansible
-  - playbooks
-  - network-automation
-  - declarative
-  - idempotent
+tags: [automation, ansible]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

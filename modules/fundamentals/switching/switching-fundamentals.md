@@ -10,7 +10,7 @@ last_updated: "2026-04-19"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: ["switching", "mac-address", "cam-table", "flooding", "forwarding", "ethernet", "layer-2", "microsegmentation"]
+tags: [switching, forwarding, ethernet, layer-2, segmentation]
 cert_alignment: "CCNA 200-301 - 2.1–2.3 | JNCIA-Junos JN0-103 | Nokia NRS I"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS", "MikroTik RouterOS"]
 language: "en"

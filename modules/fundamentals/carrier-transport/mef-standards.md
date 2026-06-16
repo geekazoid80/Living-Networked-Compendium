@@ -13,15 +13,7 @@ prerequisites:
   - CT-003
   - SW-002
 difficulty: intermediate
-tags:
-  - mef
-  - carrier-ethernet
-  - e-line
-  - e-lan
-  - e-tree
-  - evc
-  - cen
-  - service-attributes
+tags: [carrier-transport, mef, carrier-ethernet]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

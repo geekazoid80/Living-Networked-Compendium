@@ -13,13 +13,7 @@ prerequisites:
   - SW-001
   - SW-002
 difficulty: intermediate
-tags:
-  - switching
-  - port-security
-  - dai
-  - dhcp-snooping
-  - arp-inspection
-  - layer2-security
+tags: [switching, port-security, layer-2]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

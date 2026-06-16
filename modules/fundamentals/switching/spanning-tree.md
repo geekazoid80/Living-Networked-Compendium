@@ -13,14 +13,7 @@ prerequisites:
   - SW-001
   - SW-002
 difficulty: intermediate
-tags:
-  - switching
-  - stp
-  - rstp
-  - mstp
-  - spanning-tree
-  - layer2
-  - loop-prevention
+tags: [switching, spanning-tree, layer-2]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

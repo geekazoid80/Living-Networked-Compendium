@@ -13,11 +13,7 @@ prerequisites:
   - IP-001
   - SV-001
 difficulty: beginner
-tags:
-  - dhcp
-  - services
-  - ip-addressing
-  - layer7
+tags: [services, dhcp, ip-addressing, layer-7]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

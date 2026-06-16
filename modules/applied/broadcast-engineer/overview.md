@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, broadcast-engineer, learning-path, overview, seeking-contributors]
+tags: [applied, broadcast, learning-path, overview, seeking-contributors]
 ---
 
 # BRD-000 - Applied: Broadcast Network Engineer - Overview

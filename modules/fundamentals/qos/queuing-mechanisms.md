@@ -13,14 +13,7 @@ prerequisites:
   - QOS-001
   - QOS-002
 difficulty: intermediate
-tags:
-  - qos
-  - queuing
-  - llq
-  - cbwfq
-  - wfq
-  - fifo
-  - scheduling
+tags: [qos, queuing]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

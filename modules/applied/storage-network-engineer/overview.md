@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, storage, san, nas, iscsi, fibre-channel, nvme-of, storage-networking]
+tags: [applied, storage]
 ---
 
 # SNE-000 - Applied: Storage Network Engineer - Overview

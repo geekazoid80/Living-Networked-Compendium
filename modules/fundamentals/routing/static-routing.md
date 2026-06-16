@@ -10,7 +10,7 @@ last_updated: "2026-04-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: ["static-routing", "default-route", "floating-static", "next-hop", "exit-interface", "null0", "summarisation"]
+tags: [routing, static-routing]
 cert_alignment: "CCNA 200-301 - 3.3 | JNCIA-Junos JN0-103 | Nokia NRS I"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "MikroTik RouterOS"]
 language: "en"

@@ -12,14 +12,7 @@ estimated_time: 50
 prerequisites:
   - AUTO-002
 difficulty: advanced
-tags:
-  - netconf
-  - yang
-  - grpc
-  - gnmi
-  - gnoi
-  - network-automation
-  - programmability
+tags: [automation, netconf]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

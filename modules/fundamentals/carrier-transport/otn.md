@@ -12,16 +12,7 @@ estimated_time: 50
 prerequisites:
   - CT-010
 difficulty: advanced
-tags:
-  - otn
-  - odu
-  - otu
-  - tcm
-  - flexe
-  - coherent
-  - optical
-  - carrier
-  - g709
+tags: [carrier-transport, otn, optical]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

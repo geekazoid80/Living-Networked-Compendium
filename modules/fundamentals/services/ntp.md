@@ -13,11 +13,7 @@ prerequisites:
   - IP-001
   - RT-001
 difficulty: beginner
-tags:
-  - ntp
-  - time-synchronisation
-  - services
-  - layer7
+tags: [services, ntp, layer-7]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

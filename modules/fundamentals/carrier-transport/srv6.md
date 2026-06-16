@@ -13,13 +13,7 @@ prerequisites:
   - CT-004
   - IP-003
 difficulty: advanced
-tags:
-  - srv6
-  - segment-routing
-  - ipv6
-  - srh
-  - carrier
-  - traffic-engineering
+tags: [carrier-transport, srv6, segment-routing, ipv6, traffic-engineering]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

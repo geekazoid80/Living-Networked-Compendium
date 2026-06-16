@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [osi, model, layers, encapsulation, networking-fundamentals]
+tags: [networking, osi]
 vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.1; CompTIA Network+ - 1.1; JNCIA-Junos - Networking Fundamentals"

@@ -13,13 +13,7 @@ prerequisites:
   - IP-001
   - RT-001
 difficulty: intermediate
-tags:
-  - qos
-  - delay
-  - jitter
-  - packet-loss
-  - bandwidth
-  - network-quality
+tags: [qos]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"
