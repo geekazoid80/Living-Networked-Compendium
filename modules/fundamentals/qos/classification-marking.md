@@ -13,14 +13,7 @@ prerequisites:
   - QOS-001
   - SEC-001
 difficulty: intermediate
-tags:
-  - qos
-  - classification
-  - marking
-  - dscp
-  - 802.1p
-  - nbar
-  - mls-qos
+tags: [qos, classification]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

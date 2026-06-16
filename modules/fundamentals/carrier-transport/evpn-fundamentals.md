@@ -14,15 +14,7 @@ prerequisites:
   - CT-002
   - RT-007
 difficulty: advanced
-tags:
-  - evpn
-  - bgp
-  - l2vpn
-  - mac-ip
-  - multihoming
-  - arp-suppression
-  - carrier
-  - datacenter
+tags: [carrier-transport, evpn, bgp, mpls-vpn, datacentre]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

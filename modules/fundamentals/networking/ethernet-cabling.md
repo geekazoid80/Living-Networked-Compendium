@@ -10,7 +10,7 @@ last_updated: "2026-04-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [ethernet, cabling, copper, fibre, sfp, cat5e, cat6, transceiver, physical-layer]
+tags: [networking, ethernet]
 vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.3; CompTIA Network+ - 1.3; JNCIA-Junos - Networking Fundamentals"

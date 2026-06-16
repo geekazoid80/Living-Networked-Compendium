@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, cable, hfc, docsis, coax, rf-coax, access-network]
+tags: [applied, cable]
 ---
 
 # RCE-000 - Applied: RF-Coax / Cable Network Engineer - Overview

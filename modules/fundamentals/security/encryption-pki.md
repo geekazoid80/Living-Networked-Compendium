@@ -13,15 +13,7 @@ prerequisites:
   - SEC-003
   - SEC-004
 difficulty: advanced
-tags:
-  - encryption
-  - pki
-  - certificates
-  - tls
-  - symmetric
-  - asymmetric
-  - ca
-  - security
+tags: [security, encryption-pki]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, datacentre, spine-leaf, vxlan, evpn, bgp, fabric]
+tags: [applied, datacentre, spine-leaf, vxlan, evpn, bgp]
 ---
 
 # DCE-000 - Applied: Data Centre Network Engineer - Overview

@@ -10,7 +10,7 @@ last_updated: "2026-04-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: ["rip", "distance-vector", "bellman-ford", "routing-loops", "split-horizon", "poison-reverse", "convergence", "hop-count"]
+tags: [routing, rip, convergence]
 cert_alignment: "CCNA 200-301 - 3.4 (context) | JNCIA-Junos JN0-103"
 vendors: ["Cisco IOS-XE", "MikroTik RouterOS"]
 language: "en"

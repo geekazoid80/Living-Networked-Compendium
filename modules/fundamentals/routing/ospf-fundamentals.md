@@ -10,7 +10,7 @@ last_updated: "2026-04-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: ["ospf", "link-state", "lsa", "spf", "dijkstra", "area", "dr-bdr", "neighbor", "adjacency", "cost", "ospfv3"]
+tags: [routing, ospf, link-state]
 cert_alignment: "CCNA 200-301 - 3.4 | JNCIA-Junos JN0-103 | Nokia NRS I | Huawei HCIA-Datacom"
 vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "Huawei VRP", "MikroTik RouterOS"]
 language: "en"

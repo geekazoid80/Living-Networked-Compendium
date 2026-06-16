@@ -13,15 +13,7 @@ prerequisites:
   - CT-006
   - SW-002
 difficulty: advanced
-tags:
-  - evpn
-  - vxlan
-  - datacenter
-  - overlay
-  - vni
-  - vtep
-  - irb
-  - multitenant
+tags: [carrier-transport, evpn, vxlan, datacentre, overlay]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

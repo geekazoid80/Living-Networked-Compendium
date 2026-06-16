@@ -14,15 +14,7 @@ prerequisites:
   - RT-004
   - RT-006
 difficulty: advanced
-tags:
-  - segment-routing
-  - sr-mpls
-  - mpls
-  - igp
-  - ospf
-  - isis
-  - traffic-engineering
-  - carrier
+tags: [carrier-transport, segment-routing, mpls, ospf, isis, traffic-engineering]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

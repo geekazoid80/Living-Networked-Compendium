@@ -14,12 +14,7 @@ prerequisites:
   - IP-001
   - RT-001
 difficulty: intermediate
-tags:
-  - firewall
-  - security
-  - stateful-inspection
-  - zone-based
-  - packet-filtering
+tags: [security, firewall, packet-filtering]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

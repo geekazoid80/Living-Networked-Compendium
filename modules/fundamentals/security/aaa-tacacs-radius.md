@@ -14,14 +14,7 @@ prerequisites:
   - SEC-001
   - SV-004
 difficulty: intermediate
-tags:
-  - aaa
-  - tacacs
-  - radius
-  - authentication
-  - authorisation
-  - accounting
-  - security
+tags: [security, aaa]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

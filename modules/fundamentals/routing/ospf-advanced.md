@@ -13,13 +13,7 @@ prerequisites:
   - RT-004
   - IP-002
 difficulty: advanced
-tags:
-  - ospf
-  - routing
-  - multi-area
-  - redistribution
-  - lsa-filtering
-  - stub-area
+tags: [routing, ospf, route-policy]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

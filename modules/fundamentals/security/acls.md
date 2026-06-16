@@ -14,12 +14,7 @@ prerequisites:
   - IP-002
   - RT-001
 difficulty: intermediate
-tags:
-  - acl
-  - security
-  - packet-filtering
-  - layer3
-  - layer4
+tags: [security, acl, packet-filtering, layer-3, layer-4]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

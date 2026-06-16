@@ -12,14 +12,7 @@ estimated_time: 50
 prerequisites:
   - AUTO-001
 difficulty: intermediate
-tags:
-  - automation
-  - rest-api
-  - restconf
-  - http
-  - json
-  - python
-  - network-automation
+tags: [automation, rest-api, python]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

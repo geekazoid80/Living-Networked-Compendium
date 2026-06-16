@@ -13,14 +13,7 @@ prerequisites:
   - CT-001
   - CT-002
 difficulty: advanced
-tags:
-  - mpls
-  - l2vpn
-  - vpls
-  - pseudowire
-  - ethernet
-  - carrier
-  - vfi
+tags: [carrier-transport, mpls, mpls-vpn, ethernet]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, rf-satellite-engineer, learning-path, overview]
+tags: [applied, satellite, learning-path, overview]
 ---
 
 # RSE-000 - Applied: RF & Satellite Network Engineer - Overview

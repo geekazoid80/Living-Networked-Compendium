@@ -13,13 +13,7 @@ prerequisites:
   - QOS-001
   - QOS-003
 difficulty: intermediate
-tags:
-  - qos
-  - policing
-  - shaping
-  - token-bucket
-  - rate-limiting
-  - congestion-management
+tags: [qos, policing-shaping]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

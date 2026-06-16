@@ -10,7 +10,7 @@ last_updated: "2026-05-18"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [optical, fibre, single-mode, multi-mode, wavelength, transceiver, sfp]
+tags: [access-media, optical]
 cert_alignment: ""
 vendors: []
 language: en

@@ -10,7 +10,7 @@ last_updated: "2026-04-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [topology, star, mesh, bus, ring, hybrid, duplex, mtu, mss, collision-domain, broadcast-domain, unicast, multicast, three-tier]
+tags: [networking, topology, multicast]
 vendors: []
 language: en
 cert_alignment: "CCNA 200-301 - 1.2; CompTIA Network+ - 1.2; JNCIA-Junos - Networking Fundamentals"

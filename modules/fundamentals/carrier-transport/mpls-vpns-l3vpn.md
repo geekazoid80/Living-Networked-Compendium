@@ -13,15 +13,7 @@ prerequisites:
   - CT-001
   - RT-007
 difficulty: advanced
-tags:
-  - mpls
-  - l3vpn
-  - vrf
-  - bgp
-  - vpnv4
-  - route-distinguisher
-  - route-target
-  - carrier
+tags: [carrier-transport, mpls, mpls-vpn, bgp]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

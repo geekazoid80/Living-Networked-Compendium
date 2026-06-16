@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [applied, carrier, service-provider, telco, mpls, sr, evpn, bgp]
+tags: [applied, carrier-transport, mpls, segment-routing, evpn, bgp]
 ---
 
 # CE-000 - Applied: Carrier / Service Provider Network Engineer - Overview

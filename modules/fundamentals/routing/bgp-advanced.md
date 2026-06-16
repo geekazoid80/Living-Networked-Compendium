@@ -12,13 +12,7 @@ estimated_time: 60
 prerequisites:
   - RT-007
 difficulty: advanced
-tags:
-  - bgp
-  - routing
-  - communities
-  - route-map
-  - policy
-  - traffic-engineering
+tags: [routing, bgp, route-policy, traffic-engineering]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

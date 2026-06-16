@@ -14,13 +14,7 @@ prerequisites:
   - SW-002
   - SW-003
 difficulty: intermediate
-tags:
-  - switching
-  - etherchannel
-  - lacp
-  - lag
-  - link-aggregation
-  - layer2
+tags: [switching, link-aggregation, layer-2]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

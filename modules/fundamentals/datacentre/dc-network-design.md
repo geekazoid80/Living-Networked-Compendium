@@ -10,7 +10,7 @@ last_updated: "2026-05-18"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [datacentre, spine-leaf, clos, fabric, east-west, oversubscription, ecmp]
+tags: [datacentre, spine-leaf, ecmp]
 cert_alignment: ""
 vendors: []
 language: en

@@ -12,15 +12,7 @@ estimated_time: 45
 prerequisites:
   - CT-001
 difficulty: advanced
-tags:
-  - sdh
-  - sonet
-  - otn
-  - transport
-  - optical
-  - synchronous
-  - tdm
-  - carrier
+tags: [carrier-transport, sdh-sonet, otn, optical]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

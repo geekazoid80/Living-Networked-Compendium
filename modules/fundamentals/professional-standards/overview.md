@@ -10,7 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: [professional-standards, itil, nist, bcp38, tia-942, iso27001, mef, best-practices]
+tags: [professional-standards, mef]
 ---
 
 # PS-000 - Professional Standards & Frameworks - Domain Overview

@@ -15,14 +15,7 @@ prerequisites:
   - RT-008
   - SEC-001
 difficulty: advanced
-tags:
-  - redistribution
-  - routing
-  - route-map
-  - policy
-  - ospf
-  - bgp
-  - eigrp
+tags: [routing, route-policy, ospf, bgp, eigrp]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"

@@ -10,7 +10,7 @@ last_updated: "2026-04-19"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
-tags: ["is-is", "link-state", "lsp", "net", "nsap", "level-1", "level-2", "dis", "tlv", "carrier", "spf", "clnp"]
+tags: [routing, isis, link-state, carrier-transport]
 cert_alignment: "CCNP ENCOR 350-401 | JNCIS-SP JN0-362 | Nokia NRS II | Huawei HCIP-Datacom"
 vendors: ["Cisco IOS-XR", "Juniper Junos", "Nokia SR-OS", "Arista EOS"]
 language: "en"
