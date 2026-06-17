@@ -30,7 +30,7 @@ Once written, the reader will be able to:
 1. **Distinguish** three-tier (core / aggregation / access) from leaf-spine (Clos) designs and explain why east-west traffic patterns drove the shift.
 2. **Compute** oversubscription ratios for a given spine count, leaf uplink count, and server downlink count; reason about when each ratio is acceptable.
 3. **Apply** ECMP routing (BGP unnumbered or OSPF) across spines so leaf-to-leaf paths are equal-cost two-hop, and identify the symptoms when ECMP breaks (polarisation, flow stickiness, asymmetric path MTU).
-4. **Compare** layer-2 fabrics (VXLAN-EVPN, see [EVPN-VXLAN](../carrier-transport/evpn-vxlan.md)) versus pure layer-3 leaf-spine for tenant isolation and mobility requirements.
+4. **Compare** layer-2 fabrics (VXLAN-EVPN, see [EVPN-VXLAN](evpn-vxlan.md)) versus pure layer-3 leaf-spine for tenant isolation and mobility requirements.
 5. **Plan** rack-row cable layout (top-of-rack versus end-of-row), power and cooling implications, and the failure-domain boundaries each choice implies.
 
 ## How to contribute

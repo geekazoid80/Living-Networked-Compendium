@@ -63,7 +63,7 @@ See [modules/applied/carrier-engineer/overview.md](../modules/applied/carrier-en
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
 | 20 | CT-006 | EVPN Fundamentals | pending |  |
-| 21 | CT-007 | EVPN-VXLAN | pending |  |
+| 21 | CT-013 | EVPN-MPLS - Carrier L2VPN Data Plane | needed |  |
 | 22 | CT-008 | MEF Standards & Carrier Ethernet Framework | needed |  |
 | 23 | CT-009 | Carrier Ethernet Services - Design & Operations | needed |  |
 

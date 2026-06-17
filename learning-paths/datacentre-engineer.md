@@ -40,8 +40,8 @@ See [modules/applied/datacentre-engineer/overview.md](../modules/applied/datacen
 |---|---|---|---|---|
 | 11 | DC-002 | VXLAN Fundamentals (RFC 7348) | needed |  |
 | 12 | CT-006 | EVPN Fundamentals | pending |  |
-| 13 | CT-007 | EVPN-VXLAN | pending |  |
-| 14 | DC-004 | EVPN-VXLAN in the Data Centre | needed |  |
+| 13 | DC-004 | EVPN-VXLAN | pending |  |
+| 14 | DC-007 | DC Overlay & L2-Fabric Alternatives | needed |  |
 
 ## Stage 4 — BGP Underlay
 

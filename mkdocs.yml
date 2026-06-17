@@ -150,7 +150,6 @@ nav:
       - Segment Routing - SR-MPLS (CT-004): modules/fundamentals/carrier-transport/segment-routing-mpls.md
       - SRv6 (CT-005): modules/fundamentals/carrier-transport/srv6.md
       - EVPN Fundamentals (CT-006): modules/fundamentals/carrier-transport/evpn-fundamentals.md
-      - EVPN-VXLAN (CT-007): modules/fundamentals/carrier-transport/evpn-vxlan.md
       - MEF Standards (CT-008): modules/fundamentals/carrier-transport/mef-standards.md
       - Carrier Ethernet Services (CT-009): modules/fundamentals/carrier-transport/carrier-ethernet-services.md
       - SDH/SONET & OTN Basics (CT-010): modules/fundamentals/carrier-transport/sdh-sonet-otn-basics.md
@@ -158,6 +157,7 @@ nav:
       - Traffic Engineering (CT-012): modules/fundamentals/carrier-transport/traffic-engineering.md
     - Data Centre:
       - DC Network Design (DC-001): modules/fundamentals/datacentre/dc-network-design.md
+      - EVPN-VXLAN (DC-004): modules/fundamentals/datacentre/evpn-vxlan.md
     - Protocols: []
     - Network Functions: []
     - Services:
