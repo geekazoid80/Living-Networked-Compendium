@@ -37,9 +37,17 @@ STAGED_DIRS=(
 clean_staged() {
   for f in "${STAGED_FILES[@]}"; do
     rm -f "docs/${f}"
+    # Sweep iCloud / Finder "keep both" conflict copies of this staged file
+    # (e.g. "AI_GUARDRAILS 2.md"). ~/Documents is iCloud-synced, and the
+    # rm+cp churn of identical filenames on rapid rebuilds can momentarily
+    # make them; they survive a name-exact rm, so clear the " N.md" siblings.
+    local base="${f%.md}"
+    rm -f "docs/${base} "[0-9].md "docs/${base} "[0-9][0-9].md
   done
   for d in "${STAGED_DIRS[@]}"; do
     rm -rf "docs/${d}"
+    # Same conflict-copy sweep for staged directories (e.g. "modules 2").
+    rm -rf "docs/${d} "[0-9] "docs/${d} "[0-9][0-9]
   done
 }
 

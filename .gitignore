@@ -17,6 +17,12 @@ docs/CONTRIBUTION_SPEC.md
 docs/AI_GUARDRAILS.md
 docs/learning-paths/
 docs/modules/
+# iCloud / Finder "keep both" conflict copies of the staged files above.
+# ~/Documents is iCloud-synced; rapid rebuild churn can momentarily create
+# "<name> 2.md" copies. build-web.sh sweeps them on every clean, but ignore
+# them too as a backstop so a mid-build sync race never pollutes git status.
+docs/* [0-9].md
+docs/* [0-9]/
 
 # ─── Generated handout artifacts ─────────────────────────────────────────────
 # Handouts are published as GitHub Release artifacts, not committed to the repo.
