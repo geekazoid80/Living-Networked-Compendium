@@ -16,7 +16,7 @@
         <link rel="prev" href="../srv6/">
       
       
-        <link rel="next" href="../evpn-vxlan/">
+        <link rel="next" href="../mef-standards/">
       
       
         
@@ -2052,8 +2052,6 @@
       
         
       
-        
-      
     
     
     
@@ -2650,41 +2648,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../evpn-vxlan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    EVPN-VXLAN (CT-007)
-  
-
-    
-  </span>
-  
-  
-    
-  
-  
-    <span class="md-status md-status--draft"></span>
-  
-
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../mef-standards/" class="md-nav__link">
         
   
@@ -2872,6 +2835,8 @@
       
         
       
+        
+      
     
     
     
@@ -2942,6 +2907,41 @@
     
   </span>
   
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datacentre/evpn-vxlan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EVPN-VXLAN (DC-004)
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
   
 
       </a>
@@ -5158,7 +5158,7 @@
 <p>This allows EVPN to serve as a unified L2+L3 service - a single control plane (EVPN over BGP) handles both:
 - L2 forwarding (RT-2 MAC routes within a VLAN)
 - L3 routing (RT-5 IP prefix routes between subnets/VRFs)</p>
-<p>In a data centre context, this is called <strong>EVPN-VXLAN</strong> with symmetric IRB or asymmetric IRB (covered in CT-007).</p>
+<p>In a data centre context, this is called <strong>EVPN-VXLAN</strong> with symmetric IRB or asymmetric IRB (covered in DC-004).</p>
 <h3 id="transport-options">Transport Options<a class="headerlink" href="#transport-options" title="Permanent link">&para;</a></h3>
 <p>EVPN is transport-agnostic - the BGP control plane works identically regardless of the data plane:</p>
 <table>
@@ -5175,7 +5175,7 @@
 </tr>
 <tr>
 <td><strong>VXLAN</strong></td>
-<td>Data centre overlay (CT-007)</td>
+<td>Data centre overlay (DC-004)</td>
 </tr>
 <tr>
 <td><strong>SRv6</strong></td>
@@ -5314,7 +5314,7 @@
 <hr />
 <h2 id="where-to-next">Where to Next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>CT-007 - EVPN-VXLAN:</strong> EVPN with VXLAN data plane in data centre overlay networks.</li>
+<li><strong>DC-004 - EVPN-VXLAN:</strong> EVPN with VXLAN data plane in data centre overlay networks.</li>
 <li><strong>CT-004 - Segment Routing SR-MPLS:</strong> SR-MPLS as EVPN transport in carrier networks.</li>
 <li><strong>CT-005 - SRv6:</strong> EVPN-SRv6 for next-generation unified transport.</li>
 <li><strong>SEC-006 - Network Segmentation &amp; DMZ:</strong> EVPN micro-segmentation in data centre.</li>
@@ -5382,7 +5382,7 @@
 </thead>
 <tbody>
 <tr>
-<td>CT-007</td>
+<td>DC-004</td>
 <td>EVPN-VXLAN</td>
 <td>EVPN control plane with VXLAN data plane</td>
 </tr>
@@ -5443,7 +5443,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 09:59:41 UTC">June 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 18, 2026 01:17:45 UTC">June 18, 2026</span>
   </span>
 
     
@@ -5453,7 +5453,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 09:59:41 UTC">June 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 18, 2026 01:17:45 UTC">June 18, 2026</span>
   </span>
 
     

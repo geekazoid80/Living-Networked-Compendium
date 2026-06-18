@@ -2024,8 +2024,6 @@
       
         
       
-        
-      
     
     
     
@@ -2283,41 +2281,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../modules/fundamentals/carrier-transport/evpn-vxlan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    EVPN-VXLAN (CT-007)
-  
-
-    
-  </span>
-  
-  
-    
-  
-  
-    <span class="md-status md-status--draft"></span>
-  
-
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../modules/fundamentals/carrier-transport/mef-standards/" class="md-nav__link">
         
   
@@ -2505,6 +2468,8 @@
       
         
       
+        
+      
     
     
     
@@ -2572,6 +2537,41 @@
     
   </span>
   
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/fundamentals/datacentre/evpn-vxlan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EVPN-VXLAN (DC-004)
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
   
 
       </a>
@@ -5173,8 +5173,15 @@
 <td>C39</td>
 <td>CT-007</td>
 <td>EVPN-VXLAN</td>
-<td>done</td>
-<td>Overlay + underlay; DC and carrier use</td>
+<td>re-homed</td>
+<td>Re-homed to DC-004 (datacentre) 2026-06-18. EVPN-VXLAN is a DC overlay, not carrier transport; see the Data Centre table.</td>
+</tr>
+<tr>
+<td>C39a</td>
+<td>CT-013</td>
+<td>EVPN-MPLS - Carrier L2VPN Data Plane</td>
+<td>needed</td>
+<td>Carrier EVPN data plane (RFC 7432 over MPLS / SR), the VPLS replacement. Fills the carrier Stage 6 slot CT-007 vacated. Control plane is CT-006.</td>
 </tr>
 <tr>
 <td>C40</td>
@@ -5250,9 +5257,9 @@
 <tr>
 <td>C48</td>
 <td>DC-004</td>
-<td>EVPN in the Data Centre</td>
-<td>pending</td>
-<td>MAC mobility, ARP suppression, multihoming</td>
+<td>EVPN-VXLAN</td>
+<td>draft</td>
+<td>Re-homed from CT-007 (was carrier-transport) 2026-06-18. EVPN control plane + VXLAN data plane, distributed anycast gateway, symmetric/asymmetric IRB.</td>
 </tr>
 <tr>
 <td>C49</td>
@@ -5267,6 +5274,13 @@
 <td>Storage Networking Basics</td>
 <td>pending</td>
 <td>iSCSI, FCoE, NVMe-oF; brief overview</td>
+</tr>
+<tr>
+<td>C50a</td>
+<td>DC-007</td>
+<td>DC Overlay &amp; L2-Fabric Alternatives</td>
+<td>needed</td>
+<td>Comparative module: FabricPath (Cisco), TRILL (RFC 6325), SPB / 802.1aq (IEEE), Geneve (RFC 8926), NVGRE, STT, contrasted against the canonical VXLAN + EVPN. Inherently multi-vendor. Flag any single tech for a future deep-dive.</td>
 </tr>
 </tbody>
 </table>
@@ -6472,6 +6486,11 @@
 <td>Multilingual support via file naming convention</td>
 <td><code>module.md</code> = EN default; <code>module.zh-CN.md</code>, <code>module.ms.md</code>, <code>module.ta.md</code> for translations</td>
 </tr>
+<tr>
+<td>2026-06-18</td>
+<td>EVPN split by data plane across domains; EVPN-VXLAN re-homed CT-007 → DC-004</td>
+<td>EVPN (RFC 7432) is a data-plane-agnostic control plane (CT-006, stays carrier-transport). Its data planes split by domain: EVPN-MPLS is the carrier / SP transport (new CT-013, needed), EVPN-VXLAN is the data-centre overlay (DC-004). EVPN-VXLAN was misfiled under carrier-transport as CT-007; re-homed to the datacentre domain. Body unchanged; metadata + cross-references only.</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -6544,7 +6563,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 23, 2026 08:07:48 UTC">May 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 18, 2026 01:17:10 UTC">June 18, 2026</span>
   </span>
 
     
