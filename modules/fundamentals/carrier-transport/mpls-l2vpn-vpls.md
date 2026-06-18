@@ -292,7 +292,7 @@ EVPN (RFC 7432) solves all four with a BGP control plane for MAC/IP advertisemen
 
 - **CT-004 - Segment Routing SR-MPLS:** SR replaces LDP for pseudowire and VPLS transport.
 - **CT-006 - EVPN Fundamentals:** Modern replacement for VPLS with BGP-based MAC/IP control plane.
-- **CT-007 - EVPN-VXLAN:** EVPN extended to VXLAN data centres.
+- **DC-004 - EVPN-VXLAN:** EVPN extended to VXLAN data centres.
 
 ---
 ## Standards & Certifications

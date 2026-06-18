@@ -1,7 +1,7 @@
 ---
-module_id: CT-007
+module_id: DC-004
 title: "EVPN-VXLAN"
-domain: "fundamentals/carrier-transport"
+domain: "fundamentals/datacentre"
 description: "How EVPN control plane combined with VXLAN data plane creates a scalable, multitenant data centre overlay network with distributed gateway, ARP suppression, and multivendor interoperability."
 version: "1.0.0"
 status: draft
@@ -13,13 +13,13 @@ prerequisites:
   - CT-006
   - SW-002
 difficulty: advanced
-tags: [carrier-transport, evpn, vxlan, datacentre, overlay]
+tags: [datacentre, evpn, vxlan, overlay]
 created: 2026-04-19
 last_updated: "2026-04-19"
 maintainer: "@geekazoid80"
 ---
 
-# CT-007 - EVPN-VXLAN
+# DC-004 - EVPN-VXLAN
 ## Learning Objectives
 
 After completing this module you will be able to:

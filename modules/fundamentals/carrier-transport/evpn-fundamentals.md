@@ -134,7 +134,7 @@ This allows EVPN to serve as a unified L2+L3 service - a single control plane (E
 - L2 forwarding (RT-2 MAC routes within a VLAN)
 - L3 routing (RT-5 IP prefix routes between subnets/VRFs)
 
-In a data centre context, this is called **EVPN-VXLAN** with symmetric IRB or asymmetric IRB (covered in CT-007).
+In a data centre context, this is called **EVPN-VXLAN** with symmetric IRB or asymmetric IRB (covered in DC-004).
 
 ### Transport Options
 
@@ -143,7 +143,7 @@ EVPN is transport-agnostic - the BGP control plane works identically regardless 
 | Transport | Use case |
 |---|---|
 | **MPLS** (SR-MPLS or LDP) | Carrier WAN, SP edge |
-| **VXLAN** | Data centre overlay (CT-007) |
+| **VXLAN** | Data centre overlay (DC-004) |
 | **SRv6** | Next-generation carrier and DC |
 | **MPLS over UDP** | Interop with routers lacking MPLS hardware |
 
@@ -275,7 +275,7 @@ The RT-2 route carries the next-hop (PE loopback) and the encapsulation label/VN
 ---
 ## Where to Next
 
-- **CT-007 - EVPN-VXLAN:** EVPN with VXLAN data plane in data centre overlay networks.
+- **DC-004 - EVPN-VXLAN:** EVPN with VXLAN data plane in data centre overlay networks.
 - **CT-004 - Segment Routing SR-MPLS:** SR-MPLS as EVPN transport in carrier networks.
 - **CT-005 - SRv6:** EVPN-SRv6 for next-generation unified transport.
 - **SEC-006 - Network Segmentation & DMZ:** EVPN micro-segmentation in data centre.
@@ -313,7 +313,7 @@ The RT-2 route carries the next-hop (PE loopback) and the encapsulation label/VN
 
 | Module ID | Title | Relationship |
 |---|---|---|
-| CT-007 | EVPN-VXLAN | EVPN control plane with VXLAN data plane |
+| DC-004 | EVPN-VXLAN | EVPN control plane with VXLAN data plane |
 | SEC-006 | Network Segmentation & DMZ | EVPN micro-segmentation in DC |
 
 ### Modules This Module References

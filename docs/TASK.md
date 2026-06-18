@@ -140,7 +140,8 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 | C36 | CT-004 | Segment Routing (SR-MPLS) | done | IETF standard; Cisco, Nokia, Juniper implementations |
 | C37 | CT-005 | SRv6 | done | SR over IPv6 data plane |
 | C38 | CT-006 | EVPN Fundamentals | done | RFC 7432; MAC/IP advertisement; multi-vendor |
-| C39 | CT-007 | EVPN-VXLAN | done | Overlay + underlay; DC and carrier use |
+| C39 | CT-007 | EVPN-VXLAN | re-homed | Re-homed to DC-004 (datacentre) 2026-06-18. EVPN-VXLAN is a DC overlay, not carrier transport; see the Data Centre table. |
+| C39a | CT-013 | EVPN-MPLS - Carrier L2VPN Data Plane | needed | Carrier EVPN data plane (RFC 7432 over MPLS / SR), the VPLS replacement. Fills the carrier Stage 6 slot CT-007 vacated. Control plane is CT-006. |
 | C40 | CT-008 | Metro Ethernet Forum (MEF) Standards | done | E-Line, E-LAN, E-Tree, E-Access; MEF 3.0 |
 | C41 | CT-009 | Carrier Ethernet Services | done | CE 2.0 attributes, CoS, bandwidth profiles |
 | C42 | CT-010 | SDH/SONET & OTN Basics | done | Legacy transport; still present in carrier core |
@@ -156,9 +157,10 @@ Covers physical medium evolution: how we connect devices, from the beginning to 
 | C45 | DC-001 | Data Centre Network Design | pending | Spine-leaf vs 3-tier; oversubscription |
 | C46 | DC-002 | VXLAN Fundamentals | pending | RFC 7348; VTEP, VNI, BUM traffic |
 | C47 | DC-003 | BGP in the Data Centre | pending | BGP as DC underlay; RFC 7938 |
-| C48 | DC-004 | EVPN in the Data Centre | pending | MAC mobility, ARP suppression, multihoming |
+| C48 | DC-004 | EVPN-VXLAN | draft | Re-homed from CT-007 (was carrier-transport) 2026-06-18. EVPN control plane + VXLAN data plane, distributed anycast gateway, symmetric/asymmetric IRB. |
 | C49 | DC-005 | Data Centre Interconnect (DCI) | pending | OTV, EVPN DCI, dark fibre |
 | C50 | DC-006 | Storage Networking Basics | pending | iSCSI, FCoE, NVMe-oF; brief overview |
+| C50a | DC-007 | DC Overlay & L2-Fabric Alternatives | needed | Comparative module: FabricPath (Cisco), TRILL (RFC 6325), SPB / 802.1aq (IEEE), Geneve (RFC 8926), NVGRE, STT, contrasted against the canonical VXLAN + EVPN. Inherently multi-vendor. Flag any single tech for a future deep-dive. |
 
 ---
 
@@ -413,6 +415,7 @@ Network functions - conceptual and implementation, multi-vendor.
 | 2026-04-17 | Content production order: spine first (IP→Routing), then DNE deep dive, then CE deep dive | Spine modules used by both paths; write once, reference from both |
 | 2026-04-15 | Professional Standards domain added (PS) | ITIL, NIST, BCP38, TIA-942, ISO 27001, MEF, IEEE - what engineers are audited against |
 | 2026-04-15 | Multilingual support via file naming convention | `module.md` = EN default; `module.zh-CN.md`, `module.ms.md`, `module.ta.md` for translations |
+| 2026-06-18 | EVPN split by data plane across domains; EVPN-VXLAN re-homed CT-007 → DC-004 | EVPN (RFC 7432) is a data-plane-agnostic control plane (CT-006, stays carrier-transport). Its data planes split by domain: EVPN-MPLS is the carrier / SP transport (new CT-013, needed), EVPN-VXLAN is the data-centre overlay (DC-004). EVPN-VXLAN was misfiled under carrier-transport as CT-007; re-homed to the datacentre domain. Body unchanged; metadata + cross-references only. |
 
 ---
 
