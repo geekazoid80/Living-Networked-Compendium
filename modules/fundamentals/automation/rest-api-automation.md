@@ -7,6 +7,7 @@ version: "1.0.0"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
+vendors: ["Cisco IOS-XE", "Cisco NX-OS", "Arista EOS"]
 module_type: concept
 estimated_time: 50
 prerequisites:

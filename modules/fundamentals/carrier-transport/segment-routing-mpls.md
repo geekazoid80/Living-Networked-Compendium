@@ -7,6 +7,7 @@ version: "1.0.0"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
+vendors: ["Cisco IOS-XR", "Juniper Junos", "Nokia SR-OS"]
 module_type: concept
 estimated_time: 55
 prerequisites:

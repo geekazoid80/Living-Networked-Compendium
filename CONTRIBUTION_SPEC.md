@@ -93,6 +93,20 @@ Required keys:
 
 Optional supplementary keys (`vendors`, `language`, `cert_alignment`, `description`, `module_type`, `status`) may appear and are not validator‑gated. They are documented per author convention rather than spec‑mandated.
 
+`vendors` lists the platforms for which the module body **demonstrates** vendor-specific configuration or code (a worked CLI block, a `=== "Vendor"` tabbed example, a library or API call targeting that platform), not vendors mentioned only in passing prose. It records ACTUAL coverage, so an empty list (`vendors: []`) is valid and honest for a vendor-agnostic module (a concept, a standard, or a protocol explained without per-platform syntax). Use the canonical platform strings already in use across the corpus, ordered Cisco first then the rest: `Cisco IOS-XE`, `Cisco IOS-XR`, `Cisco NX-OS`, `Juniper Junos`, `Nokia SR-OS`, `Arista EOS`, `Huawei VRP`, `MikroTik RouterOS`. Unlike `tags`, this field is deliberately NOT CI-gated: it is reflect-actual-coverage metadata, and gating it would push authors either to invent coverage to satisfy the gate or to drop the field, both of which defeat its purpose. Role-overview pages under `applied/*` omit the field, since vendor coverage is not a meaningful attribute of a path introduction.
+
+The per-domain baseline below is the parity TARGET (which vendors a fully built-out module in each domain should aim to cover), not a rule the validator enforces. The gap between a module's current `vendors` list and its domain baseline is the multi-vendor backfill backlog.
+
+| Domain | Parity-target vendors |
+|---|---|
+| `fundamentals/routing`, `fundamentals/switching` | Cisco IOS-XE, Juniper Junos, Arista EOS, Nokia SR-OS (MikroTik RouterOS where the feature is common in smaller networks) |
+| `fundamentals/carrier-transport` | Cisco IOS-XR, Juniper Junos, Nokia SR-OS, Huawei VRP |
+| `fundamentals/datacentre` | Cisco NX-OS, Arista EOS, Juniper (QFX / Junos) |
+| `fundamentals/automation` | Cisco (IOS-XE / NX-OS), Juniper Junos, Arista EOS, plus any other platform the tool natively supports |
+| `fundamentals/security`, `fundamentals/qos` | Cisco IOS-XE, Juniper Junos, Nokia SR-OS, MikroTik RouterOS |
+| `fundamentals/services` (DNS, DHCP, NTP, SNMP, NAT) | Broadly multi-vendor; Cisco IOS-XE, Juniper Junos, MikroTik RouterOS as the common baseline |
+| `fundamentals/ip`, `fundamentals/networking`, `fundamentals/professional-standards` | Often vendor-agnostic; `[]` is the expected value for pure concept or standards modules |
+
 `tags` is optional, but **when present it is validator‑gated against a controlled vocabulary**. Free‑form tagging produced keyword soup (357 distinct tags across 66 modules, mostly singletons); a fixed set keeps the rendered tag index (the top‑level Tags tab) coherent and navigable rather than a list of one‑off labels. Each tag a module carries must be drawn from the canonical set below; CI rejects any tag outside it. The field stays optional (a module with no `tags` line is valid), and both the inline form (`tags: [routing, ospf]`) and the block‑list form are accepted. Adding a tag is a deliberate act: update this list and the validator set in the same PR (per § 9, the spec leads and the validator mirrors).
 
 Canonical tag vocabulary (85 tags, alphabetical):
