@@ -11,7 +11,7 @@ maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
 tags: [networking, ethernet]
-vendors: []
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS"]
 language: en
 cert_alignment: "CCNA 200-301 - 1.3; CompTIA Network+ - 1.3; JNCIA-Junos - Networking Fundamentals"
 ---

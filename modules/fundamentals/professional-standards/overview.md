@@ -10,6 +10,7 @@ last_updated: "2026-04-15"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
+vendors: []
 tags: [professional-standards, mef]
 ---
 
