@@ -5257,12 +5257,12 @@ Network 5 via Router D: 4 hops → metric = 4</p>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  R2 knows: N1=1, N2=0, N3=1
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  R3 knows: N1=2, N2=1, N3=0
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>Converged — every router knows every network.
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>Converged: every router knows every network.
 </span></code></pre></div></p>
 <p>The convergence time scales with the network diameter (number of hops across the widest path) multiplied by the update interval. A 10-hop network with 30-second updates takes up to 300 seconds (5 minutes) to converge - very slow by modern standards.</p>
 <h3 id="the-counting-to-infinity-problem">The Counting-to-Infinity Problem<a class="headerlink" href="#the-counting-to-infinity-problem" title="Permanent link">&para;</a></h3>
 <p>When a route becomes unreachable, distance-vector protocols can create a routing loop before convergence completes.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Topology:  R1 — R2 — R3
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Topology:  R1 ─ R2 ─ R3
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Networks:  N1 behind R1, N3 behind R3
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>R2 knows N3 = 1 hop (via R3)
@@ -5270,7 +5270,7 @@ Network 5 via Router D: 4 hops → metric = 4</p>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>R3 goes down. N3 is unreachable.
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>R2 removes N3 from its table — it knows N3 is gone.
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>R2 removes N3 from its table; it knows N3 is gone.
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Before R2 can send an update, R1 advertises: &quot;N3 = 2 hops via me.&quot;
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>R2 thinks: &quot;A new path! N3 = 3 hops via R1.&quot;
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>R2 tells R1: &quot;N3 = 4 hops.&quot;
@@ -5285,14 +5285,14 @@ Network 5 via Router D: 4 hops → metric = 4</p>
 <h3 id="rip-loop-prevention-mechanisms">RIP Loop-Prevention Mechanisms<a class="headerlink" href="#rip-loop-prevention-mechanisms" title="Permanent link">&para;</a></h3>
 <p><strong>Split Horizon:</strong>
 A router does not advertise a route back out the interface it learned the route from.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>R1 — R2 — R3
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>R1 ─ R2 ─ R3
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>R2 learned N3 from R3 (via its Gi0/1 facing R3).
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>With split horizon: R2 does NOT advertise N3 back to R3 via Gi0/1.
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>R2 DOES advertise N3 to R1 via Gi0/0 (different interface — allowed).
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>R2 DOES advertise N3 to R1 via Gi0/0 (different interface, allowed).
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Effect: R3 never hears from R2 that N3 is reachable via R2.
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>So when N3 fails, R3 cannot count-to-infinity with R2 — no loop between adjacent pair.
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>So when N3 fails, R3 cannot count-to-infinity with R2: no loop between adjacent pair.
 </span></code></pre></div>
 <p><strong>Poison Reverse:</strong>
 Instead of silently omitting the route, advertise it back with metric = 16 (infinity) - explicitly poisoned.</p>
@@ -5311,12 +5311,12 @@ When a route is marked unreachable, the router ignores any new advertisement for
 <details class="supplementary">
 <summary>Why Split Horizon Doesn't Fix Everything</summary>
 <p>Split horizon prevents two-node loops (R1↔R2 looping). But in a triangle topology (R1-R2-R3 all connected to each other), it does not prevent a three-node counting-to-infinity loop.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>R1 — R2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>R1 ─ R2
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>|  ×  |
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>R3 — —+
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>R3 ─ ─+
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>R1 learns N4 (behind R3) from R3.
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>R1 advertises N4 to R2 (different interface — split horizon allows it).
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>R1 advertises N4 to R2 (different interface, split horizon allows it).
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>R2 now has a path to N4 via R1.
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>R3 goes down. N4 is unreachable.
@@ -5679,7 +5679,7 @@ If R4 goes down: R3 loses N5. R3 hears from R2 (3 hops) → updates to 4. R2 hea
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 10:08:05 UTC">July 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 11:40:31 UTC">July 17, 2026</span>
   </span>
 
     
@@ -5689,7 +5689,7 @@ If R4 goes down: R3 loses N5. R3 hears from R2 (3 hops) → updates to 4. R2 hea
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 10:08:05 UTC">July 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 11:40:31 UTC">July 17, 2026</span>
   </span>
 
     

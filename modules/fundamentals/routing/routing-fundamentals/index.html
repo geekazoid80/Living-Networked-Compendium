@@ -5388,11 +5388,11 @@
 <p><strong>Routing</strong> is the process of selecting a path for traffic to travel from its source network to its destination network. A router performs routing at Layer 3: it reads the destination IP address in the packet header and decides where to send the packet next.</p>
 <p>Each <strong>hop</strong> is one router in the path from source to destination. A packet may cross many hops before it arrives. At each hop, the same process runs: read destination IP, look up routing table, forward.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  PC-A             R1              R2             Server
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  [10.0.1.5]  ——→  [10.0.1.1]  ——→  [10.0.2.1]  ——→  [10.0.2.10]
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  [10.0.1.5]  ──→  [10.0.1.1]  ──→  [10.0.2.1]  ──→  [10.0.2.10]
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>             hop 1              hop 2
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>At R1: destination 10.0.2.10 — which interface leads toward 10.0.2.0/24?
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>At R2: destination 10.0.2.10 — is 10.0.2.10 directly connected? Yes → deliver.
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>At R1: destination 10.0.2.10, which interface leads toward 10.0.2.0/24?
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>At R2: destination 10.0.2.10, is 10.0.2.10 directly connected? Yes → deliver.
 </span></code></pre></div>
 <p>Routing is <strong>per-hop</strong> and <strong>stateless</strong> - each router makes an independent decision. No router sees the full path; each only knows its own next step.</p>
 <h3 id="the-routing-table">The Routing Table<a class="headerlink" href="#the-routing-table" title="Permanent link">&para;</a></h3>
@@ -5487,9 +5487,9 @@
 <h3 id="longest-prefix-match">Longest-Prefix Match<a class="headerlink" href="#longest-prefix-match" title="Permanent link">&para;</a></h3>
 <p>When a packet arrives, the router compares the destination IP address against every entry in the routing table. There may be multiple matches. The router always installs and uses the <strong>most specific</strong> (longest prefix) match.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Routing table contains:
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  10.0.0.0/8      via 10.99.0.1  (8-bit prefix — broad)
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  10.1.0.0/16     via 10.99.0.2  (16-bit prefix — narrower)
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  10.1.2.0/24     via 10.99.0.3  (24-bit prefix — most specific)
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  10.0.0.0/8      via 10.99.0.1  (8-bit prefix, broad)
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  10.1.0.0/16     via 10.99.0.2  (16-bit prefix, narrower)
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  10.1.2.0/24     via 10.99.0.3  (24-bit prefix, most specific)
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>Packet destination: 10.1.2.50
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
@@ -5498,7 +5498,7 @@
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  10.1.0.0/16   ✓  (10.1.2.50 is in 10.1.0.0/16)
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>  10.1.2.0/24   ✓  (10.1.2.50 is in 10.1.2.0/24)
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>Winner: 10.1.2.0/24 — longest prefix wins
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>Winner: 10.1.2.0/24, longest prefix wins
 </span></code></pre></div>
 <p>If <strong>no</strong> match is found at all - and no default route exists - the router <strong>drops</strong> the packet and may send an ICMP "Destination Unreachable" back to the source.</p>
 <p>The default route (<code>0.0.0.0/0</code> for IPv4, <code>::/0</code> for IPv6) has a prefix length of zero - it matches everything. It is always the lowest-priority match, used only when nothing more specific exists.</p>
@@ -5791,7 +5791,7 @@ EOS uses Cisco-compatible terminology and default administrative distances (conn
 <strong>Objective:</strong> Configure a small three-router topology, observe what appears in each router's routing table, and verify longest-prefix match behaviour.</p>
 <p><strong>Topology:</strong>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[PC-A]         [R1]              [R2]              [R3]         [Server]
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>10.1.1.10  ——→ Gi0/0   Gi0/1 ——→ Gi0/0   Gi0/1 ——→ Gi0/0  ——→ 10.3.3.10
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>10.1.1.10  ──→ Gi0/0   Gi0/1 ──→ Gi0/0   Gi0/1 ──→ Gi0/0  ──→ 10.3.3.10
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>           10.1.1.1  10.0.12.1 10.0.12.2  10.0.23.1 10.0.23.2
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>                                                    Gi0/1
 </span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>                                                   10.3.3.1
@@ -6087,7 +6087,7 @@ EOS uses Cisco-compatible terminology and default administrative distances (conn
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 10:08:05 UTC">July 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 11:40:31 UTC">July 17, 2026</span>
   </span>
 
     
@@ -6097,7 +6097,7 @@ EOS uses Cisco-compatible terminology and default administrative distances (conn
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 10:08:05 UTC">July 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 11:40:31 UTC">July 17, 2026</span>
   </span>
 
     
