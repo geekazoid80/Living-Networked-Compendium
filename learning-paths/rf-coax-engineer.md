@@ -8,14 +8,14 @@ maintainer: "@geekazoid80"
 
 # Learning Path: RF-Coax / Cable Network Engineer
 
-> **This learning path framework is awaiting contributors.** The stage structure is defined — modules need to be written by engineers with HFC/DOCSIS experience.
+> **This learning path framework is awaiting contributors.** The stage structure is defined; modules need to be written by engineers with HFC/DOCSIS experience.
 > Open a GitHub Issue with label `rf-coax-path` to contribute.
 
 See [modules/applied/rf-coax-engineer/overview.md](../modules/applied/rf-coax-engineer/overview.md) for role context and why this path is distinct.
 
 ---
 
-## Stage 1 — Foundation
+## Stage 1: Foundation
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -26,7 +26,7 @@ See [modules/applied/rf-coax-engineer/overview.md](../modules/applied/rf-coax-en
 | 5 | AM-005 | Coaxial Cable & Cable Broadband | pending |  |
 | 6 | PS-000 | Professional Standards & Frameworks | pending |  |
 
-## Stage 2 — HFC Plant
+## Stage 2: HFC Plant
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -34,15 +34,15 @@ See [modules/applied/rf-coax-engineer/overview.md](../modules/applied/rf-coax-en
 | 8 | AM-007 | Coloured Optics - CWDM & DWDM | pending |  |
 | 9 | AM-008 | RF over Optical / HFC | pending |  |
 
-## Stage 3 — DOCSIS
+## Stage 3: DOCSIS
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 10 | RCE-001 | DOCSIS 3.0 — Channel Bonding | needed |  |
-| 11 | RCE-002 | DOCSIS 3.1 — OFDM and OFDMA | needed |  |
-| 12 | RCE-003 | DOCSIS 4.0 — Full Duplex and Extended Spectrum | needed |  |
+| 10 | RCE-001 | DOCSIS 3.0: Channel Bonding | needed |  |
+| 11 | RCE-002 | DOCSIS 3.1: OFDM and OFDMA | needed |  |
+| 12 | RCE-003 | DOCSIS 4.0: Full Duplex and Extended Spectrum | needed |  |
 
-## Stage 4 — CMTS & IP Integration
+## Stage 4: CMTS & IP Integration
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -51,14 +51,14 @@ See [modules/applied/rf-coax-engineer/overview.md](../modules/applied/rf-coax-en
 | 15 | QOS-001 | QoS Fundamentals - Delay, Jitter, Loss & Bandwidth | pending |  |
 | 16 | RCE-006 | QoS in DOCSIS (Service Flows, Classifiers) | needed |  |
 
-## Stage 5 — Remote PHY / DAA
+## Stage 5: Remote PHY / DAA
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
 | 17 | RCE-007 | Remote PHY Architecture (RPD, CCAP) | needed |  |
 | 18 | RCE-008 | Fibre-Deep and Node + 0 Design | needed |  |
 
-## Stage 6 — Operations
+## Stage 6: Operations
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -69,7 +69,7 @@ See [modules/applied/rf-coax-engineer/overview.md](../modules/applied/rf-coax-en
 
 ## Benchmark Certifications
 
-Use these to self-assess — not as the curriculum target:
+Use these to self-assess, not as the curriculum target:
 
 | Cert | Body | Relevance |
 |---|---|---|

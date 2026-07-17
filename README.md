@@ -1,6 +1,6 @@
 # Living Networked Compendium
 
-A living, community-built body of knowledge for network engineers — from your first "what even is a subnet?" through to designing carrier-grade networks, storage fabrics, and 5G cores. Lessons are atomic, linked, and sequenced by role. The compendium provides the map and the tools; real-world experience completes the journey.
+A living, community-built body of knowledge for network engineers: from your first "what even is a subnet?" through to designing carrier-grade networks, storage fabrics, and 5G cores. Lessons are atomic, linked, and sequenced by role. The compendium provides the map and the tools; real-world experience completes the journey.
 
 ---
 
@@ -16,7 +16,7 @@ You don't need to read this cover to cover. Pick a learning path, or jump straig
 
 ```
 modules/
-├── fundamentals/          Standalone atomic modules — one concept per module
+├── fundamentals/          Standalone atomic modules: one concept per module
 │   ├── networking/        OSI model, topologies, Ethernet, cabling
 │   ├── ip/                IP addressing, subnetting, IPv6
 │   ├── routing/           Static routes, OSPF, IS-IS, BGP
@@ -26,7 +26,7 @@ modules/
 │   ├── qos/               Quality of Service concepts and tools
 │   ├── rf/                RF fundamentals, modulation, antennas, link budgets
 │   ├── automation/        Python, APIs, Ansible, Terraform, NETCONF
-│   ├── access-media/      Physical layer evolution — serial to optical to wireless
+│   ├── access-media/      Physical layer evolution: serial to optical to wireless
 │   ├── carrier-transport/ MPLS, SR, EVPN, MEF, OTN
 │   ├── datacentre/        Spine-leaf, VXLAN, EVPN-DC, DCI
 │   ├── protocols/         One module per standard protocol (DNS, ARP, NTP, SNMP…)
@@ -48,7 +48,7 @@ learning-paths/            Ordered module sequences per role
 labs/                      Hands-on exercises (Packet Tracer, GNS3, CLI)
 ```
 
-**Fundamental modules** are atomic — each one covers exactly one concept and can be read independently. They are the building blocks.
+**Fundamental modules** are atomic; each one covers exactly one concept and can be read independently. They are the building blocks.
 
 **Applied paths** link fundamentals into a structured curriculum for a specific engineering role. They sequence and connect the building blocks; they don't repeat them.
 
@@ -77,13 +77,13 @@ Modules cover technology as the standard describes it, then show how major vendo
 Vendors covered include: Cisco (IOS-XE, IOS-XR, NX-OS), Juniper (Junos), Nokia (SR-OS), Arista (EOS), Huawei (VRP), Brocade/Broadcom, and MikroTik (RouterOS) where relevant.
 
 Three layers of vendor content are distinguished:
-- **Standard** — defined by RFC/IEEE/ITU; vendor-independent
-- **Seeking standardisation** — widely implemented but not yet fully standardised (e.g., EVPN extensions, SR policy)
-- **Vendor proprietary** — specific to one vendor, explicitly labelled
+- **Standard**: defined by RFC/IEEE/ITU; vendor-independent
+- **Seeking standardisation**: widely implemented but not yet fully standardised (e.g., EVPN extensions, SR policy)
+- **Vendor proprietary**: specific to one vendor, explicitly labelled
 
 ---
 
-## Content Structure — Three Buckets
+## Content Structure: Three Buckets
 
 Every module organises content into three tiers:
 
@@ -93,13 +93,13 @@ Every module organises content into three tiers:
 | Supplementary | `??? supplementary` block | Collapsed | Notes section | Speaker notes |
 | Cross-references | `<!-- XREF-START/END -->` | Visible | Stripped | Stripped |
 
-This means a single source file cleanly produces a web page, a printed handout, and a presentation deck — each with the right level of detail for its context.
+This means a single source file cleanly produces a web page, a printed handout, and a presentation deck, each with the right level of detail for its context.
 
 ---
 
 ## Certification Alignment
 
-Modules note relevant certifications as **benchmarks** — not as curriculum targets. The curriculum follows skills and standards; certifications are a useful self-assessment tool.
+Modules note relevant certifications as **benchmarks**, not as curriculum targets. The curriculum follows skills and standards; certifications are a useful self-assessment tool.
 
 Certifications referenced include: Cisco CCNA/CCNP/CCIE, Juniper JNCIA/JNCIS/JNCIP, Nokia NRS, Arista ACE, Huawei HCIA/HCIP, CompTIA Network+, MEF-CECP, and role-specific specialist certs.
 
@@ -111,7 +111,7 @@ Certifications referenced include: Cisco CCNA/CCNP/CCIE, Juniper JNCIA/JNCIS/JNC
 
 **Handouts and slides:** Versioned PDF handouts and PPTX slides are generated automatically and available as GitHub Release artifacts. Each release is numbered (`v001`, `v002`, …) and dated. A change sheet accompanies each release.
 
-**Offline:** Clone or download the repository. All content is plain Markdown — readable in any text editor, IDE, or Markdown viewer.
+**Offline:** Clone or download the repository. All content is plain Markdown, readable in any text editor, IDE, or Markdown viewer.
 
 ---
 
@@ -122,8 +122,8 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [CONTRIBUTION_SPEC.md](CONTRIBUTION_
 Key requirements:
 - Every module must follow the template in [MODULE_TEMPLATE.md](MODULE_TEMPLATE.md)
 - AI assistance is allowed but all content requires human review before `human_reviewed: true`
-- One concept per module — keep it atomic
-- Attribution is mandatory — never pass off third-party material as original
+- One concept per module: keep it atomic
+- Attribution is mandatory: never pass off third-party material as original
 - Multi-vendor: include at minimum Cisco and Juniper configuration examples for any CLI content
 
 Interested in contributing to a seeking-contributors path? Open a GitHub Issue with the relevant label (e.g., `carrier-path`, `storage-network-path`).

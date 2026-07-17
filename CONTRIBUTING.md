@@ -30,7 +30,7 @@ We welcome contributions that improve the **clarity, accuracy, usefulness, and i
 
 Please align with the following principles:
 
-- **Signal over noise** — fewer, higher-quality contributions are preferred
+- **Signal over noise**: fewer, higher-quality contributions are preferred
 - **Explain context, not just conclusions**
 - **Prefer synthesis over raw accumulation**
 - **Make relationships explicit** (links, references, dependencies)

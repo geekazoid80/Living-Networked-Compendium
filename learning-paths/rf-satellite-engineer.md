@@ -8,7 +8,7 @@ maintainer: "@geekazoid80"
 
 # Learning Path: RF & Satellite Network Engineer
 
-This path covers the knowledge a working satellite or RF network engineer needs — from the physics of radio signals through to satellite link design, payload architecture, and integration with IP networks.
+This path covers the knowledge a working satellite or RF network engineer needs, from the physics of radio signals through to satellite link design, payload architecture, and integration with IP networks.
 
 **Assumed baseline:** Singapore polytechnic or university diploma/degree in EE, Electronics, or Telecommunications. Some mathematics comfort required (logarithms, decibels).
 
@@ -18,7 +18,7 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 ---
 
-## Stage 1 — Networking Foundation
+## Stage 1: Networking Foundation
 
 *RF and satellite engineers still need solid IP networking. Start here if you haven't already.*
 
@@ -34,7 +34,7 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 ---
 
-## Stage 2 — RF Fundamentals
+## Stage 2: RF Fundamentals
 
 *The physics doesn't care if you're a network engineer or an RF engineer. You need both.*
 
@@ -49,15 +49,15 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 ---
 
-## Stage 3 — Satellite Systems
+## Stage 3: Satellite Systems
 
 *Orbital mechanics, link budgets, and how a satellite actually works.*
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 10 | RF-005 | Satellite Orbits (GEO, MEO, LEO — trade-offs and characteristics) | needed | 50 min |
+| 10 | RF-005 | Satellite Orbits (GEO, MEO, LEO: trade-offs and characteristics) | needed | 50 min |
 | 11 | RF-006 | Satellite Payload Architecture | needed | 55 min |
-| 12 | RF-007 | Frequency Bands (C, Ku, Ka, Q/V — characteristics and use cases) | needed | 45 min |
+| 12 | RF-007 | Frequency Bands (C, Ku, Ka, Q/V: characteristics and use cases) | needed | 45 min |
 | 13 | RF-008 | Link Budget Calculations | needed | 75 min |
 | 14 | RF-009 | Rain Fade & Atmospheric Attenuation | needed | 45 min |
 | 15 | RF-010 | Uplink & Downlink Design | needed | 60 min |
@@ -66,7 +66,7 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 ---
 
-## Stage 4 — Coding & Standards
+## Stage 4: Coding & Standards
 
 *How satellite systems actually encode and transmit data.*
 
@@ -79,29 +79,29 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 
 ---
 
-## Stage 5 — IP over Satellite
+## Stage 5: IP over Satellite
 
-*Where RF meets IP — and why it's not just the same as running IP on fibre.*
+*Where RF meets IP, and why it's not just the same as running IP on fibre.*
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 20 | RF-015 | Latency in Satellite Networks — causes and mitigations | needed | 50 min |
+| 20 | RF-015 | Latency in Satellite Networks: causes and mitigations | needed | 50 min |
 | 21 | RF-016 | TCP Performance over Satellite (PEP, ACM) | needed | 55 min |
 | 22 | RF-017 | QoS in Satellite Networks | needed | 50 min |
 | 23 | RF-018 | Satellite Network Architectures (hub-and-spoke, mesh, hybrid) | needed | 55 min |
 
 ---
 
-## Stage 6 — Operations & Design
+## Stage 6: Operations & Design
 
 *Putting it all together: designing, operating, and troubleshooting.*
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 24 | RF-019 | Satellite Network Operations — monitoring, alarms, escalation | needed | 50 min |
+| 24 | RF-019 | Satellite Network Operations: monitoring, alarms, escalation | needed | 50 min |
 | 25 | RF-020 | Frequency Planning & Interference Management | needed | 60 min |
 | 26 | RF-021 | Capacity Planning for Satellite Networks | needed | 55 min |
-| 27 | RF-022 | Troubleshooting RF & Satellite Links — systematic approach | needed | 60 min |
+| 27 | RF-022 | Troubleshooting RF & Satellite Links: systematic approach | needed | 60 min |
 
 ---
 
@@ -111,7 +111,7 @@ This path covers the knowledge a working satellite or RF network engineer needs 
 |---|---|---|
 | [ITU Radio Regulations](https://www.itu.int/en/ITU-R/Pages/default.aspx) | Free | Authoritative frequency allocation reference |
 | [ETSI DVB Standards](https://www.dvb.org/standards) | Free | DVB-S2, DVB-S2X specifications |
-| Pratt, Bostian, Allnutt — *Satellite Communications*, 2nd ed. | ~SGD 120 | The standard reference textbook |
-| Roddy — *Satellite Communications*, 4th ed., McGraw-Hill | ~SGD 100 | Thorough introduction to satellite systems |
+| Pratt, Bostian, Allnutt, *Satellite Communications*, 2nd ed. | ~SGD 120 | The standard reference textbook |
+| Roddy, *Satellite Communications*, 4th ed., McGraw-Hill | ~SGD 100 | Thorough introduction to satellite systems |
 | [Satcom Direct Training](https://www.satcomdirect.com) | Varies | Vendor-specific operational training |
 | [SSPI (Society of Satellite Professionals International)](https://www.sspi.org) | Membership | Industry professional development, networking |

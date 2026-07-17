@@ -15,7 +15,7 @@ This path takes you from network fundamentals through to professional-level ente
 
 ---
 
-## Stage 1 — Foundation (CCNA Level, Part 1)
+## Stage 1: Foundation (CCNA Level, Part 1)
 
 *Get the model right, the addressing right, and the physical layer right. Everything else builds on this.*
 
@@ -32,7 +32,7 @@ This path takes you from network fundamentals through to professional-level ente
 
 ---
 
-## Stage 2 — Switching (CCNA Level, Part 2)
+## Stage 2: Switching (CCNA Level, Part 2)
 
 *VLANs and switches are everywhere. You'll configure them before your first week is out.*
 
@@ -48,7 +48,7 @@ This path takes you from network fundamentals through to professional-level ente
 
 ---
 
-## Stage 3 — Routing (CCNA Level, Part 3)
+## Stage 3: Routing (CCNA Level, Part 3)
 
 *Routing is the core skill. No routing knowledge, no network engineering career.*
 
@@ -65,7 +65,7 @@ This path takes you from network fundamentals through to professional-level ente
 
 ---
 
-## Stage 4 — Services & Security (CCNA Level, Part 4)
+## Stage 4: Services & Security (CCNA Level, Part 4)
 
 *The plumbing that makes networks liveable: DHCP, DNS, NAT, ACLs.*
 
@@ -90,11 +90,11 @@ At this point you have covered the core of the CCNA curriculum.
 **Recommended before sitting the exam:**
 - Practice labs: Cisco Packet Tracer (free) or GNS3
 - Mock exams: Boson ExSim, or the official Cisco practice exam
-- Jeremy's IT Lab (free, YouTube + Packet Tracer labs) — excellent CCNA-aligned resource
+- Jeremy's IT Lab (free, YouTube + Packet Tracer labs), excellent CCNA-aligned resource
 
 ---
 
-## Stage 5 — Professional Routing (CCNP Level)
+## Stage 5: Professional Routing (CCNP Level)
 
 *Deeper into the routing protocols that run real networks.*
 
@@ -108,7 +108,7 @@ At this point you have covered the core of the CCNA curriculum.
 
 ---
 
-## Stage 6 — Quality of Service
+## Stage 6: Quality of Service
 
 *When traffic matters, QoS matters. Voice and video without QoS is an unhappy user.*
 
@@ -121,7 +121,7 @@ At this point you have covered the core of the CCNA curriculum.
 
 ---
 
-## Stage 7 — Network Security (Professional)
+## Stage 7: Network Security (Professional)
 
 *Security is not optional. Every network engineer owns some of it.*
 
@@ -134,7 +134,7 @@ At this point you have covered the core of the CCNA curriculum.
 
 ---
 
-## Stage 8 — Automation & Programmability
+## Stage 8: Automation & Programmability
 
 *Modern network engineering includes code. This is no longer optional.*
 
@@ -171,4 +171,4 @@ Stage 5–8: Cisco CCNP Enterprise (ENCOR 350-401)
 | [Cisco Networking Academy](https://netacad.com) | Free | CCNA Official Courseware |
 | [Packet Tracer](https://www.netacad.com/resources/lab-downloads) | Free | Lab simulation, beginner-friendly |
 | [GNS3](https://www.gns3.com) | Free | More realistic router/switch emulation |
-| Odom — *CCNA 200-301 Official Cert Guide* | ~SGD 80 | The definitive exam prep book |
+| Odom, *CCNA 200-301 Official Cert Guide* | ~SGD 80 | The definitive exam prep book |

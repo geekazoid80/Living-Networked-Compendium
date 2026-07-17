@@ -97,7 +97,7 @@ Use `???` (collapsed by default). If the content should default to open on web b
 <!-- XREF-START -->
 ## Internal Cross-References
 
-[Cross-reference content here — tables, links, notes]
+[Cross-reference content here: tables, links, notes]
 
 <!-- XREF-END -->
 ```
@@ -192,15 +192,15 @@ Every implementation must be classified as one of:
 ### Callout Admonitions
 
 ```
-!!! success "Standard — RFC / IEEE / ITU-T / MEF"
+!!! success "Standard: RFC / IEEE / ITU-T / MEF"
     Behaviour defined in [RFC XXXX / IEEE 802.xx / ITU-T G.xxx / MEF xx].
     All compliant implementations must behave this way.
 
-!!! info "Proprietary — Seeking Standardisation"
+!!! info "Proprietary: Seeking Standardisation"
     Originated with [Vendor]. Submitted to [body] as [draft/RFC XXXX] or adopted by [other vendors].
-    Behaviour may vary between implementations — verify interoperability before deploying in mixed environments.
+    Behaviour may vary between implementations; verify interoperability before deploying in mixed environments.
 
-!!! warning "Proprietary — Vendor Specific"
+!!! warning "Proprietary: Vendor Specific"
     [Vendor]-only feature. Will not work on other vendors' equipment.
     Document clearly in your network design and change records.
 ```
