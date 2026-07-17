@@ -14,7 +14,7 @@ See [modules/applied/storage-network-engineer/overview.md](../modules/applied/st
 
 ---
 
-## Stage 1 — Foundation
+## Stage 1: Foundation
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -26,7 +26,7 @@ See [modules/applied/storage-network-engineer/overview.md](../modules/applied/st
 | 6 | DC-001 | Data Centre Network Design | pending |  |
 | 7 | PS-000 | Professional Standards & Frameworks | pending |  |
 
-## Stage 2 — Storage Concepts
+## Stage 2: Storage Concepts
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -34,34 +34,34 @@ See [modules/applied/storage-network-engineer/overview.md](../modules/applied/st
 | 9 | SNE-002 | RAID Levels and Storage Resiliency | needed |  |
 | 10 | SNE-003 | LUN Design and Multipathing | needed |  |
 
-## Stage 3 — Fibre Channel
+## Stage 3: Fibre Channel
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
 | 11 | SNE-004 | Fibre Channel Protocol (FC frames, port types) | needed |  |
-| 12 | SNE-005 | FC Fabric — FLOGI, PLOGI, FDISC, Zoning | needed |  |
+| 12 | SNE-005 | FC Fabric: FLOGI, PLOGI, FDISC, Zoning | needed |  |
 | 13 | SNE-006 | FC Switch Topologies and ISL Design | needed |  |
 | 14 | SNE-007 | FC Switch Platforms (Cisco MDS, Brocade/Broadcom) | needed |  |
 
-## Stage 4 — Ethernet-Based Storage
+## Stage 4: Ethernet-Based Storage
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
-| 15 | SNE-008 | iSCSI — IP-based Block Storage (RFC 7143) | needed |  |
+| 15 | SNE-008 | iSCSI: IP-based Block Storage (RFC 7143) | needed |  |
 | 16 | SNE-009 | DCB / Priority Flow Control (IEEE 802.1Qbb) | needed |  |
-| 17 | SNE-010 | FCoE — Fibre Channel over Ethernet | needed |  |
-| 18 | SNE-011 | NAS — NFS (RFC 7530) and SMB/CIFS | needed |  |
+| 17 | SNE-010 | FCoE: Fibre Channel over Ethernet | needed |  |
+| 18 | SNE-011 | NAS: NFS (RFC 7530) and SMB/CIFS | needed |  |
 | 19 | DC-003 | BGP in the Data Centre (underlay for storage networks) | pending |  |
 
-## Stage 5 — NVMe over Fabrics
+## Stage 5: NVMe over Fabrics
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
 | 20 | SNE-012 | NVMe-oF Concepts and Architectures | needed |  |
-| 21 | SNE-013 | RDMA — RoCE and iWARP | needed |  |
+| 21 | SNE-013 | RDMA: RoCE and iWARP | needed |  |
 | 22 | SNE-014 | NVMe/TCP (RFC 8041) | needed |  |
 
-## Stage 6 — Replication & DR
+## Stage 6: Replication & DR
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -80,4 +80,4 @@ See [modules/applied/storage-network-engineer/overview.md](../modules/applied/st
 | Brocade Certified Network Engineer (BCNE) | Broadcom | FC fabric specialist |
 | Pure Storage Professional (PSP) | Pure Storage | All-flash array operations |
 | NetApp Certified Storage Associate (NCSA) | NetApp | NAS/SAN operations |
-| CompTIA Storage+ (legacy, discontinued — still a useful study framework) | CompTIA | Foundation reference |
+| CompTIA Storage+ (legacy, discontinued; still a useful study framework) | CompTIA | Foundation reference |

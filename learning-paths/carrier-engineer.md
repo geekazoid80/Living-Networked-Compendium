@@ -14,7 +14,7 @@ See [modules/applied/carrier-engineer/overview.md](../modules/applied/carrier-en
 
 ---
 
-## Stage 1 — Foundation (from Data Network Engineer path)
+## Stage 1: Foundation (from Data Network Engineer path)
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -26,14 +26,14 @@ See [modules/applied/carrier-engineer/overview.md](../modules/applied/carrier-en
 | 6 | RT-007 | BGP Fundamentals | pending |  |
 | 7 | PS-000 | Professional Standards & Frameworks | pending |  |
 
-## Stage 2 — Optical Transport
+## Stage 2: Optical Transport
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
 | 8 | CT-010 | SDH/SONET & OTN Basics | pending |  |
 | 9 | CT-011 | Optical Transport Network (OTN) - Deep Dive | pending |  |
 
-## Stage 3 — Carrier Routing
+## Stage 3: Carrier Routing
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -42,7 +42,7 @@ See [modules/applied/carrier-engineer/overview.md](../modules/applied/carrier-en
 | 12 | RT-009 | Route Redistribution & Policy | pending |  |
 | 13 | RT-011 | Multicast Routing | pending |  |
 
-## Stage 4 — MPLS
+## Stage 4: MPLS
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -50,15 +50,15 @@ See [modules/applied/carrier-engineer/overview.md](../modules/applied/carrier-en
 | 15 | CT-002 | MPLS VPNs - L3VPN & VRF | needed |  |
 | 16 | CT-003 | MPLS L2VPN - VPLS & Pseudowire | needed |  |
 
-## Stage 5 — Segment Routing
+## Stage 5: Segment Routing
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
 | 17 | CT-004 | Segment Routing - SR-MPLS | needed |  |
-| 18 | CT-005 | SRv6 — Segment Routing over IPv6 | needed |  |
+| 18 | CT-005 | SRv6: Segment Routing over IPv6 | needed |  |
 | 19 | CT-012 | Traffic Engineering - RSVP-TE & SR-TE | needed |  |
 
-## Stage 6 — EVPN & Carrier Ethernet
+## Stage 6: EVPN & Carrier Ethernet
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|
@@ -67,7 +67,7 @@ See [modules/applied/carrier-engineer/overview.md](../modules/applied/carrier-en
 | 22 | CT-008 | MEF Standards & Carrier Ethernet Framework | needed |  |
 | 23 | CT-009 | Carrier Ethernet Services - Design & Operations | needed |  |
 
-## Stage 7 — Operations & Automation
+## Stage 7: Operations & Automation
 
 | Order | Module ID | Title | Status | Est. Time |
 |---|---|---|---|---|

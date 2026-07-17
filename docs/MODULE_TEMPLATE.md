@@ -133,7 +133,7 @@ If you're new to networking entirely, start with [NW-001 - The OSI Model](module
 [Tables for comparisons. ASCII diagrams in fenced code blocks for topology. Worked examples inline.]
 
 ```text
-[Example — a packet trace, a calculation, a config snippet — generic/pseudocode here]
+[Example: a packet trace, a calculation, a config snippet, generic/pseudocode here]
 ```
 
 ??? supplementary "Deep Dive: [Optional deeper detail on this concept]"
@@ -265,7 +265,7 @@ The standard behaviour is defined in [RFC XXXX / IEEE 802.xx]. All compliant imp
 
 **Topology:**
 ```text
-[ASCII diagram — label interfaces and addresses]
+[ASCII diagram: label interfaces and addresses]
 ```
 
 **Steps:**
