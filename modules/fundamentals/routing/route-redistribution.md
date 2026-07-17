@@ -3,11 +3,11 @@ module_id: RT-009
 title: "Route Redistribution & Policy"
 domain: "fundamentals/routing"
 description: "How routes are moved between different routing protocols, the risks of mutual redistribution, and how route-maps and prefix-lists control what gets redistributed."
-version: "1.1.0"
+version: "1.1.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS"]
 module_type: concept
 estimated_time: 45
 prerequisites:
@@ -258,6 +258,68 @@ Some scenarios require advertising a route only when a specific condition is met
     On EOS, OSPF redistribution installs subnetted prefixes automatically (there is no `subnets` keyword, unlike legacy IOS). Route-map `set` clauses (metric, metric-type, tag) behave as in Cisco IOS. Guard redistribution with a prefix-list or tag filter to stop routes looping back across the boundary.
 
     Full configuration reference: [Arista EOS User Manual](https://www.arista.com/en/um-eos)
+
+=== "Nokia SR-OS"
+
+    On SR-OS there is no per-protocol `redistribute` command. Redistribution is expressed as a **route policy** (`policy-options`) that matches `from protocol` and accepts, then applied as an **export** policy on the destination protocol.
+
+    ```
+    configure
+        router
+            policy-options
+                begin
+                prefix-list "STATIC-ALLOWED"
+                    prefix 10.0.0.0/8 longer
+                exit
+                prefix-list "PUBLIC-ONLY"
+                    prefix 203.0.113.0/24 exact
+                exit
+                # Static -> OSPF with seed metric and tag
+                policy-statement "STATIC-TO-OSPF"
+                    entry 10
+                        from
+                            protocol static
+                            prefix-list "STATIC-ALLOWED"
+                        exit
+                        action accept
+                            metric set 10
+                            tag 200
+                        exit
+                    exit
+                    default-action reject
+                exit
+                # OSPF -> BGP, filtered to public prefixes only
+                policy-statement "OSPF-TO-BGP"
+                    entry 10
+                        from
+                            protocol ospf
+                            prefix-list "PUBLIC-ONLY"
+                        exit
+                        action accept
+                    exit
+                    default-action reject
+                exit
+                commit
+            exit
+            ospf
+                export "STATIC-TO-OSPF"
+            exit
+            bgp
+                export "OSPF-TO-BGP"
+            exit
+        exit
+    exit
+
+    # Verification
+    show router ospf database
+    show router route-table protocol ospf
+    show router bgp routes
+    show router policy "OSPF-TO-BGP"
+    ```
+
+    SR-OS installs subnetted prefixes without any `subnets` keyword. OSPF external routes default to Type 2 (E2); the policy action sets the external type where Type 1 is required. Break mutual-redistribution loops the same way as on other platforms: match `from tag` on the return policy to drop routes that already crossed the boundary.
+
+    Full configuration reference: [Nokia SR OS Routing Protocols Guide (Route Policies)](https://documentation.nokia.com/)
 
 ---
 ## Common Pitfalls
