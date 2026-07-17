@@ -3,11 +3,11 @@ module_id: RT-008
 title: "BGP Advanced - Communities, Policy & Filtering"
 domain: "fundamentals/routing"
 description: "BGP community tagging, route-maps, prefix-lists, AS-path filters, and traffic engineering with local preference, MED, and prepending."
-version: "1.0.0"
+version: "1.1.0"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS"]
 module_type: concept
 estimated_time: 60
 prerequisites:
@@ -15,7 +15,7 @@ prerequisites:
 difficulty: advanced
 tags: [routing, bgp, route-policy, traffic-engineering]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 ---
 
@@ -323,6 +323,40 @@ route-map TO-ISP-B permit 10
     ```
 
     Full configuration reference: [https://documentation.nokia.com/sr/23-3/titles/bgp.html](https://documentation.nokia.com/sr/23-3/titles/bgp.html)
+
+=== "Arista EOS"
+
+    ```
+    ! Prefix list
+    ip prefix-list CUSTOMER-PREFIXES seq 5 permit 10.0.0.0/8 ge 24
+
+    ! AS-path access list
+    ip as-path access-list CUST-AS permit ^65001_ any
+
+    ! Community list
+    ip community-list CUST permit 65000:100
+
+    ! Route-map (references prefix-list, AS-path and community)
+    route-map INBOUND-POLICY permit 10
+     match ip address prefix-list CUSTOMER-PREFIXES
+     match as-path CUST-AS
+     match community CUST
+     set local-preference 200
+    route-map INBOUND-POLICY permit 65535
+
+    ! Apply to neighbor
+    router bgp 65000
+     neighbor 10.1.1.1 route-map INBOUND-POLICY in
+     neighbor 10.1.1.1 send-community
+
+    ! Verification
+    show ip bgp neighbors 10.1.1.1 received-routes
+    show ip bgp community 65000:100
+    ```
+
+    EOS uses the same route-map, `ip prefix-list`, `ip community-list` and `ip as-path access-list` constructs as Cisco IOS. A route-map needs a trailing `permit <high-seq>` catch-all, or unmatched routes are implicitly denied. EOS also offers Routing Control Functions (RCF) as a modern policy language for complex filtering.
+
+    Full configuration reference: [Arista EOS User Manual](https://www.arista.com/en/um-eos)
 
 ---
 ## Common Pitfalls

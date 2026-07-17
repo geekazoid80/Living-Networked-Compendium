@@ -5,14 +5,14 @@ domain: "fundamentals/routing"
 difficulty: "intermediate"
 prerequisites: ["RT-001", "IP-001", "IP-002"]
 estimated_time: 40
-version: "1.0.0"
-last_updated: "2026-04-17"
+version: "1.1.0"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
 tags: [routing, static-routing]
 cert_alignment: "CCNA 200-301 - 3.3 | JNCIA-Junos JN0-103 | Nokia NRS I"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "MikroTik RouterOS"]
 language: "en"
 ---
 
@@ -320,6 +320,34 @@ Static routes are a local router configuration - no standard wire protocol. Synt
 
     Full configuration reference: [MikroTik Static Routing](https://help.mikrotik.com/docs/display/ROS/IP+Routing)
 
+=== "Arista EOS"
+    ```arista-eos
+    ! Static route — next-hop (EOS accepts CIDR prefix notation)
+    ip route 10.2.0.0/16 10.0.12.2
+
+    ! Static route — exit interface + next-hop
+    ip route 10.2.0.0/16 Ethernet1 10.0.12.2
+
+    ! Default route
+    ip route 0.0.0.0/0 203.0.113.1
+
+    ! Floating static (distance 200, dormant while OSPF AD 110 is present)
+    ip route 10.2.0.0/16 10.0.99.2 200
+
+    ! Null0 black hole
+    ip route 10.0.0.0/8 Null0
+
+    ! IPv6 static route
+    ipv6 route 2001:db8:2::/64 2001:db8:12::2
+
+    ! Verify
+    show ip route static
+    show ip route 10.2.0.0/16
+    ```
+    EOS accepts CIDR prefix notation directly (`10.2.0.0/16`) as well as the dotted-mask form. The administrative distance is the trailing numeric parameter (default 1), matching Cisco semantics. `Null0` provides the black-hole/discard behaviour.
+
+    Full configuration reference: [Arista EOS User Manual](https://www.arista.com/en/um-eos)
+
 ---
 ## Common Pitfalls
 
@@ -521,12 +549,12 @@ Gi0/0   Gi0/1  Gi0/0  Gi0/1  Gi0/0
 
 ### Vendor Mapping
 
-| Concept | Standard | Cisco IOS-XE | Juniper Junos | Nokia SR-OS | MikroTik RouterOS |
-|---|---|---|---|---|---|
-| Static route (next-hop) | RFC 1812 | `ip route X.X.X.X M.M.M.M <nh>` | `set routing-options static route X/Y next-hop <nh>` | `static-route X/Y next-hop <nh>` | `/ip route add gateway=<nh>` |
-| Default route | RFC 1812 | `ip route 0.0.0.0 0.0.0.0 <nh>` | `static route 0.0.0.0/0 next-hop <nh>` | `static-route 0.0.0.0/0 next-hop <nh>` | `dst-address=0.0.0.0/0` |
-| Floating static | Local policy | Last param = AD value | `preference <value>` | `preference <value>` | `distance=<value>` |
-| Null0 / discard | Local policy | `Null0` interface | `discard` | `black-hole` | `type=blackhole` |
+| Concept | Standard | Cisco IOS-XE | Juniper Junos | Nokia SR-OS | MikroTik RouterOS | Arista EOS |
+|---|---|---|---|---|---|---|
+| Static route (next-hop) | RFC 1812 | `ip route X.X.X.X M.M.M.M <nh>` | `set routing-options static route X/Y next-hop <nh>` | `static-route X/Y next-hop <nh>` | `/ip route add gateway=<nh>` | `ip route X/Y <nh>` |
+| Default route | RFC 1812 | `ip route 0.0.0.0 0.0.0.0 <nh>` | `static route 0.0.0.0/0 next-hop <nh>` | `static-route 0.0.0.0/0 next-hop <nh>` | `dst-address=0.0.0.0/0` | `ip route 0.0.0.0/0 <nh>` |
+| Floating static | Local policy | Last param = AD value | `preference <value>` | `preference <value>` | `distance=<value>` | Last param = AD value |
+| Null0 / discard | Local policy | `Null0` interface | `discard` | `black-hole` | `type=blackhole` | `Null0` interface |
 
 ### Maintenance Notes
 
