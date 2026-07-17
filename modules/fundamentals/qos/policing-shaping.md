@@ -176,7 +176,7 @@ The child policy (LLQ-CHILD) performs priority queuing and CBWFQ within the 5 Mb
      class class-default
       shape average 10000000    ! 10 Mbps CIR
 
-    ! HQoS — shape + child LLQ
+    ! HQoS: shape + child LLQ
     policy-map PARENT-SHAPE
      class class-default
       shape average 10000000
@@ -207,7 +207,7 @@ The child policy (LLQ-CHILD) performs priority queuing and CBWFQ within the 5 Mb
     set firewall family inet filter RATE-LIMIT term POLICE from ...
     set firewall family inet filter RATE-LIMIT term POLICE then policer CUSTOMER-POLICER
 
-    # Traffic shaping — via scheduler with transmit-rate
+    # Traffic shaping: via scheduler with transmit-rate
     set class-of-service schedulers SHAPED-CLASS transmit-rate 10m
     set class-of-service scheduler-maps SHAPED-MAP forwarding-class default scheduler SHAPED-CLASS
     set class-of-service interfaces ge-0/0/0.0 scheduler-map SHAPED-MAP

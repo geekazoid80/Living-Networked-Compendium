@@ -90,7 +90,7 @@ route-map MY-POLICY permit 20
  set local-preference 150
 !
 route-map MY-POLICY permit 65535
- ! No match — permit everything else (default)
+ ! No match: permit everything else (default)
 ```
 
 ### Prefix-Lists

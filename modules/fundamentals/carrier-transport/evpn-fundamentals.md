@@ -165,7 +165,7 @@ The RT-2 route carries the next-hop (PE loopback) and the encapsulation label/VN
      member evpn-instance 100 vni 10100
      member GigabitEthernet0/1 service-instance 100
 
-    ! BGP — enable L2VPN EVPN address family
+    ! BGP: enable L2VPN EVPN address family
     router bgp 65001
      address-family l2vpn evpn
       neighbor 2.2.2.2 activate

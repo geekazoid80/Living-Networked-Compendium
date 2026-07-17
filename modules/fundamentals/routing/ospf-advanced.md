@@ -184,7 +184,7 @@ area <transit-area-id> virtual-link <remote-ABR-router-id>
     ! Stub area
      area 2 stub
 
-    ! Totally stubby (Cisco only — on ABR only)
+    ! Totally stubby (Cisco only, on ABR only)
      area 2 stub no-summary
 
     ! NSSA

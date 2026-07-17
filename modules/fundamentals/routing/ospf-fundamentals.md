@@ -169,7 +169,7 @@ T1/E1             1.544 Mbps 100M ÷ 1.544M ≈ 64
 
 **Fix:** Set the reference bandwidth to something larger than your fastest link:
 ```text
-auto-cost reference-bandwidth 100000    (Cisco — sets reference to 100 Gbps)
+auto-cost reference-bandwidth 100000    (Cisco: sets reference to 100 Gbps)
 ```
 This must be configured consistently on ALL routers in the OSPF domain, or costs will be asymmetric and routing will be unpredictable.
 
@@ -287,14 +287,14 @@ OSPF is standardised in RFC 2328 (OSPFv2 for IPv4) and RFC 5340 (OSPFv3 for IPv6
 
 === "Cisco IOS-XE"
     ```cisco-ios
-    ! Enable OSPF process 1 — process ID is local only; does not affect interop
+    ! Enable OSPF process 1: process ID is local only; does not affect interop
     router ospf 1
      router-id 1.1.1.1
-     auto-cost reference-bandwidth 100000   ! 100 Gbps reference — set on ALL routers
+     auto-cost reference-bandwidth 100000   ! 100 Gbps reference: set on ALL routers
 
     ! Assign interfaces to an area
     interface GigabitEthernet0/0
-     ip ospf 1 area 0      ! preferred — interface-level config
+     ip ospf 1 area 0      ! preferred: interface-level config
      ip ospf priority 100  ! increase to win DR election if needed
      ip ospf cost 10       ! manual cost override
 
@@ -498,7 +498,7 @@ If different routers have different reference-bandwidth values, cost calculation
 **Topology:**
 ```text
 [R1] Lo0: 1.1.1.1/32               [R2] Lo0: 2.2.2.2/32
-     Gi0/0: 10.12.0.1/30   ←———→   Gi0/0: 10.12.0.2/30
+     Gi0/0: 10.12.0.1/30   ←───→   Gi0/0: 10.12.0.2/30
      Gi0/1: 10.1.0.1/24             Gi0/1: 10.2.0.1/24
 ```
 

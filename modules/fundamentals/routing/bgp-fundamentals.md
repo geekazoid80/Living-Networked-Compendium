@@ -180,7 +180,7 @@ AS 65002 re-advertises to 65003:
   Prepends own AS: AS_PATH: 65002 65001
 
 AS 65003 re-advertises to 65001 (original AS):
-  65001 sees 65001 in AS_PATH → REJECTS — loop detected
+  65001 sees 65001 in AS_PATH → REJECTS: loop detected
 ```
 
 **AS_PATH manipulation:**
@@ -289,11 +289,11 @@ N routers → N×(N-1)/2 sessions
 A Route Reflector (RR) relaxes the no-readvertise rule: it may re-advertise iBGP-learned routes to its **clients** (other iBGP speakers configured to peer only with the RR).
 
 ```text
-Without RR (full mesh — 6 sessions for 4 routers):
+Without RR (full mesh, 6 sessions for 4 routers):
   R1 ←→ R2, R1 ←→ R3, R1 ←→ R4
   R2 ←→ R3, R2 ←→ R4, R3 ←→ R4
 
-With RR (RR-A is the reflector — 3 sessions):
+With RR (RR-A is the reflector, 3 sessions):
   R1, R2, R3 all peer only with RR-A
   RR-A reflects routes from R1 to R2 and R3; from R2 to R1 and R3; etc.
 ```

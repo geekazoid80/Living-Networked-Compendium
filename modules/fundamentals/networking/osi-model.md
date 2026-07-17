@@ -60,19 +60,19 @@ The model has **seven layers**. Think of them as a stack:
 
 ```
 ┌─────────────────────────────┐
-│  Layer 7 — Application      │  What the user sees
+│  Layer 7:  Application      │  What the user sees
 ├─────────────────────────────┤
-│  Layer 6 — Presentation     │  Format and encrypt
+│  Layer 6:  Presentation     │  Format and encrypt
 ├─────────────────────────────┤
-│  Layer 5 — Session          │  Manage conversations
+│  Layer 5:  Session          │  Manage conversations
 ├─────────────────────────────┤
-│  Layer 4 — Transport        │  End-to-end delivery
+│  Layer 4:  Transport        │  End-to-end delivery
 ├─────────────────────────────┤
-│  Layer 3 — Network          │  Logical addressing and routing
+│  Layer 3:  Network          │  Logical addressing and routing
 ├─────────────────────────────┤
-│  Layer 2 — Data Link        │  Physical addressing and access
+│  Layer 2:  Data Link        │  Physical addressing and access
 ├─────────────────────────────┤
-│  Layer 1 — Physical         │  Bits on a wire (or radio wave)
+│  Layer 1:  Physical         │  Bits on a wire (or radio wave)
 └─────────────────────────────┘
 ```
 

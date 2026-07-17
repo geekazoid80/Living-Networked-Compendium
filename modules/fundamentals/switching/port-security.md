@@ -139,7 +139,7 @@ arp access-list SERVER-ARPS
 === "Cisco IOS-XE"
 
     ```
-    ! Port Security — sticky, max 2 MACs, shutdown on violation
+    ! Port Security: sticky, max 2 MACs, shutdown on violation
     interface GigabitEthernet0/1
      switchport mode access
      switchport access vlan 10

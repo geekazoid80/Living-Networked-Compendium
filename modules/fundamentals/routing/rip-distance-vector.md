@@ -123,7 +123,7 @@ Round 2 (after second exchange):
   R2 knows: N1=1, N2=0, N3=1
   R3 knows: N1=2, N2=1, N3=0
 
-Converged — every router knows every network.
+Converged: every router knows every network.
 ```
 
 The convergence time scales with the network diameter (number of hops across the widest path) multiplied by the update interval. A 10-hop network with 30-second updates takes up to 300 seconds (5 minutes) to converge - very slow by modern standards.
@@ -133,7 +133,7 @@ The convergence time scales with the network diameter (number of hops across the
 When a route becomes unreachable, distance-vector protocols can create a routing loop before convergence completes.
 
 ```text
-Topology:  R1 — R2 — R3
+Topology:  R1 ─ R2 ─ R3
 Networks:  N1 behind R1, N3 behind R3
 
 R2 knows N3 = 1 hop (via R3)
@@ -141,7 +141,7 @@ R1 knows N3 = 2 hops (via R2)
 
 R3 goes down. N3 is unreachable.
 
-R2 removes N3 from its table — it knows N3 is gone.
+R2 removes N3 from its table; it knows N3 is gone.
 Before R2 can send an update, R1 advertises: "N3 = 2 hops via me."
 R2 thinks: "A new path! N3 = 3 hops via R1."
 R2 tells R1: "N3 = 4 hops."
@@ -161,14 +161,14 @@ During this time, packets for N3:
 A router does not advertise a route back out the interface it learned the route from.
 
 ```text
-R1 — R2 — R3
+R1 ─ R2 ─ R3
 
 R2 learned N3 from R3 (via its Gi0/1 facing R3).
 With split horizon: R2 does NOT advertise N3 back to R3 via Gi0/1.
-R2 DOES advertise N3 to R1 via Gi0/0 (different interface — allowed).
+R2 DOES advertise N3 to R1 via Gi0/0 (different interface, allowed).
 
 Effect: R3 never hears from R2 that N3 is reachable via R2.
-So when N3 fails, R3 cannot count-to-infinity with R2 — no loop between adjacent pair.
+So when N3 fails, R3 cannot count-to-infinity with R2: no loop between adjacent pair.
 ```
 
 **Poison Reverse:**
@@ -194,12 +194,12 @@ When a route is marked unreachable, the router ignores any new advertisement for
     Split horizon prevents two-node loops (R1↔R2 looping). But in a triangle topology (R1-R2-R3 all connected to each other), it does not prevent a three-node counting-to-infinity loop.
 
     ```text
-    R1 — R2
+    R1 ─ R2
     |  ×  |
-    R3 — —+
+    R3 ─ ─+
 
     R1 learns N4 (behind R3) from R3.
-    R1 advertises N4 to R2 (different interface — split horizon allows it).
+    R1 advertises N4 to R2 (different interface, split horizon allows it).
     R2 now has a path to N4 via R1.
 
     R3 goes down. N4 is unreachable.

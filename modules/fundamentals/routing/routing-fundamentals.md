@@ -123,11 +123,11 @@ Each **hop** is one router in the path from source to destination. A packet may 
 
 ```text
   PC-A             R1              R2             Server
-  [10.0.1.5]  ——→  [10.0.1.1]  ——→  [10.0.2.1]  ——→  [10.0.2.10]
+  [10.0.1.5]  ──→  [10.0.1.1]  ──→  [10.0.2.1]  ──→  [10.0.2.10]
              hop 1              hop 2
 
-At R1: destination 10.0.2.10 — which interface leads toward 10.0.2.0/24?
-At R2: destination 10.0.2.10 — is 10.0.2.10 directly connected? Yes → deliver.
+At R1: destination 10.0.2.10, which interface leads toward 10.0.2.0/24?
+At R2: destination 10.0.2.10, is 10.0.2.10 directly connected? Yes → deliver.
 ```
 
 Routing is **per-hop** and **stateless** - each router makes an independent decision. No router sees the full path; each only knows its own next step.
@@ -180,9 +180,9 @@ When a packet arrives, the router compares the destination IP address against ev
 
 ```text
 Routing table contains:
-  10.0.0.0/8      via 10.99.0.1  (8-bit prefix — broad)
-  10.1.0.0/16     via 10.99.0.2  (16-bit prefix — narrower)
-  10.1.2.0/24     via 10.99.0.3  (24-bit prefix — most specific)
+  10.0.0.0/8      via 10.99.0.1  (8-bit prefix, broad)
+  10.1.0.0/16     via 10.99.0.2  (16-bit prefix, narrower)
+  10.1.2.0/24     via 10.99.0.3  (24-bit prefix, most specific)
 
 Packet destination: 10.1.2.50
 
@@ -191,7 +191,7 @@ Match candidates:
   10.1.0.0/16   ✓  (10.1.2.50 is in 10.1.0.0/16)
   10.1.2.0/24   ✓  (10.1.2.50 is in 10.1.2.0/24)
 
-Winner: 10.1.2.0/24 — longest prefix wins
+Winner: 10.1.2.0/24, longest prefix wins
 ```
 
 If **no** match is found at all - and no default route exists - the router **drops** the packet and may send an ICMP "Destination Unreachable" back to the source.
@@ -452,7 +452,7 @@ When a next-hop is not directly connected, the router must resolve the next-hop 
 **Topology:**
 ```text
 [PC-A]         [R1]              [R2]              [R3]         [Server]
-10.1.1.10  ——→ Gi0/0   Gi0/1 ——→ Gi0/0   Gi0/1 ——→ Gi0/0  ——→ 10.3.3.10
+10.1.1.10  ──→ Gi0/0   Gi0/1 ──→ Gi0/0   Gi0/1 ──→ Gi0/0  ──→ 10.3.3.10
            10.1.1.1  10.0.12.1 10.0.12.2  10.0.23.1 10.0.23.2
                                                     Gi0/1
                                                    10.3.3.1

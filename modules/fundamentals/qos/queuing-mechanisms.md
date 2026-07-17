@@ -170,7 +170,7 @@ Benefits:
 
     ```
     # Forwarding classes already defined (see QOS-002)
-    # Scheduler — define per-class bandwidth and priority
+    # Scheduler: define per-class bandwidth and priority
     set class-of-service schedulers VOICE transmit-rate percent 15 priority strict-high
     set class-of-service schedulers VIDEO transmit-rate percent 20 priority high
     set class-of-service schedulers SIGNALLING transmit-rate percent 5 priority medium-high

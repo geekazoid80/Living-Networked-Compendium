@@ -140,11 +140,11 @@ Access switches sit at the trust boundary. A switch port connected to an IP phon
 interface GigabitEthernet0/1
  mls qos trust dscp
 
-! Trust CoS (802.1p) from the phone — convert to DSCP using default map
+! Trust CoS (802.1p) from the phone: convert to DSCP using default map
 interface GigabitEthernet0/1
  mls qos trust cos
 
-! Trust nothing — re-mark based on port class (most restrictive)
+! Trust nothing: re-mark based on port class (most restrictive)
 interface GigabitEthernet0/1
  mls qos trust cos
  mls qos cos 0    ! Override all CoS to 0 (best effort)

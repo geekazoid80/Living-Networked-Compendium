@@ -203,7 +203,7 @@ See IP-003 for SLAAC/DHCPv6 interplay.
     ```
     # DHCP Server (quick setup)
     /ip dhcp-server setup
-    # Interactive — select interface, address pool, gateway, DNS, lease time
+    # Interactive: select interface, address pool, gateway, DNS, lease time
 
     # Manual setup
     /ip pool add name=VLAN10-POOL ranges=192.168.10.11-192.168.10.254

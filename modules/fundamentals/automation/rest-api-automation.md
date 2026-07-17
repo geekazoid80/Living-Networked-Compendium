@@ -109,7 +109,7 @@ HEADERS = {
     'Content-Type': 'application/yang-data+json',
 }
 
-# GET — read interface data
+# GET: read interface data
 url = f'{BASE_URL}/restconf/data/ietf-interfaces:interfaces'
 response = requests.get(url, auth=AUTH, headers=HEADERS, verify=False)
 response.raise_for_status()    # raise exception on HTTP error
@@ -120,7 +120,7 @@ for iface in data['ietf-interfaces:interfaces']['interface']:
 ```
 
 ```python
-# PATCH — update interface description
+# PATCH: update interface description
 url = f'{BASE_URL}/restconf/data/ietf-interfaces:interfaces/interface=GigabitEthernet0%2F1'
 payload = {
     "ietf-interfaces:interface": {

@@ -180,19 +180,19 @@ NGFW capabilities come at a significant performance cost - throughput for full D
     zone security UNTRUST
     zone security DMZ
 
-    ! Class map — match traffic
+    ! Class map: match traffic
     class-map type inspect match-any WEB-TRAFFIC
      match protocol https
      match protocol http
 
-    ! Policy map — action
+    ! Policy map: action
     policy-map type inspect TRUST-TO-UNTRUST
      class type inspect WEB-TRAFFIC
       inspect
      class class-default
       drop
 
-    ! Zone pair — bind policy to zone pair
+    ! Zone pair: bind policy to zone pair
     zone-pair security TRUST-UNTRUST source TRUST destination UNTRUST
      service-policy type inspect TRUST-TO-UNTRUST
 
@@ -222,7 +222,7 @@ NGFW capabilities come at a significant performance cost - throughput for full D
     set security policies from-zone TRUST to-zone UNTRUST policy ALLOW-WEB match application junos-https
     set security policies from-zone TRUST to-zone UNTRUST policy ALLOW-WEB then permit
 
-    # Default deny (already implicit on SRX — made explicit here)
+    # Default deny (already implicit on SRX, made explicit here)
     set security policies default-policy deny-all
 
     # Verification
