@@ -3,11 +3,11 @@ module_id: SW-005
 title: "Port Security & DAI (Dynamic ARP Inspection)"
 domain: "fundamentals/switching"
 description: "How to restrict which devices can connect to switch ports and how to prevent ARP spoofing attacks using DHCP Snooping and Dynamic ARP Inspection."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS"]
 module_type: concept
 estimated_time: 40
 prerequisites:
@@ -16,7 +16,7 @@ prerequisites:
 difficulty: intermediate
 tags: [switching, port-security, layer-2]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 ---
 
@@ -219,6 +219,32 @@ arp access-list SERVER-ARPS
     ```
 
     Full configuration reference: [https://www.arista.com/en/um-eos/eos-dhcp-snooping](https://www.arista.com/en/um-eos/eos-dhcp-snooping)
+
+=== "Nokia SR-OS"
+
+    SR-OS has no single feature called "port security". The closest equivalent is **per-SAP MAC limiting** inside a VPLS: `max-nbr-mac-addr` caps how many source MACs a SAP may learn, and `mac-pinning` stops a learned MAC from moving to another SAP (the anti-MAC-spoofing intent).
+
+    ```
+    configure
+        service
+            vpls 10 name "ACCOUNTING" customer 1 create
+                sap 1/1/1:10 create
+                    max-nbr-mac-addr 2   # cap learned MACs on this SAP
+                    mac-pinning          # pin learned MACs to this SAP
+                exit
+                no shutdown
+            exit
+        exit
+    exit
+
+    # Verification
+    show service id 10 sap 1/1/1:10 detail
+    show service id 10 fdb detail
+    ```
+
+    What SR-OS does **not** express in the same shape as the other tabs: sticky-MAC persistence into the running config, an err-disable / `violation shutdown` port state, and the integrated DHCP-snooping plus Dynamic ARP Inspection binding table. On SR-OS those protections come from different subsystems (subscriber management and anti-spoof filters) that sit outside this enterprise-access lesson. Treat this tab as the MAC-limiting analogue, not a one-to-one port-security port.
+
+    Full configuration reference: [Nokia SR OS Layer 2 Services Guide (VPLS SAP MAC controls)](https://documentation.nokia.com/)
 
 ---
 ## Common Pitfalls

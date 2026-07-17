@@ -5,14 +5,14 @@ domain: "fundamentals/switching"
 difficulty: "intermediate"
 prerequisites: ["NW-001", "NW-002", "IP-001"]
 estimated_time: 40
-version: "1.0.0"
-last_updated: "2026-04-19"
+version: "1.0.1"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
 tags: [switching, forwarding, ethernet, layer-2, segmentation]
 cert_alignment: "CCNA 200-301 - 2.1–2.3 | JNCIA-Junos JN0-103 | Nokia NRS I"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "MikroTik RouterOS"]
 language: "en"
 ---
 
@@ -257,6 +257,26 @@ Ethernet switching behaviour is standardised in IEEE 802.1D (bridging) and IEEE 
     RouterOS implements switching via the **bridge** interface. Each bridge is a separate switching domain. Ports must be added to a bridge to participate in L2 switching. Hardware offload (`hw=yes`) is supported on platforms with switch chips.
 
     Full configuration reference: [MikroTik Bridge Reference](https://help.mikrotik.com/docs/display/ROS/Bridge)
+
+=== "Nokia SR-OS"
+    ```sros
+    # View the forwarding database (MAC table) for a VPLS service
+    show service id 10 fdb detail
+
+    # View FDB usage across all services
+    show service fdb-info
+
+    # Clear dynamically learned MACs in one service
+    clear service id 10 fdb all
+
+    # A VPLS is the bridge instance; untagged ports join it as null SAPs
+    configure service vpls 10 name "LAN" customer 1 create
+    configure service vpls 10 sap 1/1/1 create
+    configure service vpls 10 sap 1/1/2 create
+    ```
+    On SR-OS the MAC table is the per-service **Forwarding Database (FDB)**, held inside each VPLS bridge instance rather than in one global table. Learn/flood/forward, unknown-unicast flooding, and MAC aging all operate per VPLS. Static FDB entries and per-SAP MAC limits are configured under the SAP within the service.
+
+    Full configuration reference: [Nokia SR OS Layer 2 Services Guide (VPLS FDB)](https://documentation.nokia.com/)
 
 ---
 ## Common Pitfalls
