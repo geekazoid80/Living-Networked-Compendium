@@ -5439,7 +5439,7 @@ When the SLA probe fails, the tracked route is removed - even if the interface i
 <p class="admonition-title">Standard - RFC 1812 (IPv4), RFC 8200 (IPv6)</p>
 <p>Static routes are programmed locally and behave identically across vendors: lowest-AD route installs, LPM selects the forwarding entry. The <code>0.0.0.0/0</code> default route is universally supported.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Nokia SR-OS</label><label for="__tabbed_1_4">MikroTik RouterOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Nokia SR-OS</label><label for="__tabbed_1_4">MikroTik RouterOS</label><label for="__tabbed_1_5">Arista EOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>! Static route — next-hop only
@@ -5533,6 +5533,32 @@ SR-OS uses <code>black-hole</code> (equivalent to Null0/discard). Preference def
 RouterOS uses <code>distance</code> instead of AD (same concept). Default static distance = 1. Set <code>type=blackhole</code> for Null0 equivalent.</p>
 <p>Full configuration reference: <a href="https://help.mikrotik.com/docs/display/ROS/IP+Routing">MikroTik Static Routing</a></p>
 </div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>! Static route — next-hop (EOS accepts CIDR prefix notation)
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ip route 10.2.0.0/16 10.0.12.2
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>! Static route — exit interface + next-hop
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>ip route 10.2.0.0/16 Ethernet1 10.0.12.2
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>! Default route
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>ip route 0.0.0.0/0 203.0.113.1
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>! Floating static (distance 200, dormant while OSPF AD 110 is present)
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>ip route 10.2.0.0/16 10.0.99.2 200
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>! Null0 black hole
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>ip route 10.0.0.0/8 Null0
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>! IPv6 static route
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>ipv6 route 2001:db8:2::/64 2001:db8:12::2
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>! Verify
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>show ip route static
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>show ip route 10.2.0.0/16
+</span></code></pre></div>
+EOS accepts CIDR prefix notation directly (<code>10.2.0.0/16</code>) as well as the dotted-mask form. The administrative distance is the trailing numeric parameter (default 1), matching Cisco semantics. <code>Null0</code> provides the black-hole/discard behaviour.</p>
+<p>Full configuration reference: <a href="https://www.arista.com/en/um-eos">Arista EOS User Manual</a></p>
+</div>
 </div>
 </div>
 <hr />
@@ -5592,14 +5618,14 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
 <strong>Estimated time:</strong> 20 minutes
 <strong>Objective:</strong> Configure static routes between three routers, add a default route, then demonstrate floating static failover.</p>
 <p><strong>Topology:</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[R1]           [R2]          [R3]
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Gi0/0   Gi0/1  Gi0/0  Gi0/1  Gi0/0
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>10.1.1.1  10.12.0.1  10.12.0.2  10.23.0.1  10.23.0.2
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>                                             Gi0/1
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>                                            10.3.3.1
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>                     (backup link)
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>[R1] ─────────────────────────────────────→ [R3]
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  10.13.0.1                             10.13.0.2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[R1]           [R2]          [R3]
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Gi0/0   Gi0/1  Gi0/0  Gi0/1  Gi0/0
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>10.1.1.1  10.12.0.1  10.12.0.2  10.23.0.1  10.23.0.2
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>                                             Gi0/1
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>                                            10.3.3.1
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>                     (backup link)
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>[R1] ─────────────────────────────────────→ [R3]
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>  10.13.0.1                             10.13.0.2
 </span></code></pre></div></p>
 <p><strong>Steps:</strong></p>
 <ol>
@@ -5608,39 +5634,39 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
 </li>
 <li>
 <p>Add static routes so R1 can reach <code>10.3.3.0/24</code> (via R2 → R3) as primary:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>! On R1: primary path via R2
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>ip route 10.3.3.0 255.255.255.0 10.12.0.2
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>! On R2: forward to R3
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>ip route 10.3.3.0 255.255.255.0 10.23.0.2
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>! On R3: return path toward R1
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>ip route 10.1.1.0 255.255.255.0 10.23.0.1
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>! On R1: primary path via R2
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>ip route 10.3.3.0 255.255.255.0 10.12.0.2
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>! On R2: forward to R3
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>ip route 10.3.3.0 255.255.255.0 10.23.0.2
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>! On R3: return path toward R1
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>ip route 10.1.1.0 255.255.255.0 10.23.0.1
 </span></code></pre></div>
 </li>
 <li>
 <p>Add a floating static on R1 via the backup link (direct R1→R3):</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>! Floating static — AD=200, only activates if primary (AD=1) disappears
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>ip route 10.3.3.0 255.255.255.0 10.13.0.2 200
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>! Floating static — AD=200, only activates if primary (AD=1) disappears
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ip route 10.3.3.0 255.255.255.0 10.13.0.2 200
 </span></code></pre></div>
 </li>
 <li>
 <p>Verify only the primary static appears (AD=1 wins over AD=200):</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>R1# show ip route 10.3.3.0
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>Routing entry for 10.3.3.0/24
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  Known via &quot;static&quot;, distance 1, metric 0
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  via 10.12.0.2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>R1# show ip route 10.3.3.0
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Routing entry for 10.3.3.0/24
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  Known via &quot;static&quot;, distance 1, metric 0
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  via 10.12.0.2
 </span></code></pre></div>
 </li>
 <li>
 <p>Simulate failure: shut down R1's Gi0/1 (the link to R2). Check that the floating static now installs:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>interface GigabitEthernet0/1
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a> shutdown
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>interface GigabitEthernet0/1
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a> shutdown
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>R1# show ip route 10.3.3.0
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Routing entry for 10.3.3.0/24
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>  Known via &quot;static&quot;, distance 200, metric 0
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>  via 10.13.0.2      ← floating static took over
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>R1# show ip route 10.3.3.0
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>Routing entry for 10.3.3.0/24
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>  Known via &quot;static&quot;, distance 200, metric 0
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  via 10.13.0.2      ← floating static took over
 </span></code></pre></div>
 </li>
 </ol>
@@ -5782,6 +5808,7 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
 <th>Juniper Junos</th>
 <th>Nokia SR-OS</th>
 <th>MikroTik RouterOS</th>
+<th>Arista EOS</th>
 </tr>
 </thead>
 <tbody>
@@ -5792,6 +5819,7 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
 <td><code>set routing-options static route X/Y next-hop &lt;nh&gt;</code></td>
 <td><code>static-route X/Y next-hop &lt;nh&gt;</code></td>
 <td><code>/ip route add gateway=&lt;nh&gt;</code></td>
+<td><code>ip route X/Y &lt;nh&gt;</code></td>
 </tr>
 <tr>
 <td>Default route</td>
@@ -5800,6 +5828,7 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
 <td><code>static route 0.0.0.0/0 next-hop &lt;nh&gt;</code></td>
 <td><code>static-route 0.0.0.0/0 next-hop &lt;nh&gt;</code></td>
 <td><code>dst-address=0.0.0.0/0</code></td>
+<td><code>ip route 0.0.0.0/0 &lt;nh&gt;</code></td>
 </tr>
 <tr>
 <td>Floating static</td>
@@ -5808,6 +5837,7 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
 <td><code>preference &lt;value&gt;</code></td>
 <td><code>preference &lt;value&gt;</code></td>
 <td><code>distance=&lt;value&gt;</code></td>
+<td>Last param = AD value</td>
 </tr>
 <tr>
 <td>Null0 / discard</td>
@@ -5816,6 +5846,7 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
 <td><code>discard</code></td>
 <td><code>black-hole</code></td>
 <td><code>type=blackhole</code></td>
+<td><code>Null0</code> interface</td>
 </tr>
 </tbody>
 </table>
@@ -5847,7 +5878,7 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 18, 2026 13:29:31 UTC">June 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 10:08:05 UTC">July 17, 2026</span>
   </span>
 
     
@@ -5857,7 +5888,7 @@ With <code>ip route 10.0.0.0 255.0.0.0 Null0</code>: The Null0 route matches <co
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 18, 2026 13:29:31 UTC">June 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 10:08:05 UTC">July 17, 2026</span>
   </span>
 
     

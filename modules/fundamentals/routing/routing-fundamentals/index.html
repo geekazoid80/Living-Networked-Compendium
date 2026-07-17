@@ -5648,7 +5648,7 @@
 <p class="admonition-title">Standard - RFC 1812 (IPv4 Router Requirements), RFC 8200 (IPv6)</p>
 <p>All compliant routers perform longest-prefix match forwarding, support a default route, and separate control-plane and data-plane functions. Administrative distance is a local policy value - not standardised - so values differ between vendors.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Nokia SR-OS</label><label for="__tabbed_1_4">MikroTik RouterOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Nokia SR-OS</label><label for="__tabbed_1_4">MikroTik RouterOS</label><label for="__tabbed_1_5">Arista EOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>! View the routing table
@@ -5711,6 +5711,22 @@ SR-OS uses "preference" with the same convention as Juniper (lower = more truste
 RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connected = 0. Dynamic protocol distances are configurable per instance. The active route (lowest distance, then lowest metric) is marked with <code>A</code> in the route print output.</p>
 <p>Full configuration reference: <a href="https://help.mikrotik.com/docs/display/ROS/IP+Routing">MikroTik Routing Reference</a></p>
 </div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>! View the routing table (RIB)
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>show ip route
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>! View a specific prefix
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>show ip route 10.1.2.0
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>! Verify which route wins for a destination (longest-prefix match)
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>show ip route 10.1.2.50
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>! Route counts by source
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>show ip route summary
+</span></code></pre></div>
+EOS uses Cisco-compatible terminology and default administrative distances (connected 0, static 1, OSPF 110, eBGP 20, iBGP 200). <code>show ip route</code> displays the RIB; EOS programs the hardware FIB from the RIB automatically, and the platform FIB view is switch-family specific (<code>show platform ...</code>). Custom AD is the trailing parameter on a static route: <code>ip route &lt;prefix&gt; &lt;next-hop&gt; &lt;distance&gt;</code>.</p>
+<p>Full configuration reference: <a href="https://www.arista.com/en/um-eos">Arista EOS User Manual</a></p>
+</div>
 </div>
 </div>
 <hr />
@@ -5730,10 +5746,10 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <ol>
 <li>
 <p>A router has these routes in its table:
-   <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>192.168.0.0/16  via 10.0.0.1
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>192.168.1.0/24  via 10.0.0.2
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>192.168.1.128/25 via 10.0.0.3
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>0.0.0.0/0       via 10.0.0.4
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>192.168.0.0/16  via 10.0.0.1
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>192.168.1.0/24  via 10.0.0.2
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>192.168.1.128/25 via 10.0.0.3
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>0.0.0.0/0       via 10.0.0.4
 </span></code></pre></div>
    A packet arrives with destination <code>192.168.1.200</code>. Which route is used? Which route is used for destination <code>192.168.2.50</code>?</p>
 </li>
@@ -5774,46 +5790,46 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <strong>Estimated time:</strong> 20 minutes
 <strong>Objective:</strong> Configure a small three-router topology, observe what appears in each router's routing table, and verify longest-prefix match behaviour.</p>
 <p><strong>Topology:</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[PC-A]         [R1]              [R2]              [R3]         [Server]
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>10.1.1.10  ——→ Gi0/0   Gi0/1 ——→ Gi0/0   Gi0/1 ——→ Gi0/0  ——→ 10.3.3.10
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>           10.1.1.1  10.0.12.1 10.0.12.2  10.0.23.1 10.0.23.2
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>                                                    Gi0/1
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>                                                   10.3.3.1
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[PC-A]         [R1]              [R2]              [R3]         [Server]
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>10.1.1.10  ——→ Gi0/0   Gi0/1 ——→ Gi0/0   Gi0/1 ——→ Gi0/0  ——→ 10.3.3.10
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>           10.1.1.1  10.0.12.1 10.0.12.2  10.0.23.1 10.0.23.2
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>                                                    Gi0/1
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>                                                   10.3.3.1
 </span></code></pre></div></p>
 <p><strong>Steps:</strong></p>
 <ol>
 <li>
 <p>Configure IP addresses on all interfaces (refer to topology). Add a static route on each router toward the next segment. On R1, add a default route via R2.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>! On R1:
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>ip route 10.3.3.0 255.255.255.0 10.0.12.2
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>! Or use default route:
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>ip route 0.0.0.0 0.0.0.0 10.0.12.2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>! On R1:
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>ip route 10.3.3.0 255.255.255.0 10.0.12.2
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>! Or use default route:
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>ip route 0.0.0.0 0.0.0.0 10.0.12.2
 </span></code></pre></div>
 </li>
 <li>
 <p>Check the routing table on R1 - identify connected, local, and static routes:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>R1# show ip route
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>C    10.1.1.0/24 is directly connected, Gi0/0
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>L    10.1.1.1/32 is directly connected, Gi0/0
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>C    10.0.12.0/24 is directly connected, Gi0/1
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>L    10.0.12.1/32 is directly connected, Gi0/1
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>S*   0.0.0.0/0 [1/0] via 10.0.12.2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>R1# show ip route
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>C    10.1.1.0/24 is directly connected, Gi0/0
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>L    10.1.1.1/32 is directly connected, Gi0/0
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>C    10.0.12.0/24 is directly connected, Gi0/1
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>L    10.0.12.1/32 is directly connected, Gi0/1
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>S*   0.0.0.0/0 [1/0] via 10.0.12.2
 </span></code></pre></div>
 </li>
 <li>
 <p>Test longest-prefix match: add a more specific static route on R1 and verify it wins:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ip route 10.3.3.0 255.255.255.0 10.0.12.2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ip route 10.3.3.0 255.255.255.0 10.0.12.2
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>R1# show ip route 10.3.3.5
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Routing entry for 10.3.3.0/24
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  Known via &quot;static&quot;, distance 1, metric 0
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  Routing Descriptor Blocks:
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>  * 10.0.12.2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>R1# show ip route 10.3.3.5
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Routing entry for 10.3.3.0/24
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>  Known via &quot;static&quot;, distance 1, metric 0
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>  Routing Descriptor Blocks:
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>  * 10.0.12.2
 </span></code></pre></div>
 </li>
 <li>
 <p>Ping from PC-A to Server and verify connectivity. Then remove the specific static route and confirm traffic falls back to the default route:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>no ip route 10.3.3.0 255.255.255.0 10.0.12.2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>no ip route 10.3.3.0 255.255.255.0 10.0.12.2
 </span></code></pre></div>
 </li>
 </ol>
@@ -5982,6 +5998,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <th>Juniper Junos</th>
 <th>Nokia SR-OS</th>
 <th>MikroTik RouterOS</th>
+<th>Arista EOS</th>
 </tr>
 </thead>
 <tbody>
@@ -5992,6 +6009,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <td><code>show route</code></td>
 <td><code>show router route-table</code></td>
 <td><code>/ip route print</code></td>
+<td><code>show ip route</code></td>
 </tr>
 <tr>
 <td>View forwarding table</td>
@@ -6000,6 +6018,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <td><code>show route forwarding-table</code></td>
 <td><code>show router fib 1</code></td>
 <td><code>/ip route print</code></td>
+<td><code>show ip route</code> (FIB auto-programmed)</td>
 </tr>
 <tr>
 <td>Verify LPM for destination</td>
@@ -6008,6 +6027,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <td><code>show route X.X.X.X</code></td>
 <td><code>show router route-table X.X.X.X</code></td>
 <td><code>/ip route check X.X.X.X</code></td>
+<td><code>show ip route X.X.X.X</code></td>
 </tr>
 <tr>
 <td>Administrative Distance (name)</td>
@@ -6016,6 +6036,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <td>Preference</td>
 <td>Preference</td>
 <td>Distance</td>
+<td>Administrative Distance</td>
 </tr>
 <tr>
 <td>Static route AD</td>
@@ -6024,6 +6045,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <td>5</td>
 <td>5</td>
 <td>1</td>
+<td>1</td>
 </tr>
 <tr>
 <td>OSPF AD</td>
@@ -6031,6 +6053,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
 <td>110</td>
 <td>10</td>
 <td>10</td>
+<td>110</td>
 <td>110</td>
 </tr>
 </tbody>
@@ -6064,7 +6087,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 18, 2026 13:29:31 UTC">June 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 10:08:05 UTC">July 17, 2026</span>
   </span>
 
     
@@ -6074,7 +6097,7 @@ RouterOS uses "distance" (equivalent to AD). Default static distance = 1; connec
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 18, 2026 13:29:31 UTC">June 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 10:08:05 UTC">July 17, 2026</span>
   </span>
 
     
