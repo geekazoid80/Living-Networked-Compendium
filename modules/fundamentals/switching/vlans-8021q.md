@@ -3,11 +3,11 @@ module_id: SW-002
 title: "VLANs & 802.1Q Trunking"
 domain: "fundamentals/switching"
 description: "How switches segment broadcast domains with VLANs and carry multiple VLANs across shared links using 802.1Q tagging."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "MikroTik RouterOS"]
 module_type: concept
 estimated_time: 45
 prerequisites:
@@ -16,7 +16,7 @@ prerequisites:
 difficulty: intermediate
 tags: [switching, vlan, layer-2]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 ---
 
@@ -272,6 +272,49 @@ By definition, VLANs cannot communicate at Layer 2. Traffic between VLANs requir
     ```
 
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/Bridging+and+Switching](https://help.mikrotik.com/docs/display/ROS/Bridging+and+Switching)
+
+=== "Nokia SR-OS"
+
+    On SR-OS there is no global VLAN table and no switchport access/trunk mode. Each VLAN is a `dot1q`-tagged SAP (Service Access Point, addressed `port:vlan`) bound into its own Layer 2 **VPLS** service; a "trunk" is simply a `dot1q` port carrying one SAP per VLAN, each into its matching VPLS.
+
+    ```
+    configure
+        # Enable dot1q tagging on the access and trunk ports
+        port 1/1/1
+            ethernet encap-type dot1q
+            no shutdown
+        exit
+        port 1/1/24
+            ethernet encap-type dot1q
+            no shutdown
+        exit
+        service
+            # ACCOUNTING = VLAN 10 as a bridged VPLS domain
+            vpls 10 name "ACCOUNTING" customer 1 create
+                sap 1/1/1:10 create     # access-side, VLAN 10
+                exit
+                sap 1/1/24:10 create    # trunk-side, VLAN 10 tag
+                exit
+                no shutdown
+            exit
+            # ENGINEERING = VLAN 20
+            vpls 20 name "ENGINEERING" customer 1 create
+                sap 1/1/24:20 create    # trunk-side, VLAN 20 tag
+                exit
+                no shutdown
+            exit
+        exit
+    exit
+
+    # Verification
+    show service service-using vpls
+    show service id 10 base
+    show service id 10 fdb detail
+    ```
+
+    Untagged frames on a `dot1q` port are caught by SAP `port:0` rather than by a `native vlan` keyword. There is no single "allowed VLAN list" on the trunk; a VLAN traverses the port only if a SAP for that tag exists and is bound into a service.
+
+    Full configuration reference: [Nokia SR OS Layer 2 Services Guide (VPLS)](https://documentation.nokia.com/)
 
 ---
 ## Common Pitfalls

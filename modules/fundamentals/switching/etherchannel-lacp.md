@@ -3,11 +3,11 @@ module_id: SW-004
 title: "EtherChannel / LAG (LACP)"
 domain: "fundamentals/switching"
 description: "How multiple physical links between switches can be bonded into a single logical channel for increased bandwidth and redundancy."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "MikroTik RouterOS"]
 module_type: concept
 estimated_time: 40
 prerequisites:
@@ -17,7 +17,7 @@ prerequisites:
 difficulty: intermediate
 tags: [switching, link-aggregation, layer-2]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 ---
 
@@ -235,6 +235,44 @@ Configuration: create the port-channel as a routed interface (`no switchport` on
     ```
 
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/Bonding](https://help.mikrotik.com/docs/display/ROS/Bonding)
+
+=== "Nokia SR-OS"
+
+    ```
+    configure
+        # Bundle two links into a LAG running LACP
+        lag 1
+            mode access
+            encap-type dot1q
+            port 1/1/1
+            port 1/1/2
+            lacp active administrative-key 32768
+            no shutdown
+        exit
+        # Carry VLANs over the bundle by binding LAG SAPs into services
+        service
+            vpls 10 name "ACCOUNTING" customer 1 create
+                sap lag-1:10 create
+                exit
+                no shutdown
+            exit
+            vpls 20 name "ENGINEERING" customer 1 create
+                sap lag-1:20 create
+                exit
+                no shutdown
+            exit
+        exit
+    exit
+
+    # Verification
+    show lag 1 detail
+    show lag 1 port
+    show port 1/1/1 detail
+    ```
+
+    SR-OS aggregates links with a **LAG** (Link Aggregation Group). Member ports are added under the `lag` context and `lacp active` runs 802.3ad; the LAG then carries `dot1q` SAPs into services exactly as a physical port would, so the bundle behaves as the "trunk over the aggregate". Member-link load-balancing is per-flow across the active ports.
+
+    Full configuration reference: [Nokia SR OS Interface Configuration Guide (LAG / LACP)](https://documentation.nokia.com/)
 
 ---
 ## Common Pitfalls

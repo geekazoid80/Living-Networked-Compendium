@@ -3,11 +3,11 @@ module_id: SW-003
 title: "Spanning Tree Protocol (STP / RSTP / MSTP)"
 domain: "fundamentals/switching"
 description: "How STP, RSTP, and MSTP prevent Layer 2 loops in switched networks while maintaining redundant paths."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "MikroTik RouterOS"]
 module_type: concept
 estimated_time: 55
 prerequisites:
@@ -16,7 +16,7 @@ prerequisites:
 difficulty: intermediate
 tags: [switching, spanning-tree, layer-2]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 ---
 
@@ -295,6 +295,40 @@ Benefits: different VLANs can use different root bridges, enabling load balancin
     ```
 
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/Spanning+Tree+Protocol](https://help.mikrotik.com/docs/display/ROS/Spanning+Tree+Protocol)
+
+=== "Nokia SR-OS"
+
+    ```
+    configure
+        service
+            vpls 10 name "ACCOUNTING" customer 1 create
+                # Spanning tree runs inside the service, not switch-wide
+                stp
+                    mode rstp
+                    priority 4096       # lower = preferred root
+                    no shutdown
+                exit
+                sap 1/1/1:10 create
+                    stp
+                        edge-port true  # PortFast equivalent
+                        auto-edge
+                    exit
+                exit
+                sap 1/1/24:10 create
+                exit
+                no shutdown
+            exit
+        exit
+    exit
+
+    # Verification
+    show service id 10 stp
+    show service id 10 stp detail
+    ```
+
+    SR-OS runs spanning tree **inside** a service: the VPLS `stp` context selects the mode (`rstp`, `mstp`) and the bridge priority, and per-SAP `edge-port true` is the PortFast equivalent. There is no global switch-wide STP, because SR-OS has no global bridge; each VPLS is its own bridged domain with its own STP instance. Edge and root protection are applied per SAP.
+
+    Full configuration reference: [Nokia SR OS Layer 2 Services Guide (VPLS STP)](https://documentation.nokia.com/)
 
 ---
 ## Common Pitfalls
