@@ -3,11 +3,11 @@ module_id: RT-009
 title: "Route Redistribution & Policy"
 domain: "fundamentals/routing"
 description: "How routes are moved between different routing protocols, the risks of mutual redistribution, and how route-maps and prefix-lists control what gets redistributed."
-version: "1.0.0"
+version: "1.1.0"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS"]
 module_type: concept
 estimated_time: 45
 prerequisites:
@@ -18,7 +18,7 @@ prerequisites:
 difficulty: advanced
 tags: [routing, route-policy, ospf, bgp, eigrp]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 ---
 
@@ -225,6 +225,39 @@ Some scenarios require advertising a route only when a specific condition is met
     ```
 
     Full configuration reference: [https://www.juniper.net/documentation/us/en/software/junos/routing-policy/topics/topic-map/policy-route-redistribution.html](https://www.juniper.net/documentation/us/en/software/junos/routing-policy/topics/topic-map/policy-route-redistribution.html)
+
+=== "Arista EOS"
+
+    ```
+    ! Static → OSPF with metric, metric-type and tag
+    ip prefix-list STATIC-ALLOWED seq 5 permit 10.0.0.0/8 ge 24
+
+    route-map STATIC-TO-OSPF permit 10
+     match ip address prefix-list STATIC-ALLOWED
+     set metric 10
+     set metric-type type-1
+     set tag 200
+
+    router ospf 1
+     redistribute static route-map STATIC-TO-OSPF
+
+    ! OSPF → BGP (filtered)
+    route-map OSPF-TO-BGP permit 10
+     match ip address prefix-list PUBLIC-ONLY
+    route-map OSPF-TO-BGP deny 20
+
+    router bgp 65000
+     redistribute ospf route-map OSPF-TO-BGP
+
+    ! Verification
+    show ip ospf database external
+    show ip bgp
+    show ip route ospf
+    ```
+
+    On EOS, OSPF redistribution installs subnetted prefixes automatically (there is no `subnets` keyword, unlike legacy IOS). Route-map `set` clauses (metric, metric-type, tag) behave as in Cisco IOS. Guard redistribution with a prefix-list or tag filter to stop routes looping back across the boundary.
+
+    Full configuration reference: [Arista EOS User Manual](https://www.arista.com/en/um-eos)
 
 ---
 ## Common Pitfalls

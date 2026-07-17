@@ -5,14 +5,14 @@ domain: "fundamentals/routing"
 difficulty: "intermediate"
 prerequisites: ["IP-001", "IP-002", "NW-001", "NW-002"]
 estimated_time: 45
-version: "1.0.0"
-last_updated: "2026-04-17"
+version: "1.1.0"
+last_updated: "2026-07-17"
 maintainer: "@geekazoid80"
 human_reviewed: false
 ai_assisted: "drafting"
 tags: [routing, forwarding, convergence]
 cert_alignment: "CCNA 200-301 - 3.1–3.3 | JNCIA-Junos JN0-103 | Nokia NRS I"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "Arista EOS", "MikroTik RouterOS"]
 language: "en"
 ---
 
@@ -358,6 +358,24 @@ The routing table structure and forwarding behaviour are defined by IETF standar
 
     Full configuration reference: [MikroTik Routing Reference](https://help.mikrotik.com/docs/display/ROS/IP+Routing)
 
+=== "Arista EOS"
+    ```arista-eos
+    ! View the routing table (RIB)
+    show ip route
+
+    ! View a specific prefix
+    show ip route 10.1.2.0
+
+    ! Verify which route wins for a destination (longest-prefix match)
+    show ip route 10.1.2.50
+
+    ! Route counts by source
+    show ip route summary
+    ```
+    EOS uses Cisco-compatible terminology and default administrative distances (connected 0, static 1, OSPF 110, eBGP 20, iBGP 200). `show ip route` displays the RIB; EOS programs the hardware FIB from the RIB automatically, and the platform FIB view is switch-family specific (`show platform ...`). Custom AD is the trailing parameter on a static route: `ip route <prefix> <next-hop> <distance>`.
+
+    Full configuration reference: [Arista EOS User Manual](https://www.arista.com/en/um-eos)
+
 ---
 ## Common Pitfalls
 
@@ -565,14 +583,14 @@ When a next-hop is not directly connected, the router must resolve the next-hop 
 
 ### Vendor Mapping
 
-| Concept | Standard | Cisco IOS-XE | Juniper Junos | Nokia SR-OS | MikroTik RouterOS |
-|---|---|---|---|---|---|
-| View routing table | RFC 1812 | `show ip route` | `show route` | `show router route-table` | `/ip route print` |
-| View forwarding table | RFC 1812 | `show ip cef` | `show route forwarding-table` | `show router fib 1` | `/ip route print` |
-| Verify LPM for destination | RFC 1812 | `show ip route X.X.X.X` | `show route X.X.X.X` | `show router route-table X.X.X.X` | `/ip route check X.X.X.X` |
-| Administrative Distance (name) | Local policy | Administrative Distance | Preference | Preference | Distance |
-| Static route AD | Local policy | 1 | 5 | 5 | 1 |
-| OSPF AD | Local policy | 110 | 10 | 10 | 110 |
+| Concept | Standard | Cisco IOS-XE | Juniper Junos | Nokia SR-OS | MikroTik RouterOS | Arista EOS |
+|---|---|---|---|---|---|---|
+| View routing table | RFC 1812 | `show ip route` | `show route` | `show router route-table` | `/ip route print` | `show ip route` |
+| View forwarding table | RFC 1812 | `show ip cef` | `show route forwarding-table` | `show router fib 1` | `/ip route print` | `show ip route` (FIB auto-programmed) |
+| Verify LPM for destination | RFC 1812 | `show ip route X.X.X.X` | `show route X.X.X.X` | `show router route-table X.X.X.X` | `/ip route check X.X.X.X` | `show ip route X.X.X.X` |
+| Administrative Distance (name) | Local policy | Administrative Distance | Preference | Preference | Distance | Administrative Distance |
+| Static route AD | Local policy | 1 | 5 | 5 | 1 | 1 |
+| OSPF AD | Local policy | 110 | 10 | 10 | 110 | 110 |
 
 ### Maintenance Notes
 
