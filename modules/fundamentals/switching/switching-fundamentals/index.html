@@ -5287,7 +5287,7 @@ Switches have a finite MAC table size (a few thousand to hundreds of thousands o
 <p class="admonition-title">Standard - IEEE 802.1D (MAC Bridging), IEEE 802.3 (Ethernet)</p>
 <p>All compliant switches implement learn/flood/forward identically. MAC aging defaults (300s) and flooding behaviour are standardised.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Arista EOS</label><label for="__tabbed_1_4">MikroTik RouterOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper Junos</label><label for="__tabbed_1_3">Arista EOS</label><label for="__tabbed_1_4">MikroTik RouterOS</label><label for="__tabbed_1_5">Nokia SR-OS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>! View the MAC address table
@@ -5357,6 +5357,24 @@ Arista EOS MAC table commands are nearly identical to Cisco IOS-XE.</p>
 </span></code></pre></div>
 RouterOS implements switching via the <strong>bridge</strong> interface. Each bridge is a separate switching domain. Ports must be added to a bridge to participate in L2 switching. Hardware offload (<code>hw=yes</code>) is supported on platforms with switch chips.</p>
 <p>Full configuration reference: <a href="https://help.mikrotik.com/docs/display/ROS/Bridge">MikroTik Bridge Reference</a></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a># View the forwarding database (MAC table) for a VPLS service
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>show service id 10 fdb detail
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a># View FDB usage across all services
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>show service fdb-info
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a># Clear dynamically learned MACs in one service
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>clear service id 10 fdb all
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a># A VPLS is the bridge instance; untagged ports join it as null SAPs
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>configure service vpls 10 name &quot;LAN&quot; customer 1 create
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>configure service vpls 10 sap 1/1/1 create
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>configure service vpls 10 sap 1/1/2 create
+</span></code></pre></div>
+On SR-OS the MAC table is the per-service <strong>Forwarding Database (FDB)</strong>, held inside each VPLS bridge instance rather than in one global table. Learn/flood/forward, unknown-unicast flooding, and MAC aging all operate per VPLS. Static FDB entries and per-SAP MAC limits are configured under the SAP within the service.</p>
+<p>Full configuration reference: <a href="https://documentation.nokia.com/">Nokia SR OS Layer 2 Services Guide (VPLS FDB)</a></p>
 </div>
 </div>
 </div>
@@ -5579,7 +5597,7 @@ RouterOS implements switching via the <strong>bridge</strong> interface. Each br
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 14:24:14 UTC">July 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 15:16:52 UTC">July 17, 2026</span>
   </span>
 
     
@@ -5589,7 +5607,7 @@ RouterOS implements switching via the <strong>bridge</strong> interface. Each br
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 14:24:14 UTC">July 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 15:16:52 UTC">July 17, 2026</span>
   </span>
 
     
