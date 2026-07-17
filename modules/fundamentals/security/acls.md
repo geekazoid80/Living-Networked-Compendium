@@ -148,7 +148,7 @@ IPv6 ACLs work on the same principles but:
 === "Cisco IOS-XE"
 
     ```
-    ! Named extended ACL — permit Engineering to internet, deny HR server
+    ! Named extended ACL: permit Engineering to internet, deny HR server
     ip access-list extended ENG-OUT
      deny   ip 10.1.1.0 0.0.0.255 10.2.2.10 0.0.0.0   ! Engineering → HR server: deny
      permit ip 10.1.1.0 0.0.0.255 any                  ! Engineering → internet: permit

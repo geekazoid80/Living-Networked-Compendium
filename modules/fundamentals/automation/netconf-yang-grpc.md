@@ -231,7 +231,7 @@ with gNMIclient(target=('192.168.1.1', 57400),
     result = gc.get(path=['openconfig-interfaces:interfaces'])
     print(result)
 
-    # Subscribe — streaming sample every 10 seconds
+    # Subscribe: streaming sample every 10 seconds
     subscriptions = [
         {
             'path': 'openconfig-interfaces:interfaces/interface/state/counters',

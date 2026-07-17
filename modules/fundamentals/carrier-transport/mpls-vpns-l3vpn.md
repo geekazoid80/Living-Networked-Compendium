@@ -181,7 +181,7 @@ PE routers establish BGP sessions with each other (directly, or via Route Reflec
       neighbor 2.2.2.2 send-community extended
      exit-address-family
 
-    ! CE-facing routing — BGP from CE into VRF
+    ! CE-facing routing: BGP from CE into VRF
     router bgp 65001
      address-family ipv4 vrf CUST-A
       neighbor 10.0.1.2 remote-as 65002    ! CE router AS

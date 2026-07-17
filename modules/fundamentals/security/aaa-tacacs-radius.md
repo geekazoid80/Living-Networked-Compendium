@@ -180,11 +180,11 @@ Accounting records are invaluable for forensic investigation ("who ran `reload` 
     ! Authentication for SSH/console login
     aaa authentication login default group tacacs+ local
 
-    ! Authorisation — exec mode and all privilege 15 commands
+    ! Authorisation: exec mode and all privilege 15 commands
     aaa authorization exec default group tacacs+ local
     aaa authorization commands 15 default group tacacs+ local none
 
-    ! Accounting — record all exec sessions and commands
+    ! Accounting: record all exec sessions and commands
     aaa accounting exec default start-stop group tacacs+
     aaa accounting commands 15 default start-stop group tacacs+
 

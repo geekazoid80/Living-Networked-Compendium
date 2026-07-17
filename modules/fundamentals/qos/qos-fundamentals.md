@@ -113,17 +113,17 @@ QoS is a pipeline applied at each router interface:
 ```
 Ingress traffic
     ↓
-[Classify] — identify traffic type (by DSCP, protocol, port, ACL)
+[Classify]: identify traffic type (by DSCP, protocol, port, ACL)
     ↓
-[Mark] — stamp the DSCP/PCP value (at trust boundary only)
+[Mark]: stamp the DSCP/PCP value (at trust boundary only)
     ↓
-[Police/Shape] — limit rate inbound
+[Police/Shape]: limit rate inbound
     ↓
-[Queue] — sort into priority queues
+[Queue]: sort into priority queues
     ↓
-[Schedule] — determine output order (strict priority / weighted fair)
+[Schedule]: determine output order (strict priority / weighted fair)
     ↓
-[Congestion avoidance] — WRED drops low-priority packets before queue fills
+[Congestion avoidance]: WRED drops low-priority packets before queue fills
     ↓
 Egress
 ```

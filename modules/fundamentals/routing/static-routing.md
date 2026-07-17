@@ -126,9 +126,9 @@ The default route matches everything that has no more-specific match. In IPv4: `
 
 ```text
 Routing table with default route:
-  10.1.0.0/24  via 10.0.0.1   (specific — wins for 10.1.x.x)
-  10.2.0.0/24  via 10.0.0.2   (specific — wins for 10.2.x.x)
-  0.0.0.0/0    via 10.0.0.3   (default — wins for everything else)
+  10.1.0.0/24  via 10.0.0.1   (specific, wins for 10.1.x.x)
+  10.2.0.0/24  via 10.0.0.2   (specific, wins for 10.2.x.x)
+  0.0.0.0/0    via 10.0.0.3   (default, wins for everything else)
 
 Packet to 10.1.0.55:   → uses 10.1.0.0/24 (more specific)
 Packet to 8.8.8.8:     → uses 0.0.0.0/0 (no specific match)
@@ -147,8 +147,8 @@ Without a default route, any traffic to an unknown destination is silently dropp
 A floating static route uses a manually inflated AD to stay dormant while a routing protocol runs, and only activates when the primary protocol-learned route disappears.
 
 ```text
-Normal static route: AD = 1  → wins over OSPF (AD=110) — wrong for backup use
-Floating static:     AD = 200 → loses to OSPF (AD=110) — stays hidden while OSPF works
+Normal static route: AD = 1  → wins over OSPF (AD=110), wrong for backup use
+Floating static:     AD = 200 → loses to OSPF (AD=110), stays hidden while OSPF works
 
 When OSPF route is present:  OSPF (AD=110) wins → static (AD=200) is not installed
 When OSPF route disappears:  Static (AD=200) is the only candidate → installs
@@ -222,10 +222,10 @@ Static routes are a local router configuration - no standard wire protocol. Synt
 
 === "Cisco IOS-XE"
     ```cisco-ios
-    ! Static route — next-hop only
+    ! Static route: next-hop only
     ip route 10.2.0.0 255.255.0.0 10.0.12.2
 
-    ! Static route — exit interface + next-hop (preferred on Ethernet)
+    ! Static route: exit interface + next-hop (preferred on Ethernet)
     ip route 10.2.0.0 255.255.0.0 GigabitEthernet0/1 10.0.12.2
 
     ! Default route
@@ -250,13 +250,13 @@ Static routes are a local router configuration - no standard wire protocol. Synt
 
 === "Juniper Junos"
     ```junos
-    # Static route — next-hop address
+    # Static route: next-hop address
     set routing-options static route 10.2.0.0/16 next-hop 10.0.12.2
 
     # Default route
     set routing-options static route 0.0.0.0/0 next-hop 203.0.113.1
 
-    # Floating static — set preference higher than OSPF (preference 10)
+    # Floating static: set preference higher than OSPF (preference 10)
     set routing-options static route 10.2.0.0/16 next-hop 10.0.99.2 preference 200
 
     # Discard (equivalent to Null0)
@@ -281,7 +281,7 @@ Static routes are a local router configuration - no standard wire protocol. Synt
     # Default route
     configure router static-route 0.0.0.0/0 next-hop 203.0.113.1
 
-    # Floating static — set preference
+    # Floating static: set preference
     configure router static-route 10.2.0.0/16 next-hop 10.0.99.2 preference 200
 
     # Black hole
@@ -297,13 +297,13 @@ Static routes are a local router configuration - no standard wire protocol. Synt
 
 === "MikroTik RouterOS"
     ```mikrotik-ros
-    # Static route — next-hop
+    # Static route: next-hop
     /ip route add dst-address=10.2.0.0/16 gateway=10.0.12.2
 
     # Default route
     /ip route add dst-address=0.0.0.0/0 gateway=203.0.113.1
 
-    # Floating static — set distance higher than routing protocol
+    # Floating static: set distance higher than routing protocol
     /ip route add dst-address=10.2.0.0/16 gateway=10.0.99.2 distance=200
 
     # Black hole
@@ -322,10 +322,10 @@ Static routes are a local router configuration - no standard wire protocol. Synt
 
 === "Arista EOS"
     ```arista-eos
-    ! Static route — next-hop (EOS accepts CIDR prefix notation)
+    ! Static route: next-hop (EOS accepts CIDR prefix notation)
     ip route 10.2.0.0/16 10.0.12.2
 
-    ! Static route — exit interface + next-hop
+    ! Static route: exit interface + next-hop
     ip route 10.2.0.0/16 Ethernet1 10.0.12.2
 
     ! Default route
@@ -446,7 +446,7 @@ Gi0/0   Gi0/1  Gi0/0  Gi0/1  Gi0/0
 3. Add a floating static on R1 via the backup link (direct R1→R3):
 
     ```cisco-ios
-    ! Floating static — AD=200, only activates if primary (AD=1) disappears
+    ! Floating static: AD=200, only activates if primary (AD=1) disappears
     ip route 10.3.3.0 255.255.255.0 10.13.0.2 200
     ```
 

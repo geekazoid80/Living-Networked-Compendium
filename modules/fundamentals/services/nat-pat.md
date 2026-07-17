@@ -147,7 +147,7 @@ NAT works transparently for most TCP/UDP protocols but breaks protocols that emb
      ip address 192.168.1.1 255.255.255.0
      ip nat inside
 
-    ! PAT (NAT overload) — all inside hosts share the outside interface IP
+    ! PAT (NAT overload): all inside hosts share the outside interface IP
     access-list 1 permit 192.168.1.0 0.0.0.255
     ip nat inside source list 1 interface GigabitEthernet0/0 overload
 
@@ -165,7 +165,7 @@ NAT works transparently for most TCP/UDP protocols but breaks protocols that emb
 === "Juniper (Junos - SRX)"
 
     ```
-    # Source NAT pool (PAT equivalent — interface-based)
+    # Source NAT pool (PAT equivalent, interface-based)
     set security nat source rule-set INTERNET-SNAT from zone trust
     set security nat source rule-set INTERNET-SNAT to zone untrust
     set security nat source rule-set INTERNET-SNAT rule SNAT-ALL match source-address 192.168.1.0/24

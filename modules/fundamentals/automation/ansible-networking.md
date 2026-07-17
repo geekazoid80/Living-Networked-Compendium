@@ -141,7 +141,7 @@ all:
           - vlan_id: 100
             name: AUTOMATION
             state: active
-        state: merged      # merge with existing — idempotent
+        state: merged      # merge with existing, idempotent
 
     - name: Save running config to startup
       cisco.ios.ios_command:
@@ -222,7 +222,7 @@ roles/ntp/
 ```
 
 ```yaml
-# playbooks/site.yml — apply role to all devices
+# playbooks/site.yml: apply role to all devices
 ---
 - name: Apply base configuration
   hosts: all
@@ -263,10 +263,10 @@ ansible-playbook -i inventory/hosts.yml playbooks/vlan.yml
 # Limit to one host
 ansible-playbook -i inventory/ playbooks/vlan.yml --limit sw-01
 
-# Dry run (check mode — no changes applied)
+# Dry run (check mode, no changes applied)
 ansible-playbook -i inventory/ playbooks/vlan.yml --check
 
-# Diff mode — show what would change
+# Diff mode: show what would change
 ansible-playbook -i inventory/ playbooks/vlan.yml --check --diff
 
 # Verbose output

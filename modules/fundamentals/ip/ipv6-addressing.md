@@ -116,7 +116,7 @@ The `::` shorthand can appear **only once** per address. If two separate zero ru
 ```text
 Full:    2001:0db8:0000:0001:0000:0000:0000:0001
 Step 1:  2001:db8:0:1:0:0:0:1        (drop leading zeros)
-Step 2:  2001:db8:0:1::1             (collapse longest zero run — 3 groups)
+Step 2:  2001:db8:0:1::1             (collapse longest zero run, 3 groups)
 ```
 
 **Expanding a compressed address** - reverse the process:
@@ -137,12 +137,12 @@ Full:        2001:0db8:0000:0000:0000:0000:0000:0001
 Every IPv6 address has a three-part structure when /64 is the standard subnet boundary:
 
 ```text
-| ←——————— Network Prefix ————————→ | ←— Subnet ID —→ | ←——— Interface ID ———→ |
+| ←─────── Network Prefix ────────→ | ←─ Subnet ID ─→ | ←─── Interface ID ───→ |
   (global routing prefix)              (site subnetting)   (host identifier)
   typically /32–/48                    16 bits             64 bits
   assigned by ISP or RIR               you allocate        device generates
 
-Example — /48 to org, /64 to subnet:
+Example: /48 to org, /64 to subnet:
   2001:0db8:1234:0001:0000:0000:0000:0001/64
   ↑ Global prefix  ↑ Subnet  ↑ Interface ID
   2001:db8:1234    :0001     :0000:0000:0000:0001
@@ -509,7 +509,7 @@ Unique Local Addresses (`fc00::/7`, typically `fd00::/8`) are the IPv6 equivalen
   [PC-A]                     [R1]                     [PC-B]
   GigE0/0                GigE0/0  GigE0/1             GigE0/0
   SLAAC                  ::1/64    ::1/64              SLAAC
-  2001:db8:1::/64  ←————————————————————→  2001:db8:2::/64
+  2001:db8:1::/64  ←────────────────────→  2001:db8:2::/64
 ```
 
 **Steps:**

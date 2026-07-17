@@ -137,9 +137,9 @@ MPLS uses a clear role separation between edge and core:
  router)  LER/LSR)   label-only)     LER/LSR)   router)
    [R]──→  [PE1] ──label──→ [P1] ──label──→ [PE2] ──→ [R]
 
-PE = Provider Edge (Label Edge Router) — pushes/pops labels; connects to customers
-P  = Provider (Label Switch Router) — swaps labels only; no customer connections
-CE = Customer Edge — no MPLS; sees only IP
+PE = Provider Edge (Label Edge Router): pushes/pops labels; connects to customers
+P  = Provider (Label Switch Router): swaps labels only; no customer connections
+CE = Customer Edge: no MPLS; sees only IP
 ```
 
 | Role | Full name | What it does |
@@ -288,7 +288,7 @@ MPLS forwarding and LDP are standardised in RFC 3031 (MPLS architecture) and RFC
     ! LDP Router ID (loopback)
     mpls ldp router-id Loopback0 force
 
-    ! Enable CEF (required for MPLS — usually on by default)
+    ! Enable CEF (required for MPLS, usually on by default)
     ip cef
 
     ! Verify
