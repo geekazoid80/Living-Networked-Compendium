@@ -5207,7 +5207,7 @@
 - Cisco: <code>ipv6 access-list NAME</code> → <code>permit icmp any any nd-na</code>, <code>permit icmp any any nd-ns</code>.</p>
 <hr />
 <h2 id="vendor-implementations">Vendor Implementations<a class="headerlink" href="#vendor-implementations" title="Permanent link">&para;</a></h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper (Junos)</label><label for="__tabbed_1_3">Arista EOS</label><label for="__tabbed_1_4">MikroTik RouterOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cisco IOS-XE</label><label for="__tabbed_1_2">Juniper (Junos)</label><label for="__tabbed_1_3">Arista EOS</label><label for="__tabbed_1_4">MikroTik RouterOS</label><label for="__tabbed_1_5">Nokia SR-OS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>! Named extended ACL: permit Engineering to internet, deny HR server
@@ -5273,6 +5273,34 @@
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>/ip firewall filter print stats
 </span></code></pre></div>
 <p>Full configuration reference: <a href="https://help.mikrotik.com/docs/display/ROS/Filter">https://help.mikrotik.com/docs/display/ROS/Filter</a></p>
+</div>
+<div class="tabbed-block">
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># IP filter policy (stateless ACL equivalent) - classic CLI
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>configure filter ip-filter 10 name &quot;ENG-OUT&quot; create
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    default-action drop                 # implicit deny-all
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    entry 10 create
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        match
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            src-ip 10.1.1.0/24
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            dst-ip 10.2.2.10/32
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        exit
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        action drop                     # Engineering -&gt; HR server: deny
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    exit
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    entry 20 create
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        match
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>            src-ip 10.1.1.0/24
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        exit
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        action forward                  # Engineering -&gt; internet: permit
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    exit
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>exit
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a># Apply inbound on the Engineering interface SAP (IES/VPRN service)
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>configure service ies 1 interface &quot;eng&quot; sap 1/1/1 ingress filter ip 10
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a># Verification
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>show filter ip 10
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>show filter ip 10 associations
+</span></code></pre></div>
+<p>Full configuration reference: <a href="https://documentation.nokia.com/html/0_add-h-f/93-0073-HTML/7750_SR_OS_Router_Configuration_Guide/filterscli.html">https://documentation.nokia.com/html/0_add-h-f/93-0073-HTML/7750_SR_OS_Router_Configuration_Guide/filterscli.html</a></p>
 </div>
 </div>
 </div>
@@ -5389,6 +5417,7 @@
 <th>Juniper (Junos)</th>
 <th>Arista EOS</th>
 <th>MikroTik RouterOS</th>
+<th>Nokia SR-OS</th>
 </tr>
 </thead>
 <tbody>
@@ -5398,6 +5427,7 @@
 <td><code>firewall family inet filter &lt;name&gt;</code></td>
 <td><code>ip access-list &lt;name&gt;</code></td>
 <td><code>/ip firewall filter</code></td>
+<td><code>filter ip-filter &lt;id&gt; name &lt;name&gt;</code></td>
 </tr>
 <tr>
 <td>Permit rule</td>
@@ -5405,6 +5435,7 @@
 <td><code>then accept</code></td>
 <td><code>permit ip &lt;src/pfx&gt; &lt;dst/pfx&gt;</code></td>
 <td><code>action=accept</code></td>
+<td><code>action forward</code></td>
 </tr>
 <tr>
 <td>Deny rule</td>
@@ -5412,6 +5443,7 @@
 <td><code>then discard</code></td>
 <td><code>deny ip &lt;src/pfx&gt; &lt;dst/pfx&gt;</code></td>
 <td><code>action=drop</code></td>
+<td><code>action drop</code></td>
 </tr>
 <tr>
 <td>Apply inbound</td>
@@ -5419,6 +5451,7 @@
 <td><code>family inet filter input &lt;name&gt;</code></td>
 <td><code>ip access-group &lt;name&gt; in</code></td>
 <td><code>chain=forward</code> (position-based)</td>
+<td><code>sap ... ingress filter ip &lt;id&gt;</code></td>
 </tr>
 <tr>
 <td>Show ACL stats</td>
@@ -5426,6 +5459,7 @@
 <td><code>show firewall filter &lt;name&gt;</code></td>
 <td><code>show ip access-lists &lt;name&gt;</code></td>
 <td><code>/ip firewall filter print stats</code></td>
+<td><code>show filter ip &lt;id&gt;</code></td>
 </tr>
 </tbody>
 </table>
@@ -5501,7 +5535,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 18, 2026 12:10:41 UTC">July 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 18, 2026 13:16:50 UTC">July 18, 2026</span>
   </span>
 
     
@@ -5511,7 +5545,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 18, 2026 12:10:41 UTC">July 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 18, 2026 13:16:50 UTC">July 18, 2026</span>
   </span>
 
     
