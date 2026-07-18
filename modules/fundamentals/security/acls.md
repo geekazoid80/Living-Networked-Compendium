@@ -3,11 +3,11 @@ module_id: "SEC-001"
 title: "Access Control Lists (ACLs)"
 domain: "fundamentals/security"
 description: "How ACLs filter packets at Layer 3/4 based on IP addresses, protocols, and ports - the foundational traffic control mechanism on routers and switches."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Arista EOS", "MikroTik RouterOS", "Nokia SR-OS"]
 module_type: concept
 estimated_time: 45
 prerequisites:
@@ -17,7 +17,7 @@ prerequisites:
 difficulty: intermediate
 tags: [security, acl, packet-filtering, layer-3, layer-4]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-18"
 maintainer: "@geekazoid80"
 ---
 
@@ -222,6 +222,37 @@ IPv6 ACLs work on the same principles but:
 
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/Filter](https://help.mikrotik.com/docs/display/ROS/Filter)
 
+=== "Nokia SR-OS"
+
+    ```
+    # IP filter policy (stateless ACL equivalent) - classic CLI
+    configure filter ip-filter 10 name "ENG-OUT" create
+        default-action drop                 # implicit deny-all
+        entry 10 create
+            match
+                src-ip 10.1.1.0/24
+                dst-ip 10.2.2.10/32
+            exit
+            action drop                     # Engineering -> HR server: deny
+        exit
+        entry 20 create
+            match
+                src-ip 10.1.1.0/24
+            exit
+            action forward                  # Engineering -> internet: permit
+        exit
+    exit
+
+    # Apply inbound on the Engineering interface SAP (IES/VPRN service)
+    configure service ies 1 interface "eng" sap 1/1/1 ingress filter ip 10
+
+    # Verification
+    show filter ip 10
+    show filter ip 10 associations
+    ```
+
+    Full configuration reference: [https://documentation.nokia.com/html/0_add-h-f/93-0073-HTML/7750_SR_OS_Router_Configuration_Guide/filterscli.html](https://documentation.nokia.com/html/0_add-h-f/93-0073-HTML/7750_SR_OS_Router_Configuration_Guide/filterscli.html)
+
 ---
 ## Common Pitfalls
 
@@ -305,13 +336,13 @@ IPv6 ACLs work on the same principles but:
 
 ### Vendor Feature Mapping
 
-| Feature | Cisco IOS-XE | Juniper (Junos) | Arista EOS | MikroTik RouterOS |
-|---|---|---|---|---|
-| Named extended ACL | `ip access-list extended <name>` | `firewall family inet filter <name>` | `ip access-list <name>` | `/ip firewall filter` |
-| Permit rule | `permit ip <src> <wild> <dst> <wild>` | `then accept` | `permit ip <src/pfx> <dst/pfx>` | `action=accept` |
-| Deny rule | `deny ip <src> <wild> <dst> <wild>` | `then discard` | `deny ip <src/pfx> <dst/pfx>` | `action=drop` |
-| Apply inbound | `ip access-group <name> in` | `family inet filter input <name>` | `ip access-group <name> in` | `chain=forward` (position-based) |
-| Show ACL stats | `show ip access-lists <name>` | `show firewall filter <name>` | `show ip access-lists <name>` | `/ip firewall filter print stats` |
+| Feature | Cisco IOS-XE | Juniper (Junos) | Arista EOS | MikroTik RouterOS | Nokia SR-OS |
+|---|---|---|---|---|---|
+| Named extended ACL | `ip access-list extended <name>` | `firewall family inet filter <name>` | `ip access-list <name>` | `/ip firewall filter` | `filter ip-filter <id> name <name>` |
+| Permit rule | `permit ip <src> <wild> <dst> <wild>` | `then accept` | `permit ip <src/pfx> <dst/pfx>` | `action=accept` | `action forward` |
+| Deny rule | `deny ip <src> <wild> <dst> <wild>` | `then discard` | `deny ip <src/pfx> <dst/pfx>` | `action=drop` | `action drop` |
+| Apply inbound | `ip access-group <name> in` | `family inet filter input <name>` | `ip access-group <name> in` | `chain=forward` (position-based) | `sap ... ingress filter ip <id>` |
+| Show ACL stats | `show ip access-lists <name>` | `show firewall filter <name>` | `show ip access-lists <name>` | `/ip firewall filter print stats` | `show filter ip <id>` |
 
 ### Modules That Reference This Module
 

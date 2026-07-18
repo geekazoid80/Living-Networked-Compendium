@@ -3,11 +3,11 @@ module_id: "SEC-002"
 title: "Firewall Concepts"
 domain: "fundamentals/security"
 description: "How stateful firewalls track connection state to make per-packet decisions, and how zone-based policy models organise security policy at scale."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS"]
 module_type: concept
 estimated_time: 45
 prerequisites:
@@ -17,7 +17,7 @@ prerequisites:
 difficulty: intermediate
 tags: [security, firewall, packet-filtering]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-18"
 maintainer: "@geekazoid80"
 ---
 
@@ -231,6 +231,44 @@ NGFW capabilities come at a significant performance cost - throughput for full D
     ```
 
     Full configuration reference: [https://www.juniper.net/documentation/us/en/software/junos/security-policies/topics/topic-map/security-policy-overview.html](https://www.juniper.net/documentation/us/en/software/junos/security-policies/topics/topic-map/security-policy-overview.html)
+
+=== "Nokia SR-OS (stateful firewall via AA-ISA)"
+
+    ```
+    # Nokia SR-OS has NO zone-based firewall model. Stateful firewalling is
+    # delivered by Application Assurance (AA) on an MS-ISA/ESA, scoped per
+    # AA-partition (up to 128 virtual firewalls) rather than by security zones.
+    # Stateless L3/L4 filtering uses ip-filter policies (see the ACLs module).
+
+    # AA stateful firewall: session-filter policy (deny-by-default, stateful)
+    configure application-assurance group 1 session-filter "FW-TRUST-OUT" create
+        default-action deny
+        entry 10 create
+            match
+                ip-protocol-num 6                 # TCP
+                dst-ip 10.0.0.100/32              # DMZ web server
+                dst-port eq 443
+            exit
+            action permit                         # permitted flows create a stateful session
+        exit
+    exit
+
+    # Bind the session-filter through an Application QoS Policy (AQP)
+    configure application-assurance group 1 policy app-qos-policy
+        entry 100 create
+            action
+                session-filter "FW-TRUST-OUT"
+            exit
+        exit
+    exit
+
+    # Verification
+    show application-assurance group 1 session-filter "FW-TRUST-OUT"
+    ```
+
+    Full configuration reference: [https://documentation.nokia.com/html/0_add-h-f/93-0267-HTML/7X50_Advanced_Configuration_Guide/AA-FW.html](https://documentation.nokia.com/html/0_add-h-f/93-0267-HTML/7X50_Advanced_Configuration_Guide/AA-FW.html)
+
+**Vendor parity note:** the zone-based stateful-firewall paradigm this module teaches maps directly onto Cisco IOS-XE ZBFW and Juniper SRX. Nokia SR-OS does not implement security zones; its equivalent stateful firewall is an Application Assurance service on MS-ISA/ESA hardware, scoped by AA-partition. The SR-OS tab above shows that closest mechanism rather than a fabricated zone equivalent.
 
 ---
 ## Common Pitfalls

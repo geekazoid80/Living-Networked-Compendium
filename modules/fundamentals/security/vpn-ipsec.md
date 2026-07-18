@@ -3,11 +3,11 @@ module_id: "SEC-003"
 title: "VPN & IPSec"
 domain: "fundamentals/security"
 description: "How VPNs create encrypted tunnels across untrusted networks, and how IPSec provides authentication and encryption through IKE, ESP, and AH."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "MikroTik RouterOS", "Nokia SR-OS"]
 module_type: concept
 estimated_time: 55
 prerequisites:
@@ -17,7 +17,7 @@ prerequisites:
 difficulty: advanced
 tags: [security, vpn-ipsec, encryption-pki]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-18"
 maintainer: "@geekazoid80"
 ---
 
@@ -313,6 +313,60 @@ GRE (Generic Routing Encapsulation) tunnels carry routing protocol traffic (incl
     ```
 
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/IPsec](https://help.mikrotik.com/docs/display/ROS/IPsec)
+
+=== "Nokia SR-OS (IKEv2, MS-ISA)"
+
+    ```
+    # NOTE: SR-OS terminates IPsec on an MS-ISA/ESA. The tunnel binds to a
+    # tunnel-group and a private/public SAP under an IES or VPRN service;
+    # it is not integrated into the base forwarding path like the peers above.
+
+    # IKE (phase-1) policy
+    configure ipsec ike-policy 10 create
+        ike-version 2
+        dh-group 19
+        auth-algorithm sha256
+        encryption-algorithm aes256
+        own-auth-method psk
+        isakmp-lifetime 86400
+    exit
+
+    # IPsec transform (phase-2 / ESP)
+    configure ipsec ipsec-transform 10 create
+        esp-auth-algorithm sha256
+        esp-encryption-algorithm aes256
+    exit
+
+    # Security policy: interesting traffic (local <-> remote subnet)
+    configure ipsec security-policy 10 create
+        entry 1 create
+            local-ip 192.168.1.0/24
+            remote-ip 10.0.0.0/8
+        exit
+    exit
+
+    # Static LAN-to-LAN tunnel under a VPRN interface (MS-ISA tunnel SAP)
+    configure service vprn 1 interface "ipsec-int" tunnel
+        sap tunnel-1.private:1 create
+            ipsec-tunnel "SITE-VPN" create
+                security-policy 10
+                local-gateway-address 203.0.113.5 peer 203.0.113.10 delivery-service 100
+                dynamic-keying
+                    ike-policy 10
+                    pre-shared-key "Str0ngKey!"
+                    transform 10
+                exit
+                no shutdown
+            exit
+        exit
+    exit
+
+    # Verification
+    show ipsec ike-policy
+    show service id 1 ipsec-tunnel "SITE-VPN"
+    ```
+
+    Full configuration reference: [https://documentation.nokia.com/html/0_add-h-f/93-0262-04-01/7750_SR_OS_MS-ISA_Guide/IPSec-Config.html](https://documentation.nokia.com/html/0_add-h-f/93-0262-04-01/7750_SR_OS_MS-ISA_Guide/IPSec-Config.html)
 
 ---
 ## Common Pitfalls
