@@ -3,11 +3,11 @@ module_id: SEC-004
 title: "AAA - Authentication, Authorisation & Accounting"
 domain: "fundamentals/security"
 description: "How AAA frameworks (TACACS+ and RADIUS) centralise network device access control, command authorisation, and session accounting."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "MikroTik RouterOS", "Nokia SR-OS"]
 module_type: concept
 estimated_time: 40
 prerequisites:
@@ -17,7 +17,7 @@ prerequisites:
 difficulty: intermediate
 tags: [security, aaa]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-18"
 maintainer: "@geekazoid80"
 ---
 
@@ -256,6 +256,47 @@ Accounting records are invaluable for forensic investigation ("who ran `reload` 
     ```
 
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/RADIUS+Client](https://help.mikrotik.com/docs/display/ROS/RADIUS+Client)
+
+=== "Nokia SR-OS (RADIUS + TACACS+)"
+
+    ```
+    # RADIUS server + client (device management login)
+    configure system security radius
+        server 1 address 10.0.0.100 secret "MySharedSecret"
+        authorization           # let RADIUS return VSA-based access levels
+        accounting
+        no shutdown
+    exit
+
+    # TACACS+ server (TCP-based; authentication before authorization)
+    configure system security tacplus
+        server 1 address 10.0.0.100 secret "MySharedSecret"
+        accounting
+        no shutdown
+    exit
+
+    # Authentication order: try RADIUS, then TACACS+, then local fallback
+    configure system security password
+        authentication-order radius tacplus local
+    exit
+
+    # Local fallback account (survives server unreachability)
+    configure system security user "admin"
+        password "Class!fy2026"
+        access console
+        console member "administrative"
+    exit
+
+    # RADIUS/TACACS+ client sources from the system interface address
+    configure router interface "system" address 10.255.255.1/32
+
+    # Verification
+    show system security radius
+    show system security tacplus
+    show system security authentication statistics
+    ```
+
+    Full configuration reference: [https://documentation.nokia.com/html/0_add-h-f/93-0071-10-01/7750_SR_OS_System_Management_Guide/security.html](https://documentation.nokia.com/html/0_add-h-f/93-0071-10-01/7750_SR_OS_System_Management_Guide/security.html)
 
 ---
 ## Common Pitfalls
