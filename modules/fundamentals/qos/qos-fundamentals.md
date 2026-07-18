@@ -1,5 +1,5 @@
 ---
-module_id: QOS-001
+module_id: "QOS-001"
 title: "QoS Fundamentals - Delay, Jitter, Loss & Bandwidth"
 domain: "fundamentals/qos"
 description: "The four metrics that define network quality for different traffic types, and the QoS framework for managing them."

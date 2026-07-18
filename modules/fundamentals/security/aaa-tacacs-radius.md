@@ -1,5 +1,5 @@
 ---
-module_id: SEC-004
+module_id: "SEC-004"
 title: "AAA - Authentication, Authorisation & Accounting"
 domain: "fundamentals/security"
 description: "How AAA frameworks (TACACS+ and RADIUS) centralise network device access control, command authorisation, and session accounting."

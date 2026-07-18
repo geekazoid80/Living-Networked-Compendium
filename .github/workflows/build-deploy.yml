@@ -166,7 +166,7 @@ jobs:
             PREREQS=$(echo "$FRONTMATTER" | grep "^prerequisites:" | \
                       grep -oP '"[A-Z]+-[0-9]+"' | tr -d '"' || true)
             for PREREQ in $PREREQS; do
-              if ! find modules/ -name "*.md" | xargs grep -l "^module_id: \"${PREREQ}\"" &>/dev/null; then
+              if ! find modules/ -name "*.md" | xargs grep -lE "^module_id:[[:space:]]*\"?${PREREQ}\"?[[:space:]]*$" &>/dev/null; then
                 echo "::warning file=${FILE}::Prerequisite '${PREREQ}' not found as a module"
               fi
             done

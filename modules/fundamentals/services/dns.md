@@ -1,5 +1,5 @@
 ---
-module_id: SV-001
+module_id: "SV-001"
 title: "DNS - Domain Name System"
 domain: "fundamentals/services"
 description: "How DNS translates human-readable names into IP addresses through a distributed hierarchical database."

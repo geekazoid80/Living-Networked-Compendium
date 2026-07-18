@@ -1,5 +1,5 @@
 ---
-module_id: SV-002
+module_id: "SV-002"
 title: "DHCP - Dynamic Host Configuration Protocol"
 domain: "fundamentals/services"
 description: "How DHCP automatically assigns IP addresses and network configuration to hosts using the DORA exchange."

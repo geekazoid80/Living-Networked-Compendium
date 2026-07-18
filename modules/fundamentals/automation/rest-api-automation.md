@@ -1,5 +1,5 @@
 ---
-module_id: AUTO-002
+module_id: "AUTO-002"
 title: "REST APIs & Network Automation"
 domain: "fundamentals/automation"
 description: "How to use HTTP-based APIs (RESTCONF, eAPI, NX-API, Meraki API) to retrieve structured data and automate network device configuration without SSH."

@@ -1,5 +1,5 @@
 ---
-module_id: SEC-005
+module_id: "SEC-005"
 title: "Encryption Standards & PKI"
 domain: "fundamentals/security"
 description: "Symmetric and asymmetric encryption, certificate authorities, X.509 certificates, and how PKI enables trust in IPSec, TLS, and 802.1X deployments."

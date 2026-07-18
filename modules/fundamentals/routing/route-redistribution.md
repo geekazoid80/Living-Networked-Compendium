@@ -1,5 +1,5 @@
 ---
-module_id: RT-009
+module_id: "RT-009"
 title: "Route Redistribution & Policy"
 domain: "fundamentals/routing"
 description: "How routes are moved between different routing protocols, the risks of mutual redistribution, and how route-maps and prefix-lists control what gets redistributed."

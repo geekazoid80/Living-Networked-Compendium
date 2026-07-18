@@ -1,5 +1,5 @@
 ---
-module_id: CT-011
+module_id: "CT-011"
 title: "Optical Transport Network (OTN) - Deep Dive"
 domain: "fundamentals/carrier-transport"
 description: "OTN multiplexing hierarchy, ODU flexgrid, GCC channels, tandem connection monitoring, coherent optical modulation, and FlexE for high-capacity carrier transport."

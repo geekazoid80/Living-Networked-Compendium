@@ -1,5 +1,5 @@
 ---
-module_id: DC-004
+module_id: "DC-004"
 title: "EVPN-VXLAN"
 domain: "fundamentals/datacentre"
 description: "How EVPN control plane combined with VXLAN data plane creates a scalable, multitenant data centre overlay network with distributed gateway, ARP suppression, and multivendor interoperability."

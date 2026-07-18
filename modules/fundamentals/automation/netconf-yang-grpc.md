@@ -1,5 +1,5 @@
 ---
-module_id: AUTO-003
+module_id: "AUTO-003"
 title: "NETCONF, YANG & gRPC"
 domain: "fundamentals/automation"
 description: "How NETCONF, YANG data models, and gRPC/gNMI provide structured, transactional, and streaming-capable network management protocols."

@@ -1,5 +1,5 @@
 ---
-module_id: SV-004
+module_id: "SV-004"
 title: "NTP - Network Time Protocol"
 domain: "fundamentals/services"
 description: "How NTP synchronises clocks across network devices using a stratum hierarchy, and why accurate time is critical for network operations."

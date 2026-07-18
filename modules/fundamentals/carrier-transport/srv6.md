@@ -1,5 +1,5 @@
 ---
-module_id: CT-005
+module_id: "CT-005"
 title: "SRv6 - Segment Routing over IPv6"
 domain: "fundamentals/carrier-transport"
 description: "How SRv6 uses IPv6 addresses as Segment Identifiers, embeds the segment list in the IPv6 Segment Routing Header, and eliminates the MPLS label plane entirely."

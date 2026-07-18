@@ -1,5 +1,5 @@
 ---
-module_id: SW-004
+module_id: "SW-004"
 title: "EtherChannel / LAG (LACP)"
 domain: "fundamentals/switching"
 description: "How multiple physical links between switches can be bonded into a single logical channel for increased bandwidth and redundancy."

@@ -1,5 +1,5 @@
 ---
-module_id: CT-012
+module_id: "CT-012"
 title: "Traffic Engineering - RSVP-TE & SR-TE"
 domain: "fundamentals/carrier-transport"
 description: "How MPLS Traffic Engineering uses RSVP-TE and Segment Routing TE to explicitly control traffic paths, provide bandwidth guarantees, and protect against link and node failures."

@@ -1,5 +1,5 @@
 ---
-module_id: SEC-001
+module_id: "SEC-001"
 title: "Access Control Lists (ACLs)"
 domain: "fundamentals/security"
 description: "How ACLs filter packets at Layer 3/4 based on IP addresses, protocols, and ports - the foundational traffic control mechanism on routers and switches."

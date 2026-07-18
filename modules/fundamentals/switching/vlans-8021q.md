@@ -1,5 +1,5 @@
 ---
-module_id: SW-002
+module_id: "SW-002"
 title: "VLANs & 802.1Q Trunking"
 domain: "fundamentals/switching"
 description: "How switches segment broadcast domains with VLANs and carry multiple VLANs across shared links using 802.1Q tagging."
