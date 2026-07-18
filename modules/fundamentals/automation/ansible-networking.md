@@ -1,5 +1,5 @@
 ---
-module_id: AUTO-004
+module_id: "AUTO-004"
 title: "Ansible for Network Automation"
 domain: "fundamentals/automation"
 description: "How to use Ansible playbooks, network modules, and roles to declaratively manage network device configuration at scale."

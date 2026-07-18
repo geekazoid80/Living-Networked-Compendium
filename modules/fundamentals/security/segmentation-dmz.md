@@ -1,5 +1,5 @@
 ---
-module_id: SEC-006
+module_id: "SEC-006"
 title: "Network Segmentation & DMZ"
 domain: "fundamentals/security"
 description: "How to design multi-zone network architectures - DMZ, management plane, micro-segmentation - to contain breaches and enforce least privilege."

@@ -1,5 +1,5 @@
 ---
-module_id: SV-005
+module_id: "SV-005"
 title: "SNMP & Syslog - Network Monitoring Fundamentals"
 domain: "fundamentals/services"
 description: "How SNMP enables structured device monitoring and management, and how Syslog collects event messages across network infrastructure."

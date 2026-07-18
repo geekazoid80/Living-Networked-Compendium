@@ -1,5 +1,5 @@
 ---
-module_id: SEC-003
+module_id: "SEC-003"
 title: "VPN & IPSec"
 domain: "fundamentals/security"
 description: "How VPNs create encrypted tunnels across untrusted networks, and how IPSec provides authentication and encryption through IKE, ESP, and AH."

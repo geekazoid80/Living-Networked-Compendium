@@ -1,5 +1,5 @@
 ---
-module_id: QOS-002
+module_id: "QOS-002"
 title: "QoS Classification & Marking"
 domain: "fundamentals/qos"
 description: "How routers identify traffic types using classification (ACL, DSCP, NBAR) and mark them with DSCP and 802.1p values for consistent QoS treatment downstream."

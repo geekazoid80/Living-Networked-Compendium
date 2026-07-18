@@ -1,5 +1,5 @@
 ---
-module_id: CT-010
+module_id: "CT-010"
 title: "SDH/SONET & OTN Basics"
 domain: "fundamentals/carrier-transport"
 description: "The architecture of synchronous digital hierarchy (SDH/SONET) and optical transport network (OTN) - the physical and optical transport layers beneath IP/MPLS carrier networks."

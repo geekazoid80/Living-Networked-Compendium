@@ -1,5 +1,5 @@
 ---
-module_id: CT-004
+module_id: "CT-004"
 title: "Segment Routing - SR-MPLS"
 domain: "fundamentals/carrier-transport"
 description: "How Segment Routing distributes MPLS labels via the IGP (OSPF/IS-IS) instead of LDP, simplifies the control plane, and enables source-based traffic engineering."

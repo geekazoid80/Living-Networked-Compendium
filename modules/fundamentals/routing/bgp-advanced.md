@@ -1,5 +1,5 @@
 ---
-module_id: RT-008
+module_id: "RT-008"
 title: "BGP Advanced - Communities, Policy & Filtering"
 domain: "fundamentals/routing"
 description: "BGP community tagging, route-maps, prefix-lists, AS-path filters, and traffic engineering with local preference, MED, and prepending."

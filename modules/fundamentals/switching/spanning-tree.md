@@ -1,5 +1,5 @@
 ---
-module_id: SW-003
+module_id: "SW-003"
 title: "Spanning Tree Protocol (STP / RSTP / MSTP)"
 domain: "fundamentals/switching"
 description: "How STP, RSTP, and MSTP prevent Layer 2 loops in switched networks while maintaining redundant paths."

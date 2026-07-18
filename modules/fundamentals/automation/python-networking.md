@@ -1,5 +1,5 @@
 ---
-module_id: AUTO-001
+module_id: "AUTO-001"
 title: "Python for Network Engineers"
 domain: "fundamentals/automation"
 description: "How to use Python with Netmiko, NAPALM, and Paramiko to automate network device configuration, data retrieval, and change management."

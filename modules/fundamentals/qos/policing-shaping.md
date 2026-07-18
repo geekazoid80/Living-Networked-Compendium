@@ -1,5 +1,5 @@
 ---
-module_id: QOS-004
+module_id: "QOS-004"
 title: "Traffic Policing & Shaping"
 domain: "fundamentals/qos"
 description: "How policing (drop/re-mark) and shaping (delay/buffer) enforce rate limits on traffic flows, and when to use each mechanism."
