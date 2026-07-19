@@ -3,11 +3,11 @@ module_id: "QOS-004"
 title: "Traffic Policing & Shaping"
 domain: "fundamentals/qos"
 description: "How policing (drop/re-mark) and shaping (delay/buffer) enforce rate limits on traffic flows, and when to use each mechanism."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS"]
 module_type: concept
 estimated_time: 35
 prerequisites:
@@ -16,7 +16,7 @@ prerequisites:
 difficulty: intermediate
 tags: [qos, policing-shaping]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-19"
 maintainer: "@geekazoid80"
 ---
 
@@ -214,6 +214,76 @@ The child policy (LLQ-CHILD) performs priority queuing and CBWFQ within the 5 Mb
     ```
 
     Full configuration reference: [https://www.juniper.net/documentation/us/en/software/junos/cos/topics/topic-map/cos-policers-overview.html](https://www.juniper.net/documentation/us/en/software/junos/cos/topics/topic-map/cos-policers-overview.html)
+
+=== "Nokia SR-OS"
+
+    ```
+    # SR-OS polices on SAP ingress (a policer with a CIR and a PIR gives the
+    # two-rate / three-colour behaviour: in-profile up to CIR, out-of-profile
+    # between CIR and PIR, dropped above PIR) and shapes on SAP egress (a
+    # queue rate with cir/pir, optionally parented to a scheduler for HQoS).
+
+    # Policing: two-rate policer on ingress, referenced from the forwarding class
+    configure qos sap-ingress 20 name "POLICE-CUST" create
+        default-fc "be"
+        queue 1 create
+        exit
+        policer 1 create
+            rate 10000 cir 5000
+        exit
+        fc "be" create
+            policer 1
+            queue 1
+        exit
+    exit
+
+    # Shaping: egress queue shaped to the contracted rate (PIR = CIR = 10 Mbps)
+    configure qos sap-egress 20 name "SHAPE-ISP" create
+        queue 1 create
+            rate 10000 cir 10000
+        exit
+        fc "be" create
+            queue 1
+        exit
+    exit
+
+    # Hierarchical shaping (HQoS): parent scheduler caps the aggregate,
+    # the egress queue is parented to it with a weight and CIR level
+    configure qos scheduler-policy "HQOS-WAN" create
+        tier 1
+            scheduler "aggregate" create
+                rate 10000
+            exit
+        exit
+    exit
+    configure qos sap-egress 21 name "SHAPE-CHILD" create
+        queue 1 create
+            parent "aggregate" level 2 weight 10 cir-level 2
+        exit
+        fc "be" create
+            queue 1
+        exit
+    exit
+
+    # Apply: police inbound, shape outbound
+    configure service vprn 1 interface "cust" create
+        sap 1/1/3 create
+            ingress
+                qos 20
+            exit
+            egress
+                qos 20
+            exit
+        exit
+    exit
+
+    # Verification
+    show qos sap-ingress 20 detail
+    show qos sap-egress 20 detail
+    show qos scheduler-hierarchy sap 1/1/3 egress detail
+    ```
+
+    Full configuration reference: [https://documentation.nokia.com/sr/22-10/books/qos/service-ingress-egress-qos-policies.html](https://documentation.nokia.com/sr/22-10/books/qos/service-ingress-egress-qos-policies.html)
 
 ---
 ## Common Pitfalls

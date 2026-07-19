@@ -3,11 +3,11 @@ module_id: "QOS-002"
 title: "QoS Classification & Marking"
 domain: "fundamentals/qos"
 description: "How routers identify traffic types using classification (ACL, DSCP, NBAR) and mark them with DSCP and 802.1p values for consistent QoS treatment downstream."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos", "MikroTik RouterOS"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS", "MikroTik RouterOS"]
 module_type: concept
 estimated_time: 35
 prerequisites:
@@ -16,7 +16,7 @@ prerequisites:
 difficulty: intermediate
 tags: [qos, classification]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-19"
 maintainer: "@geekazoid80"
 ---
 
@@ -250,6 +250,66 @@ Before the WAN policy is applied, classify inbound LAN traffic and mark DSCP at 
     ```
 
     Full configuration reference: [https://help.mikrotik.com/docs/display/ROS/Mangle](https://help.mikrotik.com/docs/display/ROS/Mangle)
+
+=== "Nokia SR-OS"
+
+    ```
+    # SR-OS classifies on SAP ingress (map DSCP to a forwarding class)
+    # and re-marks on SAP egress (per-FC DSCP rewrite). Classification and
+    # marking are two separate QoS policies bound to the same SAP.
+
+    # SAP ingress: classify inbound traffic by DSCP into forwarding classes
+    configure qos sap-ingress 10 name "EDGE-CLASSIFY" create
+        default-fc "be"
+        queue 1 create
+        exit
+        queue 2 create
+        exit
+        fc "be" create
+            queue 1
+        exit
+        fc "ef" create
+            queue 2
+        exit
+        ip-criteria
+            entry 10 create
+                match dscp ef
+                exit
+                action fc "ef" priority high
+            exit
+            entry 20 create
+                match dscp af41
+                exit
+                action fc "ef"
+            exit
+        exit
+    exit
+
+    # SAP egress: re-mark the DSCP per forwarding class before transmit
+    configure qos sap-egress 10 name "EDGE-MARK" create
+        fc "ef" create
+            dscp ef
+        exit
+    exit
+
+    # Apply both policies at the trust boundary (access SAP)
+    configure service vprn 1 interface "edge" create
+        sap 1/1/1 create
+            ingress
+                qos 10
+            exit
+            egress
+                qos 10
+            exit
+        exit
+    exit
+
+    # Verification
+    show qos sap-ingress 10 detail
+    show qos sap-egress 10 detail
+    ```
+
+    Full configuration reference: [https://documentation.nokia.com/sr/22-10/books/qos/service-ingress-egress-qos-policies.html](https://documentation.nokia.com/sr/22-10/books/qos/service-ingress-egress-qos-policies.html)
 
 ---
 ## Common Pitfalls

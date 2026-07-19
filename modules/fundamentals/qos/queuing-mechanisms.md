@@ -3,11 +3,11 @@ module_id: "QOS-003"
 title: "Queuing Mechanisms"
 domain: "fundamentals/qos"
 description: "How routers schedule packets for transmission - from FIFO to LLQ - and how each mechanism affects delay, jitter, and fairness."
-version: "1.0.0"
+version: "1.0.1"
 status: draft
 human_reviewed: false
 ai_assisted: "drafting"
-vendors: ["Cisco IOS-XE", "Juniper Junos"]
+vendors: ["Cisco IOS-XE", "Juniper Junos", "Nokia SR-OS"]
 module_type: concept
 estimated_time: 40
 prerequisites:
@@ -16,7 +16,7 @@ prerequisites:
 difficulty: intermediate
 tags: [qos, queuing]
 created: 2026-04-19
-last_updated: "2026-04-19"
+last_updated: "2026-07-19"
 maintainer: "@geekazoid80"
 ---
 
@@ -189,6 +189,90 @@ Benefits:
     ```
 
     Full configuration reference: [https://www.juniper.net/documentation/us/en/software/junos/cos/topics/topic-map/cos-schedulers-overview.html](https://www.juniper.net/documentation/us/en/software/junos/cos/topics/topic-map/cos-schedulers-overview.html)
+
+=== "Nokia SR-OS (SAP egress, expedite + WRED)"
+
+    ```
+    # SR-OS builds the LLQ pattern on SAP egress. An "expedite" queue is
+    # served by the high-priority hardware scheduler (strict priority = the
+    # voice queue); non-expedite queues carry the CBWFQ-equivalent classes
+    # with rate/cir and weighted scheduling.
+
+    configure qos sap-egress 100 name "WAN-QOS" create
+        # Voice: strict-priority hardware queue, policed to its CIR/PIR rate
+        queue 2 expedite create
+            rate 15000 cir 15000
+        exit
+        # Video: guaranteed rate via CIR, burst to PIR max
+        queue 3 create
+            rate max cir 20000
+        exit
+        # Best effort: small guarantee, shares the remainder
+        queue 1 create
+            rate max cir 5000
+        exit
+        fc "ef" create
+            queue 2
+        exit
+        fc "af4" create
+            queue 3
+        exit
+        fc "be" create
+            queue 1
+        exit
+    exit
+
+    # Hierarchical shaping: a parent scheduler caps the aggregate egress rate
+    configure qos scheduler-policy "WAN-SHAPE" create
+        tier 1
+            scheduler "root" create
+                rate 100000
+            exit
+        exit
+    exit
+
+    # Apply egress QoS + scheduler policy to the SAP
+    configure service vprn 1 interface "wan" create
+        sap 1/1/2 create
+            egress
+                qos 100
+                scheduler-policy "WAN-SHAPE"
+            exit
+        exit
+    exit
+
+    # WRED (SR-OS equivalent) is a slope-policy bound to the buffer POOL,
+    # not to an individual queue: high-slope drops in-profile packets, the
+    # more-aggressive low-slope drops out-of-profile packets first.
+    configure qos slope-policy "WRED-BULK" create
+        high-slope
+            start-avg 70
+            max-avg 90
+            max-prob 80
+            no shutdown
+        exit
+        low-slope
+            start-avg 50
+            max-avg 75
+            max-prob 80
+            no shutdown
+        exit
+    exit
+    configure card 1 mda 1 network
+        ingress
+            pool default
+                slope-policy "WRED-BULK"
+            exit
+        exit
+    exit
+
+    # Verification
+    show qos sap-egress 100 detail
+    show qos scheduler-hierarchy sap 1/1/2 egress detail
+    show qos slope-policy "WRED-BULK"
+    ```
+
+    Full configuration reference: [https://documentation.nokia.com/sr/22-10/books/qos/service-ingress-egress-qos-policies.html](https://documentation.nokia.com/sr/22-10/books/qos/service-ingress-egress-qos-policies.html)
 
 ---
 ## Common Pitfalls
