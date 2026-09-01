@@ -72,6 +72,12 @@ desktop.ini
 # above which follows the same pattern.
 .claude/settings.local.json
 
+# ─── Session worktrees ────────────────────────────────────────────────────────
+# Concurrent Claude Code sessions check out into .claude/worktrees/ so they do
+# not fight over one working tree. They are scratch checkouts of this repo, so
+# tracking them would commit the repo into itself.
+.claude/worktrees/
+
 # ─── Pandoc build artefacts ───────────────────────────────────────────────────
 # pandoc leaves empty media-* dirs in the repo root when a build fails mid-run.
 media-*/
